@@ -1,6 +1,6 @@
 
-#ifndef COMUNICACION_H_
-#define COMUNICACION_H_
+#ifndef COMUNICACION_COMUNICACION_H_
+#define COMUNICACION_COMUNICACION_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,23 +12,27 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <errno.h>
+//#include <commons/string.h>
 
 int conectar_a_server(char* ip, int puerto);
 int recibir_mensaje(int socket, void* buffer, int tamanio);
 int enviar_mensaje(int socket, void* buffer, int tamanio);
-int crear_socket_server();
+int crear_socket_escucha(int puerto);
+struct sockaddr_in crear_direccion_servidor(int puerto);
 int cerrar_socket(int socket);
-int bind_socket(int socket, const struct sockaddr_in* mi_addr);
 int listen_socket(int socket);
-struct sockaddr_in get_direccion_server(int puerto);
+int aceptar_conexion(int socket);
 
 typedef enum comm_err {
 	ERROR_CONNECT_SERVER = -10,
 	ERROR_SOCKET_CONNECT_SERVER = -11,
 	ERROR_RECV = -12,
 	ERROR_RECV_DISCONNECTED = -13,
-	ERROR_SEND = -14
+	ERROR_SEND = -14,
+	ERROR_BIND = -15,
+	ERROR_LISTEN = -16,
+	ERROR_ACCEPT = -17
 } comm_err ;
 
 
-#endif /* COMUNICACION_H_ */
+#endif /* COMUNICACION_COMUNICACION_H_ */
