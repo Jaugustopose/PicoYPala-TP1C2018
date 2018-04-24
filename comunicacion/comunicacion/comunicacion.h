@@ -41,5 +41,9 @@ typedef enum id_proceso {
 	Instancia = 4
 } id_proceso;
 
+typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
+	handshake = 1
+}id_mensaje;
+
 
 #endif /* COMUNICACION_COMUNICACION_H_ */
