@@ -34,5 +34,12 @@ typedef enum comm_err {
 	ERROR_ACCEPT = -17
 } comm_err ;
 
+typedef enum id_proceso {
+	ESI = 1,
+	Planificador = 2,
+	Coordinador = 3,
+	Instancia = 4
+} id_proceso;
+
 
 #endif /* COMUNICACION_COMUNICACION_H_ */
