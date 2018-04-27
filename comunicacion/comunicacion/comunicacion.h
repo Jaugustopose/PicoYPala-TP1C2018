@@ -2,18 +2,6 @@
 #ifndef COMUNICACION_COMUNICACION_H_
 #define COMUNICACION_COMUNICACION_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <netdb.h>
-#include <arpa/inet.h>
-#include <string.h>
-#include <errno.h>
-//#include <commons/string.h>
-
 int conectar_a_server(char* ip, int puerto);
 int recibir_mensaje(int socket, void* buffer, int tamanio);
 int enviar_mensaje(int socket, void* buffer, int tamanio);
@@ -44,6 +32,11 @@ typedef enum id_proceso {
 typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	handshake = 1
 }id_mensaje;
+
+typedef struct{
+	int comando;
+	int tamanio;
+}header_t;
 
 
 #endif /* COMUNICACION_COMUNICACION_H_ */

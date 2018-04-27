@@ -1,0 +1,13 @@
+#ifndef SRC_PLANIFICADOR_H_
+#define SRC_PLANIFICADOR_H_
+
+typedef struct{
+	int PUERTO;
+	char* ALGORITMO_PLANIFICACION;
+	int ESTIMACION_INICIAL;
+	char* IP_COORDINADOR;
+	int PUERTO_COORDINADOR;
+	char** CLAVES_BLOQUEADAS;
+}configuracion_t;
+
+#endif /* SRC_PLANIFICADOR_H_ */
