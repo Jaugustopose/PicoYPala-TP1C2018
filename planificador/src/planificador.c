@@ -3,8 +3,11 @@
 #include "planificador.h"
 #include "commons/string.h"
 #include "commons/config.h"
+#include "comunicacion/comunicacion.h"
 #include "conexiones.h"
 #include <pthread.h>
+#include <readline/readline.h>
+#include <unistd.h>
 
 configuracion_t cargarConfiguracion() {
 	configuracion_t config;
@@ -58,13 +61,140 @@ configuracion_t cargarConfiguracion() {
 	return config;
 }
 
+void procesar_entradas_consola() {
+	char* linea;
+	while (1) {
+		linea = readline("consola_planificador> ");
+		if (linea)
+			add_history(linea);
+		if (!strcmp(linea, "exit")) {
+			free(linea);
+			break;
+		}
+		procesar_entrada(linea);
+		free(linea);
+	}
+
+	exit(EXIT_SUCCESS);
+}
+
+void procesar_entrada(char* buffer) {
+
+	char** subBufferSplitted = string_split(buffer, " ");
+
+	if (subBufferSplitted[0] == NULL) { //String vacío
+		free(subBufferSplitted);
+		return;
+	} else if (!strcmp(subBufferSplitted[0], PAUSE_PLANIF)) {
+		procesar_pausa_planificacion(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], CONTINUE_PLANIF)) {
+		procesar_continuar_planificacion(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], BLOCK)){
+		procesar_bloqueo_esi(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], UNBLOCK)){
+		procesar_desbloqueo_esi(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], LIST)){
+		procesar_listar_recurso(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], KILL)){
+		procesar_kill_proceso(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], STATUS)){
+		procesar_status_instancias(subBufferSplitted);
+	} else if (!strcmp(subBufferSplitted[0], DEADLOCK)){
+		procesar_deadlock(subBufferSplitted);
+	} else {
+		printf("¡No se reconece el comando %s!\n", buffer);
+	}
+
+	free(subBufferSplitted);
+}
+
+void procesar_pausa_planificacion(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Pausar Planificación!\n");
+	} else {
+		printf("Comando 'pausar' no requiere parámetros!\n");
+	}
+}
+
+void procesar_continuar_planificacion(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Continuar Planificación!\n");
+	} else {
+		printf("Comando 'continuar' no requiere parámetros!\n");
+	}
+}
+
+void procesar_bloqueo_esi(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL || subBufferSplitted[2] == NULL) {
+		printf("Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'\n");
+	} else if (subBufferSplitted[3] == NULL) {
+		printf("Bloqueo Esi %s de la clave %s!\n", subBufferSplitted[1], subBufferSplitted[2]);
+	} else {
+		printf("Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'\n");
+	}
+}
+
+void procesar_desbloqueo_esi(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'\n");
+	} else if (subBufferSplitted[2] == NULL) {
+		printf("Desbloqueo Esi %s!\n", subBufferSplitted[1]);
+	} else {
+		printf("Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'\n");
+	}
+}
+
+void procesar_listar_recurso(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Comando 'listar' incompleto! Se requiere formato 'listar <recurso>'\n");
+	} else if (subBufferSplitted[2] == NULL) {
+		printf("Listar procesos en cola de espera para recurso %s!\n", subBufferSplitted[1]);
+	} else {
+		printf("Comando 'listar' con demasiados parámetros! Se requiere formato 'listar <recurso>'\n");
+	}
+}
+
+void procesar_kill_proceso(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Comando 'kill' incompleto! Se requiere formato 'kill <ID>'\n");
+	} else if (subBufferSplitted[2] == NULL) {
+		printf("Kill proceso %s!\n", subBufferSplitted[1]);
+	} else {
+		printf("Comando 'kill' con demasiados parámetros! Se requiere formato 'kill <ID>'\n");
+	}
+}
+
+void procesar_status_instancias(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Comando 'status' incompleto! Se requiere formato 'status <clave>'\n");
+	} else if (subBufferSplitted[2] == NULL) {
+		printf("Status instancias para clave %s!\n", subBufferSplitted[1]);
+	} else {
+		printf("Comando 'status' con demasiados parámetros! Se requiere formato 'status <clave>'\n");
+	}
+}
+
+void procesar_deadlock(char** subBufferSplitted) {
+	if (subBufferSplitted[1] == NULL) {
+		printf("Analizar deadlocks!\n");
+	} else {
+		printf("Comando 'deadlock' no requiere parámetros!\n");
+	}
+}
+
+
 int main(void) {
 	configuracion_t config = cargarConfiguracion();
 	//Conexion a Coordinador
+	//TODO Más adelante recibir el fd del socket donde tenemos abierta la comunicación con Coordinador para futuros mensajes
 	conectarConCoordinador(config.IP_COORDINADOR, config.PUERTO);
+
 	//Abrir puerto para aceptar conexion de ESIs
 	int socketEscucha = crear_socket_escucha(config.PUERTO);
 	pthread_t hiloEscucha;
 	pthread_create(&hiloEscucha,NULL, iniciarEscucha(socketEscucha), NULL);
+
+	procesar_entradas_consola();
+
 	return EXIT_SUCCESS;
 }

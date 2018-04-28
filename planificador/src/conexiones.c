@@ -10,6 +10,7 @@ typedef struct{
 }paquete_t;
 
 paquete_t recibirPaquete(int socket){
+	//TODO Manejar error que puede devolver recibir_mensaje
 	paquete_t paquete;
 	recibir_mensaje(socket,&paquete.header,sizeof(header_t));
 	paquete.cuerpo = malloc(paquete.header.tamanio);
@@ -17,6 +18,7 @@ paquete_t recibirPaquete(int socket){
 	return paquete;
 }
 
+//TODO Más adelante devolver el fd del socket donde tenemos abierta la comunicación con Coordinador para futuros mensajes
 void conectarConCoordinador(char* ip, int puerto){
 	int socketCordinador = conectar_a_server(ip, puerto);
 	//Preparo mensaje handshake
@@ -60,6 +62,7 @@ void iniciarEscucha(int socketEscucha){
 			if (FD_ISSET(fdCliente, &read_fds)) { // Me fijo si tengo datos listos para leer
 				if (fdCliente == socketEscucha) {
 					//Acepto conexion nueva
+					//TODO Manejar error que puede devolver aceptar_conexion
 					socketCliente = aceptar_conexion(socketEscucha);
 					FD_SET(socketCliente, &master); // Añadir al fdset
 				} else {
