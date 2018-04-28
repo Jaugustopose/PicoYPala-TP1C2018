@@ -2,15 +2,6 @@
 #ifndef COMUNICACION_COMUNICACION_H_
 #define COMUNICACION_COMUNICACION_H_
 
-int conectar_a_server(char* ip, int puerto);
-int recibir_mensaje(int socket, void* buffer, int tamanio);
-int enviar_mensaje(int socket, void* buffer, int tamanio);
-int crear_socket_escucha(int puerto);
-struct sockaddr_in crear_direccion_servidor(int puerto);
-int cerrar_socket(int socket);
-int listen_socket(int socket);
-int aceptar_conexion(int socket);
-
 typedef enum comm_err {
 	ERROR_CONNECT_SERVER = -10,
 	ERROR_SOCKET_CONNECT_SERVER = -11,
@@ -29,6 +20,7 @@ typedef enum id_proceso {
 	Instancia = 4
 } id_proceso;
 
+
 typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	handshake = 1
 }id_mensaje;
@@ -38,5 +30,19 @@ typedef struct{
 	int tamanio;
 }header_t;
 
+typedef struct{
+	header_t header;
+	void* cuerpo;
+} paquete_t;
+
+int conectar_a_server(char* ip, int puerto);
+int recibir_mensaje(int socket, void* buffer, int tamanio);
+int enviar_mensaje(int socket, void* buffer, int tamanio);
+int crear_socket_escucha(int puerto);
+struct sockaddr_in crear_direccion_servidor(int puerto);
+int cerrar_socket(int socket);
+int listen_socket(int socket);
+int aceptar_conexion(int socket);
+paquete_t recibirPaquete(int socket);
 
 #endif /* COMUNICACION_COMUNICACION_H_ */

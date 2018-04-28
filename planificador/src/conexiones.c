@@ -4,32 +4,19 @@
 #include <stdio.h>
 #include "comunicacion/comunicacion.h"
 
-typedef struct{
-	header_t header;
-	void* cuerpo;
-}paquete_t;
-
-paquete_t recibirPaquete(int socket){
-	//TODO Manejar error que puede devolver recibir_mensaje
-	paquete_t paquete;
-	recibir_mensaje(socket,&paquete.header,sizeof(header_t));
-	paquete.cuerpo = malloc(paquete.header.tamanio);
-	recibir_mensaje(socket,paquete.cuerpo,paquete.header.tamanio);
-	return paquete;
-}
-
 //TODO Más adelante devolver el fd del socket donde tenemos abierta la comunicación con Coordinador para futuros mensajes
 void conectarConCoordinador(char* ip, int puerto){
 	int socketCordinador = conectar_a_server(ip, puerto);
 	//Preparo mensaje handshake
 	header_t header;
-	header.comando=handshake;
-	header.tamanio=1;
+	header.comando = handshake;
+	header.tamanio = sizeof(int);
 	int cuerpo = Planificador;
-	int tamanio = sizeof(header_t)+sizeof(int);
+	int tamanio = sizeof(header_t) + sizeof(header.tamanio);
 	void* buff = malloc(tamanio);
-	memcpy(buff,&header,sizeof(header_t));
-	memcpy(buff+sizeof(header_t),&cuerpo,sizeof(int));
+	memcpy(buff, &header, sizeof(header_t));
+	memcpy(buff + sizeof(header_t), &cuerpo, sizeof(int));
+
 	//Envio mensaje handshake
 	enviar_mensaje(socketCordinador,buff,tamanio);
 	//Libero Buffer
@@ -55,7 +42,7 @@ void iniciarEscucha(int socketEscucha){
 	for (;;) {
 		read_fds = master;
 		if (select(maxFd + 1, &read_fds, NULL, NULL, NULL) == -1) { //Compruebo si algun cliente quiere interactuar.
-			printf("Error en select");
+			printf("Error en select\n");
 			exit(1);
 		}
 		for (fdCliente = 0; fdCliente <= maxFd; fdCliente++) {

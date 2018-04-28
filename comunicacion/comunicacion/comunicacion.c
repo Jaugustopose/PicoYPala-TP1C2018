@@ -136,3 +136,12 @@ int aceptar_conexion(int socket_server) {
 		return socket_cliente;
 	}
 }
+
+paquete_t recibirPaquete(int socket) {
+	//TODO Manejar error que puede devolver recibir_mensaje
+	paquete_t paquete;
+	recibir_mensaje(socket,&paquete.header,sizeof(header_t));
+	paquete.cuerpo = malloc(paquete.header.tamanio);
+	recibir_mensaje(socket,paquete.cuerpo,paquete.header.tamanio);
+	return paquete;
+}
