@@ -15,15 +15,14 @@
 
 //STRUCTS
 typedef struct config_t {
-
-	int PUERTO_COORDINADOR;
+	int PUERTO;
 	int PUERTO_PLANIFICADOR;
 	char* IP_PLANIFICADOR;
 	char* ALGORITMO_DISTRIBUCION;
 	int CANT_ENTRADAS;
 	int ENTRADA_SIZE;
 	int RETARDO;
-}config_t;
+} config_t;
 
 //VARIABLES
 int socket_coordinador = 0;
@@ -58,9 +57,9 @@ void establecer_configuracion (int puerto_escucha, int puerto_servidor, char* al
 		t_config* config_coordinador = config_create(pat);
 		free(pat);
 
-		if (config_has_property(config_coordinador, "PUERTO_COORDINADOR")) {
-			config.PUERTO_COORDINADOR = config_get_int_value(config_coordinador, "PUERTO_COORDINADOR");
-			printf("PUERTO_COORDINADOR: %d\n", config.PUERTO_COORDINADOR);
+		if (config_has_property(config_coordinador, "PUERTO")) {
+			config.PUERTO = config_get_int_value(config_coordinador, "PUERTO");
+			printf("PUERTO_COORDINADOR: %d\n", config.PUERTO);
 		}
 //		if (config_has_property(config_coordinador, "PUERTO_PLANIFICADOR")) {
 //			config.PUERTO_PLANIFICADOR = config_get_int_value(config_coordinador, "PUERTO_PLANIFICADOR");
@@ -89,53 +88,69 @@ void establecer_configuracion (int puerto_escucha, int puerto_servidor, char* al
 }
 
 
-void identificar_proceso () {
+void identificar_proceso_e_ingresar_en_bolsa () {
 
 	//Recibo identidad y coloco en la bolsa correspondiente.
-		int OK;
-		int identificacion;
-		if((OK = recibir_mensaje(socket_cliente,&id_operacion_mensaje,sizeof(int))) == ERROR_RECV){
-			//Manejar el error de cierta forma si queremos.
-		}else {
-			if (id_operacion_mensaje == handshake){
-				if((OK = recibir_mensaje(socket_cliente,&identificacion,sizeof(int))) == ERROR_RECV){
-					//Manejar el error de cierta forma si queremos.
-				}else {
-					if ((OK =recibir_mensaje(socket_cliente,&identificacion,sizeof(int))) == ERROR_RECV){
-						////Manejar el error de cierta forma si queremos.
-					}else {
+	header_t cabecera;
+	int identificacion;
+	int resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t));
+	if(resultado == ERROR_RECV){
+		printf("Error en el recv para socket %d!!!\n", socket_cliente); //TODO Manejar el error de cierta forma si queremos.
+	}
 
-						switch (identificacion){
+	switch (cabecera.comando) {
+	case handshake:
+		resultado = recibir_mensaje(socket_cliente, &identificacion, cabecera.tamanio);
+		if(resultado == ERROR_RECV){
+			printf("Error en el recv para socket %d al hacer handshake!!!\n", socket_cliente); //TODO Manejar el error de cierta forma si queremos.
+		} else {
+			switch (identificacion){
+			case ESI:
+				FD_SET(socket_cliente, &master);
+				FD_SET(socket_cliente, &bolsa_esis); //Agrego un nuevo esi a la bolsa de esis.
+				printf("Se ha conectado un nuevo esi \n");
 
-						case ESI:
-							FD_SET(socket_cliente,&master);
-							FD_SET(socket_cliente, &bolsa_esis); //agrego un nuevo esi a la bolsa de esis.
-									printf("Se ha conectado un nuevo esi \n");
-									break;
+				//TODO Debería contestar un OK por el handshake
 
-						case Instancia:
-							FD_SET(socket_cliente,&master);
-							FD_SET(socket_cliente, &bolsa_instancias); //agrego una nueva instancia a la bolsa de instancias.
-									printf("Se ha conectado una nueva instancia de ReDis \n");
-									break;
+				break;
 
-						case Planificador:
+			case Instancia:
+				FD_SET(socket_cliente, &master);
+				FD_SET(socket_cliente, &bolsa_instancias); //Agrego una nueva instancia a la bolsa de instancias.
+				printf("Se ha conectado una nueva instancia de ReDis \n");
 
-							if (planificador_conectado == 0){
-								FD_SET(socket_cliente,&master);
-								FD_SET(socket_cliente,&bolsa_planificador);
-								printf("Se ha conectado el planificador al sistema\n");
-								planificador_conectado = 1; //Para que no se conecte mas de un planificador.
-								break;
-								}
-							}
+				//TODO Debería contestar un OK por el handshake
 
+				break;
 
-						}
-					}
+			case Planificador:
+				if (planificador_conectado == 0){
+					FD_SET(socket_cliente, &master);
+					FD_SET(socket_cliente, &bolsa_planificador);
+					printf("Se ha conectado el planificador al sistema\n");
+					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
+
+					//Preparación para responder OK Handshake
+					header_t header;
+					header.comando = handshake;
+					header.tamanio = sizeof(Coordinador);
+					int id = Coordinador;
+					//Serialización
+					void* bufferOkHandshake = serializar(header, &id);
+					//Enviamos OK al Planificador
+					enviar_mensaje(socket_cliente, bufferOkHandshake, sizeof(header) + header.tamanio);
+
+					break;
+				} else {
+					//TODO Debería contestar error al 2do planificador que se quiso conectar indicando que ya hay un planificador conectado
 				}
 			}
 		}
+		break;
+	default:
+		printf("Comando %d no implementado!!!\n", cabecera.comando);
+	}
+}
 
 void conexion_de_cliente_finalizada() {
 	// conexión cerrada.
@@ -153,26 +168,27 @@ void conexion_de_cliente_finalizada() {
 		FD_CLR(fdCliente, &bolsa_planificador);
 		printf("Se desconecto el planificador\n"); //TODO: Reorganizar la distribucion para las claves.
 	}
+
 	close(fdCliente); // Si se perdio la conexion, la cierro.
 }
 
-void atender_accion_esi(){
-
+void atender_accion_esi(int fdEsi) {
+	printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 }
-void atender_accion_instancia(){
 
+void atender_accion_instancia(int fdInstancia) {
+	printf("Atendiendo acción instancia en socket %d!!!\n", fdInstancia);
 }
 
 int main(void) {
 
 	//Extraer informacion del archivo de configuracion.
-
-	establecer_configuracion(config.PUERTO_COORDINADOR,config.PUERTO_PLANIFICADOR,config.ALGORITMO_DISTRIBUCION,config.CANT_ENTRADAS,
+	establecer_configuracion(config.PUERTO,config.PUERTO_PLANIFICADOR,config.ALGORITMO_DISTRIBUCION,config.CANT_ENTRADAS,
 							 config.ENTRADA_SIZE,config.RETARDO);
 
 	//Establecer conexiones con el sistema.
-	// En caso que el plani sea server de coordinador socket_planificador = conectar_a_server(config.IP_PLANIFICADOR, config.PUERTO_PLANIFICADOR);
-	socket_coordinador = crear_socket_escucha(config.PUERTO_COORDINADOR);
+	//En caso que el plani sea server de coordinador socket_planificador = conectar_a_server(config.IP_PLANIFICADOR, config.PUERTO_PLANIFICADOR);
+	socket_coordinador = crear_socket_escucha(config.PUERTO);
 
 	//Acciones necesarias para identificar los esi o instancias entrantes.
 
@@ -180,48 +196,50 @@ int main(void) {
 	maxfd = socket_coordinador;
 
 	//Bucle principal
-
 	for (;;) {
 		read_fds = master;
 		if (select(maxfd + 1, &read_fds, NULL, NULL, NULL) == -1) { //Compruebo si algun cliente quiere interactuar.
-			perror("select");
-			exit(1);
-		};
+			perror("Se ha producido un error en el Select a la espera de actividad en sockets");
+			exit(EXIT_FAILURE);
+		}
 
+		// Recorremos los file descriptors asignados a los sockets conectados para ver cuál presenta actividad
 		for (fdCliente = 0; fdCliente <= maxfd; fdCliente++) {
 
 			if (FD_ISSET(fdCliente, &read_fds)) { // Me fijo si tengo datos listos para leer
-				if (fdCliente == socket_coordinador) { //si entro en este "if", significa que tengo datos.
+				if (fdCliente == socket_coordinador) { //Si entro en este "if", significa que tengo datos en socket escucha (Nueva conexión).
 
-					// gestionar nuevas conexiones.
-
-					if ((socket_cliente = aceptar_conexion(socket_coordinador)) == ERROR_ACCEPT){
-						printf("Error en el accept"); //Esto es cabeza, deberiamos tomar el error y armar un exit_gracefully como en el tp0.
-					}else{
-						identificar_proceso();
-
+					//Gestionar nueva conexión
+					socket_cliente = aceptar_conexion(socket_coordinador);
+					if (socket_cliente == ERROR_ACCEPT) {
+						printf("Error en el accept\n"); //TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
+					} else {
+						identificar_proceso_e_ingresar_en_bolsa();
 					}
+
 				} else {
 
 					// Gestionar datos de un cliente.
-
 					int id_operacion_mensaje;
-
-					if ((cantBytes = recibir_mensaje(fdCliente,&id_operacion_mensaje,sizeof(int)) == ERROR_RECV)) {
-
+					cantBytes = recibir_mensaje(fdCliente,&id_operacion_mensaje,sizeof(int));
+					//Handlear errores en el recibir
+					if (cantBytes == ERROR_RECV_DISCONNECTED) {
 						conexion_de_cliente_finalizada();
-
-
+						break; //Salimos del for
+					} else if (cantBytes == ERROR_RECV) {
+						printf("Error inesperado al recibir datos del cliente!\n");
+						//TODO Si el interlcutor esperaba respuesta hay que responderle con algún código de error
+						// 		Por ejemplo: handlearError(cantBytes); el cual haría un send
+						break; //Salimos del for.
+					}
+					//Se recibió OK. Atender de acuerdo a proceso.
+					if (FD_ISSET(fdCliente, &bolsa_esis)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UN ESI.
+						atender_accion_esi(fdCliente); //TODO: VER QUE PUEDE QUERER.
+					} else if (FD_ISSET(fdCliente, &bolsa_instancias)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UNA INSTANCIA.
+						atender_accion_instancia(fdCliente); //TODO:VER QUE PUEDE QUERER.
 					} else {
-
-						if (FD_ISSET(fdCliente, &bolsa_esis)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UN ESI.
-
-							atender_accion_esi(); //TODO: VER QUE PUEDE QUERER.
-						}
-						if (FD_ISSET(fdCliente, &bolsa_instancias)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UNA INSTANCIA.
-
-							atender_accion_instancia(); //TODO:VER QUE PUEDE QUERER.
-						}
+						perror("El socket buscado no está en ningún set!!! Situación anómala. Finalizando...");
+						exit(EXIT_FAILURE);
 					}
 				}
 			}

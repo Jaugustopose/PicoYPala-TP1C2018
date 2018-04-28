@@ -140,8 +140,17 @@ int aceptar_conexion(int socket_server) {
 paquete_t recibirPaquete(int socket) {
 	//TODO Manejar error que puede devolver recibir_mensaje
 	paquete_t paquete;
-	recibir_mensaje(socket,&paquete.header,sizeof(header_t));
+	recibir_mensaje(socket, &paquete.header, sizeof(header_t));
 	paquete.cuerpo = malloc(paquete.header.tamanio);
 	recibir_mensaje(socket,paquete.cuerpo,paquete.header.tamanio);
 	return paquete;
+}
+
+void* serializar(header_t header, void* payload) {
+
+	void* buffer = malloc(sizeof(header) + header.tamanio);
+	memcpy(buffer, &header, sizeof(header)); //Primero el header (con comando/operación y tamanio payload)
+	memcpy(buffer + sizeof(header), payload, header.tamanio); // Luego el payload
+
+	return buffer;
 }

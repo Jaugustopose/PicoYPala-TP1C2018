@@ -44,5 +44,6 @@ int cerrar_socket(int socket);
 int listen_socket(int socket);
 int aceptar_conexion(int socket);
 paquete_t recibirPaquete(int socket);
+void* serializar(header_t paquete, void* payload);
 
 #endif /* COMUNICACION_COMUNICACION_H_ */
