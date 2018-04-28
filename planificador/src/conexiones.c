@@ -23,7 +23,7 @@ void conectarConCoordinador(char* ip, int puerto){
 	free(buff);
 	//Recibo Respuesta del Handshake
 	paquete_t paquete = recibirPaquete(socketCordinador);
-	if(paquete.header.comando==handshake && *(int*)paquete.cuerpo==Coordinador)
+	if(paquete.header.comando == handshake && *(int*)paquete.cuerpo == Coordinador)
 		printf("Conectado correctamente al coordinador");
 }
 

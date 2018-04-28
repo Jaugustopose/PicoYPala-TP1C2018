@@ -194,6 +194,8 @@ int main(void) {
 	pthread_t hiloEscucha;
 	pthread_create(&hiloEscucha,NULL, iniciarEscucha(socketEscucha), NULL);
 
+	pthread_detach(hiloEscucha);
+
 	procesar_entradas_consola();
 
 	return EXIT_SUCCESS;
