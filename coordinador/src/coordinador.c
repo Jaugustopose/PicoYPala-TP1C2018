@@ -34,7 +34,6 @@ fd_set bolsa_instancias; //Bolsa donde voy a ingresar cada instancia que se cone
 fd_set bolsa_planificador;
 int fdCliente = 0; //Para recorrer conjunto de fd.
 int maxfd = 0; //Numero del ultimo fd creado.
-int id_operacion_mensaje = 0;
 t_config* config_coordinador; //Para cuando tenga que traer cosas del .cfg
 config_t config; //Para cuando tenga que traer cosas del .cfg
 int planificador_conectado = 0;
@@ -106,18 +105,12 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 				FD_SET(socket_cliente, &master);
 				FD_SET(socket_cliente, &bolsa_esis); //Agrego un nuevo esi a la bolsa de esis.
 				printf("Se ha conectado un nuevo esi \n");
-
-				//TODO Debería contestar un OK por el handshake
-
 				break;
 
 			case Instancia:
 				FD_SET(socket_cliente, &master);
 				FD_SET(socket_cliente, &bolsa_instancias); //Agrego una nueva instancia a la bolsa de instancias.
 				printf("Se ha conectado una nueva instancia de ReDis \n");
-
-				//TODO Debería contestar un OK por el handshake
-
 				break;
 
 			case Planificador:
@@ -126,22 +119,28 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 					FD_SET(socket_cliente, &bolsa_planificador);
 					printf("Se ha conectado el planificador al sistema\n");
 					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
-
-					//Preparación para responder OK Handshake
-					header_t header;
-					header.comando = handshake;
-					header.tamanio = sizeof(Coordinador);
-					int id = Coordinador;
-					//Serialización
-					void* bufferOkHandshake = serializar(header, &id);
-					//Enviamos OK al Planificador
-					enviar_mensaje(socket_cliente, bufferOkHandshake, sizeof(header) + header.tamanio);
-
 					break;
+
 				} else {
-					//TODO Debería contestar error al 2do planificador que se quiso conectar indicando que ya hay un planificador conectado
+					//Preparación para responder IMPOSIBILIDAD DE CONEXION al segundo planificador.
+					header_t header;
+					header.comando = imposibilidad_conexion;
+					header.tamanio = 0; // Solo envia header. Payload va a estar vacio.
+					//Enviamos OK al Planificador. No hace falta serializar dado que payload esta vacio.
+					enviar_mensaje(socket_cliente, &header, sizeof(header) + header.tamanio); // header.tamanio se podria borrar pero lo dejo para mayor entendimiento.
+					printf("Se ha impedido la conexion de un segundo planificador al sistema\n");
+					close(fdCliente);
 				}
 			}
+			//Preparación para responder OK Handshake al proceso conectado recientemente.
+			header_t header;
+			header.comando = handshake;
+			header.tamanio = sizeof(Coordinador);
+			identificacion = Coordinador;
+			//Serialización
+			void* bufferOkHandshake = serializar(header, &identificacion);
+			//Enviamos OK al Planificador
+			enviar_mensaje(socket_cliente, bufferOkHandshake, sizeof(header) + header.tamanio);
 		}
 
 		if (socket_cliente > maxfd) {
@@ -149,8 +148,9 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 		}
 
 		break;
+
 	default:
-		printf("Comando %d no implementado!!!\n", cabecera.comando);
+		printf("Comando/operacion %d no implementada!!!\n", cabecera.comando);
 	}
 }
 
@@ -168,7 +168,7 @@ void conexion_de_cliente_finalizada() {
 		printf("Se desconecto instancia del socket %d\n", fdCliente); //TODO: Reorganizar la distribucion para las claves.
 	} else {
 		FD_CLR(fdCliente, &bolsa_planificador);
-		printf("Se desconecto el planificador\n"); //TODO: Reorganizar la distribucion para las claves.
+		printf("Se desconecto el planificador\n");
 	}
 
 	close(fdCliente); // Si se perdio la conexion, la cierro.
