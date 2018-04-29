@@ -84,6 +84,19 @@ void establecer_configuracion(int puerto_escucha, int puerto_servidor, char* alg
 		}
 }
 
+void responder_ok_handshake(int identificacion, int socket_cliente) {
+	//Preparación para responder OK Handshake al proceso conectado recientemente.
+	header_t header;
+	header.comando = handshake;
+	header.tamanio = sizeof(Coordinador);
+	identificacion = Coordinador;
+	//Serialización
+	void* bufferOkHandshake = serializar(header, &identificacion);
+	//Enviamos OK al Planificador
+	enviar_mensaje(socket_cliente, bufferOkHandshake,
+	sizeof(header) + header.tamanio);
+}
+
 void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 
 	//Recibo identidad y coloco en la bolsa correspondiente.
@@ -105,12 +118,14 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 				FD_SET(socket_cliente, &master);
 				FD_SET(socket_cliente, &bolsa_esis); //Agrego un nuevo esi a la bolsa de esis.
 				printf("Se ha conectado un nuevo esi \n");
+				responder_ok_handshake(identificacion, socket_cliente);
 				break;
 
 			case Instancia:
 				FD_SET(socket_cliente, &master);
 				FD_SET(socket_cliente, &bolsa_instancias); //Agrego una nueva instancia a la bolsa de instancias.
 				printf("Se ha conectado una nueva instancia de ReDis \n");
+				responder_ok_handshake(identificacion, socket_cliente);
 				break;
 
 			case Planificador:
@@ -119,6 +134,7 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 					FD_SET(socket_cliente, &bolsa_planificador);
 					printf("Se ha conectado el planificador al sistema\n");
 					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
+					responder_ok_handshake(identificacion, socket_cliente);
 					break;
 
 				} else {
@@ -132,15 +148,7 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 					close(fdCliente);
 				}
 			}
-			//Preparación para responder OK Handshake al proceso conectado recientemente.
-			header_t header;
-			header.comando = handshake;
-			header.tamanio = sizeof(Coordinador);
-			identificacion = Coordinador;
-			//Serialización
-			void* bufferOkHandshake = serializar(header, &identificacion);
-			//Enviamos OK al Planificador
-			enviar_mensaje(socket_cliente, bufferOkHandshake, sizeof(header) + header.tamanio);
+
 		}
 
 		if (socket_cliente > maxfd) {
