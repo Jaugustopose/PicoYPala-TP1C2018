@@ -131,7 +131,7 @@ void procesar_bloqueo_esi(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL || subBufferSplitted[2] == NULL) {
 		printf("Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'\n");
 	} else if (subBufferSplitted[3] == NULL) {
-		printf("Bloqueo Esi %s de la clave %s!\n", subBufferSplitted[1], subBufferSplitted[2]);
+		printf("Bloqueo Esi %s de la cola del recurso %s!\n", subBufferSplitted[2], subBufferSplitted[1]);
 	} else {
 		printf("Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'\n");
 	}
@@ -194,12 +194,12 @@ int main(void) {
 
 	//TODO Se comentó código donde se escucha como server temporalmente para evitar el manejo del hilo ahora hasta que el flujo coordinador-planificador funcione ok
 	//TODO Abrir puerto para aceptar conexion de ESIs
-//	int socketEscucha = crear_socket_escucha(config.PUERTO);
-//	pthread_t hiloEscucha;
-//	pthread_create(&hiloEscucha, NULL, iniciarEscucha(socketEscucha), NULL);
-//	pthread_detach(hiloEscucha);
+	int socketEscucha = crear_socket_escucha(config.PUERTO);
+	pthread_t hiloEscucha;
+	pthread_create(&hiloEscucha, NULL, procesar_entradas_consola, NULL);
+	pthread_detach(hiloEscucha);
 
-	procesar_entradas_consola();
+	iniciarEscucha(socketEscucha);
 
 	return EXIT_SUCCESS;
 }

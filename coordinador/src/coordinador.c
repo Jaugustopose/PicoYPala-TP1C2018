@@ -27,7 +27,6 @@ typedef struct config_t {
 //VARIABLES
 int socket_coordinador = 0;
 int socket_planificador = 0;
-int socket_cliente = 0;
 fd_set master; // Bolsa donde voy a registrar todas las conexiones realizadas al coordinador.
 fd_set read_fds; //Bolsa que utilizo para leer informacion de los fd_set actuales.
 fd_set bolsa_esis; //Bolsa donde voy a ingresar cada esi que se conecte.
@@ -36,7 +35,6 @@ fd_set bolsa_planificador;
 int fdCliente = 0; //Para recorrer conjunto de fd.
 int maxfd = 0; //Numero del ultimo fd creado.
 int id_operacion_mensaje = 0;
-int cantBytes = 0;
 t_config* config_coordinador; //Para cuando tenga que traer cosas del .cfg
 config_t config; //Para cuando tenga que traer cosas del .cfg
 int planificador_conectado = 0;
@@ -45,7 +43,7 @@ int planificador_conectado = 0;
 
 //FUNCIONES
 
-void establecer_configuracion (int puerto_escucha, int puerto_servidor, char* algoritmo, int entradas, int tamanio_entrada, int retard) {
+void establecer_configuracion(int puerto_escucha, int puerto_servidor, char* algoritmo, int entradas, int tamanio_entrada, int retard) {
 		char* pat = string_new();
 		char cwd[1024]; // Variable donde voy a guardar el path absoluto hasta el /Debug
 		string_append(&pat, getcwd(cwd, sizeof(cwd)));
@@ -87,8 +85,7 @@ void establecer_configuracion (int puerto_escucha, int puerto_servidor, char* al
 		}
 }
 
-
-void identificar_proceso_e_ingresar_en_bolsa () {
+void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 
 	//Recibo identidad y coloco en la bolsa correspondiente.
 	header_t cabecera;
@@ -146,6 +143,11 @@ void identificar_proceso_e_ingresar_en_bolsa () {
 				}
 			}
 		}
+
+		if (socket_cliente > maxfd) {
+			maxfd = socket_cliente;
+		}
+
 		break;
 	default:
 		printf("Comando %d no implementado!!!\n", cabecera.comando);
@@ -210,18 +212,18 @@ int main(void) {
 				if (fdCliente == socket_coordinador) { //Si entro en este "if", significa que tengo datos en socket escucha (Nueva conexión).
 
 					//Gestionar nueva conexión
-					socket_cliente = aceptar_conexion(socket_coordinador);
+					int socket_cliente = aceptar_conexion(socket_coordinador);
 					if (socket_cliente == ERROR_ACCEPT) {
 						printf("Error en el accept\n"); //TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
 					} else {
-						identificar_proceso_e_ingresar_en_bolsa();
+						identificar_proceso_e_ingresar_en_bolsa(socket_cliente);
 					}
 
 				} else {
 
 					// Gestionar datos de un cliente.
 					int id_operacion_mensaje;
-					cantBytes = recibir_mensaje(fdCliente,&id_operacion_mensaje,sizeof(int));
+					int cantBytes = recibir_mensaje(fdCliente,&id_operacion_mensaje,sizeof(int));
 					//Handlear errores en el recibir
 					if (cantBytes == ERROR_RECV_DISCONNECTED) {
 						conexion_de_cliente_finalizada();

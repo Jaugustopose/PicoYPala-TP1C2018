@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include "comunicacion/comunicacion.h"
 
-//TODO Más adelante devolver el fd del socket donde tenemos abierta la comunicación con Coordinador para futuros mensajes
 int conectarConCoordinador(char* ip, int puerto){
 	int socketCoordinador = conectar_a_server(ip, puerto);
 	//Preparo mensaje handshake
@@ -30,7 +29,7 @@ int conectarConCoordinador(char* ip, int puerto){
 
 }
 
-void iniciarEscucha(int socketEscucha){
+void iniciarEscucha(int socketEscucha) {
 	fd_set master; // fdset de los procesos ESI conectados
 	fd_set read_fds; // fdset temporal para pasar al select
 	//Añadir listener al conjunto maestro
