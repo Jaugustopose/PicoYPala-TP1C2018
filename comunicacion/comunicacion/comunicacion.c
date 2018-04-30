@@ -146,6 +146,19 @@ paquete_t recibirPaquete(int socket) {
 	return paquete;
 }
 
+void responder_ok_handshake(int identificacion, int socket_destinatario) {
+	//Preparación para responder OK Handshake al proceso conectado recientemente.
+	int id = identificacion;
+	header_t header;
+	header.comando = handshake;
+	header.tamanio = sizeof(id);
+
+	//Serialización
+	void* bufferOkHandshake = serializar(header, &id);
+	//Enviamos OK al Planificador
+	enviar_mensaje(socket_destinatario, bufferOkHandshake,sizeof(header) + header.tamanio);
+}
+
 void* serializar(header_t header, void* payload) {
 
 	void* buffer = malloc(sizeof(header) + header.tamanio);

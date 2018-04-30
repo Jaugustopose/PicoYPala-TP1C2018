@@ -84,19 +84,6 @@ void establecer_configuracion(int puerto_escucha, int puerto_servidor, char* alg
 		}
 }
 
-void responder_ok_handshake(int identificacion, int socket_cliente) {
-	//Preparación para responder OK Handshake al proceso conectado recientemente.
-	int id = identificacion;
-	header_t header;
-	header.comando = handshake;
-	header.tamanio = sizeof(id);
-
-	//Serialización
-	void* bufferOkHandshake = serializar(header, &id);
-	//Enviamos OK al Planificador
-	enviar_mensaje(socket_cliente, bufferOkHandshake,sizeof(header) + header.tamanio);
-}
-
 void responder_no_OK_handshake(int socket_cliente) {
 	//Preparación para responder IMPOSIBILIDAD DE CONEXION al segundo planificador.
 	header_t header;

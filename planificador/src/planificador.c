@@ -196,10 +196,10 @@ int main(void) {
 	//TODO Abrir puerto para aceptar conexion de ESIs
 	int socketEscucha = crear_socket_escucha(config.PUERTO);
 	pthread_t hiloEscucha;
-	pthread_create(&hiloEscucha, NULL, procesar_entradas_consola, NULL);
+	pthread_create(&hiloEscucha, NULL, iniciarEscucha, socketEscucha);
 	pthread_detach(hiloEscucha);
 
-	iniciarEscucha(socketEscucha);
+	procesar_entradas_consola();
 
 	return EXIT_SUCCESS;
 }

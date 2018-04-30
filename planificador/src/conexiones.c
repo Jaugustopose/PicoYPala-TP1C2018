@@ -29,6 +29,25 @@ int conectarConCoordinador(char* ip, int puerto){
 
 }
 
+void procesar_handshake(int socketCliente) {
+	header_t cabecera;
+	int identificacion;
+	//Recibimos Header con info de operación
+	int resultado = recibir_mensaje(socketCliente, &cabecera, sizeof(header_t));
+	if (resultado == ERROR_RECV) {
+		printf("Error en el recv para socket %d!!!\n", socketCliente); //TODO Manejar el error de cierta forma si queremos.
+	} else {
+		//Recibimos identificación del handshake
+		resultado = recibir_mensaje(socketCliente, &identificacion, cabecera.tamanio);
+		if(resultado == ERROR_RECV) {
+			printf("Error en el recv para socket %d al hacer handshake!!!\n", socketCliente); //TODO Manejar el error de cierta forma si queremos.
+		} else {
+			//Respondemos el ok del handshake
+			responder_ok_handshake(Planificador, socketCliente);
+		}
+	}
+}
+
 void iniciarEscucha(int socketEscucha) {
 	fd_set master; // fdset de los procesos ESI conectados
 	fd_set read_fds; // fdset temporal para pasar al select
@@ -53,6 +72,12 @@ void iniciarEscucha(int socketEscucha) {
 					//Acepto conexion nueva
 					//TODO Manejar error que puede devolver aceptar_conexion
 					socketCliente = aceptar_conexion(socketEscucha);
+					if (socketCliente == ERROR_ACCEPT) {
+						printf("Error en el accept\n"); //TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
+					} else {
+						//Recibo identidad y coloco en la bolsa correspondiente.
+						procesar_handshake(socketCliente);
+					}
 					FD_SET(socketCliente, &master); // Añadir al fdset
 				} else {
 					// Recibir mensaje de un ESI

@@ -3,5 +3,6 @@
 
 int conectarConCoordinador(char* ip, int puerto);
 void iniciarEscucha(int socketEscucha);
+void procesar_handshake(int socketCliente);
 
 #endif /* SRC_CONEXIONES_H_ */
