@@ -190,7 +190,7 @@ int main(void) {
 	configuracion_t config = cargarConfiguracion();
 	//Conexion a Coordinador
 
-	socket_coordinador = conectarConCoordinador(config.IP_COORDINADOR, config.PUERTO_COORDINADOR);
+	socket_coordinador = conectarConProceso(config.IP_COORDINADOR, config.PUERTO_COORDINADOR, Planificador);
 
 	//TODO Se comentó código donde se escucha como server temporalmente para evitar el manejo del hilo ahora hasta que el flujo coordinador-planificador funcione ok
 	//TODO Abrir puerto para aceptar conexion de ESIs
