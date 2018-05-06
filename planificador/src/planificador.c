@@ -193,7 +193,7 @@ int main(void) {
 	config = cargarConfiguracion();
 
 	//Conexion a Coordinador
-	socket_coordinador = conectarConCoordinador(config.IP_COORDINADOR, config.PUERTO_COORDINADOR);
+	socket_coordinador = conectarConProceso(config.IP_COORDINADOR, config.PUERTO_COORDINADOR, Planificador);
 
 	//Abrir puerto para aceptar conexion de ESIs en un hilo nuevo
 	int socketEscucha = crear_socket_escucha(config.PUERTO);

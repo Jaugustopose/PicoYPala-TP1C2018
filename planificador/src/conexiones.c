@@ -4,31 +4,6 @@
 #include <stdio.h>
 #include "comunicacion/comunicacion.h"
 
-int conectarConCoordinador(char* ip, int puerto){
-	int socketCoordinador = conectar_a_server(ip, puerto);
-	//Preparo mensaje handshake
-	header_t header;
-	header.comando = handshake;
-	header.tamanio = sizeof(int);
-	int cuerpo = Planificador;
-	int tamanio = sizeof(header_t) + sizeof(header.tamanio);
-	void* buff = malloc(tamanio);
-	memcpy(buff, &header, sizeof(header_t));
-	memcpy(buff + sizeof(header_t), &cuerpo, sizeof(int));
-
-	//Envio mensaje handshake
-	enviar_mensaje(socketCoordinador,buff,tamanio);
-	//Libero Buffer
-	free(buff);
-	//Recibo Respuesta del Handshake
-	paquete_t paquete = recibirPaquete(socketCoordinador);
-	if(paquete.header.comando == handshake && *(int*)paquete.cuerpo == Coordinador)
-		printf("Conectado correctamente al coordinador\n");
-
-	return socketCoordinador;
-
-}
-
 void procesar_handshake(int socketCliente) {
 	header_t cabecera;
 	int identificacion;

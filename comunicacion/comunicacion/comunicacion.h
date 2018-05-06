@@ -47,5 +47,5 @@ int aceptar_conexion(int socket);
 paquete_t recibirPaquete(int socket);
 void responder_ok_handshake(int identificacion, int socket_destinatario);
 void* serializar(header_t paquete, void* payload);
-
+int conectarConProceso(char* ip, int puerto,int identidad);
 #endif /* COMUNICACION_COMUNICACION_H_ */

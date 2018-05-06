@@ -136,7 +136,30 @@ int aceptar_conexion(int socket_server) {
 		return socket_cliente;
 	}
 }
+int conectarConProceso(char* ip, int puerto,int proceso){
+	int socketProceso = conectar_a_server(ip, puerto);
+	//Preparo mensaje handshake
+	header_t header;
+	header.comando = handshake;
+	header.tamanio = sizeof(int);
+	int cuerpo = proceso;
+	int tamanio = sizeof(header_t) + sizeof(header.tamanio);
+	void* buff = malloc(tamanio);
+	memcpy(buff, &header, sizeof(header_t));
+	memcpy(buff + sizeof(header_t), &cuerpo, sizeof(int));
 
+	//Envio mensaje handshake
+	enviar_mensaje(socketProceso,buff,tamanio);
+	//Libero Buffer
+	free(buff);
+	//Recibo Respuesta del Handshake
+	paquete_t paquete = recibirPaquete(socketProceso);
+	if(paquete.header.comando == handshake && *(int*)paquete.cuerpo == proceso)
+		printf("Conectado correctamente al Proceso %d\n",proceso);
+
+	return socketProceso;
+
+}
 paquete_t recibirPaquete(int socket) {
 	//TODO Manejar error que puede devolver recibir_mensaje
 	paquete_t paquete;
