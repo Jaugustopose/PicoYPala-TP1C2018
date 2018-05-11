@@ -1,13 +1,11 @@
 #include "planificador.h"
 #include "includes.h"
-#include "commons/string.h"
 #include "commons/config.h"
 #include "comunicacion/comunicacion.h"
 #include "conexiones.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <pthread.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include <unistd.h>
 
 
@@ -39,6 +37,10 @@ configuracion_t cargarConfiguracion() {
 		config.ALGORITMO_PLANIFICACION = config_get_string_value(configPlanificador, "ALGORITMO_PLANIFICACION");
 		printf("ALGORITMO_PLANIFICACION: %s\n", config.ALGORITMO_PLANIFICACION);
 	}
+	if (config_has_property(configPlanificador, "ALFA_PLANIFICACION")) {
+			config.ALFA_PLANIFICACION = config_get_int_value(configPlanificador, "ALFA_PLANIFICACION");
+			printf("ALFA_PLANIFICACION: %d\n", config.ALFA_PLANIFICACION);
+		}
 	if (config_has_property(configPlanificador, "IP_COORDINADOR")) {
 		config.IP_COORDINADOR = config_get_string_value(configPlanificador, "IP_COORDINADOR");
 		printf("IP_COORDINADOR: %s\n", config.IP_COORDINADOR);
@@ -191,16 +193,17 @@ void procesar_deadlock(char** subBufferSplitted) {
 
 int main(void) {
 	config = cargarConfiguracion();
-
+	inicializarPlanificacion();
+/*
 	//Conexion a Coordinador
 	socket_coordinador = conectarConProceso(config.IP_COORDINADOR, config.PUERTO_COORDINADOR, Planificador);
 
 	//Abrir puerto para aceptar conexion de ESIs en un hilo nuevo
 	int socketEscucha = crear_socket_escucha(config.PUERTO);
 	pthread_t hiloEscucha;
-	pthread_create(&hiloEscucha, NULL, iniciarEscucha, socketEscucha);
+	pthread_create(&hiloEscucha, NULL, &iniciarEscucha, &socketEscucha);
 
 	procesar_entradas_consola();
-
+*/
 	return EXIT_SUCCESS;
 }

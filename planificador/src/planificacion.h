@@ -5,5 +5,6 @@
 #include "commons/collections/list.h"
 
 void inicializarPlanificacion();
+void prueba();
 
 #endif /* SRC_PLANIFICACION_H_ */

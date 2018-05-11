@@ -23,7 +23,8 @@ void procesar_handshake(int socketCliente) {
 	}
 }
 
-void iniciarEscucha(int socketEscucha) {
+void* iniciarEscucha(void* socket) {
+	int socketEscucha = *(int*)socket;
 	fd_set master; // fdset de los procesos ESI conectados
 	fd_set read_fds; // fdset temporal para pasar al select
 	//Añadir listener al conjunto maestro
@@ -61,4 +62,5 @@ void iniciarEscucha(int socketEscucha) {
 			}
 		}
 	}
+	return 0;
 }

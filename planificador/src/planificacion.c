@@ -3,55 +3,111 @@
 #include <stdbool.h>
 #include <string.h>
 
-t_queue* colaListos;
-t_queue* colaEjecucion;
+t_list* colaListos;
+proceso_t* procesoEjecucion;
 t_queue* colaTerminados;
 t_list* listaBloqueados;
 
 extern configuracion_t config;
-const char *FIFO = "FIFO";
-const char *SJFCD= "SJF-CD";
-const char *SJFSD= "SJF-SD";
-const char *HRRN= "HRRN";
+int contadorProcesos = 1;
+
+//Prototipos
+void procesoEjecutar(proceso_t* proceso);
+
+//Funciones
+bool esFIFO(){
+	char *FIFO = "FIFO";
+	return strcmp(config.ALGORITMO_PLANIFICACION, FIFO)==0;
+}
+
+bool esSJFCD(){
+	char *SJFCD= "SJF-CD";
+	return strcmp(config.ALGORITMO_PLANIFICACION, SJFCD)==0;
+}
+
+bool esSJFSD(){
+	char *SJFSD= "SJF-SD";
+	return strcmp(config.ALGORITMO_PLANIFICACION, SJFSD)==0;
+}
+
+bool esHRRN(){
+	char *HRRN= "HRRN";
+	return strcmp(config.ALGORITMO_PLANIFICACION, HRRN)==0;
+}
 
 void inicializarPlanificacion(){
-	colaListos = queue_create();
-	colaEjecucion = queue_create();
+	colaListos = list_create();
+	procesoEjecucion = 0;
 	colaTerminados = queue_create();
 	listaBloqueados = list_create();
 }
 
-void planificar(){
-	//Aca se van a ejecutar los diferentes algoritmos de planificación
-	if(strcmp(config.ALGORITMO_PLANIFICACION, FIFO)==0){
-		//TODO IMPLEMENTAR FIFO
-	}else if(strcmp(config.ALGORITMO_PLANIFICACION, SJFCD)==0){
-		//TODO IMPLEMENTAR SJF CON DESALOJO
-	}else if(strcmp(config.ALGORITMO_PLANIFICACION, SJFSD)==0){
-		//TODO IMPLEMENTAR SJF SIN DESALOJO
-	}else if(strcmp(config.ALGORITMO_PLANIFICACION, HRRN)==0){
-		//TODO IMPLEMENTAR HRRN
+bool planificadorConDesalojo(){
+	return esSJFCD() || esHRRN();
+}
+
+bool comparadorSJF(void* arg1, void* arg2){
+	proceso_t* proceso1 = (proceso_t*)arg1;
+	proceso_t* proceso2 = (proceso_t*)arg2;
+	return proceso1->rafagaEstimada <= proceso2->rafagaEstimada;
+}
+
+bool comparadorHRRN(void* arg1, void* arg2){
+	proceso_t* proceso1 = (proceso_t*)arg1;
+	proceso_t* proceso2 = (proceso_t*)arg2;
+	return (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) >= (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+}
+
+void ordenarColaListos(){
+	if(esHRRN()){
+		list_sort(colaListos, &comparadorHRRN);
+	}else if(esFIFO()){
+		//No ordena
+	}else{
+		list_sort(colaListos, &comparadorSJF);
 	}
+
 }
 
 void procesoListo(proceso_t* proceso){
-	queue_push(colaListos, (void*)proceso);
-	planificar();
+	list_add(colaListos, (void*)proceso);
+	ordenarColaListos();
+	if(planificadorConDesalojo()){
+		//TODO: Verificar si es necesario cambiar de proceso
+	}
 }
 
-void procesoEjecucion(proceso_t* proceso){
-	queue_push(colaEjecucion, (void*)proceso);
+void procesoNuevo(int socketESI){
+	proceso_t* proceso = malloc(sizeof(proceso_t));
+	proceso->idProceso = contadorProcesos;
+	contadorProcesos++;
+	proceso->claveBloqueo = string_new();
+	proceso->clavesBloqueadas = list_create();
+	proceso->rafagaActual = 0;
+	proceso->rafagaEstimada = config.ESTIMACION_INICIAL;
+	proceso->rafagasEsperando = 0;
+	proceso->socketESI = socketESI;
+	if(procesoEjecucion == 0){
+		procesoEjecutar(proceso);
+	}else{
+		procesoListo(proceso);
+	}
+}
+
+void procesoEjecutar(proceso_t* proceso){
+	procesoEjecucion = proceso;
+	//TODO: MANDAR AL ESI CORRESPONDIENTE EL COMANDO PARA QUE EJECUTE LA PRIMER SENTENCIA;
 }
 
 void procesoTerminado(proceso_t* proceso){
 	queue_push(colaTerminados, (void*)proceso);
-	planificar();
+	//TODO: Cambio de proceso
 }
 
 void procesoBloquear(proceso_t* proceso, char* clave){
 	proceso->claveBloqueo=clave;
 	list_add(listaBloqueados, (void*)proceso);
-	planificar();
+	//TODO: Cambio de proceso
 }
 
 void procesoDesbloquear(char* clave){
@@ -67,3 +123,29 @@ void procesoDesbloquear(char* clave){
 	}
 }
 
+void incrementarRafagasEsperando(){
+	int i;
+	for(i=0;i<list_size(colaListos);i++){
+		proceso_t* proceso;
+		proceso = (proceso_t*)list_get(colaListos, i);
+		proceso->rafagasEsperando++;
+	}
+}
+
+void sentenciaFinalizada(){
+	procesoEjecucion->rafagaActual++;
+	if(esHRRN()){
+		incrementarRafagasEsperando();
+	}
+	if(procesoEjecucion->rafagaActual == procesoEjecucion->rafagaEstimada){
+		//TODO: Cambio de proceso
+	}else{
+		//TODO: Mandar a ejecutar la siguiente rafaga
+	}
+}
+
+void estimarRafaga(proceso_t* proceso){
+	int alfa = config.ALFA_PLANIFICACION;
+	int estimacion = proceso->rafagaActual*alfa/100 + (100-alfa)*proceso->rafagaEstimada/100;
+	proceso->rafagaEstimada = estimacion;
+}
