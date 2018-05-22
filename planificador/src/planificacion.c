@@ -13,6 +13,9 @@ int contadorProcesos = 1;
 
 //Prototipos
 void procesoEjecutar(proceso_t* proceso);
+void colaListosPush(proceso_t* proceso);
+proceso_t* colaListosPop();
+proceso_t* colaListosPeek();
 
 //Funciones
 bool esFIFO(){
@@ -69,12 +72,37 @@ void ordenarColaListos(){
 
 }
 
-void procesoListo(proceso_t* proceso){
+void planificarConDesalojo(){
+	if(esHRRN()){
+		proceso_t* proceso1 = colaListosPeek();
+		proceso_t* proceso2 = procesoEjecucion;
+		bool cambiarProceso = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) > (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+		if(cambiarProceso){
+			colaListosPush(procesoEjecucion);
+			procesoEjecutar(colaListosPop());
+		}
+	}else{
+		proceso_t* proceso1 = colaListosPeek();
+		proceso_t* proceso2 = procesoEjecucion;
+		bool cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
+		if(cambiarProceso){
+			colaListosPush(procesoEjecucion);
+			procesoEjecutar(colaListosPop());
+		}
+	}
+}
+
+void colaListosPush(proceso_t* proceso){
 	list_add(colaListos, (void*)proceso);
 	ordenarColaListos();
-	if(planificadorConDesalojo()){
-		//TODO: Verificar si es necesario cambiar de proceso
-	}
+}
+
+proceso_t* colaListosPop(){
+	return list_remove(colaListos, 0);
+}
+
+proceso_t* colaListosPeek(){
+	return list_get(colaListos, 0);
 }
 
 void procesoNuevo(int socketESI){
@@ -90,7 +118,10 @@ void procesoNuevo(int socketESI){
 	if(procesoEjecucion == 0){
 		procesoEjecutar(proceso);
 	}else{
-		procesoListo(proceso);
+		colaListosPush(proceso);
+		if(planificadorConDesalojo()){
+			planificarConDesalojo();
+		}
 	}
 }
 
@@ -99,15 +130,15 @@ void procesoEjecutar(proceso_t* proceso){
 	//TODO: MANDAR AL ESI CORRESPONDIENTE EL COMANDO PARA QUE EJECUTE LA PRIMER SENTENCIA;
 }
 
-void procesoTerminado(proceso_t* proceso){
-	queue_push(colaTerminados, (void*)proceso);
-	//TODO: Cambio de proceso
+void procesoTerminado(){
+	queue_push(colaTerminados, (void*)procesoEjecucion);
+	procesoEjecutar(colaListosPop());
 }
 
-void procesoBloquear(proceso_t* proceso, char* clave){
-	proceso->claveBloqueo=clave;
-	list_add(listaBloqueados, (void*)proceso);
-	//TODO: Cambio de proceso
+void procesoBloquear(char* clave){
+	procesoEjecucion->claveBloqueo=clave;
+	list_add(listaBloqueados, (void*)procesoEjecucion);
+	procesoEjecutar(colaListosPop());
 }
 
 void procesoDesbloquear(char* clave){
@@ -117,7 +148,10 @@ void procesoDesbloquear(char* clave){
 		proceso = (proceso_t*)list_get(listaBloqueados, i);
 		if(strcmp(proceso->claveBloqueo, clave)==0){
 			list_remove(listaBloqueados, i);
-			procesoListo(proceso);
+			colaListosPush(proceso);
+			if(planificadorConDesalojo()){
+				planificarConDesalojo();
+			}
 			break;
 		}
 	}
@@ -138,7 +172,8 @@ void sentenciaFinalizada(){
 		incrementarRafagasEsperando();
 	}
 	if(procesoEjecucion->rafagaActual == procesoEjecucion->rafagaEstimada){
-		//TODO: Cambio de proceso
+		colaListosPush(procesoEjecucion);
+		procesoEjecutar(colaListosPop());
 	}else{
 		//TODO: Mandar a ejecutar la siguiente rafaga
 	}
