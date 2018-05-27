@@ -65,38 +65,7 @@ config_t cargarConfiguracion(char *path) {
 	return config;
 
 }
-//
-//char* escribirEntrada(char* map, int numeroEntrada, char* texto,
-//		int cantidadEntradas, int entradasTamanio) {
-//	int tamanioArchivo = cantidadEntradas * entradasTamanio;
-//	int posicion_texto = 0;
-//	int posicion_texto_fin = strlen(texto);
-//	int posicion_ini = numeroEntrada * entradasTamanio;
-//	int posicion_fin = ((numeroEntrada + 1) * entradasTamanio) - 1;
-//	int posicion;
-//	int posicion_libre = 0;
-//	posicion = posicion_ini;
-//
-//	//posiciona en lugar libre de la entrada
-//	while ((posicion <= posicion_fin) && posicion_libre != 1) {
-//
-//		if (map[posicion] != '\0') {
-//			posicion++;
-//		} else {
-//			posicion_libre = 1;
-//		};
-//	}
-//	while ((posicion <= posicion_fin) && posicion_texto <= posicion_texto_fin) {
-//		map[posicion] = texto[posicion_texto];
-//		posicion++;
-//		posicion_texto++;
-//	}
-////	map[posicion] = '\0';
-//
-//	return map;
-//}
-//
-//
+
 
 
 persistirDiccionarioDeTablaDeEntradas(t_dictionary * mapArchivoTablaDeEntradas ,  t_dictionary * diccionarioEntradas ){
@@ -188,18 +157,8 @@ int main(int argc, char *argv[]) {
 	printf("EntradasCantidad: %d entradasTamanio: %d \n ", entradasCantidad,
 			entradasTamanio);
 
-//
-//	struct t_entrada entradas[entradasCantidad];
-//	int i =0;
-//	while(entradasCantidad>i){
-//		struct t_entrada entradaNula;
-//		entradaNula.clave=string_new();
-//		entradaNula.numeroEntrada=i;
-//		entradaNula.tamanioValor=0;
-//		entradas[i]=entradaNula;
-//		i=i+1;
-//	}
-//
+
+
 	//	mapeo de archivo ArchivoMatrizDeEntradas
 	char* pathArchivo = string_new();
 	string_append(&pathArchivo, configuracion.punto_montaje);
@@ -252,10 +211,6 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 	printf("Se mapio archivo \n");
-
-	if(sizeof(mapArchivoTablaDeEntradas)>0){
-		printf("255 se mapeo bien Entrada y se encontro key messi%d\n",sizeof(mapArchivoTablaDeEntradas));
-	}else{printf("255 no pude leer entrada %d\n",sizeof(mapArchivoTablaDeEntradas));};
 
 
 	free(pathArchivo);
@@ -316,27 +271,23 @@ printf("Seguir 1 si sigue o 0 si no = %d\n",seguir);
 			printf("INICIO procesado GET\n");
 			//se accsede a la tabla de entradas si no la encuentra la crea
 
-		if(strlen(key)>40){
-//			Error de Tamaño de Clave
-//			De exceder el tamaño máximo de 40 caracteres para la Clave, la operación fallará y se informará al Usuario. Abortando el ESI culpable.
-
-			}else {
+//		if(strlen(key)>40){
+////			Error de Tamaño de Clave
+////			De exceder el tamaño máximo de 40 caracteres para la Clave, la operación fallará y se informará al Usuario. Abortando el ESI culpable.
+//
+//			}else {
 
 			if (dictionary_has_key(diccionarioEntradas, key)) {
 				printf("si exite la clave\n");
 				//si exite la clave
 				struct t_entrada *unaEntrada;
 				unaEntrada = dictionary_get(diccionarioEntradas, key);
-				//intento de bloquear
-				if(unaEntrada->bloquiado==0){
 
-				printf("GET Entrada  numeroEntrada:%d tamanioValor:%d bloquiado:%d\n",
-						unaEntrada->numeroEntrada, unaEntrada->tamanioValor, unaEntrada->bloquiado);
-				unaEntrada->bloquiado=1;
-				}else{
-					printf("GET ERROR clave  ya bloquiada  numeroEntrada:%d tamanioValor:%d bloquiado:%d\n",
-						unaEntrada->numeroEntrada, unaEntrada->tamanioValor,unaEntrada->bloquiado);
-				}
+
+				printf("GET Entrada  numeroEntrada:%d tamanioValor:%d \n",
+						unaEntrada->numeroEntrada, unaEntrada->tamanioValor);
+
+
 			}else {
 				printf("si no exite la clave\n");
 				//si no exite la clave
@@ -345,7 +296,7 @@ printf("Seguir 1 si sigue o 0 si no = %d\n",seguir);
 				unaEntrada.numeroEntrada=contadorDeEntradasInsertadas;
 				contadorDeEntradasInsertadas=contadorDeEntradasInsertadas+1;
 				unaEntrada.tamanioValor = 0;
-				unaEntrada.bloquiado=1;
+
 
 				dictionary_put(diccionarioEntradas,key,&unaEntrada);
 
@@ -360,19 +311,19 @@ printf("Seguir 1 si sigue o 0 si no = %d\n",seguir);
 				if (sincronizo == -1) {
 										perror("No se puede sincronizar con el disco ");
 									}else{
-									printf("Se mapeo correctamente \n");}
-
-if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
-	printf("se mapeo bien Entrada y se encontro key messi\n");
-}else{printf("no pude leer entrada\n");
-
-};
+									printf("Se sincronizo correctamente \n");}
+//
+//if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
+//	printf("se mapeo bien Entrada y se encontro key messi\n");
+//}else{printf("no pude leer entrada\n");
+//
+//};
 
 
 
 			}
 
-		}
+		//}
 
 			//FIN procesado GET
 		} else {
@@ -385,7 +336,7 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 				if (dictionary_has_key(diccionarioEntradas, key)){
 					struct t_entrada *unaEntrada;
 					unaEntrada = dictionary_get(diccionarioEntradas, key);
-					if(unaEntrada->bloquiado==1){
+
 					//escribe entrada
 						printf("Clave bloquiada y guardando valor \n");
 
@@ -396,24 +347,9 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 
 						dictionary_put(diccionarioValoresEntradas,key,value);
 						printf("Se guardo valor en diccionario par %s\n",dictionary_get(diccionarioValoresEntradas,key));
-//		//RECONFIGURANDO LAS ENTRADAS MAXIMAS DEL SISTEMA
-//						maximoNumeroEntradaInicio=unaEntrada->numeroEntrada;
-//
-//						  if ((unaEntrada->tamanioValor%entradasTamanio)==0){
-//							  maximoNumeroEntradaFin=maximoNumeroEntradaInicio + (unaEntrada->tamanioValor/entradasTamanio);
-//						  }else{
-//							  maximoNumeroEntradaFin=maximoNumeroEntradaInicio + (unaEntrada->tamanioValor/entradasTamanio) + 1;
-//						  }
-//						  printf("Reconfigurado de maximoNumeroEntradaInicio:%d maximoNumeroEntradaFin:%d", maximoNumeroEntradaInicio,maximoNumeroEntradaFin);
-//
-//		//FIN DE RECONFIGURADO
 
 
-					}else{
-						//Error de Clave no Bloqueada
-						printf("Error de Clave no Bloqueada \n");
-						//Si la clave que intenta acceder no se encuentra tomada por el ESI en cuestión, se debera informar al Usuario y se debera abortar el ESI.
-}
+
 				}else{
 					printf("Error de Clave no Identificada\n");
 					//Error de Clave no Identificada
@@ -423,28 +359,7 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 				}
 
 
-//				char* entradaEnArchivo = string_new();
-//				string_append(&entradaEnArchivo, key);
-//				string_append(&entradaEnArchivo, ";");
-//				string_append(&entradaEnArchivo,
-//						string_itoa(unaEntrada.numeroEntrada));
-//				string_append(&entradaEnArchivo, ";");
-//				string_append(&entradaEnArchivo,
-//						string_itoa(unaEntrada.tamanioValor));
-//				string_append(&entradaEnArchivo, ";");
-//
-//				mapArchivoTablaDeEntradas = escribirEntrada(
-//						mapArchivoTablaDeEntradas,
-//						contadorEntradasEscritasEnTabla, entradaEnArchivo,
-//						entradasCantidad, 255);
-//				free(entradaEnArchivo);
-//				if (msync(mapArchivoTablaDeEntradas, (entradasCantidad * 255),
-//						MS_SYNC) == -1) {
-//					perror("No se puede sincronizar con el disco ");
-//				}
-//				printf("Se mapeo correctamente \n"
-//					);
-//				contadorDeEntradasInsertadas=contadorDeEntradasInsertadas+1;
+
 				printf("FIN procesado SET\n");
 				//FIN procesado SET
 			} else {
@@ -458,7 +373,7 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 							struct t_entrada *unaEntrada;
 							unaEntrada = dictionary_get(diccionarioEntradas,
 									key);
-						if(unaEntrada->bloquiado==1){
+
 					char* pathArchivo = string_new();
 					string_append(&pathArchivo, configuracion.punto_montaje);
 					string_append(&pathArchivo, key);
@@ -467,7 +382,7 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 					int tamanioArchivo = unaEntrada->tamanioValor * sizeof(char) +1;
 					if(remove(pathArchivo)){
 						printf("Se elimino archivo satifactoriamente\n");}else{
-							printf("no se elimino archivo\n")
+							printf("no se elimino archivo\n");
 						}
 
 					int fd = open(pathArchivo, O_RDWR|O_TRUNC, (mode_t) 0600);
@@ -491,7 +406,7 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 							struct t_entrada copiaEntrada;
 							copiaEntrada.numeroEntrada=unaEntrada->numeroEntrada;
 							copiaEntrada.tamanioValor=unaEntrada->tamanioValor;
-							copiaEntrada.bloquiado=0;
+
 
 						dictionary_remove(diccionarioEntradas, key);
 						if(dictionary_has_key(diccionarioEntradas,key)!=1){
@@ -515,10 +430,6 @@ printf("result=%d\n",result);
 	    							}
 
 							}
-		    			 }else{
-		    				 printf("La clave se encuentra pero no esta bloquiada\n");
-
-		    			 }
 
 						//FIN procesa do STORE
 					} else {
