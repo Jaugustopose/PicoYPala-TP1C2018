@@ -23,7 +23,10 @@ typedef enum id_proceso {
 
 typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	handshake = 1,
-	imposibilidad_conexion = 2
+	imposibilidad_conexion = 2,
+	requerimiento_ejecucion = 3,
+	sentencia_finalizada = 4,
+	esi_finalizado = 5
 }id_mensaje;
 
 typedef struct{

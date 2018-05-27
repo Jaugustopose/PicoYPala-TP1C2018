@@ -2,6 +2,7 @@
 #include "includes.h"
 #include "commons/config.h"
 #include "comunicacion/comunicacion.h"
+#include "planificacion.h"
 #include "conexiones.h"
 #include <pthread.h>
 #include <readline/readline.h>
@@ -190,20 +191,25 @@ void procesar_deadlock(char** subBufferSplitted) {
 	}
 }
 
-
 int main(void) {
+
 	config = cargarConfiguracion();
 	inicializarPlanificacion();
-/*
+
+	sockets_escucha_t sockets;
+
 	//Conexion a Coordinador
 	socket_coordinador = conectarConProceso(config.IP_COORDINADOR, config.PUERTO_COORDINADOR, Planificador);
+	sockets.socket_coordinador = socket_coordinador;
 
 	//Abrir puerto para aceptar conexion de ESIs en un hilo nuevo
 	int socketEscucha = crear_socket_escucha(config.PUERTO);
+	sockets.socket_escucha_esis = socketEscucha;
 	pthread_t hiloEscucha;
-	pthread_create(&hiloEscucha, NULL, &iniciarEscucha, &socketEscucha);
+	pthread_create(&hiloEscucha, NULL, &iniciarEscucha, &sockets);
+	pthread_detach(hiloEscucha);
 
 	procesar_entradas_consola();
-*/
+
 	return EXIT_SUCCESS;
 }

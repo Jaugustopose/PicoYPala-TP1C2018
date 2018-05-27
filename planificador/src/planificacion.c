@@ -1,5 +1,6 @@
 #include "planificacion.h"
 #include "includes.h"
+#include "conexiones.h"
 #include <stdbool.h>
 #include <string.h>
 
@@ -13,10 +14,11 @@ extern configuracion_t config;
 int contadorProcesos = 1;
 
 //Prototipos
-void procesoEjecutar(proceso_t* proceso);
 void colaListosPush(proceso_t* proceso);
 proceso_t* colaListosPop();
 proceso_t* colaListosPeek();
+int procesoEjecutar(proceso_t* proceso);
+void estimarRafaga(proceso_t* proceso);
 
 //Funciones
 bool esFIFO(){
@@ -106,7 +108,7 @@ proceso_t* colaListosPeek(){
 	return list_get(colaListos, 0);
 }
 
-void procesoNuevo(int socketESI){
+int procesoNuevo(int socketESI) {
 	proceso_t* proceso = malloc(sizeof(proceso_t));
 	proceso->idProceso = contadorProcesos;
 	contadorProcesos++;
@@ -116,22 +118,29 @@ void procesoNuevo(int socketESI){
 	proceso->rafagaEstimada = config.ESTIMACION_INICIAL;
 	proceso->rafagasEsperando = 0;
 	proceso->socketESI = socketESI;
+	int retorno;
 	if(procesoEjecucion == 0){
-		procesoEjecutar(proceso);
-	}else{
+		retorno = procesoEjecutar(proceso);
+		if (retorno < 0) {
+			//TODO Lo ponemos en la lista de Terminados???
+		}
+	} else {
 		colaListosPush(proceso);
-		if(planificadorConDesalojo()){
+		if (planificadorConDesalojo()) {
 			planificarConDesalojo();
 		}
 	}
+
+	return EXIT_SUCCESS; //TODO: Revisar si habría que hacer algún return antes en los IF
+
 }
 
-void procesoEjecutar(proceso_t* proceso){
+int procesoEjecutar(proceso_t* proceso) {
 	procesoEjecucion = proceso;
-	//TODO: MANDAR AL ESI CORRESPONDIENTE EL COMANDO PARA QUE EJECUTE LA PRIMER SENTENCIA;
+	return mandar_a_ejecutar_esi(proceso->socketESI);
 }
 
-void procesoTerminado(){
+void procesoTerminado() {
 	queue_push(colaTerminados, (void*)procesoEjecucion);
 	procesoEjecutar(colaListosPop());
 }
@@ -142,15 +151,15 @@ void procesoBloquear(char* clave){
 	procesoEjecutar(colaListosPop());
 }
 
-void procesoDesbloquear(char* clave){
+void procesoDesbloquear(char* clave) {
 	int i;
-	for(i=0;i<list_size(listaBloqueados);i++){
+	for (i=0;i<list_size(listaBloqueados);i++) {
 		proceso_t* proceso;
 		proceso = (proceso_t*)list_get(listaBloqueados, i);
-		if(strcmp(proceso->claveBloqueo, clave)==0){
+		if (strcmp(proceso->claveBloqueo, clave)==0) {
 			list_remove(listaBloqueados, i);
 			colaListosPush(proceso);
-			if(planificadorConDesalojo()){
+			if (planificadorConDesalojo()) {
 				planificarConDesalojo();
 			}
 			break;
@@ -158,29 +167,30 @@ void procesoDesbloquear(char* clave){
 	}
 }
 
-void incrementarRafagasEsperando(){
+void incrementarRafagasEsperando() {
 	int i;
-	for(i=0;i<list_size(colaListos);i++){
+	for (i=0;i<list_size(colaListos);i++) {
 		proceso_t* proceso;
 		proceso = (proceso_t*)list_get(colaListos, i);
 		proceso->rafagasEsperando++;
 	}
 }
 
-void sentenciaFinalizada(){
+void sentenciaFinalizada() {
 	procesoEjecucion->rafagaActual++;
-	if(esHRRN()){
+	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
-	if(procesoEjecucion->rafagaActual == procesoEjecucion->rafagaEstimada){
+	if (procesoEjecucion->rafagaActual == procesoEjecucion->rafagaEstimada) {
 		colaListosPush(procesoEjecucion);
 		procesoEjecutar(colaListosPop());
-	}else{
-		//TODO: Mandar a ejecutar la siguiente rafaga
+	} else {
+		 mandar_a_ejecutar_esi(procesoEjecucion->socketESI);
+		 //TODO: Manejar error Send.
 	}
 }
 
-void estimarRafaga(proceso_t* proceso){
+void estimarRafaga(proceso_t* proceso) {
 	int alfa = config.ALFA_PLANIFICACION;
 	int estimacion = proceso->rafagaActual*alfa/100 + (100-alfa)*proceso->rafagaEstimada/100;
 	proceso->rafagaEstimada = estimacion;

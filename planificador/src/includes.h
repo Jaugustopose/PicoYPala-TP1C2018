@@ -28,4 +28,9 @@ typedef struct{
 	int rafagasEsperando;
 }proceso_t;
 
+typedef struct {
+	int socket_escucha_esis;
+	int socket_coordinador;
+} sockets_escucha_t;
+
 #endif /* SRC_INCLUDES_H_ */
