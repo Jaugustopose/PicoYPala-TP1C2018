@@ -5,6 +5,7 @@
 #include <stdlib.h>
 
 #include "commons/collections/list.h"
+#include "commons/collections/dictionary.h"
 #include "commons/string.h"
 
 typedef struct{

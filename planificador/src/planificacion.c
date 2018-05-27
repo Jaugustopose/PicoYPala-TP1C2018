@@ -7,6 +7,7 @@ t_list* colaListos;
 proceso_t* procesoEjecucion;
 t_queue* colaTerminados;
 t_list* listaBloqueados;
+t_dictionary claves;
 
 extern configuracion_t config;
 int contadorProcesos = 1;
@@ -183,4 +184,31 @@ void estimarRafaga(proceso_t* proceso){
 	int alfa = config.ALFA_PLANIFICACION;
 	int estimacion = proceso->rafagaActual*alfa/100 + (100-alfa)*proceso->rafagaEstimada/100;
 	proceso->rafagaEstimada = estimacion;
+}
+
+bool verificarClave(char* clave){
+	return dictionary_has_key(claves, clave);
+}
+
+void bloquearClave(char* clave){
+	dictionary_put(claves, clave, 0);
+}
+
+void desbloquearClave(char* clave){
+	dictionary_remove(claves, clave);
+}
+
+void solicitarClave(char* clave){
+	if(verificarClave(clave)){
+		procesoBloquear(clave);
+	}else{
+		bloquearClave(clave);
+		list_add(procesoEjecucion->clavesBloqueadas, clave);
+	}
+}
+
+void liberarClave(char* clave){
+	void* elem = list_remove(procesoEjecucion->clavesBloqueadas, clave);
+	desbloquearClave(clave);
+	free(elem);
 }
