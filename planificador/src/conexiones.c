@@ -95,12 +95,7 @@ void* iniciarEscucha(void* sockets) {
 					} else {
 						switch(header.comando) {
 						case sentencia_finalizada:
-							if (planificadorConDesalojo()) {
-								planificarConDesalojo();
-							} else {
-								//Mandamos a ejecutar siguiente ráfaga
-								mandar_a_ejecutar_esi(socketCliente);
-							}
+							sentenciaFinalizada();
 							break;
 						case esi_finalizado:
 							procesoTerminado();
@@ -108,7 +103,6 @@ void* iniciarEscucha(void* sockets) {
 						}
 					}
 				}
-
 			}
 		}
 	}
