@@ -57,9 +57,11 @@ int maxfd = 0; //Numero del ultimo fd creado.
 t_config* config_coordinador; //Para cuando tenga que traer cosas del .cfg
 config_t config; //Para cuando tenga que traer cosas del .cfg
 int planificador_conectado = 0;
-int cantidad_instancias = 0;
+int max_instancias = 0;
+int puntero_algoritmo_equitative = 0;
 t_list* lista_instancias_claves;
 t_list* lista_esis_permisos_setear;
+
 
 
 
@@ -246,11 +248,28 @@ void conexion_de_cliente_finalizada() {
 
 void* encontrar_esi_en_lista(int unESI){
 	//Funcion de ayuda solo dentro de este scope
-	int mismo_numero (infoEsi_t p){
+	int mismo_numero (infoEsi_t* p){
 		return string_equals_ignore_case(p->fdESI,unESI);
 	}
 
 	return list_find(lista_esis_permisos_setear, (void*) mismo_numero);
+}
+
+infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){
+
+	if (string_equals_ignore_case(algoritmo,"EQUITATIVE")){
+		if (puntero_algoritmo_equitative < max_instancias){
+			return list_get(lista_instancias_claves,puntero_algoritmo_equitative);
+			puntero_algoritmo_equitative++;
+		}else if(puntero_algoritmo_equitative == max_instancias) {
+			return list_get(lista_instancias_claves,puntero_algoritmo_equitative);
+			puntero_algoritmo_equitative = 0;
+		}
+	}else if (string_equals_ignore_case(algoritmo, "LSU")){
+		// Ordeno la lista_instancias_claves por espacio_disponible
+	}else if (string_equals_ignore_case(algoritmo, "KEY")){
+		// Hago resta con numeros de letras para saber en que instancia tiene que escribir/buscar/colgarse_de_esta/etc
+	}
 }
 
 void* encontrar_clave (char* unaClave){
@@ -282,7 +301,7 @@ void* encontrar_clave (char* unaClave){
 
 void atender_accion_esi(int fdEsi) {
 	int codAccion;
-	t_esi_operacion instruccion_esi;
+	t_esi_operacion sentencia_esi;
 	int resultado;
 	printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
@@ -292,15 +311,15 @@ void atender_accion_esi(int fdEsi) {
 		printf("Error al recibir instruccion del ESI\n");
 	} else {
 
-	resultado = recibir_mensaje(fdEsi,&instruccion_esi,sizeof(t_esi_operacion));
+	resultado = recibir_mensaje(fdEsi,&sentencia_esi,sizeof(t_esi_operacion));
 
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 		printf("Error al recibir instruccion del ESI\n");
 	} else {
-		switch (instruccion_esi.keyword) {
+		switch (sentencia_esi.keyword) {
 			header_t header;
-			infoEsi_t esiAAgregarClave;
-			void* clave_encontrada;
+			infoEsi_t* esiAAgregarClave;
+			infoInstancia_t* instanciaConClave;
 			void* buffer;
 
 			case GET:
@@ -310,39 +329,54 @@ void atender_accion_esi(int fdEsi) {
 				 * 		1.2) Si me responde con NO, corto.
 				 */
 				header.comando = solicitud_get_clave;
-				header.tamanio = sizeof(instruccion_esi.argumentos.GET.clave);
-				memcpy(buffer,&header,sizeof(header_t));
-				memcpy(buffer + sizeof(header_t),&instruccion_esi.argumentos.GET.clave, sizeof(instruccion_esi.argumentos.GET.clave));
+				header.tamanio = sizeof(sentencia_esi.argumentos.GET.clave);
+				buffer = serializar(header,&sentencia_esi.argumentos.GET.clave);
 
-				enviar_mensaje(socket_planificador,buffer,sizeof(header_t)+sizeof(instruccion_esi.argumentos.GET.clave));
+				/*memcpy(buffer,&header,sizeof(header_t));
+				memcpy(buffer + sizeof(header_t),&sentencia_esi.argumentos.GET.clave, sizeof(sentencia_esi.argumentos.GET.clave));
+				*/
 
+				enviar_mensaje(socket_planificador,buffer,sizeof(header_t)+sizeof(sentencia_esi.argumentos.GET.clave));
 				recibir_mensaje(socket_planificador,&header,sizeof(header_t));
 
-				if (header.comando == clave_permitida_para_get){
+				if (header.comando == clave_permitida_para_get){ //Necesito que el planificador me diga si puede hacer el GET o no.
 
-					clave_encontrada = encontrar_clave(instruccion_esi.argumentos.GET.clave);
+					instanciaConClave = encontrar_clave(sentencia_esi.argumentos.GET.clave);
 
-					if (clave_encontrada != 0){
-						esiAAgregarClave = encontrar_esi_en_lista(fdEsi);
-						list_add(esiAAgregarClave->claves_tomadas,instruccion_esi.argumentos.GET.clave);
-					}else {
+					if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
+						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
+							esiAAgregarClave = encontrar_esi_en_lista(fdEsi);
+							list_add(esiAAgregarClave->claves_tomadas,sentencia_esi.argumentos.GET.clave); //Agrego clave al ESI para controlar que primero hizo GET antes de SET/STORE.
+						}else {
+							//Abortar el esi con error "instancia desconectada" y notificar al usuario.
+						}
+					}else { //Entro aqui si no encontre la clave en mi sistema
+
+						instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION); //Selecciono instancia victima segun algoritmo de distribucion
+
+						header.comando = sentencia_get;
+						header.tamanio = sizeof(sentencia_esi.argumentos.GET.clave);
+						memcpy(buffer,&sentencia_esi.argumentos.GET.clave,sizeof(sentencia_esi.argumentos.GET.clave));
+						serializar(header,buffer);
+
+						enviar_mensaje(instanciaConClave->fd,buffer,sizeof(header_t)+(header.tamanio));
+						list_add(instanciaConClave->claves,sentencia_esi.argumentos.GET.clave);
 					}
-
 				} else {
 					//Corto
 				}
 
-				 /* 2) Verificar si existe clave en mi lista interna (lista_instancias_claves)
+				 /* 2) Verificar si existe clave en mi lista interna (lista_instancias_claves) LISTO
 				 * 		2.1) Si existe:
-				 * 			2.1.1) Agrego clave tomada por el esi en mi lista interna (lista_esis_permisos_setear)
+				 * 			2.1.1) Agrego clave tomada por el esi en mi lista interna (lista_esis_permisos_setear) LISTO
 				 *
 				 * 		2.2) Si existe pero la instancia que la posee esta desconectada:
 				 * 			2.2.1) Notifico al usuario y aborto el ESI. TODO
 				 *
 				 *		2.3) Si no existe:
-				 *			2.3.1) Le digo a la instancia correspondiente que cree la clave (segun algoritmo de distribucion que tenga)
-				 *			2.3.2) Agrego la clave a la lista de claves que tiene la instancia en mi lista interna (lista_instancias_claves)
+				 *			2.3.1) Le digo a la instancia correspondiente que cree la clave (segun algoritmo de distribucion que tenga) LISTO
+				 *			2.3.2) Agrego la clave a la lista de claves que tiene la instancia en mi lista interna (lista_instancias_claves) LISTO
 				 *
 				 */
 				break;
@@ -363,6 +397,7 @@ void atender_accion_esi(int fdEsi) {
 				break;
 		}
 	}
+}
 }
 
 void atender_accion_instancia(int fdInstancia) {

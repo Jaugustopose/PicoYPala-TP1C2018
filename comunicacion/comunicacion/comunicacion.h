@@ -27,7 +27,8 @@ typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	envio_nombre_instancia = 3,
 	instruccion_esi = 4,
 	solicitud_get_clave = 5,
-	clave_permitida_para_get = 6
+	clave_permitida_para_get = 6,
+	sentencia_get = 7
 }id_mensaje;
 
 typedef struct{
