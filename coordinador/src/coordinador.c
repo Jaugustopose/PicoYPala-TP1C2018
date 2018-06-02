@@ -142,7 +142,7 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 	int identificacion;
 	infoInstancia_t* nueva_instancia;
 	infoInstancia_t* instancia_existente;
-	void* nombre_instancia;
+	char* nombre_instancia;
 	int resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t));
 	if(resultado == ERROR_RECV){
 		printf("Error en el recv para socket %d!!!\n", socket_cliente);
@@ -255,7 +255,7 @@ void* encontrar_esi_en_lista(int unESI){
 	return list_find(lista_esis_permisos_setear, (void*) mismo_numero);
 }
 
-infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){
+infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning sale porque no estan imlementados LSU y KEY.
 
 	if (string_equals_ignore_case(algoritmo,"EQUITATIVE")){
 		if (puntero_algoritmo_equitative < max_instancias){
@@ -280,23 +280,19 @@ void* encontrar_clave (char* unaClave){
 	}
 
 	int i;
-	void* listaDeClaves;
+	void* instanciaConlistaDeClaves;
 	void* instanciaConClave;
 
 	for (i = 0; i < lista_instancias_claves->elements_count; ++i) {
 
-		listaDeClaves = list_get(lista_instancias_claves,i);
-		instanciaConClave = list_find(listaDeClaves,(void*) misma_clave);
+		instanciaConlistaDeClaves = list_get(lista_instancias_claves,i);
+		instanciaConClave = list_find(instanciaConlistaDeClaves,(void*) misma_clave);
 
 		if(instanciaConClave != NULL){
 			return list_get(lista_instancias_claves,i);
-			break;
 		}
-
 	}
-	if (instanciaConClave == NULL){
 		return 0; // Devuelvo 0 si no tenia la clave en ninguna instancia
-	}
 }
 
 void* esi_con_clave(int unESI, char* unaClave){
@@ -307,7 +303,7 @@ void* esi_con_clave(int unESI, char* unaClave){
 		}
 
 		int misma_clave (char* p){
-				return string_equals_ignore_case(p,unaClave);
+				return (p == unaClave);
 		}
 
 	infoEsi_t* esiBuscado;
@@ -328,11 +324,6 @@ void atender_accion_esi(int fdEsi) {
 	int resultado;
 	printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
-	//Funcion de ayuda solo dentro de este scope
-		int misma_clave_prefijada (char* p){
-			return string_equals_ignore_case(p,sentencia_esi.argumentos.STORE.clave);
-		};
-
 	recibir_mensaje(fdEsi,&codAccion,sizeof(int));
 
 	if (codAccion != msj_instruccion_esi){
@@ -344,6 +335,10 @@ void atender_accion_esi(int fdEsi) {
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 		printf("Error al recibir instruccion del ESI\n");
 	} else {
+		//Funcion de ayuda solo dentro de este scope
+			int misma_clave_prefijada (char* p){
+				return string_equals_ignore_case(p,sentencia_esi.argumentos.STORE.clave);
+			};
 		switch (sentencia_esi.keyword) {
 			header_t header;
 			infoEsi_t* esiAAgregarClave;
@@ -358,12 +353,9 @@ void atender_accion_esi(int fdEsi) {
 				 * 		1.2) Si me responde con NO, corto.
 				 */
 				header.comando = msj_solicitud_get_clave;
-				header.tamanio = sizeof(sentencia_esi.argumentos.GET.clave);
-				bufferAEnviar = serializar(header,&sentencia_esi.argumentos.GET.clave);
+				header.tamanio = strlen(sentencia_esi.argumentos.GET.clave);
+				bufferAEnviar = serializar(header,sentencia_esi.argumentos.GET.clave);
 
-				/*memcpy(buffer,&header,sizeof(header_t));
-				memcpy(buffer + sizeof(header_t),&sentencia_esi.argumentos.GET.clave, sizeof(sentencia_esi.argumentos.GET.clave));
-				*/
 
 				enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t)+sizeof(sentencia_esi.argumentos.GET.clave));
 				recibir_mensaje(socket_planificador,&header,sizeof(header_t));
