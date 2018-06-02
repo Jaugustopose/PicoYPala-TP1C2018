@@ -15,10 +15,4 @@ void conexion_de_cliente_finalizada();
 void atender_accion_esi(int fdEsi);
 void atender_accion_instancia(int fdInstancia);
 
-typedef enum id_algoritmo {
-	EQUITATIVE = 1,
-	LSU = 2,
-	KEY = 3,
-} id_algoritmo;
-
 #endif /* COORDINADOR_H_ */

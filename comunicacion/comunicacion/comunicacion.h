@@ -22,13 +22,16 @@ typedef enum id_proceso {
 
 
 typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
-	handshake = 1,
-	imposibilidad_conexion = 2,
-	envio_nombre_instancia = 3,
-	instruccion_esi = 4,
-	solicitud_get_clave = 5,
-	clave_permitida_para_get = 6,
-	sentencia_get = 7
+	msj_handshake = 1,
+	msj_imposibilidad_conexion = 2,
+	msj_envio_nombre_instancia = 3,
+	msj_instruccion_esi = 4,
+	msj_solicitud_get_clave = 5,
+	msj_clave_permitida_para_get = 6,
+	msj_sentencia_get = 7,
+	msj_sentencia_set = 8,
+	msj_sentencia_store = 9,
+	msj_inexistencia_clave = 10
 }id_mensaje;
 
 typedef struct{
