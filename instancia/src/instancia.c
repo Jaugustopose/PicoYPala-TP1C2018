@@ -20,8 +20,6 @@
 #include "instancia.h"
 #include "comunicacion/comunicacion.h"
 
-
-
 config_t cargarConfiguracion(char *path) {
 	config_t config;
 
@@ -116,7 +114,6 @@ persistirDiccionarioDeTablaDeEntradas(t_dictionary * mapArchivoTablaDeEntradas ,
 						printf("se mapeo bien Entrada  numeroEntrada:%d tamanioValor:%d",
 														unaEntrada->numeroEntrada,
 														unaEntrada->tamanioValor);
-
 }
 
 
@@ -124,13 +121,10 @@ persistirDiccionarioDeTablaDeEntradas(t_dictionary * mapArchivoTablaDeEntradas ,
 
 int main(int argc, char *argv[]) {
 
-
-
-
-
 	//variables nescesarias
 	int maximoNumeroEntradaInicio=0;
 	int maximoNumeroEntradaFin=0;
+
 
 	//Creo el log
 	log_errores = log_create("instancia.log", "Instance", true,
@@ -138,7 +132,7 @@ int main(int argc, char *argv[]) {
 
 	config_t configuracion;
 
-	if (argc = 1) {
+	if (argc == 1) {
 		/*llamo a la funcion de creacion de archivo de configuracion con la estructura t_config*/
 		char* pathConfiguracion = argv[1];
 		printf("Path de configuracion: %s\n", pathConfiguracion);
@@ -179,8 +173,8 @@ int main(int argc, char *argv[]) {
 
 	//recibir entradas y tamanio
 
-	 entradasCantidad = 0;
-	entradasTamanio = 0;
+	int entradasCantidad = 0;
+	int entradasTamanio = 0;
 
 	recibir_mensaje(socket_server, &entradasCantidad, sizeof(entradasCantidad));
 	recibir_mensaje(socket_server, &entradasTamanio, sizeof(entradasTamanio));
@@ -265,7 +259,6 @@ if(dictionary_size(mapArchivoTablaDeEntradas)>0){
 	printf("tiene datos el archivo de entrada %d \n",dictionary_size(mapArchivoTablaDeEntradas));
 	memcpy(&diccionarioEntradas,&mapArchivoTablaDeEntradas,sizeof(t_dictionary));
 }
-
 	int contadorDeEntradasInsertadas = 0;
 
 //inicio de while
@@ -275,7 +268,6 @@ printf("Seguir 1 si sigue o 0 si no = %d\n",seguir);
 
 
 	while (seguir==1) {
-
 
 
 
@@ -304,11 +296,29 @@ printf("Seguir 1 si sigue o 0 si no = %d\n",seguir);
 		printf("Key: %s \n", key);
 		printf("Value: %s \n", value);
 
-//creacion de tabla de entradas y de lista de keys
-
-
+//creacion de tabla de entradas
+		struct t_dictionary *diccionarioEntradas = dictionary_create();
+//se crea el dato del diccionario de entradas
+		struct t_entrada {
+			//char* clave;
+			int numeroEntrada;
+			int tamanioValor;
+		};
 
 		int contadorEntradasEscritasEnTabla = 0;
+////entrada de prueba -- borrar
+//		struct t_entrada unaEntrada;
+//		printf("\n PRUEBA CARGO 1 entradacantidad en el diccionario %d\n",
+//				dictionary_size(diccionarioEntradas));
+//
+//		unaEntrada.numeroEntrada = dictionary_size(diccionarioEntradas);
+//
+//		unaEntrada.tamanioValor = 4;
+//		printf("eNTRADA NUMERO %d TAMANIOVALOR %d\n", unaEntrada.numeroEntrada,
+//				unaEntrada.tamanioValor);
+//		dictionary_put(diccionarioEntradas, "materias:K3001", &unaEntrada);
+//		printf("PRUEBA fin cantidad en el diccionario %d\n\n",
+//				dictionary_size(diccionarioEntradas));
 
 		//analisis sentencia
 		if (strcmp(sentenciaSeparada[0], "GET") == 0) {
@@ -373,84 +383,49 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 			}
 
 		}
-
 			//FIN procesado GET
 		} else {
 			if (strcmp(sentenciaSeparada[0], "SET") == 0) {
 				//INICIO procesado SET
 				printf("INICIO procesado SET\n");
 
-
 				//se accsede a la tabla de entradas
-				if (dictionary_has_key(diccionarioEntradas, key)){
-					struct t_entrada *unaEntrada;
-					unaEntrada = dictionary_get(diccionarioEntradas, key);
-					if(unaEntrada->bloquiado==1){
-					//escribe entrada
-						printf("Clave bloquiada y guardando valor \n");
 
+				struct t_entrada unaEntrada;
+				unaEntrada.numeroEntrada = dictionary_size(diccionarioEntradas);
+				unaEntrada.tamanioValor = strlen(value);
+				dictionary_put(diccionarioEntradas, key, &unaEntrada);
 
-						unaEntrada->tamanioValor = strlen(value);
+				char* entradaEnArchivo = string_new();
+				string_append(&entradaEnArchivo, key);
+				string_append(&entradaEnArchivo, ";");
+				string_append(&entradaEnArchivo,
+						string_itoa(unaEntrada.numeroEntrada));
+				string_append(&entradaEnArchivo, ";");
+				string_append(&entradaEnArchivo,
+						string_itoa(unaEntrada.tamanioValor));
+				string_append(&entradaEnArchivo, ";");
 
-
-
-						dictionary_put(diccionarioValoresEntradas,key,value);
-						printf("Se guardo valor en diccionario par %s\n",dictionary_get(diccionarioValoresEntradas,key));
-//		//RECONFIGURANDO LAS ENTRADAS MAXIMAS DEL SISTEMA
-//						maximoNumeroEntradaInicio=unaEntrada->numeroEntrada;
-//
-//						  if ((unaEntrada->tamanioValor%entradasTamanio)==0){
-//							  maximoNumeroEntradaFin=maximoNumeroEntradaInicio + (unaEntrada->tamanioValor/entradasTamanio);
-//						  }else{
-//							  maximoNumeroEntradaFin=maximoNumeroEntradaInicio + (unaEntrada->tamanioValor/entradasTamanio) + 1;
-//						  }
-//						  printf("Reconfigurado de maximoNumeroEntradaInicio:%d maximoNumeroEntradaFin:%d", maximoNumeroEntradaInicio,maximoNumeroEntradaFin);
-//
-//		//FIN DE RECONFIGURADO
-
-
-					}else{
-						//Error de Clave no Bloqueada
-						printf("Error de Clave no Bloqueada \n");
-						//Si la clave que intenta acceder no se encuentra tomada por el ESI en cuestión, se debera informar al Usuario y se debera abortar el ESI.
-}
-				}else{
-					printf("Error de Clave no Identificada\n");
-					//Error de Clave no Identificada
-					//						Cuando un Usuario ejecute una operación de
-					//						STORE o SET y la clave no exista, se deberá generar un error informando de dicha inexistencia al Usuario. Abortando el ESI culpable.
-
+				mapArchivoTablaDeEntradas = escribirEntrada(
+						mapArchivoTablaDeEntradas,
+						contadorEntradasEscritasEnTabla, entradaEnArchivo,
+						entradasCantidad, 255);
+				free(entradaEnArchivo);
+				if (msync(mapArchivoTablaDeEntradas, (entradasCantidad * 255),
+						MS_SYNC) == -1) {
+					perror("No se puede sincronizar con el disco ");
 				}
+				printf("Se mapeo correctamente \n"
+					);
+				contadorDeEntradasInsertadas=contadorDeEntradasInsertadas+1;
 
-
-//				char* entradaEnArchivo = string_new();
-//				string_append(&entradaEnArchivo, key);
-//				string_append(&entradaEnArchivo, ";");
-//				string_append(&entradaEnArchivo,
-//						string_itoa(unaEntrada.numeroEntrada));
-//				string_append(&entradaEnArchivo, ";");
-//				string_append(&entradaEnArchivo,
-//						string_itoa(unaEntrada.tamanioValor));
-//				string_append(&entradaEnArchivo, ";");
-//
-//				mapArchivoTablaDeEntradas = escribirEntrada(
-//						mapArchivoTablaDeEntradas,
-//						contadorEntradasEscritasEnTabla, entradaEnArchivo,
-//						entradasCantidad, 255);
-//				free(entradaEnArchivo);
-//				if (msync(mapArchivoTablaDeEntradas, (entradasCantidad * 255),
-//						MS_SYNC) == -1) {
-//					perror("No se puede sincronizar con el disco ");
-//				}
-//				printf("Se mapeo correctamente \n"
-//					);
-//				contadorDeEntradasInsertadas=contadorDeEntradasInsertadas+1;
 				printf("FIN procesado SET\n");
 				//FIN procesado SET
 			} else {
 				if (strcmp(sentenciaSeparada[0], "STORE") == 0) {
 					//INICIO procesado STORE
 					printf("INICIO procesado STORE\n");
+
 
 					if (dictionary_has_key(diccionarioEntradas, key) ) {
 						//leer entrada en memoria
@@ -459,18 +434,15 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 							unaEntrada = dictionary_get(diccionarioEntradas,
 									key);
 						if(unaEntrada->bloquiado==1){
+
 					char* pathArchivo = string_new();
 					string_append(&pathArchivo, configuracion.punto_montaje);
 					string_append(&pathArchivo, key);
 					string_append(&pathArchivo, ".txt");
 					//se accsede a la tabla de entradas
-					int tamanioArchivo = unaEntrada->tamanioValor * sizeof(char) +1;
-					if(remove(pathArchivo)){
-						printf("Se elimino archivo satifactoriamente\n");}else{
-							printf("no se elimino archivo\n")
-						}
 
-					int fd = open(pathArchivo, O_RDWR|O_TRUNC, (mode_t) 0600);
+					int tamanioArchivo = entradasTamanio * sizeof(char);
+					int fd = open(pathArchivo, O_RDWR, (mode_t) 0600);
 					if (fd <= -1) {
 						close(fd);
 						fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC,
@@ -478,6 +450,7 @@ if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
 						if (fd == -1) {
 							printf("Error al abrir para escritura\n");
 							exit(EXIT_FAILURE);
+<<<<<<< HEAD
 						}else{
 
 
@@ -523,7 +496,6 @@ printf("result=%d\n",result);
 						//FIN procesa do STORE
 					} else {
 						printf("Error de Clave no Identificada\n");
-
 					}
 				}
 			}

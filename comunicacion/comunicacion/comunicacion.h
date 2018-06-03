@@ -37,7 +37,10 @@ typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	msj_esi_tiene_tomada_clave = 13,
 	msj_ok_solicitud_operacion = 14,
 	msj_fail_solicitud_operacion = 15,
-	msj_abortar_esi = 16
+	msj_abortar_esi = 16,
+	msj_sentencia_get = 17,
+	msj_sentencia_set = 18,
+	msj_sentencia_store = 19
 }id_mensaje;
 
 typedef struct{
