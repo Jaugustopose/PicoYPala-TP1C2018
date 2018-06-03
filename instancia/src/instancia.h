@@ -35,7 +35,7 @@ struct t_entrada  {
 	//char* clave;
 	int numeroEntrada;
 	int tamanioValor;
-	int bloquiado; // si se bloquea pasa a 1
+
 };
 
 config_t cargarConfiguracion(char *path);
