@@ -68,7 +68,7 @@ void* iniciarEscucha(void* sockets) {
 					}
 
 				} else if (fdCliente == sockets_predefinidos.socket_coordinador) {
-					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear
+					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
 					paquete_t paquete = recibirPaquete(fdCliente);
 					retorno = procesar_notificacion_coordinador(paquete.header.comando, paquete.header.tamanio, paquete.cuerpo);
@@ -80,7 +80,7 @@ void* iniciarEscucha(void* sockets) {
 						respuesta = msj_fail_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
 						switch(paquete.header.comando) {
-							case msj_inexistencia_clave: //Procesar inexistancia clave
+							case msj_inexistencia_clave: //Procesar inexistencia clave
 								respuesta = msj_abortar_esi;
 								//enviar_mensaje(???, &respuesta, sizeof(respuesta));
 								//TODO Ver cómo obtener de procesar_notificacion_coordinador el socket del ESI a abortar
