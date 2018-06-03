@@ -105,7 +105,7 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 	}
 
 	switch (cabecera.comando) {
-	case handshake:
+	case msj_handshake:
 		resultado = recibir_mensaje(socket_cliente, &identificacion, cabecera.tamanio);
 		if(resultado == ERROR_RECV){
 			printf("Error en el recv para socket %d al hacer handshake!!!\n", socket_cliente); //TODO Manejar el error de cierta forma si queremos.

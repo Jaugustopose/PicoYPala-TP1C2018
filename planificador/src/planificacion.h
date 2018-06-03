@@ -5,23 +5,10 @@
 #include "commons/collections/list.h"
 
 //Prototipos
-bool esFIFO();
-bool esSJFCD();
-bool esSJFSD();
-bool esHRRN();
 void inicializarPlanificacion();
-bool planificadorConDesalojo();
-bool comparadorSJF(void* arg1, void* arg2);
-bool comparadorHRRN(void* arg1, void* arg2);
-void ordenarColaListos();
-void planificarConDesalojo();
 int procesoNuevo(int socketESI);
-void procesoTerminado();
-void procesoBloquear(char* clave);
-void procesoDesbloquear(char* clave);
-void incrementarRafagasEsperando();
+void procesoTerminado(int exitStatus);
 void sentenciaFinalizada();
-void solicitarClave(char* clave);
-void liberarClave(char* clave);
+int procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo);
 
 #endif /* SRC_PLANIFICACION_H_ */

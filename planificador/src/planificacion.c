@@ -1,6 +1,7 @@
 #include "planificacion.h"
 #include "includes.h"
 #include "conexiones.h"
+#include "comunicacion/comunicacion.h"
 #include <stdbool.h>
 #include <string.h>
 
@@ -8,17 +9,32 @@ t_list* colaListos;
 proceso_t* procesoEjecucion;
 t_queue* colaTerminados;
 t_list* listaBloqueados;
-t_dictionary claves;
+t_dictionary* claves;
 
 extern configuracion_t config;
 int contadorProcesos = 1;
 
 //Prototipos
+bool esFIFO();
+bool esSJFCD();
+bool esSJFSD();
+bool esHRRN();
+bool planificadorConDesalojo();
+bool comparadorSJF(void* arg1, void* arg2);
+bool comparadorHRRN(void* arg1, void* arg2);
+void ordenarColaListos();
+void planificarConDesalojo();
+void procesoBloquear(char* clave);
+void procesoDesbloquear(char* clave);
+void incrementarRafagasEsperando();
+bool solicitarClave(char* clave);
+void liberarClave(char* clave);
 void colaListosPush(proceso_t* proceso);
 proceso_t* colaListosPop();
 proceso_t* colaListosPeek();
 int procesoEjecutar(proceso_t* proceso);
 void estimarRafaga(proceso_t* proceso);
+void liberarRecursos(proceso_t* proceso);
 
 //Funciones
 bool esFIFO(){
@@ -123,6 +139,7 @@ int procesoNuevo(int socketESI) {
 		retorno = procesoEjecutar(proceso);
 		if (retorno < 0) {
 			//TODO Lo ponemos en la lista de Terminados???
+			procesoTerminado(exit_abortado_inesperado);
 		}
 	} else {
 		colaListosPush(proceso);
@@ -140,8 +157,10 @@ int procesoEjecutar(proceso_t* proceso) {
 	return mandar_a_ejecutar_esi(proceso->socketESI);
 }
 
-void procesoTerminado() {
+void procesoTerminado(int exitStatus) {
+	procesoEjecucion->exitStatus = exitStatus;
 	queue_push(colaTerminados, (void*)procesoEjecucion);
+	liberarRecursos(procesoEjecucion);
 	procesoEjecutar(colaListosPop());
 }
 
@@ -177,6 +196,7 @@ void incrementarRafagasEsperando() {
 }
 
 void sentenciaFinalizada() {
+	//TODO EL PROCESO EN EJECUCIÓN CAMBIÓ SI ESTA SENTENCIA FINALIZADA CORRESPONDE A UN 'STORE' Y ESTOY EN PLANIFICACION CON DESALOJO (Y HABÍA CORRESPONDIDO CAMBIAR PROCESO)
 	procesoEjecucion->rafagaActual++;
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
@@ -208,17 +228,60 @@ void desbloquearClave(char* clave){
 	dictionary_remove(claves, clave);
 }
 
-void solicitarClave(char* clave){
+bool solicitarClave(char* clave){
+	bool pudo_solicitar = true;
 	if(verificarClave(clave)){
 		procesoBloquear(clave);
-	}else{
+		pudo_solicitar = false;
+	} else {
 		bloquearClave(clave);
 		list_add(procesoEjecucion->clavesBloqueadas, clave);
 	}
+	return pudo_solicitar;
 }
 
+//Siempre se llamará luego de asegurarse que el proceso tenga la clave bloqueada
 void liberarClave(char* clave){
-	void* elem = list_remove(procesoEjecucion->clavesBloqueadas, clave);
+	//Closure para hacer el remove de la lista de claves bloqueadas
+	bool _soy_clave_buscada(char* p) {
+		return strcmp(p, clave) == 0;
+	}
+	void* elem = list_remove_by_condition(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
 	desbloquearClave(clave);
 	free(elem);
+}
+
+void liberarRecursos(proceso_t* proceso) {
+	list_iterate(proceso->clavesBloqueadas, (void*)desbloquearClave);
+}
+
+int procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo) {
+
+	int retorno;
+	//Closure para buscar si el proceso tiene la clave que intenta bloquear
+	bool _soy_clave_buscada(char* p) {
+		return strcmp(p, cuerpo) == 0;
+	}
+	//El cuerpo del paquete que llega acá siempre tiene que ser una clave
+
+	switch(comando) {
+	case msj_solicitud_get_clave: //Procesar GET
+		retorno = solicitarClave(cuerpo); //TODO Si hay bloqueo de proceso y se pone a ejecutar otro se va a hacer el return de mandar_a_ejecutar_esi
+		break;
+	case msj_store_clave: //Procesar STORE
+		liberarClave(cuerpo);
+		procesoDesbloquear(cuerpo); //TODO Si hay desalojo acá se va a hacer el return de mandar_a_ejecutar_esi
+		retorno = true;
+		break;
+	case msj_inexistencia_clave: //Procesar inexistancia clave
+		procesoTerminado(exit_abortado_por_clave_inexistente);
+		retorno = true;
+		break;
+	case msj_esi_tiene_tomada_clave:
+		retorno = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
+		break;
+	}
+
+	return retorno;
+
 }

@@ -155,7 +155,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	//Envio de hadshake
-	int id_mensaje = handshake;
+	int id_mensaje = msj_handshake;
 	int tamanio = sizeof(id_proceso);
 	int cuerpo = Instancia;
 

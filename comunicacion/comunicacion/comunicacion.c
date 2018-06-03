@@ -140,7 +140,7 @@ int conectarConProceso(char* ip, int puerto,int proceso){
 	int socketProceso = conectar_a_server(ip, puerto);
 	//Preparo mensaje handshake
 	header_t header;
-	header.comando = handshake;
+	header.comando = msj_handshake;
 	header.tamanio = sizeof(int);
 	int cuerpo = proceso;
 	int tamanio = sizeof(header_t) + sizeof(header.tamanio);
@@ -154,7 +154,7 @@ int conectarConProceso(char* ip, int puerto,int proceso){
 	free(buff);
 	//Recibo Respuesta del Handshake
 	paquete_t paquete = recibirPaquete(socketProceso);
-	if(paquete.header.comando == handshake && *(int*)paquete.cuerpo == proceso)
+	if(paquete.header.comando == msj_handshake && *(int*)paquete.cuerpo == proceso)
 		printf("Conectado correctamente al Proceso %d\n",proceso);
 
 	return socketProceso;
@@ -173,7 +173,7 @@ void responder_ok_handshake(int identificacion, int socket_destinatario) {
 	//Preparación para responder OK Handshake al proceso conectado recientemente.
 	int id = identificacion;
 	header_t header;
-	header.comando = handshake;
+	header.comando = msj_handshake;
 	header.tamanio = sizeof(id);
 
 	//Serialización

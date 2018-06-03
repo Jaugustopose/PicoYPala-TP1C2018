@@ -25,21 +25,6 @@ void procesar_handshake(int socketCliente) {
 	}
 }
 
-/*TODO
- * Es importante destacar que la operación GET generará una clave sin valor y ademas modifica el estado de bloqueos y desbloqueos en el planificador.
- * Es el SET el encargado de alterar el valor.
- */
-
-void procesar_notificacion_coordinador(int socket_coordinador) {
-//	paquete_t paquete = recibirPaquete(socket_coordinador);
-
-	//TODO Recibir notificación de bloqueo de ESI
-
-	//TODO Recibir notificación de Bloqueo de Clave de recurso por Parte de ESI (GET). Procesar, Si está tomada informar bloqueo de ESI, si no, sólo almacenar resultado
-
-	//TODO Recibir notificación de inexistencia de Instancia. Requiere abortar al ESI en cuestión.
-}
-
 void* iniciarEscucha(void* sockets) {
 	sockets_escucha_t sockets_predefinidos = *(sockets_escucha_t*) sockets;
 
@@ -53,6 +38,7 @@ void* iniciarEscucha(void* sockets) {
 	int fdCliente;
 	int socketCliente;
 	int bytesRecibidos;
+	int retorno;
 
 	//Bucle principal
 	for (;;) {
@@ -82,10 +68,30 @@ void* iniciarEscucha(void* sockets) {
 					}
 
 				} else if (fdCliente == sockets_predefinidos.socket_coordinador) {
-					// El coordinador está notificando de inexistencia de clave, bloqueo de clave o de ESI
+					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear
 					// Handshake hecho previo a ingresar al Select.
-					procesar_notificacion_coordinador(sockets_predefinidos.socket_coordinador);
-
+					paquete_t paquete = recibirPaquete(fdCliente);
+					retorno = procesar_notificacion_coordinador(paquete.header.comando, paquete.header.tamanio, paquete.cuerpo);
+					int respuesta;
+					if (retorno) {
+						respuesta = msj_ok_solicitud_operacion;
+						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+					} else { //En caso de falla de operación, además de informar al coordinador, abortar el ESI cuando sea necesario
+						respuesta = msj_fail_solicitud_operacion;
+						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+						switch(paquete.header.comando) {
+							case msj_inexistencia_clave: //Procesar inexistancia clave
+								respuesta = msj_abortar_esi;
+								//enviar_mensaje(???, &respuesta, sizeof(respuesta));
+								//TODO Ver cómo obtener de procesar_notificacion_coordinador el socket del ESI a abortar
+								break;
+							case msj_esi_tiene_tomada_clave:
+								respuesta = msj_abortar_esi;
+								//enviar_mensaje(???, &respuesta, sizeof(respuesta));
+								//TODO Ver cómo obtener de procesar_notificacion_coordinador el socket del ESI a abortar
+								break;
+						}
+					}
 				} else {
 					header_t header;
 					bytesRecibidos = recibir_mensaje(socketCliente, &header, sizeof(header_t));
@@ -94,11 +100,11 @@ void* iniciarEscucha(void* sockets) {
 						FD_CLR(fdCliente, &master);
 					} else {
 						switch(header.comando) {
-						case sentencia_finalizada:
+						case msj_sentencia_finalizada:
 							sentenciaFinalizada();
 							break;
-						case esi_finalizado:
-							procesoTerminado();
+						case msj_esi_finalizado:
+							procesoTerminado(exit_ok);
 							break;
 						}
 					}
@@ -112,7 +118,7 @@ void* iniciarEscucha(void* sockets) {
 
 int mandar_a_ejecutar_esi(int socket_esi) {
 	header_t header;
-	header.comando = requerimiento_ejecucion;
+	header.comando = msj_requerimiento_ejecucion;
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(socket_esi, &header, 0);
 	if (retorno < 0) {
@@ -125,23 +131,3 @@ int mandar_a_ejecutar_esi(int socket_esi) {
 	// Que lo maneje el select una vez que escalen hacia arriba los retornos de errores y lleguen
 	return retorno;
 }
-
-//void conexion_de_cliente_finalizada() {
-//	// conexión cerrada.
-//	printf("Server: socket %d termino la conexion\n", fdCliente);
-//	// Eliminar del conjunto maestro y su respectiva bolsa.
-//	FD_CLR(fdCliente, &master);
-//	if (FD_ISSET(fdCliente, &bolsa_esis)) {
-//		FD_CLR(fdCliente, &bolsa_esis);
-//		printf("Se desconecto esi del socket %d\n", fdCliente); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
-//
-//	} else if (FD_ISSET(fdCliente, &bolsa_instancias)){
-//		FD_CLR(fdCliente, &bolsa_instancias);
-//		printf("Se desconecto instancia del socket %d\n", fdCliente); //TODO: Reorganizar la distribucion para las claves.
-//	} else {
-//		FD_CLR(fdCliente, &bolsa_planificador);
-//		printf("Se desconecto el planificador\n");
-//	}
-//
-//	close(fdCliente); // Si se perdio la conexion, la cierro.
-//}

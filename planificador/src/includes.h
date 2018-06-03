@@ -26,11 +26,18 @@ typedef struct{
 	int rafagaEstimada;
 	int rafagaActual;
 	int rafagasEsperando;
+	int exitStatus;
 }proceso_t;
 
 typedef struct {
 	int socket_escucha_esis;
 	int socket_coordinador;
 } sockets_escucha_t;
+
+typedef enum id_exit_status {
+	exit_ok = 1,
+	exit_abortado_por_clave_inexistente = 2,
+	exit_abortado_inesperado = 3 //Por poner algo,
+}id_exit_status;
 
 #endif /* SRC_INCLUDES_H_ */
