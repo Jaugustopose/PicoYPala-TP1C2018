@@ -37,7 +37,12 @@ typedef struct {
 typedef enum id_exit_status {
 	exit_ok = 1,
 	exit_abortado_por_clave_inexistente = 2,
-	exit_abortado_inesperado = 3 //Por poner algo,
+	exit_abortado_inesperado = 3 //Por poner algo...
 }id_exit_status;
+
+typedef struct {
+	int respuestaACoordinador;
+	int fdESIAAbortar;
+}respuesta_operacion_t;
 
 #endif /* SRC_INCLUDES_H_ */

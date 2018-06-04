@@ -177,10 +177,8 @@ void procesoDesbloquear(char* clave) {
 		proceso = (proceso_t*)list_get(listaBloqueados, i);
 		if (strcmp(proceso->claveBloqueo, clave)==0) {
 			list_remove(listaBloqueados, i);
+			estimarRafaga(proceso);
 			colaListosPush(proceso);
-			if (planificadorConDesalojo()) {
-				planificarConDesalojo();
-			}
 			break;
 		}
 	}
@@ -195,15 +193,14 @@ void incrementarRafagasEsperando() {
 	}
 }
 
-void sentenciaFinalizada() {
-	//TODO EL PROCESO EN EJECUCIÓN CAMBIÓ SI ESTA SENTENCIA FINALIZADA CORRESPONDE A UN 'STORE' Y ESTOY EN PLANIFICACION CON DESALOJO (Y HABÍA CORRESPONDIDO CAMBIAR PROCESO)
+void sentenciaFinalizada(int socket_esi) {
+
 	procesoEjecucion->rafagaActual++;
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
-	if (procesoEjecucion->rafagaActual == procesoEjecucion->rafagaEstimada) {
-		colaListosPush(procesoEjecucion);
-		procesoEjecutar(colaListosPop());
+	if (planificadorConDesalojo()) {
+		planificarConDesalojo();
 	} else {
 		 mandar_a_ejecutar_esi(procesoEjecucion->socketESI);
 		 //TODO: Manejar error Send.
@@ -255,30 +252,35 @@ void liberarRecursos(proceso_t* proceso) {
 	list_iterate(proceso->clavesBloqueadas, (void*)desbloquearClave);
 }
 
-int procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo) {
+respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo) {
 
-	int retorno;
+	respuesta_operacion_t retorno;
+
 	//Closure para buscar si el proceso tiene la clave que intenta bloquear
 	bool _soy_clave_buscada(char* p) {
 		return strcmp(p, cuerpo) == 0;
 	}
-	//El cuerpo del paquete que llega acá siempre tiene que ser una clave
 
+	//El cuerpo siempre tiene que ser una clave
 	switch(comando) {
 	case msj_solicitud_get_clave: //Procesar GET
-		retorno = solicitarClave(cuerpo); //TODO Si hay bloqueo de proceso y se pone a ejecutar otro se va a hacer el return de mandar_a_ejecutar_esi
+		retorno.respuestaACoordinador = solicitarClave(cuerpo);
+		retorno.fdESIAAbortar = -1;
 		break;
 	case msj_store_clave: //Procesar STORE
 		liberarClave(cuerpo);
-		procesoDesbloquear(cuerpo); //TODO Si hay desalojo acá se va a hacer el return de mandar_a_ejecutar_esi
-		retorno = true;
+		procesoDesbloquear(cuerpo); //TODO Si hay desalojo acá se puede pisar procesoEnEjecucion
+		retorno.respuestaACoordinador = 1;
+		retorno.fdESIAAbortar = -1;
 		break;
 	case msj_inexistencia_clave: //Procesar inexistancia clave
+		retorno.fdESIAAbortar = procesoEjecucion->socketESI;
 		procesoTerminado(exit_abortado_por_clave_inexistente);
-		retorno = true;
+		retorno.respuestaACoordinador = 1;
 		break;
 	case msj_esi_tiene_tomada_clave:
-		retorno = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
+		retorno.respuestaACoordinador = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
+		retorno.fdESIAAbortar = (retorno.respuestaACoordinador == 1) ? -1 : procesoEjecucion->socketESI;
 		break;
 	}
 

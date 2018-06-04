@@ -38,7 +38,7 @@ void* iniciarEscucha(void* sockets) {
 	int fdCliente;
 	int socketCliente;
 	int bytesRecibidos;
-	int retorno;
+	respuesta_operacion_t retorno;
 
 	//Bucle principal
 	for (;;) {
@@ -73,26 +73,23 @@ void* iniciarEscucha(void* sockets) {
 					paquete_t paquete = recibirPaquete(fdCliente);
 					retorno = procesar_notificacion_coordinador(paquete.header.comando, paquete.header.tamanio, paquete.cuerpo);
 					int respuesta;
-					if (retorno) {
+					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-					} else { //En caso de falla de operación, además de informar al coordinador, abortar el ESI cuando sea necesario
+						if (paquete.header.comando == msj_inexistencia_clave) {
+							respuesta = msj_abortar_esi;
+							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
+						}
+					} else { //La operación del coordinador se procesó mal, abortar el ESI cuando sea necesario
 						respuesta = msj_fail_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-						switch(paquete.header.comando) {
-							case msj_inexistencia_clave: //Procesar inexistencia clave
-								respuesta = msj_abortar_esi;
-								//enviar_mensaje(???, &respuesta, sizeof(respuesta));
-								//TODO Ver cómo obtener de procesar_notificacion_coordinador el socket del ESI a abortar
-								break;
-							case msj_esi_tiene_tomada_clave:
-								respuesta = msj_abortar_esi;
-								//enviar_mensaje(???, &respuesta, sizeof(respuesta));
-								//TODO Ver cómo obtener de procesar_notificacion_coordinador el socket del ESI a abortar
-								break;
+						if (paquete.header.comando == msj_esi_tiene_tomada_clave) {
+							respuesta = msj_abortar_esi;
+							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
 					}
 				} else {
+					int respuesta;
 					header_t header;
 					bytesRecibidos = recibir_mensaje(socketCliente, &header, sizeof(header_t));
 					if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
@@ -105,6 +102,8 @@ void* iniciarEscucha(void* sockets) {
 							break;
 						case msj_esi_finalizado:
 							procesoTerminado(exit_ok);
+							respuesta = msj_ok_solicitud_operacion;
+							enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
 							break;
 						}
 					}
