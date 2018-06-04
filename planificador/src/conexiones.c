@@ -120,7 +120,7 @@ int mandar_a_ejecutar_esi(int socket_esi) {
 	header_t header;
 	header.comando = msj_requerimiento_ejecucion;
 	header.tamanio = 0;
-	int retorno = enviar_mensaje(socket_esi, &header, 0);
+	int retorno = enviar_mensaje(socket_esi, &header, sizeof(header_t));
 	if (retorno < 0) {
 		printf("Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_esi);
 	}

@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include "esi.h"
 #include "comunicacion/comunicacion.h"
@@ -170,7 +171,7 @@ void leerScript(char **argv){
 
 void msgEjecucion(t_esi_operacion operacion){
 	header_t header;
-	header.comando = msj_requerimiento_ejecucion ; //TODO: Poner comando correcto (msj_instruccion_esi)
+	header.comando = msj_instruccion_esi ;
 	header.tamanio = sizeof(t_esi_operacion);
 	int tamanio = sizeof(header_t)+sizeof(t_esi_operacion);
 	void* buffer = malloc(tamanio);
@@ -186,7 +187,7 @@ void msgEjecucion(t_esi_operacion operacion){
 
 void msgFinProceso(){
 	header_t header;
-	header.comando = msj_requerimiento_ejecucion ; //TODO: Poner comando correcto (msj_esi_finalizado)
+	header.comando = msj_esi_finalizado;
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
 	if (retorno < 0) {
@@ -197,7 +198,7 @@ void msgFinProceso(){
 
 void msgSentenciaFinalizada(){
 	header_t header;
-	header.comando = msj_requerimiento_ejecucion ; //TODO: Poner comando correcto (msj_sentencia_finalizada)
+	header.comando = msj_sentencia_finalizada;
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
 	if (retorno < 0) {
