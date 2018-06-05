@@ -53,6 +53,12 @@ typedef struct{
 	void* cuerpo;
 } paquete_t;
 
+typedef enum t_operacion{
+	get,
+	set,
+	store
+} operacion_t;
+
 int conectar_a_server(char* ip, int puerto);
 int recibir_mensaje(int socket, void* buffer, int tamanio);
 int enviar_mensaje(int socket, void* buffer, int tamanio);
