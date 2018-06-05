@@ -31,13 +31,17 @@ typedef struct{
 
 }config_t;
 
-struct t_entrada  {
-	//char* clave;
+typedef struct  {
+	char clave[41];
 	int numeroEntrada;
 	int tamanioValor;
+	int tiempo;
 
-};
+}t_entrada;
+
+
 
 config_t cargarConfiguracion(char *path);
 //char* creacion_y_mapeo_archivo(int entradaCantidad, int entradaTamanio,		char* pathArchivo);
-char* escribirEntrada(char* map, int numeroEntrada, char* texto, int cantidadEntradas,int entradasTamanio) ;
+char* escribirEntrada(char* matriz, int tamanioEntradas,int numEntrada,char* textoAEscribir) ;
+char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud);

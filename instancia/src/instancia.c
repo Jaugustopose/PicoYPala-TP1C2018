@@ -19,8 +19,8 @@
 #include "commons/collections/list.h"
 #include "instancia.h"
 #include "comunicacion/comunicacion.h"
-
-
+#include "parsi/parser.h"
+#include <math.h>
 
 config_t cargarConfiguracion(char *path) {
 	config_t config;
@@ -67,41 +67,80 @@ config_t cargarConfiguracion(char *path) {
 }
 
 
+int redondiarArribaDivision(int divisor, int dividendo) {
 
-persistirDiccionarioDeTablaDeEntradas(t_dictionary * mapArchivoTablaDeEntradas ,  t_dictionary * diccionarioEntradas ){
+	int resultado = ((divisor + dividendo - 1) / dividendo);
 
-	memcpy(&mapArchivoTablaDeEntradas,&diccionarioEntradas,sizeof( t_dictionary ));
+	return resultado;
+}
 
+char * escribirAPartir(char* matriz, int puntoInicio, char* textoAEscribir) {
+	int puntoFin = puntoInicio + strlen(textoAEscribir) + 1;
+	int a = 0;
+	int i = 0;
+	for (a = puntoInicio; a <= puntoFin + 1; a++) {
+		matriz[a] = textoAEscribir[i];
+		i++;
+	}
+	matriz[puntoFin] = '\0';
+	return matriz;
+}
 
-	if (msync(mapArchivoTablaDeEntradas, entradasCantidad*255,	MS_SYNC) == -1) {
-							perror("No se puede sincronizar con el disco ");
-						}
-						printf("Se mapeo correctamente \n"
-							);
+char* leerDesdeAsta(char * matriz, int puntoInicio, int puntoFin) {
+	char* texto = malloc(puntoFin - puntoInicio) + 1;
+	int a = 0;
+	int i = 0;
+	for (a = puntoInicio; a < puntoFin; a++) {
+		texto[i] = matriz[a];
+		i++;
+	}
+	texto[puntoFin] = '\0';
+	return texto;
+}
 
-						struct t_entrada *unaEntrada;
-						unaEntrada = dictionary_get(diccionarioEntradas,
-								"messi");
-						printf("se mapeo bien Entrada  numeroEntrada:%d tamanioValor:%d",
-														unaEntrada->numeroEntrada,
-														unaEntrada->tamanioValor);
+char* escribirEntrada(char* matriz, int tamanioEntradas, int numEntrada,
+		char* textoAEscribir) {
 
+	char* texto = escribirAPartir(matriz, tamanioEntradas * numEntrada,
+			textoAEscribir);
+	return texto;
+}
+
+char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud) {
+	int puntoInicio = tamanioEntradas * numEntrada;
+	int puntoFin = tamanioEntradas * numEntrada + longitud;
+	return leerDesdeAsta(matriz, puntoInicio, puntoFin);
+}
+char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
+	char * matriz = malloc(entradasCantidad * entradasTamanio);
+	strcpy(matriz, "");
+	int i = 0;
+	for (i = 0; i <= numeroEntradas * tamanioEntradas; i++) {
+		matriz[i] = '\0';
+	}
+	return matriz;
 }
 
 
+void imprimirPorPantallaEstucturas(t_entrada* matriz,t_dictionary* diccionario,char* matrizDeChar,int cantidadEntradas,int tamanioEntradas){
+	int i=0;
+	for(i=0;i<cantidadEntradas;i++){
+		printf("-------Diccionario: %c  %d ",matriz[i].clave[0],dictionary_get(diccionario,matriz[i].clave));
+		printf(" MatrizMap:%d %c %d %d %d ",i,matriz[i].clave[0],matriz[i].numeroEntrada,matriz[i].tamanioValor,matriz[i].tiempo);
+		char* texto =leerEntrada(matrizDeChar,tamanioEntradas,matriz[i].numeroEntrada,matriz[i].tamanioValor);
+		printf(" MatrizChar Valor: %s\n",texto);
+	}
 
+}
 
 int main(int argc, char *argv[]) {
 
-
-
-
-
 	//variables nescesarias
-	int maximoNumeroEntradaInicio=0;
-	int maximoNumeroEntradaFin=0;
+	int maximoNumeroEntradaInicio = 0;
+	int maximoNumeroEntradaFin = 0;
 
 	//Creo el log
+
 	log_errores = log_create("instancia.log", "Instance", true,
 			LOG_LEVEL_ERROR);
 
@@ -139,16 +178,15 @@ int main(int argc, char *argv[]) {
 	free(buffer);
 
 	//Envio de envio de nombre
-	bufferTamanio=strlen(configuracion.nombre_instancia)+1;
-
-
+	bufferTamanio = strlen(configuracion.nombre_instancia) + 1;
 
 	enviar_mensaje(socket_server, &bufferTamanio, sizeof(bufferTamanio));
-	enviar_mensaje(socket_server, configuracion.nombre_instancia, bufferTamanio);
+	enviar_mensaje(socket_server, configuracion.nombre_instancia,
+			bufferTamanio);
 
 	//recibir entradas y tamanio
 
-	 entradasCantidad = 0;
+	entradasCantidad = 0;
 	entradasTamanio = 0;
 
 	recibir_mensaje(socket_server, &entradasCantidad, sizeof(entradasCantidad));
@@ -157,28 +195,26 @@ int main(int argc, char *argv[]) {
 	printf("EntradasCantidad: %d entradasTamanio: %d \n ", entradasCantidad,
 			entradasTamanio);
 
-
-
 	//	mapeo de archivo ArchivoMatrizDeEntradas
 	char* pathArchivo = string_new();
 	string_append(&pathArchivo, configuracion.punto_montaje);
 	char* nombreTablaDeEntradas = "TablaDeEntradas";
 	string_append(&pathArchivo, nombreTablaDeEntradas);
 	string_append(&pathArchivo, ".bin");
-	printf("Path de archivo creado y mapeado o solo mapeado \n%s\n:",
+	printf("Path de archivo creado y mapeado o solo mapeado: %s\n:",
 			pathArchivo);
 
-
-
-
-	 /*Abrir o crear archivo de una entrada*/
+	/*Abrir o crear archivo de una entrada*/
 	printf("Abriendo %s: \n", pathArchivo);
 	//int tamanioArchivo = entradasCantidad * entradasTamanio ;
-	int tamanioArchivo =sizeof(t_dictionary);
+	int tamanioArchivo = entradasTamanio * entradasCantidad * sizeof(char);
+	int tamanioArchivoTablaEntradas = sizeof(t_entrada) * entradasCantidad ;
 	int fd = open(pathArchivo, O_RDWR, (mode_t) 0600);
+	int archivoNoExistiaPrimeraCarga = 0;
 	if (fd <= -1) {
 		close(fd);
 		fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
+		archivoNoExistiaPrimeraCarga = 1;
 		if (fd == -1) {
 			printf("Error al abrir para escritura\n");
 			exit(EXIT_FAILURE);
@@ -199,262 +235,351 @@ int main(int argc, char *argv[]) {
 		}
 
 	}
+	char * matrizValoresEntradas = crearMatriz(entradasCantidad,
+			entradasTamanio);
 
+	/* Mapiando archivo */
 
-	/* Mapiando archivo
-	 */
-	struct t_dictionary* mapArchivoTablaDeEntradas = (struct t_dictionary*) mmap(0, tamanioArchivo, PROT_READ | PROT_WRITE, MAP_SHARED, fd,
-	NULL);
+	t_entrada * mapArchivoTablaDeEntradas = mmap(0, tamanioArchivoTablaEntradas,
+	PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	if (mapArchivoTablaDeEntradas == MAP_FAILED) {
 		close(fd);
 		printf("Error al mapiar achivo\n");
 		exit(EXIT_FAILURE);
 	}
 	printf("Se mapio archivo \n");
+	int i = 0;
+	for (i = 0; i < entradasCantidad && archivoNoExistiaPrimeraCarga == 1;
+			i++) {
+		mapArchivoTablaDeEntradas[i].numeroEntrada = -1;
+		mapArchivoTablaDeEntradas[i].tamanioValor = -1;
+		mapArchivoTablaDeEntradas[i].tiempo = -1;
+		//mapArchivoTablaDeEntradas[i].clave[0] = '\0';
+		printf("%d %d %d \n",mapArchivoTablaDeEntradas[i].numeroEntrada,mapArchivoTablaDeEntradas[i].tamanioValor,mapArchivoTablaDeEntradas[i].tiempo);
+	}
 
 
 	free(pathArchivo);
-	struct t_dictionary *diccionarioValoresEntradas=dictionary_create();
-	struct t_dictionary *diccionarioEntradas=dictionary_create();
-if(dictionary_size(mapArchivoTablaDeEntradas)>0){
-	printf("tiene datos el archivo de entrada %d \n",dictionary_size(mapArchivoTablaDeEntradas));
-	memcpy(&diccionarioEntradas,&mapArchivoTablaDeEntradas,sizeof(t_dictionary));
-}
+	struct t_dictionary *diccionarioEntradas = dictionary_create();
 
-	int contadorDeEntradasInsertadas = 0;
+
+
+	//se carga diccionarioEntradas, matrizValoresEntradas con datos de mapArchivoTablaDeEntradas
+
+	int b = 0;
+	for (i = 0; i < entradasCantidad && archivoNoExistiaPrimeraCarga == 0;
+			i++) {
+
+		if (mapArchivoTablaDeEntradas[i].clave[0] != '\0') {
+			dictionary_put(diccionarioEntradas,
+					mapArchivoTablaDeEntradas[i].clave, i);
+			char* pathArchivo = string_new();
+			string_append(&pathArchivo, configuracion.punto_montaje);
+			string_append(&pathArchivo, mapArchivoTablaDeEntradas[i].clave);
+			string_append(&pathArchivo, ".txt");
+			int fd = fopen(pathArchivo, "r");
+
+			//cargo matrizValoresEntradas
+
+			char *valor = malloc(mapArchivoTablaDeEntradas[i].tamanioValor);
+			fgets(valor, mapArchivoTablaDeEntradas[i].tamanioValor, fd);
+			matrizValoresEntradas = escribirEntrada(matrizValoresEntradas,
+					entradasTamanio, mapArchivoTablaDeEntradas[i].numeroEntrada,
+					valor);
+			free(valor);
+
+			close(fd);
+			free(pathArchivo);
+		}
+
+//------cargar diccionario con lo rescatado en el archivo
+	}
+
+
 
 //inicio de while
-	int seguir=0;
+	int seguir = 0;
 	recibir_mensaje(socket_server, &seguir, sizeof(seguir));
-printf("Seguir 1 si sigue o 0 si no = %d\n",seguir);
+	//printf("--------------------Seguir 1 si sigue o 0 si no = %d\n", seguir);
 
-
-	while (seguir==1) {
-
-
-
-
+	while (seguir == 1) {
 
 		//Recibir sentencia de Re Distinto
 		int tamanioMensaje;
 
 		recibir_mensaje(socket_server, &tamanioMensaje, sizeof(tamanioMensaje));
-		if(tamanioMensaje>0){
+		if (tamanioMensaje > 0) {
 
-		char * sentencia = malloc(tamanioMensaje);
-		recibir_mensaje(socket_server, sentencia, tamanioMensaje);
+			char * sentencia = malloc(tamanioMensaje);
+			recibir_mensaje(socket_server, sentencia, tamanioMensaje);
 
-		printf("Sentencia: %s\n", sentencia);
+			printf("Sentencia: %s\n", sentencia);
+			t_esi_operacion esi_operacion = parse(sentencia);
+			//Procesado de sentencia de una entrada
 
-		//Procesado de sentencia de una entrada
+			free(sentencia);
 
-		char** sentenciaSeparada = string_split(sentencia, " ");
-		free(sentencia);
-		char* instruccion = sentenciaSeparada[0];
-		char* key = sentenciaSeparada[1];
-		char* value = sentenciaSeparada[2];
-		printf("Instruccion: %s\n", instruccion);
+			int instruccion = esi_operacion.keyword;
 
-//obtiene clave asociada de salida de procesado de sentencia
-		printf("Key: %s \n", key);
-		printf("Value: %s \n", value);
-
-//creacion de tabla de entradas y de lista de keys
+			printf("Instruccion: %d\n", instruccion);
 
 
 
-		int contadorEntradasEscritasEnTabla = 0;
-
-		//analisis sentencia
-		if (strcmp(sentenciaSeparada[0], "GET") == 0) {
-			//INICIO procesado GET
-			printf("INICIO procesado GET\n");
-			//se accsede a la tabla de entradas si no la encuentra la crea
-
-//		if(strlen(key)>40){
-////			Error de Tamaño de Clave
-////			De exceder el tamaño máximo de 40 caracteres para la Clave, la operación fallará y se informará al Usuario. Abortando el ESI culpable.
-//
-//			}else {
-
-			if (dictionary_has_key(diccionarioEntradas, key)) {
-				printf("si exite la clave\n");
-				//si exite la clave
-				struct t_entrada *unaEntrada;
-				unaEntrada = dictionary_get(diccionarioEntradas, key);
+			//analisis sentencia
+			if (instruccion == 0) {
+				//INICIO procesado GET
+				printf("INICIO procesado GET\n");
+				imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+				//se accsede a la tabla de entradas si no la encuentra la crea
 
 
-				printf("GET Entrada  numeroEntrada:%d tamanioValor:%d \n",
-						unaEntrada->numeroEntrada, unaEntrada->tamanioValor);
+				if (dictionary_has_key(diccionarioEntradas,
+						esi_operacion.argumentos.GET.clave)) {
+					printf("si exite la clave\n");
+					//si exite la clave
+
+					int posicionTablaDeEntradas;
+					posicionTablaDeEntradas = dictionary_get(
+							diccionarioEntradas,
+							esi_operacion.argumentos.GET.clave);
+					t_entrada unaEntrada =
+							mapArchivoTablaDeEntradas[posicionTablaDeEntradas];
 
 
-			}else {
-				printf("si no exite la clave\n");
-				//si no exite la clave
-				//crea
-				struct t_entrada unaEntrada;
-				unaEntrada.numeroEntrada=contadorDeEntradasInsertadas;
-				contadorDeEntradasInsertadas=contadorDeEntradasInsertadas+1;
-				unaEntrada.tamanioValor = 0;
+					printf("GET Entrada  numeroEntrada:%d tamanioValor:%d \n",
+							unaEntrada.numeroEntrada, unaEntrada.tamanioValor);
 
+				} else {
+					printf("si no exite la clave\n");
+					//si no exite la clave
+					//crea
 
-				dictionary_put(diccionarioEntradas,key,&unaEntrada);
+					//busqueda de mapArchivoTablaDeEntradas en null
+					int a = 0;
+					int fin = 0;
+					for (a = 0; a < entradasCantidad && fin != 1; a++) {
+						if (mapArchivoTablaDeEntradas[a].clave[0] != '\0') {
 
-				//persistirDiccionarioDeTablaDeEntradas(diccionarioEntradas);
+							if (a == entradasCantidad) {
+								printf(
+										"mapArchivoTablaDeEntradas no se encontro clave libre sustituir%d\n",
+										a);
 
-				memcpy(&mapArchivoTablaDeEntradas,&diccionarioEntradas,sizeof(&diccionarioEntradas));
+							} else {
 
-
-//				int sincronizo=msync(mapArchivoTablaDeEntradas, tamanioArchivo,	MS_SYNC);
-				printf("mapArchivoTablaDeEntradas:%d\n t_dictionary:%d\n",sizeof(&mapArchivoTablaDeEntradas),sizeof(t_dictionary));
-				int sincronizo=msync(mapArchivoTablaDeEntradas, sizeof(t_dictionary) ,	MS_SYNC);
-				if (sincronizo == -1) {
-										perror("No se puede sincronizar con el disco ");
-									}else{
-									printf("Se sincronizo correctamente \n");}
-//
-//if( dictionary_has_key(mapArchivoTablaDeEntradas,"messi")){
-//	printf("se mapeo bien Entrada y se encontro key messi\n");
-//}else{printf("no pude leer entrada\n");
-//
-//};
-
-
-
-			}
-
-		//}
-
-			//FIN procesado GET
-		} else {
-			if (strcmp(sentenciaSeparada[0], "SET") == 0) {
-				//INICIO procesado SET
-				printf("INICIO procesado SET\n");
-
-
-				//se accsede a la tabla de entradas
-				if (dictionary_has_key(diccionarioEntradas, key)){
-					struct t_entrada *unaEntrada;
-					unaEntrada = dictionary_get(diccionarioEntradas, key);
-
-					//escribe entrada
-						printf("Clave bloquiada y guardando valor \n");
-
-
-						unaEntrada->tamanioValor = strlen(value);
-
-
-
-						dictionary_put(diccionarioValoresEntradas,key,value);
-						printf("Se guardo valor en diccionario par %s\n",dictionary_get(diccionarioValoresEntradas,key));
-
-
-
-				}else{
-					printf("Error de Clave no Identificada\n");
-					//Error de Clave no Identificada
-					//						Cuando un Usuario ejecute una operación de
-					//						STORE o SET y la clave no exista, se deberá generar un error informando de dicha inexistencia al Usuario. Abortando el ESI culpable.
-
-				}
-
-
-
-				printf("FIN procesado SET\n");
-				//FIN procesado SET
-			} else {
-				if (strcmp(sentenciaSeparada[0], "STORE") == 0) {
-					//INICIO procesado STORE
-					printf("INICIO procesado STORE\n");
-
-					if (dictionary_has_key(diccionarioEntradas, key) ) {
-						//leer entrada en memoria
-
-							struct t_entrada *unaEntrada;
-							unaEntrada = dictionary_get(diccionarioEntradas,
-									key);
-
-					char* pathArchivo = string_new();
-					string_append(&pathArchivo, configuracion.punto_montaje);
-					string_append(&pathArchivo, key);
-					string_append(&pathArchivo, ".txt");
-					//se accsede a la tabla de entradas
-					int tamanioArchivo = unaEntrada->tamanioValor * sizeof(char) +1;
-					if(remove(pathArchivo)){
-						printf("Se elimino archivo satifactoriamente\n");}else{
-							printf("no se elimino archivo\n");
-						}
-
-					int fd = open(pathArchivo, O_RDWR|O_TRUNC, (mode_t) 0600);
-					if (fd <= -1) {
-						close(fd);
-						fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC,
-								(mode_t) 0600);
-						if (fd == -1) {
-							printf("Error al abrir para escritura\n");
-							exit(EXIT_FAILURE);
-						}else{
-
-
-
-
-							printf("STORE Entrada numeroEntrada:%d tamanioValor:%d\n",unaEntrada->numeroEntrada,unaEntrada->tamanioValor);
-													/* Escribir entrada en archivo */
-
-
-
-							struct t_entrada copiaEntrada;
-							copiaEntrada.numeroEntrada=unaEntrada->numeroEntrada;
-							copiaEntrada.tamanioValor=unaEntrada->tamanioValor;
-
-
-						dictionary_remove(diccionarioEntradas, key);
-						if(dictionary_has_key(diccionarioEntradas,key)!=1){
-							printf("Elimino entrada\n");
-						}
-							dictionary_put(diccionarioEntradas, key,&copiaEntrada);
-							if(dictionary_has_key(diccionarioEntradas,key)){printf("Inserto la nueva\n");}
-						//	memcpy(&mapArchivoTablaDeEntradas,&diccionarioEntradas,sizeof(&diccionarioEntradas));
-							char * value1=dictionary_get(diccionarioValoresEntradas, key);
-													int result = write(fd, value1, tamanioArchivo);
-printf("result=%d\n",result);
-													if (result <0) {
-														close(fd);
-														printf(
-																"Error al escribir  \n");
-														exit(EXIT_FAILURE);
-													}else{
-														printf("se guardo archivo \n");
-														close(fd);
-													}
-	    							}
-
+								printf(
+										"mapArchivoTablaDeEntradas con clave ocupada %d\n",
+										a);
 							}
+						} else {
+							printf(
+									"mapArchivoTablaDeEntradas Se encontro clave libre %d\n",
+									a);
+							dictionary_put(diccionarioEntradas,
+									esi_operacion.argumentos.GET.clave, a);
+							strcpy(mapArchivoTablaDeEntradas[a].clave,
+									esi_operacion.argumentos.GET.clave);
 
-						//FIN procesa do STORE
-					} else {
-						printf("Error de Clave no Identificada\n");
+							fin = 1;
+
+						}
 
 					}
+
+				}
+				imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+				//FIN procesado GET
+			} else {
+				if (instruccion == 1) {
+					//INICIO procesado SET
+					printf("INICIO procesado SET\n");
+					imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+
+					//se accsede a la tabla de entradas
+					if (dictionary_has_key(diccionarioEntradas,
+							esi_operacion.argumentos.SET.clave)) {
+
+						int i = dictionary_get(diccionarioEntradas,
+								esi_operacion.argumentos.SET.clave);
+
+						int cantidadDeEntradasAUsar = redondiarArribaDivision(
+								strlen(esi_operacion.argumentos.SET.valor),
+								entradasTamanio);
+
+						printf(
+								"texto: %s  valor:%d cantidadDeEntradasAUsar: %d\n",
+								esi_operacion.argumentos.SET.valor,
+								strlen(esi_operacion.argumentos.SET.valor),
+								cantidadDeEntradasAUsar);
+						//primera vez que se inserta
+						printf(
+								"mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
+								i, mapArchivoTablaDeEntradas[i].numeroEntrada);
+						if (mapArchivoTablaDeEntradas[i].numeroEntrada == -1) {
+							//busqueda de entradas contiguas
+							int a = 0;
+							int contadorContiguas = 0;
+							int numeroEntradaInicialAInsertar = -1;
+							for (a = 0;
+									a <= entradasCantidad
+											&& cantidadDeEntradasAUsar
+													!= contadorContiguas; a++) {
+
+								if (mapArchivoTablaDeEntradas[a].numeroEntrada
+										== -1) {
+									contadorContiguas++;
+								} else {
+									//existe entrada y se calcula cuantas entradas ocupa
+									contadorContiguas = 0;
+									a =
+											a
+													+ redondiarArribaDivision(
+															mapArchivoTablaDeEntradas[a].tamanioValor,
+															entradasTamanio)
+													;
+								};
+								if (contadorContiguas
+										== cantidadDeEntradasAUsar) {
+									numeroEntradaInicialAInsertar = a-contadorContiguas;
+								}
+							}
+							//se inserta datos en matriz de valores
+
+							matrizValoresEntradas = escribirEntrada(
+									matrizValoresEntradas, entradasTamanio,
+									numeroEntradaInicialAInsertar,
+									esi_operacion.argumentos.SET.valor);
+							printf(
+									"Se inserto en matriz de valores el valor %s\n",
+									leerEntrada(matrizValoresEntradas,
+											entradasTamanio,
+											numeroEntradaInicialAInsertar,
+											mapArchivoTablaDeEntradas[numeroEntradaInicialAInsertar].numeroEntrada));
+
+							//se inserta datos en matriz de entradas
+							mapArchivoTablaDeEntradas[i].numeroEntrada =
+									numeroEntradaInicialAInsertar;
+							mapArchivoTablaDeEntradas[i].tamanioValor = strlen(
+									esi_operacion.argumentos.SET.valor);
+							strcpy(mapArchivoTablaDeEntradas[i].clave,
+									esi_operacion.argumentos.SET.clave);
+
+							printf(
+									"en matriz %d tamanioValor %d escribioentrada %s\n",
+									i,
+									mapArchivoTablaDeEntradas[i].tamanioValor,
+									esi_operacion.argumentos.SET.valor);
+
+						} else {
+							//si ya habia asignado un indice de la matriz de entrada, se sustituye por una entrada una sola segun lo que me dijo lucas
+							mapArchivoTablaDeEntradas[i].tamanioValor =
+									string_length(
+											esi_operacion.argumentos.SET.valor);
+							matrizValoresEntradas = escribirEntrada(
+									matrizValoresEntradas, entradasTamanio,
+									mapArchivoTablaDeEntradas[i].numeroEntrada,
+									esi_operacion.argumentos.SET.valor);
+
+							printf(
+									"en matriz %d tamanioValor %d escribioentrada %s\n",
+									i,
+									mapArchivoTablaDeEntradas[i].tamanioValor,
+									esi_operacion.argumentos.SET.valor);
+
+						}
+
+					} else {
+						printf("Error de Clave no Identificada\n");
+						//Error de Clave no Identificada
+						//						Cuando un Usuario ejecute una operación de
+						//						STORE o SET y la clave no exista, se deberá generar un error informando de dicha inexistencia al Usuario. Abortando el ESI culpable.
+
+					}
+					imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+					printf("FIN procesado SET\n");
+					//FIN procesado SET
+				} else {
+					if (instruccion == 2) {
+						//INICIO procesado STORE
+						printf("INICIO procesado STORE\n");
+						imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+
+						if (dictionary_has_key(diccionarioEntradas,
+								esi_operacion.argumentos.STORE.clave)) {
+							//leer entrada en memoria
+
+							int i = dictionary_get(diccionarioEntradas,
+									esi_operacion.argumentos.STORE.clave);
+
+							char* pathArchivo = string_new();
+							string_append(&pathArchivo,
+									configuracion.punto_montaje);
+							string_append(&pathArchivo,
+									esi_operacion.argumentos.STORE.clave);
+							string_append(&pathArchivo, ".txt");
+							//se accsede a la tabla de entradas
+							char* textoValor = leerEntrada(
+									matrizValoresEntradas, entradasTamanio,
+									mapArchivoTablaDeEntradas[i].numeroEntrada,
+									mapArchivoTablaDeEntradas[i].tamanioValor);
+							if (textoValor[9] == '\0') {
+								printf("encontro barra 0 en 9");
+
+							}
+							printf("texto: %s\n", textoValor);
+							int tamanioArchivo = strlen(textoValor)
+									* sizeof(char);
+							if (remove(pathArchivo)) {
+								printf(
+										"Se elimino archivo satifactoriamente\n");
+							} else {
+								printf("no se elimino archivo\n");
+							}
+
+							fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC,
+									(mode_t) 0600);
+							if (fd == -1) {
+								printf("Error al abrir para escritura\n");
+								exit(EXIT_FAILURE);
+							} else {
+
+								int result = write(fd, textoValor,
+										tamanioArchivo);
+								printf("result=%d\n", result);
+								if (result < 0) {
+									close(fd);
+									printf("Error al escribir  \n");
+									exit(EXIT_FAILURE);
+								} else {
+									printf("se guardo archivo \n");
+									close(fd);
+								}
+							}
+
+
+							printf("texto de de tabla num 0 clave:%s\n",
+									mapArchivoTablaDeEntradas[0].clave);
+
+							imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+							printf("FIN procesa do STORE\n");
+//						//FIN procesa do STORE
+
+						} else {
+							imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
+							printf("Error de Clave no Identificada\n");
+							printf("FIN procesa do STORE\n");
+						}
+					}
+
 				}
 			}
 
-			}
+}
+			recibir_mensaje(socket_server, &seguir, sizeof(int));
 		}
 
-		//se obtiene informacin para obtener el valor en el almancenamiento
 
-		//se accsede al valor
+		close(socket_server);
+		return EXIT_SUCCESS;
 
-		//respuesta resultado al coordinador
-
-		//int t_nombre_instancia =strlen(configuracion.nombre_instancia);
-		//printf("mensaje %d\n",t_nombre_instancia);
-		//enviar_mensaje(socket_server,t_nombre_instancia,sizeof(int));
-		//printf("se imprimio mensaje");
-		recibir_mensaje(socket_server, &seguir, sizeof(int));
-	}
-
-	close(socket_server);
-	return EXIT_SUCCESS;
 }
