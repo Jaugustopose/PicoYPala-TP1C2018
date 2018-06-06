@@ -123,13 +123,15 @@ char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
 
 
 void imprimirPorPantallaEstucturas(t_entrada* matriz,t_dictionary* diccionario,char* matrizDeChar,int cantidadEntradas,int tamanioEntradas){
-	int i=0;
-	for(i=0;i<cantidadEntradas;i++){
-		printf("-------Diccionario: %c  %d ",matriz[i].clave[0],dictionary_get(diccionario,matriz[i].clave));
-		printf(" MatrizMap:%d %c %d %d %d ",i,matriz[i].clave[0],matriz[i].numeroEntrada,matriz[i].tamanioValor,matriz[i].tiempo);
-		char* texto =leerEntrada(matrizDeChar,tamanioEntradas,matriz[i].numeroEntrada,matriz[i].tamanioValor);
-		printf(" MatrizChar Valor: %s\n",texto);
-	}
+//	int i=0;
+//	for(i=0;i<cantidadEntradas ;i++){
+//		if(dictionary_has_key(diccionario,matriz[i].clave)){
+//		printf("-------Diccionario:  %s %d ",matriz[i].clave,dictionary_get(diccionario,matriz[i].clave));
+//		printf(" MatrizMap:%d %d %d %d ",i,matriz[i].numeroEntrada,matriz[i].tamanioValor,matriz[i].tiempo);
+//		char* texto =leerEntrada(matrizDeChar,tamanioEntradas,matriz[i].numeroEntrada,matriz[i].tamanioValor);
+//		printf(" MatrizChar Valor: %s\n",texto);
+//		}
+//	}
 
 }
 
@@ -220,7 +222,7 @@ int main(int argc, char *argv[]) {
 			exit(EXIT_FAILURE);
 		}
 		/* confirmando tamaño nuevo		     */
-		int result = lseek(fd, tamanioArchivo - 1, SEEK_SET);
+		int result = lseek(fd, tamanioArchivoTablaEntradas - 1, SEEK_SET);
 		if (result == -1) {
 			close(fd);
 			printf("Error al saltar con lseeck\n");
@@ -249,6 +251,7 @@ int main(int argc, char *argv[]) {
 	}
 	printf("Se mapio archivo \n");
 	int i = 0;
+
 	for (i = 0; i < entradasCantidad && archivoNoExistiaPrimeraCarga == 1;
 			i++) {
 		mapArchivoTablaDeEntradas[i].numeroEntrada = -1;
@@ -300,7 +303,7 @@ int main(int argc, char *argv[]) {
 //inicio de while
 	int seguir = 0;
 	recibir_mensaje(socket_server, &seguir, sizeof(seguir));
-	//printf("--------------------Seguir 1 si sigue o 0 si no = %d\n", seguir);
+	printf("--------------------Seguir 1 si sigue o 0 si no = %d\n", seguir);
 
 	while (seguir == 1) {
 
@@ -413,7 +416,7 @@ int main(int argc, char *argv[]) {
 								cantidadDeEntradasAUsar);
 						//primera vez que se inserta
 						printf(
-								"mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
+								"antes de set mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
 								i, mapArchivoTablaDeEntradas[i].numeroEntrada);
 						if (mapArchivoTablaDeEntradas[i].numeroEntrada == -1) {
 							//busqueda de entradas contiguas
@@ -421,7 +424,7 @@ int main(int argc, char *argv[]) {
 							int contadorContiguas = 0;
 							int numeroEntradaInicialAInsertar = -1;
 							for (a = 0;
-									a <= entradasCantidad
+									a < entradasCantidad
 											&& cantidadDeEntradasAUsar
 													!= contadorContiguas; a++) {
 
@@ -431,18 +434,20 @@ int main(int argc, char *argv[]) {
 								} else {
 									//existe entrada y se calcula cuantas entradas ocupa
 									contadorContiguas = 0;
-									a =
-											a
+									a =a
 													+ redondiarArribaDivision(
 															mapArchivoTablaDeEntradas[a].tamanioValor,
 															entradasTamanio)
-													;
+													-1;
 								};
 								if (contadorContiguas
 										== cantidadDeEntradasAUsar) {
-									numeroEntradaInicialAInsertar = a-contadorContiguas;
+									numeroEntradaInicialAInsertar = a-contadorContiguas+1;
 								}
 							}
+
+							//se actualiza tamanio valor de matriz de entrada
+							mapArchivoTablaDeEntradas[i].tamanioValor=strlen(esi_operacion.argumentos.SET.valor);
 							//se inserta datos en matriz de valores
 
 							matrizValoresEntradas = escribirEntrada(
@@ -450,11 +455,14 @@ int main(int argc, char *argv[]) {
 									numeroEntradaInicialAInsertar,
 									esi_operacion.argumentos.SET.valor);
 							printf(
+									"despues de set mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
+									i, numeroEntradaInicialAInsertar);
+							printf(
 									"Se inserto en matriz de valores el valor %s\n",
 									leerEntrada(matrizValoresEntradas,
 											entradasTamanio,
 											numeroEntradaInicialAInsertar,
-											mapArchivoTablaDeEntradas[numeroEntradaInicialAInsertar].numeroEntrada));
+											mapArchivoTablaDeEntradas[i].tamanioValor));
 
 							//se inserta datos en matriz de entradas
 							mapArchivoTablaDeEntradas[i].numeroEntrada =
@@ -522,10 +530,7 @@ int main(int argc, char *argv[]) {
 									matrizValoresEntradas, entradasTamanio,
 									mapArchivoTablaDeEntradas[i].numeroEntrada,
 									mapArchivoTablaDeEntradas[i].tamanioValor);
-							if (textoValor[9] == '\0') {
-								printf("encontro barra 0 en 9");
 
-							}
 							printf("texto: %s\n", textoValor);
 							int tamanioArchivo = strlen(textoValor)
 									* sizeof(char);
@@ -557,8 +562,8 @@ int main(int argc, char *argv[]) {
 							}
 
 
-							printf("texto de de tabla num 0 clave:%s\n",
-									mapArchivoTablaDeEntradas[0].clave);
+							printf("texto de de tabla num i clave:%s\n",
+									mapArchivoTablaDeEntradas[i].clave);
 
 							imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
 							printf("FIN procesa do STORE\n");
@@ -570,6 +575,9 @@ int main(int argc, char *argv[]) {
 							printf("FIN procesa do STORE\n");
 						}
 					}
+
+
+
 
 				}
 			}
