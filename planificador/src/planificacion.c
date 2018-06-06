@@ -62,6 +62,7 @@ void inicializarPlanificacion(){
 	procesoEjecucion = 0;
 	colaTerminados = queue_create();
 	listaBloqueados = list_create();
+	claves = dictionary_create();
 }
 
 bool planificadorConDesalojo(){

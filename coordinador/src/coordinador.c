@@ -344,6 +344,7 @@ void atender_accion_esi(int fdEsi) {
 		infoEsi_t* esiConClave;
 		void* bufferAEnviar;
 		char* clave;
+		int retornoPlanificador;
 
 		case msj_sentencia_get:
 			printf("Se recibió comando get de ESI\n");
@@ -358,9 +359,9 @@ void atender_accion_esi(int fdEsi) {
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
 			free(bufferAEnviar);
 			printf("Se envió mensaje al planificador\n");
-			recibir_mensaje(socket_planificador, &header, sizeof(header_t));
+			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
 			printf("Se recibió mensaje del planificador\n");
-			if (header.comando == msj_clave_permitida_para_get){ //Necesito que el planificador me diga si puede hacer el GET o no.
+			if (retornoPlanificador == msj_clave_permitida_para_get){ //Necesito que el planificador me diga si puede hacer el GET o no.
 
 				infoInstancia_t* instanciaConClave = encontrar_clave(clave);
 
@@ -405,6 +406,7 @@ void atender_accion_esi(int fdEsi) {
 			// TODO: Error de clave no identificada. Hacer un if que pregunte si la clave existe esta en el sistema.
 
 			clave = (char*)buffer; //Anda de una porque como separamos con /0
+			// TODO: Falta preguntarle al Planificador si el ESI tiene bloqueada esta clave
 			esiConClave = esi_con_clave(fdEsi, clave);
 
 			if (esiConClave != NULL) {
@@ -432,6 +434,7 @@ void atender_accion_esi(int fdEsi) {
 			break;
 		case msj_sentencia_store:
 			clave = (char*)buffer;
+			// TODO: Falta preguntarle al Planificador si el ESI tiene bloqueada esta clave
 			esiConClave = esi_con_clave(fdEsi, clave);
 
 			if (esiConClave != NULL) {

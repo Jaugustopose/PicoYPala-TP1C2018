@@ -48,7 +48,6 @@ void* iniciarEscucha(void* sockets) {
 			printf("Error en select\n");
 			exit(1);
 		}
-		printf("Se recibió algo\n");
 		for (fdCliente = 0; fdCliente <= maxFd; fdCliente++) {
 			if (FD_ISSET(fdCliente, &read_fds)) { // Me fijo si tengo datos listos para leer
 				if (fdCliente == sockets_predefinidos.socket_escucha_esis) {
