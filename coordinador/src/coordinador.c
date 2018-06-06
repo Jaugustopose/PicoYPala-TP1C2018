@@ -200,7 +200,7 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 				if (planificador_conectado == 0){
 					FD_SET(socket_cliente, &master);
 					FD_SET(socket_cliente, &bolsa_planificador);
-					printf("Se ha conectado el planificador al sistema\n");
+					printf("Se ha conectado el planificador al sistema en socket %d\n", socket_cliente);
 					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
 					responder_ok_handshake(Planificador, socket_cliente);
 					socket_planificador = socket_cliente;

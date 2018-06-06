@@ -32,6 +32,7 @@ void* iniciarEscucha(void* sockets) {
 	fd_set read_fds; // fdset temporal para pasar al select
 	//Añadir listener al conjunto maestro
 	FD_ZERO(&master);
+	FD_SET(sockets_predefinidos.socket_coordinador, &master);
 	FD_SET(sockets_predefinidos.socket_escucha_esis, &master);
 	//Mantener actualizado cual es el maxSock
 	int maxFd = sockets_predefinidos.socket_escucha_esis;
