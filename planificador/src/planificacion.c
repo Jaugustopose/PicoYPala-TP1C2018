@@ -264,6 +264,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 	//El cuerpo siempre tiene que ser una clave
 	switch(comando) {
 	case msj_solicitud_get_clave: //Procesar GET
+		printf("Solicitud de clave recibida\n");
 		retorno.respuestaACoordinador = solicitarClave(cuerpo);
 		retorno.fdESIAAbortar = -1;
 		break;

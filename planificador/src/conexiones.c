@@ -47,6 +47,7 @@ void* iniciarEscucha(void* sockets) {
 			printf("Error en select\n");
 			exit(1);
 		}
+		printf("Se recibió algo\n");
 		for (fdCliente = 0; fdCliente <= maxFd; fdCliente++) {
 			if (FD_ISSET(fdCliente, &read_fds)) { // Me fijo si tengo datos listos para leer
 				if (fdCliente == sockets_predefinidos.socket_escucha_esis) {
@@ -70,7 +71,9 @@ void* iniciarEscucha(void* sockets) {
 				} else if (fdCliente == sockets_predefinidos.socket_coordinador) {
 					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
+					printf("Notificacion recibida del coordinador\n");
 					paquete_t paquete = recibirPaquete(fdCliente);
+					printf("Paquete recibido del coordinador\n");
 					retorno = procesar_notificacion_coordinador(paquete.header.comando, paquete.header.tamanio, paquete.cuerpo);
 					int respuesta;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario

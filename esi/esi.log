@@ -1,0 +1,13 @@
+[DEBUG] 21:47:12:127 ESI/(8538:8538): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 21:47:12:127 ESI/(8538:8538): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 21:47:12:127 ESI/(8538:8538): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 21:47:12:128 ESI/(8538:8538): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 21:47:12:128 ESI/(8538:8538): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 21:47:12:128 ESI/(8538:8538): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 21:47:12:128 ESI/(8538:8538): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 21:47:12:128 ESI/(8538:8538): Parseando linea: GET futbol:ansaldi
+

@@ -171,12 +171,33 @@ void leerScript(char **argv){
 
 void msgEjecucion(t_esi_operacion operacion){
 	header_t header;
-	header.comando = msj_instruccion_esi ;
-	header.tamanio = sizeof(t_esi_operacion);
-	int tamanio = sizeof(header_t)+sizeof(t_esi_operacion);
-	void* buffer = malloc(tamanio);
-	memcpy(buffer, &header, sizeof(header_t));
-	memcpy(buffer+sizeof(header_t), &operacion, sizeof(t_esi_operacion));
+	int tamanio;
+	void* buffer;
+	if(operacion.keyword == GET){
+		header.comando = msj_sentencia_get;
+		header.tamanio = strlen(operacion.argumentos.GET.clave) + 1; //+1 para que copie tambien el /0
+		tamanio = sizeof(header_t)+header.tamanio;
+		buffer = malloc(tamanio);
+		memcpy(buffer, &header, sizeof(header_t));
+		memcpy(buffer+sizeof(header_t), operacion.argumentos.GET.clave, header.tamanio);
+	}else if(operacion.keyword == SET){
+		header.comando = msj_sentencia_set;
+		int tamanioClave = strlen(operacion.argumentos.SET.clave) + 1; //+1 para que copie tambien el /0
+		int tamanioValor = strlen(operacion.argumentos.SET.valor) + 1; //+1 para que copie tambien el /0
+		header.tamanio = tamanioClave + tamanioValor;
+		tamanio = sizeof(header_t)+header.tamanio;
+		buffer = malloc(tamanio);
+		memcpy(buffer, &header, sizeof(header_t));
+		memcpy(buffer+sizeof(header_t), operacion.argumentos.SET.clave, tamanioClave);
+		memcpy(buffer+sizeof(header_t) + tamanioClave, operacion.argumentos.SET.valor, tamanioValor);
+	}else{
+		header.comando = msj_sentencia_store;
+		header.tamanio = strlen(operacion.argumentos.STORE.clave) + 1; //+1 para que copie tambien el /0
+		tamanio = sizeof(header_t)+header.tamanio;
+		buffer = malloc(tamanio);
+		memcpy(buffer, &header, sizeof(header_t));
+		memcpy(buffer+sizeof(header_t), operacion.argumentos.STORE.clave, header.tamanio);
+	}
 	int retorno = enviar_mensaje(socket_coordinador, buffer, tamanio);
 	free(buffer);
 	if (retorno < 0) {

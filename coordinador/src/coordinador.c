@@ -203,6 +203,7 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 					printf("Se ha conectado el planificador al sistema\n");
 					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
 					responder_ok_handshake(Planificador, socket_cliente);
+					socket_planificador = socket_cliente;
 					break;
 
 				} else {
@@ -318,163 +319,146 @@ void* esi_con_clave(int unESI, char* unaClave){
 }
 
 void atender_accion_esi(int fdEsi) {
-	int codAccion;
-//	t_esi_operacion sentencia_esi;
-	int operacion;
-	int tamanioTotal;
-//	int tamanioClave;
-	char* claveValor;
-	char* clave;
-//	int tamanioValor;
-
-
+	header_t header;
 	int resultado;
+
 	printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
-	recibir_mensaje(fdEsi,&codAccion,sizeof(int));
+	resultado = recibir_mensaje(fdEsi,&header,sizeof(header_t));
+	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
+		printf("Error al recibir instruccion del ESI 1\n");
+		conexion_de_cliente_finalizada();
+		return;
+	}
+	void* buffer = malloc(header.tamanio);
+	resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
+	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
+		printf("Error al recibir instruccion del ESI 2\n");
+		conexion_de_cliente_finalizada();
+		return;
+	}
 
-	if (codAccion != msj_instruccion_esi){
-		printf("Error al recibir instruccion del ESI\n");
-	} else {
+	switch (header.comando) {
+		infoEsi_t* esiAAgregarClave;
+		infoInstancia_t* instanciaConClave;
+		infoEsi_t* esiConClave;
+		void* bufferAEnviar;
+		char* clave;
 
-		resultado = recibir_mensaje(fdEsi, &operacion, sizeof(operacion));
+		case msj_sentencia_get:
+			printf("Se recibió comando get de ESI\n");
 
-		if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
-			printf("Error al recibir instruccion del ESI\n");
-		} else {
+			/* 1) Le pregunto al planificador si puede hacer el get de la clave indicada
+			 * 		1.1) Si me responde con OK, continuo con 2)
+			 * 		1.2) Si me responde con NO, corto.
+			 */
+			clave = (char*)buffer;
+			header.comando = msj_solicitud_get_clave;
+			bufferAEnviar = serializar(header, buffer);
+			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
+			free(bufferAEnviar);
+			printf("Se envió mensaje al planificador\n");
+			recibir_mensaje(socket_planificador, &header, sizeof(header_t));
+			printf("Se recibió mensaje del planificador\n");
+			if (header.comando == msj_clave_permitida_para_get){ //Necesito que el planificador me diga si puede hacer el GET o no.
 
-			//Recibimos el tamanio total que puede representar solo la clave o clave valor (dependiendo de si es GET/STORE o SET)
-			recibir_mensaje(fdEsi, &tamanioTotal, sizeof(tamanioTotal));
+				infoInstancia_t* instanciaConClave = encontrar_clave(clave);
 
-			switch (operacion) {
-				header_t header;
-				infoEsi_t* esiAAgregarClave;
-				infoInstancia_t* instanciaConClave;
-				infoEsi_t* esiConClave;
-				void* bufferAEnviar;
+				if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
-				case get:
+					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave esta desconectada
+						esiAAgregarClave = encontrar_esi_en_lista(fdEsi);
+						list_add(esiAAgregarClave->claves_tomadas, clave); //Agrego clave al ESI para controlar que primero hizo GET antes de SET/STORE.
+						//TODO ¿Es necesario agregar a lista las claves tomadas por el ESI? ¿No dijimos que iba a preguntarle al planificador?
+					}else {
+						//Abortar el esi con error "instancia desconectada" y notificar al usuario. TODO: Enviar al PLANI el problema este.
+					}
+				}else { //Entro aqui si no encontre la clave en mi sistema
 
-					/* 1) Le pregunto al planificador si puede hacer el get de la clave indicada
-					 * 		1.1) Si me responde con OK, continuo con 2)
-					 * 		1.2) Si me responde con NO, corto.
-					 */
-					recibir_mensaje(fdEsi, clave, tamanioTotal);
-					header.comando = msj_solicitud_get_clave;
-					header.tamanio = tamanioTotal;
+					instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION); //Selecciono instancia victima segun algoritmo de distribucion
+
+					header.comando = msj_sentencia_get;
 					bufferAEnviar = serializar(header, clave);
 
-					enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
+					enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
 					free(bufferAEnviar);
-					recibir_mensaje(socket_planificador, &header, sizeof(header_t));
-
-					if (header.comando == msj_clave_permitida_para_get){ //Necesito que el planificador me diga si puede hacer el GET o no.
-
-						instanciaConClave = encontrar_clave(clave);
-
-						if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
-
-							if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave esta desconectada
-								esiAAgregarClave = encontrar_esi_en_lista(fdEsi);
-								list_add(esiAAgregarClave->claves_tomadas, clave); //Agrego clave al ESI para controlar que primero hizo GET antes de SET/STORE.
-								//TODO ¿Es necesario agregar a lista las claves tomadas por el ESI? ¿No dijimos que iba a preguntarle al planificador?
-							}else {
-								//Abortar el esi con error "instancia desconectada" y notificar al usuario. TODO: Enviar al PLANI el problema este.
-							}
-						}else { //Entro aqui si no encontre la clave en mi sistema
-
-							instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION); //Selecciono instancia victima segun algoritmo de distribucion
-
-							header.comando = msj_sentencia_get;
-							header.tamanio = tamanioTotal;
-							bufferAEnviar = serializar(header, clave);
-
-							enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
-							free(bufferAEnviar);
-							list_add(instanciaConClave->claves, clave);
-						}
-					} else {
-						//Corto
-					}
-
-					 /* 2) Verificar si existe clave en mi lista interna (lista_instancias_claves) LISTO
-					 * 		2.1) Si existe:
-					 * 			2.1.1) Agrego clave tomada por el esi en mi lista interna (lista_esis_permisos_setear) LISTO
-					 *
-					 * 		2.2) Si existe pero la instancia que la posee esta desconectada:
-					 * 			2.2.1) Notifico al usuario y aborto el ESI. TODO
-					 *
-					 *		2.3) Si no existe:
-					 *			2.3.1) Le digo a la instancia correspondiente que cree la clave (segun algoritmo de distribucion que tenga) LISTO
-					 *			2.3.2) Agrego la clave a la lista de claves que tiene la instancia en mi lista interna (lista_instancias_claves) LISTO
-					 *
-					 */
-					break;
-				case set:
-					// TODO: Error de clave no identificada. Hacer un if que pregunte si la clave existe esta en el sistema.
-					recibir_mensaje(fdEsi, claveValor, tamanioTotal);
-					char** substrings = string_split(claveValor, "\0"); //TODO Ojo con esto. ¿Es lo mejor?
-					clave = substrings[0]; //Solo uso la clave cuando separo porque es lo unico que requiere validacion
-//					char* valor = substrings[1];
-					esiConClave = esi_con_clave(fdEsi, clave);
-
-					if (esiConClave != NULL) {
-
-						instanciaConClave = encontrar_clave(clave);
-
-						header.comando = msj_sentencia_set;
-						header.tamanio = tamanioTotal;
-						bufferAEnviar = serializar(header, claveValor);
-
-						enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
-						free(bufferAEnviar);
-					} else {
-						header.comando = msj_inexistencia_clave;
-						header.tamanio = 0;
-						void* buffer = malloc(0);
-						bufferAEnviar = serializar(header, buffer);
-
-						enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + (header.tamanio)); //Envio mensaje al PLANIFICADOR para que aborte el esi por error clave inexistente.
-						free(bufferAEnviar);
-					}
-					/* 1) Pregunto si esi tiene la clave geteada LISTO
-					 * 		1.1) Si la tiene, paso instruccion a instancia segun algoritmo de distribucion LISTO
-					 * 		1.2) Si no la tiene, informar que primero tiene que hacer el get. LISTO
-					 */
-					break;
-				case store:
-
-					recibir_mensaje(fdEsi, clave, tamanioTotal);
-					esiConClave = esi_con_clave(fdEsi, clave);
-
-					if (esiConClave != NULL) {
-
-						instanciaConClave = encontrar_clave(clave);
-
-						header.comando = msj_sentencia_store;
-						header.tamanio = tamanioTotal;
-						bufferAEnviar = serializar(header, clave);
-
-						enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
-						free(bufferAEnviar);
-						//Funcion de ayuda solo dentro de este scope
-						int misma_clave_prefijada (char* p){
-							return string_equals_ignore_case(p, clave);
-						};
-						list_remove_by_condition(esiConClave->claves_tomadas, (void*) misma_clave_prefijada); // Borro la clave de la lista de claves tomadas por el ESI.
-					}else {
-						header.comando = msj_inexistencia_clave;
-						header.tamanio = 0;
-						void* buffer = malloc(0);
-						bufferAEnviar = serializar(header,buffer);
-
-						enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t)+(header.tamanio)); //Envio mensaje al PLANIFICADOR para que aborte el esi por error clave inexistente.
-					}
-					break;
-				default:
-					break;
+					list_add(instanciaConClave->claves, clave);
+				}
+			} else {
+				//Corto
 			}
-		}
+
+			 /* 2) Verificar si existe clave en mi lista interna (lista_instancias_claves) LISTO
+			 * 		2.1) Si existe:
+			 * 			2.1.1) Agrego clave tomada por el esi en mi lista interna (lista_esis_permisos_setear) LISTO
+			 *
+			 * 		2.2) Si existe pero la instancia que la posee esta desconectada:
+			 * 			2.2.1) Notifico al usuario y aborto el ESI. TODO
+			 *
+			 *		2.3) Si no existe:
+			 *			2.3.1) Le digo a la instancia correspondiente que cree la clave (segun algoritmo de distribucion que tenga) LISTO
+			 *			2.3.2) Agrego la clave a la lista de claves que tiene la instancia en mi lista interna (lista_instancias_claves) LISTO
+			 *
+			 */
+			break;
+		case msj_sentencia_set:
+			// TODO: Error de clave no identificada. Hacer un if que pregunte si la clave existe esta en el sistema.
+
+			clave = (char*)buffer; //Anda de una porque como separamos con /0
+			esiConClave = esi_con_clave(fdEsi, clave);
+
+			if (esiConClave != NULL) {
+
+				instanciaConClave = encontrar_clave(clave);
+
+				header.comando = msj_sentencia_set;
+				bufferAEnviar = serializar(header, buffer);
+
+				enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
+				free(bufferAEnviar);
+			} else {
+				header.comando = msj_inexistencia_clave;
+				header.tamanio = 0;
+				void* buffer = malloc(0);
+				bufferAEnviar = serializar(header, buffer);
+
+				enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + (header.tamanio)); //Envio mensaje al PLANIFICADOR para que aborte el esi por error clave inexistente.
+				free(bufferAEnviar);
+			}
+			/* 1) Pregunto si esi tiene la clave geteada LISTO
+			 * 		1.1) Si la tiene, paso instruccion a instancia segun algoritmo de distribucion LISTO
+			 * 		1.2) Si no la tiene, informar que primero tiene que hacer el get. LISTO
+			 */
+			break;
+		case msj_sentencia_store:
+			clave = (char*)buffer;
+			esiConClave = esi_con_clave(fdEsi, clave);
+
+			if (esiConClave != NULL) {
+
+				instanciaConClave = encontrar_clave(clave);
+
+				header.comando = msj_sentencia_store;
+				bufferAEnviar = serializar(header, buffer);
+
+				enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
+				free(bufferAEnviar);
+				//Funcion de ayuda solo dentro de este scope
+				int misma_clave_prefijada (char* p){
+					return string_equals_ignore_case(p, clave);
+				};
+				list_remove_by_condition(esiConClave->claves_tomadas, (void*) misma_clave_prefijada); // Borro la clave de la lista de claves tomadas por el ESI.
+			}else {
+				header.comando = msj_inexistencia_clave;
+				header.tamanio = 0;
+				void* buffer = malloc(0);
+				bufferAEnviar = serializar(header,buffer);
+
+				enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t)+(header.tamanio)); //Envio mensaje al PLANIFICADOR para que aborte el esi por error clave inexistente.
+			}
+			break;
+		default:
+			printf("Se recibio comando desconocido desde ESI");
 	}
 }
 
@@ -520,7 +504,7 @@ int main(void) {
 					}
 
 				} else {
-
+					/* LUCAS CABELLO: Te comenté esto porque estaba recibiendo un byte y rompiendo el header de esta manera
 					// Gestionar datos de un cliente.
 					int id_operacion_mensaje;
 					int cantBytes = recibir_mensaje(fdCliente,&id_operacion_mensaje,sizeof(int));
@@ -535,6 +519,8 @@ int main(void) {
 						break; //Salimos del for.
 					}
 					//Se recibió OK. Atender de acuerdo a proceso.
+					 *
+					 */
 					if (FD_ISSET(fdCliente, &bolsa_esis)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UN ESI.
 						atender_accion_esi(fdCliente);
 					} else if (FD_ISSET(fdCliente, &bolsa_instancias)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UNA INSTANCIA.
