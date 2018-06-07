@@ -275,7 +275,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 		retorno.respuestaACoordinador = 1;
 		retorno.fdESIAAbortar = -1;
 		break;
-	case msj_inexistencia_clave: //Procesar inexistancia clave
+	case msj_error_clave_no_identificada: //Procesar inexistancia clave
 		retorno.fdESIAAbortar = procesoEjecucion->socketESI;
 		procesoTerminado(exit_abortado_por_clave_inexistente);
 		retorno.respuestaACoordinador = 1;

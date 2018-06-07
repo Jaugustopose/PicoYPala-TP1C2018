@@ -79,7 +79,7 @@ void* iniciarEscucha(void* sockets) {
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-						if (paquete.header.comando == msj_inexistencia_clave) {
+						if (paquete.header.comando == msj_error_clave_no_identificada) {
 							respuesta = msj_abortar_esi;
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
