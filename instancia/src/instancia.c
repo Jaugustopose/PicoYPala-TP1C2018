@@ -75,19 +75,19 @@ int redondiarArribaDivision(int divisor, int dividendo) {
 }
 
 char * escribirAPartir(char* matriz, int puntoInicio, char* textoAEscribir) {
-	int puntoFin = puntoInicio + strlen(textoAEscribir) + 1;
+	int puntoFin = puntoInicio + strlen(textoAEscribir) -1;
 	int a = 0;
 	int i = 0;
-	for (a = puntoInicio; a <= puntoFin + 1; a++) {
+	for (a = puntoInicio; a <= puntoFin ; a++) {
 		matriz[a] = textoAEscribir[i];
 		i++;
 	}
-	matriz[puntoFin] = '\0';
+	//matriz[puntoFin] = '\0';
 	return matriz;
 }
 
 char* leerDesdeAsta(char * matriz, int puntoInicio, int puntoFin) {
-	char* texto = malloc(puntoFin - puntoInicio) + 1;
+	char* texto = malloc(puntoFin - puntoInicio) ;
 	int a = 0;
 	int i = 0;
 	for (a = puntoInicio; a < puntoFin; a++) {
@@ -123,16 +123,91 @@ char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
 
 
 void imprimirPorPantallaEstucturas(t_entrada* matriz,t_dictionary* diccionario,char* matrizDeChar,int cantidadEntradas,int tamanioEntradas){
-//	int i=0;
-//	for(i=0;i<cantidadEntradas ;i++){
-//		if(dictionary_has_key(diccionario,matriz[i].clave)){
-//		printf("-------Diccionario:  %s %d ",matriz[i].clave,dictionary_get(diccionario,matriz[i].clave));
-//		printf(" MatrizMap:%d %d %d %d ",i,matriz[i].numeroEntrada,matriz[i].tamanioValor,matriz[i].tiempo);
-//		char* texto =leerEntrada(matrizDeChar,tamanioEntradas,matriz[i].numeroEntrada,matriz[i].tamanioValor);
-//		printf(" MatrizChar Valor: %s\n",texto);
-//		}
-//	}
+	if(seguir==2){
 
+
+
+		int i=0;
+	for(i=0;i<cantidadEntradas ;i++){
+		if(dictionary_has_key(diccionario,matriz[i].clave)){
+		printf("-------Diccionario:  %s %d ",matriz[i].clave,dictionary_get(diccionario,matriz[i].clave));
+		printf(" MatrizMap:%d %d %d %d ",i,matriz[i].numeroEntrada,matriz[i].tamanioValor,matriz[i].tiempo);
+		char* texto =leerEntrada(matrizDeChar,tamanioEntradas,matriz[i].numeroEntrada,matriz[i].tamanioValor);
+		printf(" MatrizChar Valor: %s\n",texto);
+		}
+		}
+	}
+}
+
+void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
+	printf("Sustituye Algoritmo declarado %s\n",algoritmo);
+	if(string_equals_ignore_case(algoritmo,"Ciclico")){
+		//busco siguiente atomico
+		int i=0;
+		if(punteroIUltimoInsertadoMatriz+1<entradasCantidad){
+			i=punteroIUltimoInsertadoMatriz+1;
+		}else {
+			i=0;
+		}
+		int fin=0;
+		while(fin==0){
+			if(redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)==1){
+				//inserto directo clave
+
+printf("Se remueve de diccionari y matriz clave %s \n",matriz[i].clave);
+				dictionary_remove(diccionario,matriz[i].clave);
+				dictionary_put(diccionario,clave,i);
+				strcpy(matriz[i].clave,clave);
+				//inserto tamanio valor -1
+				matriz[i].tamanioValor=-1;
+
+				fin=1;
+			}else{
+				if(redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)==0){
+					i++;
+					if(i==entradasCantidad){
+						i=0;
+					}
+				}else{
+				if(i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)<entradasCantidad){
+					//salto al proximo
+				i=i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio);
+					}else{
+						i=0;
+					}
+				}
+				}
+
+			}
+
+
+
+
+
+
+
+
+
+		//pongo la clave en matriz y diccionario
+
+		//cambio tamaniovalor de matriz y timer
+
+	}else{
+		if(string_equals_ignore_case(algoritmo,"LRU")){
+
+
+
+		}else{
+			if(string_equals_ignore_case(algoritmo,"BSU")){
+
+
+
+
+			}
+
+
+		}
+	}
 }
 
 int main(int argc, char *argv[]) {
@@ -301,12 +376,12 @@ int main(int argc, char *argv[]) {
 
 
 //inicio de while
-	int seguir = 0;
+	 seguir = 0;
 	recibir_mensaje(socket_server, &seguir, sizeof(seguir));
 	printf("--------------------Seguir 1 si sigue o 0 si no = %d\n", seguir);
 
-	while (seguir == 1) {
-
+	while (seguir >0) {
+printf("\n");
 		//Recibir sentencia de Re Distinto
 		int tamanioMensaje;
 
@@ -357,37 +432,85 @@ int main(int argc, char *argv[]) {
 					//si no exite la clave
 					//crea
 
-					//busqueda de mapArchivoTablaDeEntradas en null
-					int a = 0;
-					int fin = 0;
-					for (a = 0; a < entradasCantidad && fin != 1; a++) {
-						if (mapArchivoTablaDeEntradas[a].clave[0] != '\0') {
+					int fin=0;
+					int i=0;
+					while(mapArchivoTablaDeEntradas[i].numeroEntrada!=-1 && fin==0){
 
-							if (a == entradasCantidad) {
-								printf(
-										"mapArchivoTablaDeEntradas no se encontro clave libre sustituir%d\n",
-										a);
+						if(i==entradasCantidad){
+							//sustituir
 
-							} else {
-
-								printf(
-										"mapArchivoTablaDeEntradas con clave ocupada %d\n",
-										a);
-							}
-						} else {
-							printf(
-									"mapArchivoTablaDeEntradas Se encontro clave libre %d\n",
-									a);
-							dictionary_put(diccionarioEntradas,
-									esi_operacion.argumentos.GET.clave, a);
-							strcpy(mapArchivoTablaDeEntradas[a].clave,
-									esi_operacion.argumentos.GET.clave);
-
-							fin = 1;
-
+													sustituirMatrizEntradas(
+																	configuracion.algoritmo_remplazo,
+																	punteroIUltimoInsertadoMatriz,
+																	mapArchivoTablaDeEntradas,
+																	diccionarioEntradas,
+																	esi_operacion.argumentos.GET.clave);
+							fin=1;
+						}else{
+															printf(
+																	"mapArchivoTablaDeEntradas con clave ocupada indice %d, numeroEntrada: %d tamanioValor %d\n",
+															i,mapArchivoTablaDeEntradas[i].numeroEntrada,mapArchivoTablaDeEntradas[i].tamanioValor);
+															i=i+redondiarArribaDivision(mapArchivoTablaDeEntradas[i].tamanioValor,entradasTamanio)-1;
 						}
 
+						i++;
 					}
+
+					if(mapArchivoTablaDeEntradas[i].numeroEntrada==-1 && fin==0){
+													printf(
+															"mapArchivoTablaDeEntradas Se encontro clave libre indice %d, numeroEntrada: %d\n",
+															i,mapArchivoTablaDeEntradas[i].numeroEntrada);
+													dictionary_put(diccionarioEntradas,
+															esi_operacion.argumentos.GET.clave, i);
+													strcpy(mapArchivoTablaDeEntradas[i].clave,
+															esi_operacion.argumentos.GET.clave);
+													punteroIUltimoInsertadoMatriz = i;
+					}
+
+//					//busqueda de mapArchivoTablaDeEntradas en null
+//					int a = 0;
+//					int fin = 0;
+//					for (a = 0; a <= entradasCantidad && fin != 1; a++) {
+//						if (mapArchivoTablaDeEntradas[a].numeroEntrada != -1) {
+//
+//							if (a == entradasCantidad) {
+//								printf(
+//										"mapArchivoTablaDeEntradas no se encontro clave libre sustituir%d\n",
+//										a);
+//
+//								//algoritmos de sustitucion
+//								sustituirMatrizEntradas(
+//										configuracion.algoritmo_remplazo,
+//										punteroIUltimoInsertadoMatriz,
+//										mapArchivoTablaDeEntradas,
+//										diccionarioEntradas,
+//										esi_operacion.argumentos.GET.clave);
+//								fin = 1;
+//							} else {
+//
+//								printf(
+//										"mapArchivoTablaDeEntradas con clave ocupada %d\n",
+//										a);
+//							}
+//						} else {
+//							printf(
+//									"mapArchivoTablaDeEntradas Se encontro clave libre %d\n",
+//									a);
+//							dictionary_put(diccionarioEntradas,
+//									esi_operacion.argumentos.GET.clave, a);
+//							strcpy(mapArchivoTablaDeEntradas[a].clave,
+//									esi_operacion.argumentos.GET.clave);
+//							punteroIUltimoInsertadoMatriz = a;
+//
+//							fin = 1;
+//
+//						}
+//
+//					}
+
+
+
+
 
 				}
 				imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);

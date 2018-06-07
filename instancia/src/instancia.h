@@ -14,9 +14,10 @@
 #endif /* SRC_INSTANCIA_H_ */
 
 //struct t_dictionary* mapArchivoTablaDeEntrada;
-
+int seguir;
 int entradasCantidad ;
 int entradasTamanio ;
+int punteroIUltimoInsertadoMatriz;
 
 t_log * log_errores;
 
@@ -45,3 +46,4 @@ config_t cargarConfiguracion(char *path);
 //char* creacion_y_mapeo_archivo(int entradaCantidad, int entradaTamanio,		char* pathArchivo);
 char* escribirEntrada(char* matriz, int tamanioEntradas,int numEntrada,char* textoAEscribir) ;
 char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud);
+int redondiarArribaDivision(int divisor, int dividendo);
