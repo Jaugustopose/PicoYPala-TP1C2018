@@ -1,15 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "planificador.h"
-#include "commons/string.h"
+#include "includes.h"
 #include "commons/config.h"
 #include "comunicacion/comunicacion.h"
+#include "planificacion.h"
 #include "conexiones.h"
 #include <pthread.h>
 #include <readline/readline.h>
+#include <readline/history.h>
 #include <unistd.h>
 
+
 int socket_coordinador;
+configuracion_t config;
 
 configuracion_t cargarConfiguracion() {
 	configuracion_t config;
@@ -36,6 +38,10 @@ configuracion_t cargarConfiguracion() {
 		config.ALGORITMO_PLANIFICACION = config_get_string_value(configPlanificador, "ALGORITMO_PLANIFICACION");
 		printf("ALGORITMO_PLANIFICACION: %s\n", config.ALGORITMO_PLANIFICACION);
 	}
+	if (config_has_property(configPlanificador, "ALFA_PLANIFICACION")) {
+			config.ALFA_PLANIFICACION = config_get_int_value(configPlanificador, "ALFA_PLANIFICACION");
+			printf("ALFA_PLANIFICACION: %d\n", config.ALFA_PLANIFICACION);
+		}
 	if (config_has_property(configPlanificador, "IP_COORDINADOR")) {
 		config.IP_COORDINADOR = config_get_string_value(configPlanificador, "IP_COORDINADOR");
 		printf("IP_COORDINADOR: %s\n", config.IP_COORDINADOR);
@@ -185,18 +191,22 @@ void procesar_deadlock(char** subBufferSplitted) {
 	}
 }
 
-
 int main(void) {
-	configuracion_t config = cargarConfiguracion();
+
+	config = cargarConfiguracion();
+	inicializarPlanificacion();
+
+	sockets_escucha_t sockets;
+
 	//Conexion a Coordinador
-
 	socket_coordinador = conectarConProceso(config.IP_COORDINADOR, config.PUERTO_COORDINADOR, Planificador);
+	sockets.socket_coordinador = socket_coordinador;
 
-	//TODO Se comentó código donde se escucha como server temporalmente para evitar el manejo del hilo ahora hasta que el flujo coordinador-planificador funcione ok
-	//TODO Abrir puerto para aceptar conexion de ESIs
+	//Abrir puerto para aceptar conexion de ESIs en un hilo nuevo
 	int socketEscucha = crear_socket_escucha(config.PUERTO);
+	sockets.socket_escucha_esis = socketEscucha;
 	pthread_t hiloEscucha;
-	pthread_create(&hiloEscucha, NULL, iniciarEscucha, socketEscucha);
+	pthread_create(&hiloEscucha, NULL, &iniciarEscucha, &sockets);
 	pthread_detach(hiloEscucha);
 
 	procesar_entradas_consola();
