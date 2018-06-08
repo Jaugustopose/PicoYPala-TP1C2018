@@ -87,7 +87,7 @@ char * escribirAPartir(char* matriz, int puntoInicio, char* textoAEscribir) {
 	return matriz;
 }
 
-char* leerDesdeAsta(char * matriz, int puntoInicio, int puntoFin) {
+char* leerDesdeHasta(char * matriz, int puntoInicio, int puntoFin) {
 	texto = malloc(puntoFin - puntoInicio);
 	printf("leerDesdeHasta INICIO Texto %s \n",texto);
 	printf("leerDesdeHasta puntoInicio %d puntoFin %d \n",puntoInicio,puntoFin);
@@ -119,7 +119,7 @@ char* escribirEntrada(char* matriz, int tamanioEntradas, int numEntrada,
 char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud) {
 	int puntoInicio = tamanioEntradas * numEntrada;
 	int puntoFin = tamanioEntradas * numEntrada + longitud;
-	return leerDesdeAsta(matriz, puntoInicio, puntoFin);
+	return leerDesdeHasta(matriz, puntoInicio, puntoFin);
 }
 char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
 	char * matriz = malloc(entradasCantidad * entradasTamanio);
