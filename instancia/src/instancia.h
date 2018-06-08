@@ -14,6 +14,7 @@
 #endif /* SRC_INSTANCIA_H_ */
 
 //struct t_dictionary* mapArchivoTablaDeEntrada;
+char* texto;
 int seguir;
 int entradasCantidad ;
 int entradasTamanio ;

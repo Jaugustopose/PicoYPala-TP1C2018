@@ -83,19 +83,29 @@ char * escribirAPartir(char* matriz, int puntoInicio, char* textoAEscribir) {
 		matriz[a] = textoAEscribir[i];
 		i++;
 	}
+
 	//matriz[puntoFin] = '\0';
 	return matriz;
 }
 
-char* leerDesdeAsta(char * matriz, int puntoInicio, int puntoFin) {
-	char* texto = malloc(puntoFin - puntoInicio) ;
+char* leerDesdeHasta(char * matriz, int puntoInicio, int puntoFin) {
+	texto = malloc(puntoFin - puntoInicio);
+	printf("leerDesdeHasta INICIO Texto %s \n",texto);
+	printf("leerDesdeHasta puntoInicio %d puntoFin %d \n",puntoInicio,puntoFin);
+
 	int a = 0;
 	int i = 0;
 	for (a = puntoInicio; a < puntoFin; a++) {
 		texto[i] = matriz[a];
 		i++;
 	}
-	texto[puntoFin] = '\0';
+	texto[puntoFin-puntoInicio] = '\0';
+
+
+	printf("leerDesdeHasta fin Texto %s \n",texto);
+	printf("leerDesdeHasta  logitud strlen %d \n",strlen(texto));
+	printf("leerDesdeHasta string_length %d\n",string_length(texto));
+
 	return texto;
 }
 
@@ -110,7 +120,7 @@ char* escribirEntrada(char* matriz, int tamanioEntradas, int numEntrada,
 char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud) {
 	int puntoInicio = tamanioEntradas * numEntrada;
 	int puntoFin = tamanioEntradas * numEntrada + longitud;
-	return leerDesdeAsta(matriz, puntoInicio, puntoFin);
+	return leerDesdeHasta(matriz, puntoInicio, puntoFin);
 }
 
 char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
@@ -135,6 +145,7 @@ void imprimirPorPantallaEstucturas(t_entrada* matriz,t_dictionary* diccionario,c
 		printf(" MatrizMap:%d %d %d %d ",i,matriz[i].numeroEntrada,matriz[i].tamanioValor,matriz[i].tiempo);
 		char* texto =leerEntrada(matrizDeChar,tamanioEntradas,matriz[i].numeroEntrada,matriz[i].tamanioValor);
 		printf(" MatrizChar Valor: %s\n",texto);
+		free(texto);
 		}
 		}
 	}
@@ -353,8 +364,8 @@ int main(int argc, char *argv[]) {
 
 			//cargo matrizValoresEntradas
 
-			char *valor = malloc(mapArchivoTablaDeEntradas[i].tamanioValor);
-			fgets(valor, mapArchivoTablaDeEntradas[i].tamanioValor, fd);
+			char *valor = malloc(mapArchivoTablaDeEntradas[i].tamanioValor+1);
+			fgets(valor, mapArchivoTablaDeEntradas[i].tamanioValor+1, fd);
 			matrizValoresEntradas = escribirEntrada(matrizValoresEntradas,
 					entradasTamanio, mapArchivoTablaDeEntradas[i].numeroEntrada,
 					valor);
@@ -562,12 +573,13 @@ printf("\n");
 							printf(
 									"despues de set mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
 									i, numeroEntradaInicialAInsertar);
+							char* texto=leerEntrada(matrizValoresEntradas,
+																		entradasTamanio,
+																		numeroEntradaInicialAInsertar,
+																		mapArchivoTablaDeEntradas[i].tamanioValor);
 							printf(
-									"Se inserto en matriz de valores el valor %s\n",
-									leerEntrada(matrizValoresEntradas,
-											entradasTamanio,
-											numeroEntradaInicialAInsertar,
-											mapArchivoTablaDeEntradas[i].tamanioValor));
+									"Se inserto en matriz de valores el valor %s\n",texto									);
+							free(texto);
 
 							//se inserta datos en matriz de entradas
 							mapArchivoTablaDeEntradas[i].numeroEntrada =
@@ -655,6 +667,7 @@ printf("\n");
 
 								int result = write(fd, textoValor,
 										tamanioArchivo);
+
 								printf("result=%d\n", result);
 								if (result < 0) {
 									close(fd);
@@ -675,7 +688,7 @@ printf("\n");
 							}
 
 
-
+							free(textoValor);
 
 							imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
 							printf("FIN procesa do STORE\n");
@@ -720,9 +733,10 @@ printf("\n");
 						entradasTamanio,
 						mapArchivoTablaDeEntradas[i].numeroEntrada,
 						mapArchivoTablaDeEntradas[i].tamanioValor);
+				int tamanioArchivo=0;
+				tamanioArchivo= string_length(textoValor) ;
+				printf("IMPORTANTE linea 746 texto: %s %d\n", textoValor, tamanioArchivo);
 
-				printf("texto: %s\n", textoValor);
-				int tamanioArchivo = strlen(textoValor) * sizeof(char);
 				if (remove(pathArchivo)) {
 					printf("Se elimino archivo satifactoriamente\n");
 				} else {
@@ -750,6 +764,7 @@ printf("\n");
 
 
 				}
+				free(textoValor);
 
 			 }//TERMINO EL IF
 
