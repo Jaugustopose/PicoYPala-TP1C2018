@@ -166,12 +166,14 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 				FD_SET(socket_cliente, &master);
 				FD_SET(socket_cliente, &bolsa_instancias); //Agrego una nueva instancia a la bolsa de instancias.
 				printf("Se ha conectado una nueva instancia de ReDis \n");
+				responder_ok_handshake(Instancia, socket_cliente);
 
 				resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t)); //Ahora recibo el nombre de la instancia
 				if ((resultado == ERROR_RECV) || !(cabecera.comando == msj_nombre_instancia)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
 					printf("Error al intentar recibir nombre de la instancia\n");
 				} else {
-					recibir_mensaje(socket_cliente, &nombre_instancia, cabecera.tamanio);
+					nombre_instancia = malloc(cabecera.tamanio);
+					recibir_mensaje(socket_cliente, nombre_instancia, cabecera.tamanio);
 				}
 
 				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
@@ -192,8 +194,6 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 
 					//TODO: Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento". Probablemente tenga que enviar un mensaje a la instancia para que recupere su info.
 				}
-
-				responder_ok_handshake(Instancia, socket_cliente);
 				break;
 
 			case Planificador:

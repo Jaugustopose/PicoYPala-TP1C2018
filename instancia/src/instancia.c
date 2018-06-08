@@ -21,6 +21,7 @@
 #include "comunicacion/comunicacion.h"
 #include "parsi/parser.h"
 #include <math.h>
+#include <string.h>
 
 config_t cargarConfiguracion(char *path) {
 	config_t config;
@@ -111,6 +112,7 @@ char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitu
 	int puntoFin = tamanioEntradas * numEntrada + longitud;
 	return leerDesdeAsta(matriz, puntoInicio, puntoFin);
 }
+
 char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
 	char * matriz = malloc(entradasCantidad * entradasTamanio);
 	strcpy(matriz, "");
@@ -120,7 +122,6 @@ char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
 	}
 	return matriz;
 }
-
 
 void imprimirPorPantallaEstucturas(t_entrada* matriz,t_dictionary* diccionario,char* matrizDeChar,int cantidadEntradas,int tamanioEntradas){
 	if(seguir==2){
@@ -217,13 +218,12 @@ int main(int argc, char *argv[]) {
 	int maximoNumeroEntradaFin = 0;
 
 	//Creo el log
-
 	log_errores = log_create("instancia.log", "Instance", true,
 			LOG_LEVEL_ERROR);
 
 	config_t configuracion;
 
-	if (argc = 1) {
+	if (argc > 1) {
 		/*llamo a la funcion de creacion de archivo de configuracion con la estructura t_config*/
 		char* pathConfiguracion = argv[1];
 		printf("Path de configuracion: %s\n", pathConfiguracion);
@@ -232,42 +232,35 @@ int main(int argc, char *argv[]) {
 	}
 
 	//coneccion coordinador
-	int socket_server = conectar_a_server(configuracion.ip_coordinador,
-			configuracion.puerto_coordinador);
-	if (socket_server < 0) {
-		log_error(log_error, "Error conectar_a_server");
+	int socketCoordinador = conectarConProceso(configuracion.ip_coordinador, configuracion.puerto_coordinador, Instancia);
+	if (socketCoordinador < 0) {
+		log_error(log_errores, "Error conectar_a_server");
 		exit(1);
 	}
 
-	//Envio de hadshake
-	int id_mensaje = msj_handshake;
-	int tamanio = sizeof(id_proceso);
-	int cuerpo = Instancia;
-
-	int bufferTamanio = sizeof(id_mensaje) + sizeof(tamanio) + tamanio;
-	void * buffer = malloc(bufferTamanio);
-	memcpy(buffer, &id_mensaje, sizeof(id_mensaje));
-	memcpy(buffer + sizeof(id_mensaje), &tamanio, sizeof(tamanio));
-	memcpy(buffer + sizeof(id_mensaje) + sizeof(tamanio), &cuerpo, tamanio);
-
-	enviar_mensaje(socket_server, buffer, bufferTamanio);
-
-	free(buffer);
-
 	//Envio de envio de nombre
-	bufferTamanio = strlen(configuracion.nombre_instancia) + 1;
-
-	enviar_mensaje(socket_server, &bufferTamanio, sizeof(bufferTamanio));
-	enviar_mensaje(socket_server, configuracion.nombre_instancia,
-			bufferTamanio);
+	header_t header;
+	header.comando = msj_nombre_instancia;
+	header.tamanio = strlen(configuracion.nombre_instancia) + 1;
+	void* buffer = serializar(header, configuracion.nombre_instancia);
+	enviar_mensaje(socketCoordinador, buffer, sizeof(header_t)+header.tamanio);
 
 	//recibir entradas y tamanio
 
 	entradasCantidad = 0;
 	entradasTamanio = 0;
 
-	recibir_mensaje(socket_server, &entradasCantidad, sizeof(entradasCantidad));
-	recibir_mensaje(socket_server, &entradasTamanio, sizeof(entradasTamanio));
+	int resultado = recibir_mensaje(socketCoordinador, &header, sizeof(header_t));
+	if ((resultado == ERROR_RECV) || !(header.comando == msj_cantidad_entradas)) {
+		printf("Error al intentar recibir cantidad de entradas\n");
+	}
+	recibir_mensaje(socketCoordinador, &entradasCantidad, header.tamanio);
+
+	resultado = recibir_mensaje(socketCoordinador, &header, sizeof(header_t));
+	if ((resultado == ERROR_RECV) || !(header.comando == msj_tamanio_entradas)) {
+		printf("Error al intentar recibir tamaño de entradas\n");
+	}
+	recibir_mensaje(socketCoordinador, &entradasTamanio, header.tamanio);
 
 	printf("EntradasCantidad: %d entradasTamanio: %d \n ", entradasCantidad,
 			entradasTamanio);
@@ -380,33 +373,18 @@ int main(int argc, char *argv[]) {
 	timer=0;
 	timerDump=0;
 	 seguir = 0;
-	recibir_mensaje(socket_server, &seguir, sizeof(seguir));
+	recibir_mensaje(socketCoordinador, &seguir, sizeof(seguir));
 	printf("--------------------Seguir 1 si sigue o 0 si no = %d\n", seguir);
 
 	while (seguir >0) {
 printf("\n");
 		//Recibir sentencia de Re Distinto
-		int tamanioMensaje;
+		header_t header;
 
-
-		recibir_mensaje(socket_server, &tamanioMensaje, sizeof(tamanioMensaje));
-		if (tamanioMensaje > 0) {
-
-			char * sentencia = malloc(tamanioMensaje);
-			recibir_mensaje(socket_server, sentencia, tamanioMensaje);
-
-			printf("Sentencia: %s\n", sentencia);
-			t_esi_operacion esi_operacion = parse(sentencia);
-			//Procesado de sentencia de una entrada
-
-			free(sentencia);
-
-			int instruccion = esi_operacion.keyword;
-
-			printf("Instruccion: %d\n", instruccion);
-
-
-
+		int resultado = recibir_mensaje(socketCoordinador, &header, sizeof(header_t));
+		if (resultado == ERROR_RECV_DISCONNECTED || resultado == ERROR_RECV_DISCONNECTED) {
+			printf("Se perdió la conexión con el Coordinador\n");
+		}
 			//analisis sentencia
 			if (instruccion == 0) {
 				//INICIO procesado GET
@@ -800,11 +778,11 @@ printf("\n");
 		timer++;
 
 		//recibe mensaje 0 para parar 1 para seguir y 2 para seguir mostrando por pantalla estructuras
-			recibir_mensaje(socket_server, &seguir, sizeof(int));
+			recibir_mensaje(socketCoordinador, &seguir, sizeof(int));
 		}
 
 
-		close(socket_server);
+		close(socketCoordinador);
 		return EXIT_SUCCESS;
 
 }

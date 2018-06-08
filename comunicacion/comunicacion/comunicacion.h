@@ -44,7 +44,9 @@ typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	msj_error_clave_no_identificada = 20,
 	msj_error_comunicacion = 21,
 	msj_error_clave_inaccesible = 22,
-	msj_error_clave_no_bloqueada = 23
+	msj_error_clave_no_bloqueada = 23,
+	msj_cantidad_entradas = 24,
+	msj_tamanio_entradas = 25
 }id_mensaje;
 
 typedef struct{
