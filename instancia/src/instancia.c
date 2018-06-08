@@ -353,6 +353,7 @@ int main(int argc, char *argv[]) {
 					mapArchivoTablaDeEntradas[i].clave, i);
 			char* pathArchivo = string_new();
 			string_append(&pathArchivo, configuracion.punto_montaje);
+			string_append(&pathArchivo, "DUMP/");
 			string_append(&pathArchivo, mapArchivoTablaDeEntradas[i].clave);
 			string_append(&pathArchivo, ".txt");
 			int fd = fopen(pathArchivo, "r");
@@ -376,6 +377,8 @@ int main(int argc, char *argv[]) {
 
 
 //inicio de while
+	timer=0;
+	timerDump=0;
 	 seguir = 0;
 	recibir_mensaje(socket_server, &seguir, sizeof(seguir));
 	printf("--------------------Seguir 1 si sigue o 0 si no = %d\n", seguir);
@@ -384,6 +387,7 @@ int main(int argc, char *argv[]) {
 printf("\n");
 		//Recibir sentencia de Re Distinto
 		int tamanioMensaje;
+
 
 		recibir_mensaje(socket_server, &tamanioMensaje, sizeof(tamanioMensaje));
 		if (tamanioMensaje > 0) {
@@ -681,12 +685,19 @@ printf("\n");
 								} else {
 									printf("se guardo archivo \n");
 									close(fd);
+									printf("texto de de tabla num i clave:%s\n",
+																		mapArchivoTablaDeEntradas[i].clave);
+//									//se elimina de memoria la entrada y del diccionario
+//									dictionary_remove(diccionarioEntradas,mapArchivoTablaDeEntradas[i].clave);
+//									mapArchivoTablaDeEntradas[i].clave[0]='\0';
+//									mapArchivoTablaDeEntradas[i].numeroEntrada=-1;
+//									mapArchivoTablaDeEntradas[i].tamanioValor=-1;
+//									mapArchivoTablaDeEntradas[i].tiempo=-1;
 								}
 							}
 
 
-							printf("texto de de tabla num i clave:%s\n",
-									mapArchivoTablaDeEntradas[i].clave);
+
 
 							imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,diccionarioEntradas,matrizValoresEntradas,entradasCantidad,entradasTamanio);
 							printf("FIN procesa do STORE\n");
@@ -706,6 +717,89 @@ printf("\n");
 			}
 
 }
+
+
+
+
+
+		//proceso dump en cantidad de ciclos
+		if (configuracion.intervalo_dump == timerDump+1) {
+
+			//recorro matrizde entradas de 0 a cantidad de entradas
+			i = 0;
+			while (i < entradasCantidad) {
+
+				if(mapArchivoTablaDeEntradas[i].numeroEntrada>-1 && mapArchivoTablaDeEntradas[i].numeroEntrada<entradasCantidad &&
+						mapArchivoTablaDeEntradas[i].tamanioValor>-1){
+
+				char* pathArchivo = string_new();
+				string_append(&pathArchivo, configuracion.punto_montaje);
+				string_append(&pathArchivo, "DUMP/");
+				string_append(&pathArchivo, mapArchivoTablaDeEntradas[i].clave);
+				string_append(&pathArchivo, ".txt");
+				//se accsede a la tabla de entradas
+				char* textoValor = leerEntrada(matrizValoresEntradas,
+						entradasTamanio,
+						mapArchivoTablaDeEntradas[i].numeroEntrada,
+						mapArchivoTablaDeEntradas[i].tamanioValor);
+
+				printf("texto: %s\n", textoValor);
+				int tamanioArchivo = strlen(textoValor) * sizeof(char);
+				if (remove(pathArchivo)) {
+					printf("Se elimino archivo satifactoriamente\n");
+				} else {
+					printf("no se elimino archivo\n");
+				}
+
+				fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC,
+						(mode_t) 0600);
+				if (fd == -1) {
+					printf("Error al abrir para escritura\n");
+					exit(EXIT_FAILURE);
+				} else {
+
+					int result = write(fd, textoValor, tamanioArchivo);
+					printf("result=%d\n", result);
+					if (result < 0) {
+						close(fd);
+						printf("Error al escribir  \n");
+						exit(EXIT_FAILURE);
+					} else {
+						printf("se guardo archivo \n");
+						close(fd);
+
+					}
+
+
+				}
+
+			 }//TERMINO EL IF
+
+				if(redondiarArribaDivision(
+								mapArchivoTablaDeEntradas[i].tamanioValor,
+								entradasTamanio)==0){
+					i++;
+				}else{
+				i = i
+						+ redondiarArribaDivision(
+								mapArchivoTablaDeEntradas[i].tamanioValor,
+								entradasTamanio);
+				}
+
+
+
+			}
+
+			timerDump = 0;
+		} else {
+			timerDump++;
+		}
+
+
+		//timer suma 1
+		timer++;
+
+		//recibe mensaje 0 para parar 1 para seguir y 2 para seguir mostrando por pantalla estructuras
 			recibir_mensaje(socket_server, &seguir, sizeof(int));
 		}
 

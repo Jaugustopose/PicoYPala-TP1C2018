@@ -18,7 +18,8 @@ int seguir;
 int entradasCantidad ;
 int entradasTamanio ;
 int punteroIUltimoInsertadoMatriz;
-
+int timer;
+int timerDump;
 t_log * log_errores;
 
 /*defino estructura de datanode*/
