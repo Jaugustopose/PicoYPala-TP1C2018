@@ -60,6 +60,7 @@ void* iniciarEscucha(void* sockets) {
 						// hace al revés: Planificador se conectará a Coordinador previamente.
 						procesar_handshake(socketCliente);
 						FD_SET(socketCliente, &master);
+						maxFd = socketCliente;
 						//TODO Analizar si es necesario sincronizar. En principio el select es secuencial así que no. Pero ver si algún comando
 						//     de consola podría llamar a este método procesoNuevo.
 						int retorno = procesoNuevo(socketCliente);
@@ -101,6 +102,7 @@ void* iniciarEscucha(void* sockets) {
 					} else {
 						switch(header.comando) {
 						case msj_sentencia_finalizada:
+							printf("MSJ Sentencia finalizada recibida\n");
 							sentenciaFinalizada();
 							break;
 						case msj_esi_finalizado:

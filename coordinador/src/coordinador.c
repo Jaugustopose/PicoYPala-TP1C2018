@@ -16,6 +16,7 @@
 #include <pthread.h>
 #include <commons/collections/list.h>
 #include <stdbool.h>
+#include <signal.h>
 
 //STRUCTS
 typedef struct config_t {
@@ -62,6 +63,13 @@ t_list* lista_instancias_claves;
 t_list* lista_esis_permisos_setear;
 
 
+void sig_handler(int signo) {
+  if (signo == SIGINT) {
+  printf("SIGINT interceptado. Finalizando... \n");
+  close(socket_coordinador);
+  exit(EXIT_SUCCESS);
+  }
+}
 
 
 
@@ -176,8 +184,21 @@ void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
 					recibir_mensaje(socket_cliente, nombre_instancia, cabecera.tamanio);
 				}
 
+				cabecera.comando=msj_cantidad_entradas;
+				cabecera.tamanio=sizeof(int);
+				void* buffer = serializar(cabecera, &config.CANT_ENTRADAS);
+				enviar_mensaje(socket_cliente,buffer,sizeof(header_t)+cabecera.tamanio);
+				free(buffer);
+
+				cabecera.comando=msj_tamanio_entradas;
+				cabecera.tamanio=sizeof(int);
+				buffer = serializar(cabecera, &config.ENTRADA_SIZE);
+				enviar_mensaje(socket_cliente,buffer,sizeof(header_t)+cabecera.tamanio);
+				free(buffer);
+
 				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
 				if (instancia_existente == 0) { //No existia anteriormente en el sistema.
+					nueva_instancia = (infoInstancia_t*)malloc(sizeof(infoInstancia_t));
 					nueva_instancia->nombre = nombre_instancia;
 					nueva_instancia->fd = socket_cliente;
 					nueva_instancia->espacio_disponible = config.CANT_ENTRADAS;
@@ -280,13 +301,13 @@ void* encontrar_clave (char* unaClave){
 	}
 
 	int i;
-	void* instanciaConlistaDeClaves;
+	infoInstancia_t* instanciaConlistaDeClaves;
 	void* instanciaConClave;
 
 	for (i = 0; i < lista_instancias_claves->elements_count; ++i) {
 
-		instanciaConlistaDeClaves = list_get(lista_instancias_claves,i);
-		instanciaConClave = list_find(instanciaConlistaDeClaves,(void*) misma_clave);
+		instanciaConlistaDeClaves = (infoInstancia_t*)list_get(lista_instancias_claves,i);
+		instanciaConClave = list_find(instanciaConlistaDeClaves->claves,(void*) misma_clave);
 
 		if(instanciaConClave != NULL){
 			return list_get(lista_instancias_claves,i);
@@ -359,18 +380,27 @@ void atender_accion_esi(int fdEsi) {
 				if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-
+						//Mensaje a planificador
 						header.comando = msj_solicitud_get_clave;
-						header.tamanio = 0;
-
 						bufferAEnviar = serializar(header, buffer);
-
 						enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
-
 						free(bufferAEnviar);
 						printf("Se envió mensaje al planificador\n");
 						recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
-						printf("Se recibió mensaje del planificador\n"); //JUAN POSE: Creo que no necesito respuesta del planificador, si el tipo puede hacer el get, que directamente ejecute la siguiente linea (el set)
+						printf("Se recibió OK del planificador\n");
+
+						//MEnsaje a Instancia
+						header.comando = msj_sentencia_get;
+						header.tamanio = strlen(clave)+1;
+						bufferAEnviar = serializar(header, clave);
+						enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + header.tamanio);
+						free(bufferAEnviar);
+
+						//Responder a ESI que salio todo OK
+						header.comando = msj_sentencia_finalizada;
+						header.tamanio = 0;
+						enviar_mensaje(fdEsi, &header, sizeof(header_t));
+						printf("MSJ Sentencia finalizada enviado a ESI\n");
 					}else { //Se envia al PLANI que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
 						header.comando = msj_error_clave_inaccesible;
 						header.tamanio = 0;
@@ -382,13 +412,29 @@ void atender_accion_esi(int fdEsi) {
 
 					instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION); //Selecciono instancia victima segun algoritmo de distribucion
 
-					header.comando = msj_sentencia_get;
-					header.tamanio = strlen(clave)+1; //Decirle a AGUS que va a tener que leer este numero si o si (esta en la estructura header), despues, que lea hasta el \0 como queria el.
-
-					bufferAEnviar = serializar(header, clave);
-
-					enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
+					//Mensaje a planificador
+					header.comando = msj_solicitud_get_clave;
+					bufferAEnviar = serializar(header, buffer);
+					enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
 					free(bufferAEnviar);
+					printf("Se envió mensaje al planificador\n");
+					recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
+					printf("Se recibió OK del planificador\n");
+
+
+					//MEnsaje a Instancia
+					header.comando = msj_sentencia_get;
+					header.tamanio = strlen(clave)+1;
+					bufferAEnviar = serializar(header, clave);
+					enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + header.tamanio);
+					free(bufferAEnviar);
+
+					//Responder a ESI que salio todo OK
+					header.comando = msj_sentencia_finalizada;
+					header.tamanio = 0;
+					enviar_mensaje(fdEsi, &header, sizeof(header_t));
+					printf("MSJ Sentencia finalizada enviado a ESI\n");
+
 					list_add(instanciaConClave->claves, clave);
 				}
 		break;
@@ -403,18 +449,18 @@ void atender_accion_esi(int fdEsi) {
 				if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 
 					header.comando = msj_esi_tiene_tomada_clave;
-					header.tamanio = 0;
-
 					bufferAEnviar = serializar(header, buffer);
-
-					enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio); //Pregunto al PLANI si el ESI tiene la clave tomada como para operar.
+					enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
+					free(bufferAEnviar);
 
 					recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
 					printf("Se recibió mensaje del planificador\n");
-					free(bufferAEnviar);
-					if (retornoPlanificador == msj_clave_permitida_para_operar){
+					if (retornoPlanificador == msj_ok_solicitud_operacion){
 						header.comando = msj_sentencia_set;
-						header.tamanio = strlen(clave)+2; //1 por el \0 de la clave y otro por el \0 del valor.
+						int size = strlen(clave);
+						char* p = (char*)buffer + size +1;
+						int size2 = strlen(p);
+						header.tamanio = size + size2 + 2;
 
 						bufferAEnviar = serializar(header,buffer);
 						enviar_mensaje(instanciaConClave->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
@@ -505,6 +551,14 @@ void atender_accion_instancia(int fdInstancia) {
 }
 
 int main(void) {
+
+	if (signal(SIGINT, sig_handler) == SIG_ERR){
+	  printf("Error al interceptar SIGINT\n");
+	  return EXIT_SUCCESS;
+	}
+
+
+	lista_instancias_claves = list_create();
 
 	//Extraer informacion del archivo de configuracion.
 	establecer_configuracion(config.PUERTO,config.PUERTO_PLANIFICADOR,config.ALGORITMO_DISTRIBUCION,config.CANT_ENTRADAS,

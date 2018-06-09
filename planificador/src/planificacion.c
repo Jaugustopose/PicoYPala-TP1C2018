@@ -93,22 +93,25 @@ void ordenarColaListos(){
 }
 
 void planificarConDesalojo(){
-	if(esHRRN()){
-		proceso_t* proceso1 = colaListosPeek();
-		proceso_t* proceso2 = procesoEjecucion;
-		bool cambiarProceso = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) > (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+	if(list_size(colaListos)){
+		bool cambiarProceso;
+		if(esHRRN()){
+			proceso_t* proceso1 = colaListosPeek();
+			proceso_t* proceso2 = procesoEjecucion;
+			cambiarProceso = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) > (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+		}else{
+			proceso_t* proceso1 = colaListosPeek();
+			proceso_t* proceso2 = procesoEjecucion;
+			cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
+		}
 		if(cambiarProceso){
 			colaListosPush(procesoEjecucion);
 			procesoEjecutar(colaListosPop());
+		}else{
+			procesoEjecutar(procesoEjecucion);
 		}
 	}else{
-		proceso_t* proceso1 = colaListosPeek();
-		proceso_t* proceso2 = procesoEjecucion;
-		bool cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
-		if(cambiarProceso){
-			colaListosPush(procesoEjecucion);
-			procesoEjecutar(colaListosPop());
-		}
+		procesoEjecutar(procesoEjecucion);
 	}
 }
 

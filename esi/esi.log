@@ -11,3 +11,80 @@
 [INFO] 21:47:12:128 ESI/(8538:8538): Msg requerimiento de ejecución recibido del Planificador
 [INFO] 21:47:12:128 ESI/(8538:8538): Parseando linea: GET futbol:ansaldi
 
+[DEBUG] 00:53:56:573 ESI/(17978:17978): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 00:54:02:614 ESI/(17978:17978): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 00:54:02:614 ESI/(17978:17978): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 00:54:02:614 ESI/(17978:17978): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 00:54:02:614 ESI/(17978:17978): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 00:54:02:614 ESI/(17978:17978): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 00:54:49:511 ESI/(17978:17978): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 00:54:49:511 ESI/(17978:17978): Parseando linea: GET futbol:ansaldi
+
+[DEBUG] 00:58:44:290 ESI/(18239:18239): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 00:58:44:290 ESI/(18239:18239): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 00:58:44:290 ESI/(18239:18239): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 00:58:44:290 ESI/(18239:18239): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 00:58:44:290 ESI/(18239:18239): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 00:58:44:290 ESI/(18239:18239): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 00:58:44:291 ESI/(18239:18239): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 00:58:44:291 ESI/(18239:18239): Parseando linea: GET futbol:ansaldi
+
+[DEBUG] 01:08:24:520 ESI/(18641:18641): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 01:08:24:520 ESI/(18641:18641): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 01:08:24:520 ESI/(18641:18641): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 01:08:24:520 ESI/(18641:18641): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 01:08:24:520 ESI/(18641:18641): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 01:08:24:520 ESI/(18641:18641): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 01:08:44:298 ESI/(18641:18641): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 01:08:44:298 ESI/(18641:18641): Parseando linea: GET futbol:ansaldi
+
+[DEBUG] 01:11:09:920 ESI/(18793:18793): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 01:11:09:920 ESI/(18793:18793): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 01:11:09:920 ESI/(18793:18793): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 01:11:09:920 ESI/(18793:18793): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 01:11:09:920 ESI/(18793:18793): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 01:11:09:920 ESI/(18793:18793): IP_COORDINADOR: 127.0.0.1
+
+[DEBUG] 01:12:43:59 ESI/(18877:18877): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 01:12:43:59 ESI/(18877:18877): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 01:12:43:59 ESI/(18877:18877): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 01:12:43:59 ESI/(18877:18877): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 01:12:43:59 ESI/(18877:18877): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 01:12:43:59 ESI/(18877:18877): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 01:12:46:408 ESI/(18877:18877): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 01:12:46:408 ESI/(18877:18877): Parseando linea: GET futbol:ansaldi
+
+[INFO] 01:13:10:199 ESI/(18877:18877): Msg Sentencia finalizada recibido del Coordinador
+[DEBUG] 01:20:29:942 ESI/(19285:19285): Ruta Script: /home/utnso/ESI_MultiClave
+[DEBUG] 01:20:29:942 ESI/(19285:19285): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 01:20:29:942 ESI/(19285:19285): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 01:20:29:942 ESI/(19285:19285): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 01:20:29:942 ESI/(19285:19285): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 01:20:29:942 ESI/(19285:19285): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 01:20:35:613 ESI/(19285:19285): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 01:20:35:614 ESI/(19285:19285): Parseando linea: GET futbol:ansaldi
+
+[INFO] 01:20:52:936 ESI/(19285:19285): Msg Sentencia finalizada recibido del Coordinador

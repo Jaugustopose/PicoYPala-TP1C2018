@@ -89,6 +89,8 @@ int crear_socket_escucha(int puerto) {
 		puts("Error al crear socket\n");
 		exit(EXIT_FAILURE);
 	} else {
+		if (setsockopt(socket_escucha, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 }, sizeof(int)) < 0)
+		    error("setsockopt(SO_REUSEADDR) failed");
 
 		struct sockaddr_in direccionServidor = crear_direccion_servidor(puerto);
 
@@ -163,9 +165,12 @@ int conectarConProceso(char* ip, int puerto,int proceso){
 paquete_t recibirPaquete(int socket) {
 	//TODO Manejar error que puede devolver recibir_mensaje
 	paquete_t paquete;
+	paquete.cuerpo = 0;
 	recibir_mensaje(socket, &paquete.header, sizeof(header_t));
-	paquete.cuerpo = malloc(paquete.header.tamanio);
-	recibir_mensaje(socket,paquete.cuerpo,paquete.header.tamanio);
+	if(paquete.header.tamanio){
+		paquete.cuerpo = malloc(paquete.header.tamanio);
+		recibir_mensaje(socket,paquete.cuerpo,paquete.header.tamanio);
+	}
 	return paquete;
 }
 
