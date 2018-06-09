@@ -94,19 +94,25 @@ void* iniciarEscucha(void* sockets) {
 				} else {
 					int respuesta;
 					header_t header;
-					bytesRecibidos = recibir_mensaje(socketCliente, &header, sizeof(header_t));
+					bytesRecibidos = recibir_mensaje(fdCliente, &header, sizeof(header_t));
 					if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
 						//TODO: ESI se desconectó. Sacar de los FD, el close del socket ya lo hizo el recibir_mensaje.
 						FD_CLR(fdCliente, &master);
 					} else {
 						switch(header.comando) {
 						case msj_sentencia_finalizada:
-							sentenciaFinalizada();
+							sentenciaFinalizada(fdCliente);
 							break;
 						case msj_esi_finalizado:
-							procesoTerminado(exit_ok);
-							respuesta = msj_ok_solicitud_operacion;
-							enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+							pthread_mutex_lock(&mutex_proceso_ejecucion);
+							if (fdCliente == fdProcesoEnEjecucion()) {
+								procesoTerminado(exit_ok);
+								respuesta = msj_ok_solicitud_operacion;
+								enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+							}
+							pthread_mutex_unlock(&mutex_proceso_ejecucion);
+
+
 							break;
 						}
 					}

@@ -9,6 +9,28 @@
 #include <readline/history.h>
 #include <unistd.h>
 
+//Estructuras Consola
+//Opciones de entrada por consola
+char PAUSE_PLANIF[] = "pausar";
+char CONTINUE_PLANIF[] = "continuar";
+char BLOCK[] = "bloquear";
+char UNBLOCK[] = "desbloquear";
+char LIST[] = "listar";
+char KILL[] = "kill";
+char STATUS[] = "status";
+char DEADLOCK[] = "deadlock";
+
+//Prototipos Consola
+void procesar_entradas_consola();
+void procesar_entrada(char* buffer);
+void procesar_pausa_planificacion(char** subBufferSplitted);
+void procesar_continuar_planificacion(char** subBufferSplitted);
+void procesar_bloqueo_esi(char** subBufferSplitted);
+void procesar_desbloqueo_esi(char** subBufferSplitted);
+void procesar_listar_recurso(char** subBufferSplitted);
+void procesar_kill_proceso(char** subBufferSplitted);
+void procesar_status_instancias(char** subBufferSplitted);
+void procesar_deadlock(char** subBufferSplitted);
 
 int socket_coordinador;
 configuracion_t config;
@@ -120,6 +142,7 @@ void procesar_entrada(char* buffer) {
 void procesar_pausa_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		printf("Pausar Planificación!\n");
+		sem_wait(&planificacion_habilitada);
 	} else {
 		printf("Comando 'pausar' no requiere parámetros!\n");
 	}
@@ -128,6 +151,7 @@ void procesar_pausa_planificacion(char** subBufferSplitted) {
 void procesar_continuar_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		printf("Continuar Planificación!\n");
+		sem_wait(&planificacion_habilitada);
 	} else {
 		printf("Comando 'continuar' no requiere parámetros!\n");
 	}
@@ -138,6 +162,7 @@ void procesar_bloqueo_esi(char** subBufferSplitted) {
 		printf("Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'\n");
 	} else if (subBufferSplitted[3] == NULL) {
 		printf("Bloqueo Esi %s de la cola del recurso %s!\n", subBufferSplitted[2], subBufferSplitted[1]);
+		bloquearEsiPorConsola(strtol(subBufferSplitted[2], NULL, 10) , subBufferSplitted[1]);
 	} else {
 		printf("Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'\n");
 	}
@@ -211,5 +236,6 @@ int main(void) {
 
 	procesar_entradas_consola();
 
+	sem_destroy(&planificacion_habilitada);
 	return EXIT_SUCCESS;
 }

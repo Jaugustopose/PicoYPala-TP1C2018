@@ -4,6 +4,7 @@
 #include "comunicacion/comunicacion.h"
 #include <stdbool.h>
 #include <string.h>
+#include <pthread.h>
 
 t_list* colaListos;
 proceso_t* procesoEjecucion;
@@ -63,6 +64,7 @@ void inicializarPlanificacion(){
 	colaTerminados = queue_create();
 	listaBloqueados = list_create();
 	claves = dictionary_create();
+	sem_init(&planificacion_habilitada, 1, 1);
 }
 
 bool planificadorConDesalojo(){
@@ -139,7 +141,6 @@ int procesoNuevo(int socketESI) {
 	if(procesoEjecucion == 0){
 		retorno = procesoEjecutar(proceso);
 		if (retorno < 0) {
-			//TODO Lo ponemos en la lista de Terminados???
 			procesoTerminado(exit_abortado_inesperado);
 		}
 	} else {
@@ -155,7 +156,10 @@ int procesoNuevo(int socketESI) {
 
 int procesoEjecutar(proceso_t* proceso) {
 	procesoEjecucion = proceso;
-	return mandar_a_ejecutar_esi(proceso->socketESI);
+	sem_wait(&planificacion_habilitada);
+	int resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
+	sem_post(&planificacion_habilitada);
+	return resultado;
 }
 
 void procesoTerminado(int exitStatus) {
@@ -195,17 +199,22 @@ void incrementarRafagasEsperando() {
 }
 
 void sentenciaFinalizada(int socket_esi) {
+	pthread_mutex_lock(&mutex_proceso_ejecucion);
 
 	procesoEjecucion->rafagaActual++;
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
-	if (planificadorConDesalojo()) {
-		planificarConDesalojo();
-	} else {
-		 mandar_a_ejecutar_esi(procesoEjecucion->socketESI);
-		 //TODO: Manejar error Send.
+	//El socket que envió sentencia finalizada difiere del que está en ejecución => Fue desalojado (bloqueado) por consola.
+	if (socket_esi == procesoEjecucion->socketESI) {
+		if (planificadorConDesalojo()) {
+			planificarConDesalojo();
+		} else {
+			procesoEjecutar(procesoEjecucion); //TODO: Manejar error Send.
+		}
 	}
+	pthread_mutex_unlock(&mutex_proceso_ejecucion);
+
 }
 
 void estimarRafaga(proceso_t* proceso) {
@@ -251,6 +260,36 @@ void liberarClave(char* clave){
 
 void liberarRecursos(proceso_t* proceso) {
 	list_iterate(proceso->clavesBloqueadas, (void*)desbloquearClave);
+}
+
+void bloquearEsiPorConsola(int idEsi, char* clave) {
+	//Closure para hacer el remove de la lista de claves bloqueadas
+	bool _soy_clave_buscada(proceso_t* p) {
+		return p->idProceso == idEsi;
+	}
+	pthread_mutex_lock(&mutex_cola_listos);
+	proceso_t* proceso = (proceso_t*)list_remove_by_condition(colaListos, (void*)_soy_clave_buscada);
+	pthread_mutex_unlock(&mutex_cola_listos);
+	if (proceso != NULL) {
+		//Bloqueo manual de proceso que estaba en Listo.
+		proceso->claveBloqueo = clave;
+		list_add(listaBloqueados, proceso);
+		if(!verificarClave(clave)) //Si la clave no estaba bloqueada también hay que bloquear la clave
+			bloquearClave(clave);
+	} else {
+		pthread_mutex_lock(&mutex_proceso_ejecucion);
+		if (procesoEjecucion->idProceso == idEsi) {
+			if(!verificarClave(clave))
+				bloquearClave(clave);
+			procesoBloquear(clave);
+		}
+		pthread_mutex_unlock(&mutex_proceso_ejecucion);
+	}
+
+}
+
+int fdProcesoEnEjecucion() {
+	return procesoEjecucion->socketESI;
 }
 
 respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo) {
