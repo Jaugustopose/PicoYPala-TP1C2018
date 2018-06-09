@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -153,11 +154,10 @@ void imprimirPorPantallaEstucturas(t_entrada* matriz, t_dictionary* diccionario,
 	}
 }
 
-void sustituirMatrizEntradas(char * algoritmo,
-		int punteroIUltimoInsertadoMatriz, t_entrada * matriz,
-		t_dictionary * diccionario, char * clave) {
-	printf("Sustituye Algoritmo declarado %s\n", algoritmo);
-	if (string_equals_ignore_case(algoritmo, "Ciclico")) {
+
+void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
+	printf("\n Sustituye Algoritmo declarado %s\n",algoritmo);
+	if(string_equals_ignore_case(algoritmo,"Ciclico")){
 		//busco siguiente atomico
 		int i = 0;
 		if (punteroIUltimoInsertadoMatriz + 1 < entradasCantidad) {
@@ -177,7 +177,9 @@ void sustituirMatrizEntradas(char * algoritmo,
 				dictionary_put(diccionario, clave, i);
 				strcpy(matriz[i].clave, clave);
 				//inserto tamanio valor -1
-				matriz[i].tamanioValor = -1;
+
+				matriz[i].tamanioValor=-1;
+				matriz[i].tiempo=-1;
 
 				fin = 1;
 			} else {
@@ -208,8 +210,78 @@ void sustituirMatrizEntradas(char * algoritmo,
 
 		//cambio tamaniovalor de matriz y timer
 
-	} else {
-		if (string_equals_ignore_case(algoritmo, "LRU")) {
+	}else{
+		if(string_equals_ignore_case(algoritmo,"LRU")){
+
+			int i=0;
+			int aSustituir=-1;
+			int aSustituirTiempo=0;
+			while(i<entradasCantidad){
+
+				if(redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)==1){
+				if(timer-matriz[i].tiempo>aSustituirTiempo){
+					aSustituirTiempo=matriz[i].tiempo;
+					aSustituir=i;
+				}
+
+				}
+				printf("IdEntrada: %d timerEntrada: %d timerSistema: %d \n",i ,matriz[i].tiempo, timer);
+				if(i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)<=entradasCantidad){
+					//salto al proximo
+				i=i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio);
+					}
+			}
+			if(aSustituir>-1){
+			//remuevo y sustituyo
+				printf("\n a sustituir %s\n",dictionary_get(diccionario,matriz[i].clave));
+			dictionary_remove(diccionario,matriz[i].clave);
+			dictionary_put(diccionario,clave,aSustituir);
+			strcpy(matriz[aSustituir].clave,clave);
+			//inserto tamanio valor -1
+			matriz[aSustituir].tamanioValor=-1;
+			matriz[aSustituir].tiempo=-1;
+			printf("removido por %s\n",dictionary_get(diccionario,matriz[i].clave));
+			}
+
+
+
+		}else{
+			if(string_equals_ignore_case(algoritmo,"BSU")){
+				int i=0;
+				int aSustituir=-1;
+				int aSustituirTamanio=0;
+				while(i<entradasCantidad){
+					if(redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)==1){
+					if(matriz[i].tamanioValor>aSustituirTamanio){
+						aSustituirTamanio=matriz[i].tamanioValor;
+						aSustituir=i;
+					}
+
+					}
+
+					if(i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)<=entradasCantidad){
+						//salto al proximo
+					i=i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio);
+						}
+				}
+				if(aSustituir>-1){
+				//remuevo y sustituyo
+
+
+					dictionary_put(diccionario,matriz[aSustituir].clave,-1);
+					if(dictionary_get(diccionario,matriz[aSustituir].clave) == -1){
+						printf("Se realizo el put de -1 en la clave\n");
+					}
+					dictionary_remove_and_destroy(diccionario,matriz[aSustituir].clave, free);
+
+
+				dictionary_put(diccionario,clave,aSustituir);
+				strcpy(matriz[aSustituir].clave,clave);
+				//inserto tamanio valor -1
+				matriz[aSustituir].tamanioValor=-1;
+				matriz[aSustituir].tiempo=-1;
+				printf("removido por %s\n",dictionary_get(diccionario,matriz[i].clave));
+				}
 
 		} else {
 			if (string_equals_ignore_case(algoritmo, "BSU")) {
@@ -218,6 +290,7 @@ void sustituirMatrizEntradas(char * algoritmo,
 
 		}
 	}
+}
 }
 
 int main(int argc, char *argv[]) {
@@ -582,22 +655,12 @@ int main(int argc, char *argv[]) {
 				printf(
 						"despues de set mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
 						i, numeroEntradaInicialAInsertar);
-				char* texto = leerEntrada(matrizValoresEntradas,
+				char* texto2 = leerEntrada(matrizValoresEntradas,
 						entradasTamanio, numeroEntradaInicialAInsertar,
 						mapArchivoTablaDeEntradas[i].tamanioValor);
-				printf("Se inserto en matriz de valores el valor %s\n", texto);
-				free(texto);
+				printf("Se inserto en matriz de valores el valor %s\n", texto2);
+				free(texto2);
 
-				//se inserta datos en matriz de entradas
-				mapArchivoTablaDeEntradas[i].numeroEntrada =
-						numeroEntradaInicialAInsertar;
-				mapArchivoTablaDeEntradas[i].tamanioValor = strlen(valor);
-				strcpy(mapArchivoTablaDeEntradas[i].clave, clave);
-
-				printf("en matriz %d tamanioValor %d escribioentrada %s\n", i,
-						mapArchivoTablaDeEntradas[i].tamanioValor, valor);
-
-			} else {
 				//si ya habia asignado un indice de la matriz de entrada, se sustituye por una entrada una sola segun lo que me dijo lucas
 				mapArchivoTablaDeEntradas[i].tamanioValor = string_length(
 						valor);
@@ -616,6 +679,7 @@ int main(int argc, char *argv[]) {
 			//						Cuando un Usuario ejecute una operación de
 			//						STORE o SET y la clave no exista, se deberá generar un error informando de dicha inexistencia al Usuario. Abortando el ESI culpable.
 
+
 		}
 		imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,
 				diccionarioEntradas, matrizValoresEntradas, entradasCantidad,
@@ -631,70 +695,81 @@ int main(int argc, char *argv[]) {
 				diccionarioEntradas, matrizValoresEntradas, entradasCantidad,
 				entradasTamanio);
 
-		if (dictionary_has_key(diccionarioEntradas, clave)) {
-			//leer entrada en memoria
+		if (dictionary_has_key(diccionarioEntradas,
+										clave)) {
+									//leer entrada en memoria
 
-			int i = dictionary_get(diccionarioEntradas, clave);
+									int i = dictionary_get(diccionarioEntradas,
+											clave);
 
-			char* pathArchivo = string_new();
-			string_append(&pathArchivo, configuracion.punto_montaje);
-			string_append(&pathArchivo, clave);
-			string_append(&pathArchivo, ".txt");
-			//se accsede a la tabla de entradas
-			char* textoValor = leerEntrada(matrizValoresEntradas,
-					entradasTamanio, mapArchivoTablaDeEntradas[i].numeroEntrada,
-					mapArchivoTablaDeEntradas[i].tamanioValor);
+									char* pathArchivo = string_new();
+									string_append(&pathArchivo,
+											configuracion.punto_montaje);
+									string_append(&pathArchivo,
+											clave);
+									string_append(&pathArchivo, ".txt");
+									//se accsede a la tabla de entradas
+									char* textoValor = leerEntrada(
+											matrizValoresEntradas, entradasTamanio,
+											mapArchivoTablaDeEntradas[i].numeroEntrada,
+											mapArchivoTablaDeEntradas[i].tamanioValor);
 
-			printf("texto: %s\n", textoValor);
-			int tamanioArchivo = strlen(textoValor) * sizeof(char);
-			if (remove(pathArchivo)) {
-				printf("Se elimino archivo satifactoriamente\n");
-			} else {
-				printf("no se elimino archivo\n");
-			}
+									printf("texto: %s\n", textoValor);
+									int tamanioArchivo = strlen(textoValor)
+											* sizeof(char);
+									if (remove(pathArchivo)) {
+										printf(
+												"Se elimino archivo satifactoriamente\n");
+									} else {
+										printf("no se elimino archivo\n");
+									}
 
-			fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
-			if (fd == -1) {
-				printf("Error al abrir para escritura\n");
-				exit(EXIT_FAILURE);
-			} else {
+									fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC,
+											(mode_t) 0600);
+									if (fd == -1) {
+										printf("Error al abrir para escritura\n");
+										exit(EXIT_FAILURE);
+									} else {
 
-				int result = write(fd, textoValor, tamanioArchivo);
+										int result = write(fd, textoValor,
+												tamanioArchivo);
 
-				printf("result=%d\n", result);
-				if (result < 0) {
-					close(fd);
-					printf("Error al escribir  \n");
-					exit(EXIT_FAILURE);
-				} else {
-					printf("se guardo archivo \n");
-					close(fd);
-					printf("texto de de tabla num i clave:%s\n",
-							mapArchivoTablaDeEntradas[i].clave);
-					//									//se elimina de memoria la entrada y del diccionario
-					//									dictionary_remove(diccionarioEntradas,mapArchivoTablaDeEntradas[i].clave);
-					//									mapArchivoTablaDeEntradas[i].clave[0]='\0';
-					//									mapArchivoTablaDeEntradas[i].numeroEntrada=-1;
-					//									mapArchivoTablaDeEntradas[i].tamanioValor=-1;
-					//									mapArchivoTablaDeEntradas[i].tiempo=-1;
-				}
-			}
+										printf("result=%d\n", result);
+										if (result < 0) {
+											close(fd);
+											printf("Error al escribir  \n");
+											exit(EXIT_FAILURE);
+										} else {
+											printf("se guardo archivo \n");
+											close(fd);
+											printf("texto de de tabla num i clave:%s\n",
+																				mapArchivoTablaDeEntradas[i].clave);
+											mapArchivoTablaDeEntradas[i].tiempo=timer;
+		//									//se elimina de memoria la entrada y del diccionario
+		//									dictionary_remove(diccionarioEntradas,mapArchivoTablaDeEntradas[i].clave);
+		//									mapArchivoTablaDeEntradas[i].clave[0]='\0';
+		//									mapArchivoTablaDeEntradas[i].numeroEntrada=-1;
+		//									mapArchivoTablaDeEntradas[i].tamanioValor=-1;
+		//									mapArchivoTablaDeEntradas[i].tiempo=-1;
+										}
+									}
 
-			free(textoValor);
 
-			imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,
-					diccionarioEntradas, matrizValoresEntradas,
-					entradasCantidad, entradasTamanio);
-			printf("FIN procesa do STORE\n");
-			//						//FIN procesa do STORE
-		} else {
-			imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,
-					diccionarioEntradas, matrizValoresEntradas,
-					entradasCantidad, entradasTamanio);
-			printf("Error de Clave no Identificada\n");
-			printf("FIN procesa do STORE\n");
-		}
-		break;
+									free(textoValor);
+
+												imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,
+														diccionarioEntradas, matrizValoresEntradas,
+														entradasCantidad, entradasTamanio);
+												printf("FIN procesa do STORE\n");
+												//						//FIN procesa do STORE
+											} else {
+												imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas,
+														diccionarioEntradas, matrizValoresEntradas,
+														entradasCantidad, entradasTamanio);
+												printf("Error de Clave no Identificada\n");
+												printf("FIN procesa do STORE\n");
+											}
+											break;
 		}
 
 		//proceso dump en cantidad de ciclos
