@@ -36,12 +36,36 @@ typedef struct infoInstancia_t{
 	char letra_fin;
 	int desconectada;
 	t_list* claves;
+	pthread_mutex_t semaforo;
 }infoInstancia_t;
 
-typedef struct infoEsi_t{
-	int fdESI;
-	t_list* claves_tomadas; // Lista tiene las claves tomadas por el esi
-}infoEsi_t;
+typedef struct {
+		enum {
+			GET,
+			SET,
+			STORE,
+			COMPACTAR
+		} keyword;
+		union {
+			struct {
+				char* clave;
+			} GET;
+			struct {
+				char* clave;
+				char* valor;
+			} SET;
+			struct {
+				char* clave;
+			} STORE;
+		} argumentos;
+	} operacion_compartida_t;
+
+typedef struct infoParaHilo_t{
+	int fd;
+	pthread_mutex_t semaforo;
+	operacion_compartida_t* operacion;
+}infoParaHilo_t;
+
 
 //VARIABLES
 int socket_coordinador = 0;
@@ -58,11 +82,11 @@ config_t config; //Para cuando tenga que traer cosas del .cfg
 int planificador_conectado = 0;
 int max_instancias = 0;
 int puntero_algoritmo_equitative = 0;
+int contadorDeEsis = 0;
+int contadorDeInstancias = 0;
 t_list* lista_instancias_claves;
 t_list* lista_esis_permisos_setear;
-
-
-
+operacion_compartida_t* operacion; //Estructura que se compartira con todas las instancias. Se sincroniza para su ejecucion particular en una instancia.
 
 
 //FUNCIONES
@@ -134,98 +158,6 @@ void* instancia_conectada_anteriormente(char* unNombre){
 
 }
 
-void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
-
-	//Recibo identidad y coloco en la bolsa correspondiente.
-	header_t cabecera;
-	int identificacion;
-	infoInstancia_t* nueva_instancia;
-	infoInstancia_t* instancia_existente;
-	char* nombre_instancia;
-	int resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t));
-	if(resultado == ERROR_RECV){
-		printf("Error en el recv para socket %d!!!\n", socket_cliente);
-	}
-
-	switch (cabecera.comando) {
-	case msj_handshake:
-		resultado = recibir_mensaje(socket_cliente, &identificacion, cabecera.tamanio);
-		if(resultado == ERROR_RECV){
-			printf("Error en el recv para socket %d al hacer handshake!!!\n", socket_cliente);
-		} else {
-			switch (identificacion){
-			case ESI:
-				FD_SET(socket_cliente, &master);
-				FD_SET(socket_cliente, &bolsa_esis); //Agrego un nuevo esi a la bolsa de esis.
-				printf("Se ha conectado un nuevo esi \n");
-				responder_ok_handshake(ESI, socket_cliente);
-				break;
-
-			case Instancia:
-
-				FD_SET(socket_cliente, &master);
-				FD_SET(socket_cliente, &bolsa_instancias); //Agrego una nueva instancia a la bolsa de instancias.
-				printf("Se ha conectado una nueva instancia de ReDis \n");
-
-				resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t)); //Ahora recibo el nombre de la instancia
-				if ((resultado == ERROR_RECV) || !(cabecera.comando == msj_nombre_instancia)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
-					printf("Error al intentar recibir nombre de la instancia\n");
-				} else {
-					recibir_mensaje(socket_cliente, &nombre_instancia, cabecera.tamanio);
-				}
-
-				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
-				if (instancia_existente == 0) { //No existia anteriormente en el sistema.
-					nueva_instancia->nombre = nombre_instancia;
-					nueva_instancia->fd = socket_cliente;
-					nueva_instancia->espacio_disponible = config.CANT_ENTRADAS;
-					nueva_instancia->desconectada = false;
-					nueva_instancia->letra_inicio = '-';
-					nueva_instancia->letra_fin = '-';
-					nueva_instancia->claves = list_create();
-
-					list_add(lista_instancias_claves,nueva_instancia); //Agrego nueva instancia a la lista de instancias conectadas al sistema.
-
-				}else { //Para cuando una instancia se quiere reincorporar.
-
-					instancia_existente->desconectada = false;
-
-					//TODO: Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento". Probablemente tenga que enviar un mensaje a la instancia para que recupere su info.
-				}
-
-				responder_ok_handshake(Instancia, socket_cliente);
-				break;
-
-			case Planificador:
-				if (planificador_conectado == 0){
-					FD_SET(socket_cliente, &master);
-					FD_SET(socket_cliente, &bolsa_planificador);
-					printf("Se ha conectado el planificador al sistema en socket %d\n", socket_cliente);
-					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
-					responder_ok_handshake(Planificador, socket_cliente);
-					socket_planificador = socket_cliente;
-					break;
-
-				} else {
-					//Responder IMPOSIBILIDAD DE CONEXION al segundo planificador.
-					responder_no_OK_handshake(socket_cliente);
-					close(fdCliente);
-				}
-			}
-
-		}
-
-		if (socket_cliente > maxfd) {
-			maxfd = socket_cliente;
-		}
-
-		break;
-
-	default:
-		printf("Comando/operacion %d no implementada!!!\n", cabecera.comando);
-	}
-}
-
 void conexion_de_cliente_finalizada() {
 	// conexión cerrada.
 	printf("Server: socket %d termino la conexion\n", fdCliente);
@@ -244,15 +176,6 @@ void conexion_de_cliente_finalizada() {
 	}
 
 	close(fdCliente); // Si se perdio la conexion, la cierro.
-}
-
-void* encontrar_esi_en_lista(int unESI){
-	//Funcion de ayuda solo dentro de este scope
-	int mismo_numero (infoEsi_t* p){
-		return p->fdESI == unESI;
-	}
-
-	return list_find(lista_esis_permisos_setear, (void*) mismo_numero);
 }
 
 infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning sale porque no estan implementados LSU y KEY.
@@ -295,30 +218,9 @@ void* encontrar_clave (char* unaClave){
 		return 0; // Devuelvo 0 si no tenia la clave en ninguna instancia
 }
 
-void* esi_con_clave(int unESI, char* unaClave){
-	void* laTieneTomada;
-	//Funcion de ayuda solo dentro de este scope
-		int mismo_numero (infoEsi_t* p){
-			return p->fdESI == unESI;
-		}
+void* atender_accion_esi(void* fd) {
 
-		int misma_clave (char* p){
-				return (p == unaClave);
-		}
-
-	infoEsi_t* esiBuscado;
-	esiBuscado = list_find(lista_esis_permisos_setear, (void*) mismo_numero);
-
-	laTieneTomada = list_find(esiBuscado->claves_tomadas,(void*) misma_clave);
-
-	if(laTieneTomada != NULL){
-		return esiBuscado;
-	}else {
-		return NULL;
-	}
-}
-
-void atender_accion_esi(int fdEsi) {
+	int fdEsi = (int) fd;
 	header_t header;
 	int resultado;
 
@@ -328,20 +230,18 @@ void atender_accion_esi(int fdEsi) {
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 		printf("Error al recibir header del ESI \n");
 		conexion_de_cliente_finalizada();
-		return;
+		return 0;
 	}
 	void* buffer = malloc(header.tamanio);
 	resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 		printf("Error al recibir payload del ESI \n");
 		conexion_de_cliente_finalizada();
-		return;
+		return 0;
 	}
 
 	switch (header.comando) {
-		infoEsi_t* esiAAgregarClave;
 		infoInstancia_t* instanciaConClave;
-		infoEsi_t* esiConClave;
 		void* bufferAEnviar;
 		char* clave;
 		int retornoPlanificador;
@@ -359,7 +259,6 @@ void atender_accion_esi(int fdEsi) {
 				if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-
 						header.comando = msj_solicitud_get_clave;
 						header.tamanio = 0;
 
@@ -379,17 +278,15 @@ void atender_accion_esi(int fdEsi) {
 
 					}
 				}else { //Entro aqui si no encontre la clave en mi sistema
-
+					//TODO: Hacer esto con semaforos.
 					instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION); //Selecciono instancia victima segun algoritmo de distribucion
-
-					header.comando = msj_sentencia_get;
-					header.tamanio = strlen(clave)+1; //Decirle a AGUS que va a tener que leer este numero si o si (esta en la estructura header), despues, que lea hasta el \0 como queria el.
-
-					bufferAEnviar = serializar(header, clave);
-
-					enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + (header.tamanio));
-					free(bufferAEnviar);
 					list_add(instanciaConClave->claves, clave);
+
+					operacion->keyword = msj_sentencia_get;
+					operacion->argumentos.GET.clave = clave;
+
+					pthread_mutex_unlock(&instanciaConClave->semaforo);
+
 				}
 		break;
 
@@ -401,7 +298,6 @@ void atender_accion_esi(int fdEsi) {
 			if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 				if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-
 					header.comando = msj_esi_tiene_tomada_clave;
 					header.tamanio = 0;
 
@@ -413,6 +309,7 @@ void atender_accion_esi(int fdEsi) {
 					printf("Se recibió mensaje del planificador\n");
 					free(bufferAEnviar);
 					if (retornoPlanificador == msj_clave_permitida_para_operar){
+						//TODO: Hacer esto con semaforos.
 						header.comando = msj_sentencia_set;
 						header.tamanio = strlen(clave)+2; //1 por el \0 de la clave y otro por el \0 del valor.
 
@@ -446,62 +343,220 @@ void atender_accion_esi(int fdEsi) {
 
 		case msj_sentencia_store:
 			clave = (char*)buffer;
-			// TODO: Falta preguntarle al Planificador si el ESI tiene bloqueada esta clave
 
-				instanciaConClave = encontrar_clave(clave);
+			instanciaConClave = encontrar_clave(clave);
 
-				if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
+			if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
-					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
+				if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 
-						header.comando = msj_esi_tiene_tomada_clave;
-						header.tamanio = 0;
-
-						bufferAEnviar = serializar(header, buffer);
-
-						enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio); //Pregunto al PLANI si el ESI tiene la clave tomada como para operar.
-
-						recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
-						printf("Se recibió mensaje del planificador\n");
-						free(bufferAEnviar);
-						if (retornoPlanificador == msj_clave_permitida_para_operar){
-							header.comando = msj_sentencia_store;
-							header.tamanio = strlen(clave)+1;
-
-							bufferAEnviar = serializar(header,buffer);
-							enviar_mensaje(instanciaConClave->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-						}else{
-							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
-							header.comando = msj_error_clave_no_identificada;
-							header.tamanio = 0;
-
-							bufferAEnviar = serializar(header, buffer);
-
-							enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
-						}
-					}else { //Se envia al PLANI que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
-						header.comando = msj_error_clave_inaccesible;
-						header.tamanio = 0;
-						bufferAEnviar = serializar(header,buffer);
-						enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header.tamanio);
-
-					}
-				}else { //No se encontro la clave en ninguna instancia.
-					header.comando = msj_error_clave_no_identificada;
+					header.comando = msj_esi_tiene_tomada_clave;
 					header.tamanio = 0;
 
 					bufferAEnviar = serializar(header, buffer);
 
-					enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
+					enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio); //Pregunto al PLANI si el ESI tiene la clave tomada como para operar.
+
+					recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
+					printf("Se recibió mensaje del planificador\n");
+					free(bufferAEnviar);
+					if (retornoPlanificador == msj_clave_permitida_para_operar){
+						//TODO: Hacer esto con semaforos.
+						header.comando = msj_sentencia_store;
+						header.tamanio = strlen(clave)+1;
+
+						bufferAEnviar = serializar(header,buffer);
+						enviar_mensaje(instanciaConClave->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+					}else{
+						//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
+						header.comando = msj_error_clave_no_identificada;
+						header.tamanio = 0;
+
+						bufferAEnviar = serializar(header, buffer);
+
+						enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
 					}
-			break;
+				}else { //Se envia al PLANI que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
+					header.comando = msj_error_clave_inaccesible;
+					header.tamanio = 0;
+					bufferAEnviar = serializar(header,buffer);
+					enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header.tamanio);
+
+				}
+			}else { //No se encontro la clave en ninguna instancia.
+				header.comando = msj_error_clave_no_identificada;
+				header.tamanio = 0;
+
+				bufferAEnviar = serializar(header, buffer);
+
+				enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio);
+				}
+		break;
 		default:
 			printf("Se recibio comando desconocido desde ESI");
 	}
 }
 
-void atender_accion_instancia(int fdInstancia) {
-	printf("Atendiendo acción instancia en socket %d!!!\n", fdInstancia);
+void* atender_accion_instancia(void* info) {
+
+	header_t header;
+	void* buffer;
+	void* bufferAEnviar;
+	infoParaHilo_t* informacionQueSeComparte = (infoParaHilo_t*) info;
+	pthread_mutex_lock(&informacionQueSeComparte->semaforo); //Hago el wait al mutex
+
+	printf("Atendiendo acción instancia en socket %d!!!\n", informacionQueSeComparte->fd);
+
+	switch (operacion->keyword) {
+
+		case GET:
+			header.comando = msj_sentencia_get;
+			header.tamanio = strlen(operacion->argumentos.GET.clave)+1;
+			buffer = malloc(header.tamanio);
+			memcpy(buffer,operacion->argumentos.GET.clave,header.tamanio);
+
+			bufferAEnviar = serializar(header,buffer);
+			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+			break;
+
+		case SET:
+			header.comando = msj_sentencia_set;
+			header.tamanio = strlen(operacion->argumentos.SET.clave)+strlen(operacion->argumentos.SET.valor)+2; //El +2 va para los \0
+
+			buffer = malloc(header.tamanio);
+			memcpy(buffer,operacion->argumentos.SET.clave,strlen(operacion->argumentos.SET.clave)+1);
+			memcpy(buffer + strlen(operacion->argumentos.SET.clave)+1,operacion->argumentos.SET.valor,strlen(operacion->argumentos.SET.valor)+1);
+
+			bufferAEnviar = serializar(header,buffer);
+			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+			break;
+
+		case STORE:
+			header.comando = msj_sentencia_store;
+			header.tamanio = strlen(operacion->argumentos.STORE.clave)+1;
+
+			buffer = malloc(header.tamanio);
+			memcpy(buffer,operacion->argumentos.STORE.clave,header.tamanio);
+
+			bufferAEnviar = serializar(header,buffer);
+			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+			break;
+
+		case COMPACTAR:
+			header.comando = msj_instancia_compactar;
+			header.tamanio = 0;
+
+			buffer = malloc(header.tamanio);
+
+			bufferAEnviar = serializar(header,buffer);
+			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t));
+			break;
+		default:
+			break;
+	}
+}
+void identificar_proceso_e_ingresar_en_bolsa(int socket_cliente) {
+
+	//Recibo identidad y coloco en la bolsa correspondiente.
+	header_t cabecera;
+	int identificacion;
+	infoInstancia_t* nueva_instancia;
+	infoInstancia_t* instancia_existente;
+	char* nombre_instancia;
+	int resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t));
+	if(resultado == ERROR_RECV){
+		printf("Error en el recv para socket %d!!!\n", socket_cliente);
+	}
+
+	switch (cabecera.comando) {
+	case msj_handshake:
+		resultado = recibir_mensaje(socket_cliente, &identificacion, cabecera.tamanio);
+		if(resultado == ERROR_RECV){
+			printf("Error en el recv para socket %d al hacer handshake!!!\n", socket_cliente);
+		} else {
+			switch (identificacion){
+			case ESI:
+				responder_ok_handshake(ESI, socket_cliente);
+
+				//Creo el hilo para su ejecucion
+				pthread_t hiloESI;
+				pthread_create(&hiloESI,NULL,&atender_accion_esi, &socket_cliente);
+				pthread_detach(hiloESI);
+				break;
+
+			case Instancia:
+
+				resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t)); //Ahora recibo el nombre de la instancia
+				if ((resultado == ERROR_RECV) || !(cabecera.comando == msj_nombre_instancia)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
+					printf("Error al intentar recibir nombre de la instancia\n");
+				} else {
+					recibir_mensaje(socket_cliente, &nombre_instancia, cabecera.tamanio);
+				}
+
+				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
+				if (instancia_existente == 0) { //No existia anteriormente en el sistema.
+					nueva_instancia->nombre = nombre_instancia;
+					nueva_instancia->fd = socket_cliente;
+					nueva_instancia->espacio_disponible = config.CANT_ENTRADAS;
+					nueva_instancia->desconectada = false;
+					nueva_instancia->letra_inicio = '-';
+					nueva_instancia->letra_fin = '-';
+					nueva_instancia->claves = list_create();
+					pthread_mutex_init(&nueva_instancia->semaforo,NULL);
+
+					//Creo hilo de ejecucion para instancia
+					pthread_t hiloInstancia;
+					infoParaHilo_t* info;
+					info = malloc(sizeof(infoParaHilo_t));
+					info->fd = socket_cliente;
+					info->operacion = operacion;
+					info->semaforo = nueva_instancia->semaforo;
+
+					responder_ok_handshake(Instancia, socket_cliente);
+
+					pthread_create(&hiloInstancia, NULL, &atender_accion_instancia,&info);
+					pthread_detach(hiloInstancia);
+
+
+					list_add(lista_instancias_claves,nueva_instancia); //Agrego nueva instancia a la lista de instancias conectadas al sistema.
+
+				}else { //Para cuando una instancia se quiere reincorporar.
+
+					instancia_existente->desconectada = false;
+
+					//TODO: Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento".
+					//TODO: Verificar si van quedando hilos abiertos a medida que las instancias se van desconectando.
+				}
+				break;
+
+			case Planificador:
+				if (planificador_conectado == 0){
+					FD_SET(socket_cliente, &master);
+					FD_SET(socket_cliente, &bolsa_planificador);
+					printf("Se ha conectado el planificador al sistema en socket %d\n", socket_cliente);
+					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
+					responder_ok_handshake(Planificador, socket_cliente);
+					socket_planificador = socket_cliente;
+					break;
+
+				} else {
+					//Responder IMPOSIBILIDAD DE CONEXION al segundo planificador.
+					responder_no_OK_handshake(socket_cliente);
+					close(fdCliente);
+				}
+			}
+
+		}
+
+		if (socket_cliente > maxfd) {
+			maxfd = socket_cliente;
+		}
+
+		break;
+
+	default:
+		printf("Comando/operacion %d no implementada!!!\n", cabecera.comando);
+	}
 }
 
 int main(void) {
@@ -513,6 +568,9 @@ int main(void) {
 	//Establecer conexiones con el sistema.
 	//En caso que el plani sea server de coordinador socket_planificador = conectar_a_server(config.IP_PLANIFICADOR, config.PUERTO_PLANIFICADOR);
 	socket_coordinador = crear_socket_escucha(config.PUERTO);
+
+	//Inicializo estructura de operacion compartida
+	operacion = malloc(sizeof(operacion_compartida_t));
 
 	//Acciones necesarias para identificar los esi o instancias entrantes.
 
