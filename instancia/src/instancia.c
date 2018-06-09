@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -151,7 +152,7 @@ void imprimirPorPantallaEstucturas(t_entrada* matriz,t_dictionary* diccionario,c
 }
 
 void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
-	printf("Sustituye Algoritmo declarado %s\n",algoritmo);
+	printf("\n Sustituye Algoritmo declarado %s\n",algoritmo);
 	if(string_equals_ignore_case(algoritmo,"Ciclico")){
 		//busco siguiente atomico
 		int i=0;
@@ -171,6 +172,7 @@ printf("Se remueve de diccionari y matriz clave %s \n",matriz[i].clave);
 				strcpy(matriz[i].clave,clave);
 				//inserto tamanio valor -1
 				matriz[i].tamanioValor=-1;
+				matriz[i].tiempo=-1;
 
 				fin=1;
 			}else{
@@ -206,11 +208,75 @@ printf("Se remueve de diccionari y matriz clave %s \n",matriz[i].clave);
 	}else{
 		if(string_equals_ignore_case(algoritmo,"LRU")){
 
+			int i=0;
+			int aSustituir=-1;
+			int aSustituirTiempo=0;
+			while(i<entradasCantidad){
+
+				if(redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)==1){
+				if(timer-matriz[i].tiempo>aSustituirTiempo){
+					aSustituirTiempo=matriz[i].tiempo;
+					aSustituir=i;
+				}
+
+				}
+				printf("IdEntrada: %d timerEntrada: %d timerSistema: %d \n",i ,matriz[i].tiempo, timer);
+				if(i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)<=entradasCantidad){
+					//salto al proximo
+				i=i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio);
+					}
+			}
+			if(aSustituir>-1){
+			//remuevo y sustituyo
+				printf("\n a sustituir %s\n",dictionary_get(diccionario,matriz[i].clave));
+			dictionary_remove(diccionario,matriz[i].clave);
+			dictionary_put(diccionario,clave,aSustituir);
+			strcpy(matriz[aSustituir].clave,clave);
+			//inserto tamanio valor -1
+			matriz[aSustituir].tamanioValor=-1;
+			matriz[aSustituir].tiempo=-1;
+			printf("removido por %s\n",dictionary_get(diccionario,matriz[i].clave));
+			}
+
 
 
 		}else{
 			if(string_equals_ignore_case(algoritmo,"BSU")){
+				int i=0;
+				int aSustituir=-1;
+				int aSustituirTamanio=0;
+				while(i<entradasCantidad){
+					if(redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)==1){
+					if(matriz[i].tamanioValor>aSustituirTamanio){
+						aSustituirTamanio=matriz[i].tamanioValor;
+						aSustituir=i;
+					}
 
+					}
+
+					if(i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio)<=entradasCantidad){
+						//salto al proximo
+					i=i+redondiarArribaDivision(matriz[i].tamanioValor,entradasTamanio);
+						}
+				}
+				if(aSustituir>-1){
+				//remuevo y sustituyo
+
+
+					dictionary_put(diccionario,matriz[aSustituir].clave,-1);
+					if(dictionary_get(diccionario,matriz[aSustituir].clave) == -1){
+						printf("Se realizo el put de -1 en la clave\n");
+					}
+					dictionary_remove_and_destroy(diccionario,matriz[aSustituir].clave, free);
+
+
+				dictionary_put(diccionario,clave,aSustituir);
+				strcpy(matriz[aSustituir].clave,clave);
+				//inserto tamanio valor -1
+				matriz[aSustituir].tamanioValor=-1;
+				matriz[aSustituir].tiempo=-1;
+				printf("removido por %s\n",dictionary_get(diccionario,matriz[i].clave));
+				}
 
 
 
@@ -592,6 +658,7 @@ printf("\n");
 									matrizValoresEntradas, entradasTamanio,
 									numeroEntradaInicialAInsertar,
 									esi_operacion.argumentos.SET.valor);
+
 							printf(
 									"despues de set mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n",
 									i, numeroEntradaInicialAInsertar);
@@ -610,6 +677,7 @@ printf("\n");
 									esi_operacion.argumentos.SET.valor);
 							strcpy(mapArchivoTablaDeEntradas[i].clave,
 									esi_operacion.argumentos.SET.clave);
+							mapArchivoTablaDeEntradas[i].tiempo=timer;
 
 							printf(
 									"en matriz %d tamanioValor %d escribioentrada %s\n",
@@ -626,6 +694,7 @@ printf("\n");
 									matrizValoresEntradas, entradasTamanio,
 									mapArchivoTablaDeEntradas[i].numeroEntrada,
 									esi_operacion.argumentos.SET.valor);
+							mapArchivoTablaDeEntradas[i].tiempo=timer;
 
 							printf(
 									"en matriz %d tamanioValor %d escribioentrada %s\n",
@@ -700,6 +769,7 @@ printf("\n");
 									close(fd);
 									printf("texto de de tabla num i clave:%s\n",
 																		mapArchivoTablaDeEntradas[i].clave);
+									mapArchivoTablaDeEntradas[i].tiempo=timer;
 //									//se elimina de memoria la entrada y del diccionario
 //									dictionary_remove(diccionarioEntradas,mapArchivoTablaDeEntradas[i].clave);
 //									mapArchivoTablaDeEntradas[i].clave[0]='\0';
