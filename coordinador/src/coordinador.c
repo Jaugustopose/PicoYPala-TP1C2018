@@ -194,7 +194,7 @@ infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning s
 	}
 }
 
-void* encontrar_clave (char* unaClave){
+void* encontrar_instancia_por_clave (char* unaClave){
 
 	//Funcion de ayuda solo dentro de este scope
 	int misma_clave (char* p){
@@ -215,6 +215,20 @@ void* encontrar_clave (char* unaClave){
 		}
 	}
 		return 0; // Devuelvo 0 si no tenia la clave en ninguna instancia
+}
+
+void* encontrar_instancia_por_fd (int unFd){
+
+	//Funcion de ayuda solo dentro de este scope
+	int mismo_fd (infoInstancia_t* p){
+		return (p->fd == unFd);
+	}
+
+	void* instanciaConFd;
+
+	instanciaConFd = list_find(lista_instancias_claves,(void*) mismo_fd);
+
+	return instanciaConFd;
 }
 
 void* atender_accion_esi(void* fd) {
@@ -410,60 +424,70 @@ void* atender_accion_instancia(void* info) { //TODO: Ver tema de cuándo termina
 	header_t header;
 	void* buffer;
 	void* bufferAEnviar;
+	infoInstancia_t* miInstancia;
 	infoParaHilo_t* informacionQueSeComparte = (infoParaHilo_t*) info;
 
 	pthread_mutex_lock(&informacionQueSeComparte->semaforo); //Hago el wait al mutex
 
-	printf("Atendiendo acción instancia en socket %d!!!\n", informacionQueSeComparte->fd);
+	miInstancia = encontrar_instancia_por_fd(informacionQueSeComparte->fd);
 
-	switch (operacion->keyword) {
+	if(miInstancia->desconectada == true){ //Si la instancia que atendia este hilo se desconecto, el hilo muere.
+		pthread_mutex_destroy(&informacionQueSeComparte->semaforo);
+		exit(EXIT_FAILURE);
+	}else{
 
-		case GET:
-			header.comando = msj_sentencia_get;
-			header.tamanio = strlen(operacion->argumentos.GET.clave)+1;
-			buffer = malloc(header.tamanio);
-			memcpy(buffer,operacion->argumentos.GET.clave,header.tamanio);
+		printf("Atendiendo acción instancia en socket %d!!!\n", informacionQueSeComparte->fd);
 
-			bufferAEnviar = serializar(header,buffer);
-			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-			break;
+		switch (operacion->keyword) {
 
-		case SET:
-			header.comando = msj_sentencia_set;
-			header.tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
+			case GET:
+				header.comando = msj_sentencia_get;
+				header.tamanio = strlen(operacion->argumentos.GET.clave)+1;
+				buffer = malloc(header.tamanio);
+				memcpy(buffer,operacion->argumentos.GET.clave,header.tamanio);
 
-			buffer = malloc(header.tamanio);
-			memcpy(buffer,operacion->argumentos.SET.claveYValor,strlen(operacion->argumentos.SET.claveYValor)+1);
+				bufferAEnviar = serializar(header,buffer);
+				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+				break;
 
-			bufferAEnviar = serializar(header,buffer);
-			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-			break;
+			case SET:
+				header.comando = msj_sentencia_set;
+				header.tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
 
-		case STORE:
-			header.comando = msj_sentencia_store;
-			header.tamanio = strlen(operacion->argumentos.STORE.clave)+1;
+				buffer = malloc(header.tamanio);
+				memcpy(buffer,operacion->argumentos.SET.claveYValor,strlen(operacion->argumentos.SET.claveYValor)+1);
 
-			buffer = malloc(header.tamanio);
-			memcpy(buffer,operacion->argumentos.STORE.clave,header.tamanio);
+				bufferAEnviar = serializar(header,buffer);
+				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+				break;
 
-			bufferAEnviar = serializar(header,buffer);
-			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-			break;
+			case STORE:
+				header.comando = msj_sentencia_store;
+				header.tamanio = strlen(operacion->argumentos.STORE.clave)+1;
 
-		case COMPACTAR:
-			header.comando = msj_instancia_compactar;
-			header.tamanio = 0;
+				buffer = malloc(header.tamanio);
+				memcpy(buffer,operacion->argumentos.STORE.clave,header.tamanio);
 
-			buffer = malloc(header.tamanio);
+				bufferAEnviar = serializar(header,buffer);
+				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+				break;
 
-			bufferAEnviar = serializar(header,buffer);
-			enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t));
-			break;
-		default:
-			break;
-	}
+			case COMPACTAR:
+				header.comando = msj_instancia_compactar;
+				header.tamanio = 0;
+
+				buffer = malloc(header.tamanio);
+
+				bufferAEnviar = serializar(header,buffer);
+				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t));
+				break;
+			default:
+				break;
+		}
 
 	pthread_mutex_unlock(&informacionQueSeComparte->semaforo);
+
+	}
 }
 void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
@@ -533,6 +557,7 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 				}else { //Para cuando una instancia se quiere reincorporar.
 
 					instancia_existente->desconectada = false;
+					instancia_existente->fd = socket_cliente;
 
 					//TODO: Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento".
 					//TODO: Verificar si van quedando hilos abiertos a medida que las instancias se van desconectando.
@@ -567,6 +592,11 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 	default:
 		printf("Comando/operacion %d no implementada!!!\n", cabecera.comando);
 	}
+}
+
+void escuchar_mensaje_de_instancia(int unFileDescriptor){
+
+
 }
 
 int main(void) {
@@ -629,8 +659,9 @@ int main(void) {
 					 */
 //					if (FD_ISSET(fdCliente, &bolsa_esis)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UN ESI.
 //						atender_accion_esi(fdCliente);
-//					} else if (FD_ISSET(fdCliente, &bolsa_instancias)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UNA INSTANCIA.
-//						atender_accion_instancia(fdCliente);
+					if (FD_ISSET(fdCliente, &bolsa_instancias)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UNA INSTANCIA. DEJO ESTO NADA MAS POR COMPACTACION
+						escuchar_mensaje_de_instancia(fdCliente);
+					}
 //					} else {
 //						perror("El socket buscado no está en ningún set!!! Situación anómala. Finalizando...");
 //						exit(EXIT_FAILURE);
