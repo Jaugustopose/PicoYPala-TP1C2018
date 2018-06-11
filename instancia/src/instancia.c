@@ -74,10 +74,10 @@ int redondearArribaDivision(int divisor, int dividendo) {
 }
 
 void escribirAPartir(char* matriz, int puntoInicio, char* textoAEscribir) {
-	int puntoFin = puntoInicio + strlen(textoAEscribir) - 1;
+	int puntoFin = puntoInicio + strlen(textoAEscribir);
 	int a = 0;
 	int i = 0;
-	for (a = puntoInicio; a <= puntoFin; a++) {
+	for (a = puntoInicio; a < puntoFin; a++) {
 		matriz[a] = textoAEscribir[i];
 		i++;
 	}
@@ -86,10 +86,9 @@ void escribirAPartir(char* matriz, int puntoInicio, char* textoAEscribir) {
 }
 
 char* leerDesdeHasta(char * matriz, int puntoInicio, int puntoFin) {
-	char* texto = malloc(puntoFin - puntoInicio);
-	printf("leerDesdeHasta INICIO Texto %s \n", texto);
-	printf("leerDesdeHasta puntoInicio %d puntoFin %d \n", puntoInicio,
-			puntoFin);
+	char* texto = malloc(puntoFin - puntoInicio + 1);
+	printf("leerDesdeHasta INICIO\n");
+	printf("leerDesdeHasta puntoInicio %d puntoFin %d \n", puntoInicio, puntoFin);
 
 	int a = 0;
 	int i = 0;
@@ -121,7 +120,7 @@ char * crearMatriz(int numeroEntradas, int tamanioEntradas) {
 	char * matriz = malloc(entradasCantidad * entradasTamanio);
 	strcpy(matriz, "");
 	int i = 0;
-	for (i = 0; i <= numeroEntradas * tamanioEntradas; i++) {
+	for (i = 0; i < numeroEntradas * tamanioEntradas; i++) {
 		matriz[i] = '\0';
 	}
 	return matriz;
@@ -319,7 +318,6 @@ int main(int argc, char *argv[]) {
 	int fd = open(pathArchivo, O_RDWR, (mode_t) 0600);
 	int archivoNoExistiaPrimeraCarga = 0;
 	if (fd <= -1) {
-		close(fd);
 		fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
 		archivoNoExistiaPrimeraCarga = 1;
 		if (fd == -1) {
@@ -342,8 +340,7 @@ int main(int argc, char *argv[]) {
 		}
 
 	}
-	char * matrizValoresEntradas = crearMatriz(entradasCantidad,
-			entradasTamanio);
+	char* matrizValoresEntradas = crearMatriz(entradasCantidad, entradasTamanio);
 
 	/* Mapiando archivo */
 
@@ -367,7 +364,7 @@ int main(int argc, char *argv[]) {
 							  mapArchivoTablaDeEntradas[i].tiempo);
 	}
 
-	free(pathArchivo);
+//	free(pathArchivo);
 	t_dictionary *diccionarioEntradas = dictionary_create();
 
 	//se carga diccionarioEntradas, matrizValoresEntradas con datos de mapArchivoTablaDeEntradas
@@ -405,17 +402,14 @@ int main(int argc, char *argv[]) {
 		header2.comando=0;
 		header2.tamanio=0;
 
-		int resultado = recibir_mensaje(socketCoordinador, &header2,
-				sizeof(header_t));
-		if (resultado == ERROR_RECV_DISCONNECTED
-				|| resultado == ERROR_RECV_DISCONNECTED) {
+		int resultado = recibir_mensaje(socketCoordinador, &header2, sizeof(header_t));
+		if (resultado == ERROR_RECV_DISCONNECTED) {
 			printf("Se perdió la conexión con el Coordinador\n");
 		}
 
 		void* buffer = malloc(header2.tamanio);
 		resultado = recibir_mensaje(socketCoordinador, buffer, header2.tamanio);
-		if (resultado == ERROR_RECV_DISCONNECTED
-				|| resultado == ERROR_RECV_DISCONNECTED) {
+		if (resultado == ERROR_RECV_DISCONNECTED || resultado == ERROR_RECV_DISCONNECTED) {
 			printf("Se perdió la conexión con el Coordinador\n");
 		}
 
@@ -519,16 +513,15 @@ int main(int argc, char *argv[]) {
 
 	//				matrizValoresEntradas = escribirEntrada(matrizValoresEntradas,
 	//						entradasTamanio, numeroEntradaInicialAInsertar, valor);
-					escribirEntrada(matrizValoresEntradas,
-											entradasTamanio, numeroEntradaInicialAInsertar, valor);
+					escribirEntrada(matrizValoresEntradas, entradasTamanio, numeroEntradaInicialAInsertar, valor);
+					mapArchivoTablaDeEntradas[i].numeroEntrada = numeroEntradaInicialAInsertar;
 					printf("despues de set mapArchivoTablaDeEntradas indice %d numeroEntrada %d\n", i, numeroEntradaInicialAInsertar);
 					char* texto2 = leerEntrada(matrizValoresEntradas, entradasTamanio, numeroEntradaInicialAInsertar, mapArchivoTablaDeEntradas[i].tamanioValor);
 					printf("Se inserto en matriz de valores el valor %s\n", texto2);
 	//				free(texto2);
 
 					//si ya habia asignado un indice de la matriz de entrada, se sustituye por una entrada una sola segun lo que me dijo lucas
-					mapArchivoTablaDeEntradas[i].tamanioValor = string_length(
-							valor);
+					mapArchivoTablaDeEntradas[i].tamanioValor = string_length(valor);
 	//				matrizValoresEntradas = escribirEntrada(matrizValoresEntradas,
 	//						entradasTamanio,
 	//						mapArchivoTablaDeEntradas[i].numeroEntrada, valor);
@@ -579,8 +572,7 @@ int main(int argc, char *argv[]) {
 					exit(EXIT_FAILURE);
 				} else {
 
-					int result = write(fd, textoValor,
-							tamanioArchivo);
+					int result = write(fd, textoValor, tamanioArchivo);
 
 					printf("result=%d\n", result);
 					if (result < 0) {
@@ -602,12 +594,12 @@ int main(int argc, char *argv[]) {
 				}
 				free(textoValor);
 				imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas, diccionarioEntradas, matrizValoresEntradas, entradasCantidad, entradasTamanio);
-				printf("FIN procesa do STORE\n");
+				printf("FIN procesado STORE\n");
 				//FIN procesado STORE
 			} else {
 				imprimirPorPantallaEstucturas(mapArchivoTablaDeEntradas, diccionarioEntradas, matrizValoresEntradas, entradasCantidad, entradasTamanio);
 				printf("Error de Clave no Identificada\n");
-				printf("FIN procesa do STORE\n");
+				printf("FIN procesado STORE\n");
 			}
 			break;
 		}

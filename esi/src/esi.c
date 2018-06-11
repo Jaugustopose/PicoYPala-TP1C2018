@@ -30,11 +30,15 @@ typedef struct{
 
 void exitFailure(){
 	log_destroy(logESI);
+	close(socket_coordinador);
+	close(socket_planificador);
 	exit(EXIT_FAILURE);
 }
 
 void exitSuccess(){
 	log_destroy(logESI);
+	close(socket_coordinador);
+	close(socket_planificador);
 	exit(EXIT_SUCCESS);
 }
 
@@ -244,7 +248,7 @@ void atenderMsgPlanificador(){
 			if(retorno.finArchivo){
 				log_info(logESI, "Fin Script");
 				msgFinProceso();
-				exitSuccess();
+//				exitSuccess();
 			}else{
 				msgEjecucion(retorno.parsed);
 			}

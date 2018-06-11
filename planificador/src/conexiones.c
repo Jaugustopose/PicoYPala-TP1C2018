@@ -102,10 +102,11 @@ void* iniciarEscucha(void* sockets) {
 					} else {
 						switch(header.comando) {
 						case msj_sentencia_finalizada:
-							printf("MSJ Sentencia finalizada recibida\n");
+							printf("MSJ Sentencia finalizada recibido\n");
 							sentenciaFinalizada();
 							break;
 						case msj_esi_finalizado:
+							printf("MSJ ESI finalizado recibido\n");
 							procesoTerminado(exit_ok);
 							respuesta = msj_ok_solicitud_operacion;
 							enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));

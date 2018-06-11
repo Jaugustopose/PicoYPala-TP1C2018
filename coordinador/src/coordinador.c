@@ -433,7 +433,7 @@ void atender_accion_esi(int fdEsi) {
 					header.comando = msj_sentencia_finalizada;
 					header.tamanio = 0;
 					enviar_mensaje(fdEsi, &header, sizeof(header_t));
-					printf("MSJ Sentencia finalizada enviado a ESI\n");
+					printf("MSJ Sentencia GET finalizada enviado a ESI\n");
 
 					list_add(instanciaConClave->claves, clave);
 				}
@@ -464,6 +464,13 @@ void atender_accion_esi(int fdEsi) {
 
 						bufferAEnviar = serializar(header,buffer);
 						enviar_mensaje(instanciaConClave->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+
+						//Responder a ESI que salio todo OK
+						header.comando = msj_sentencia_finalizada;
+						header.tamanio = 0;
+						enviar_mensaje(fdEsi, &header, sizeof(header_t));
+						printf("MSJ Sentencia SET finalizada enviado a ESI\n");
+
 					}else{
 						//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
 						header.comando = msj_error_clave_no_identificada;
@@ -501,21 +508,25 @@ void atender_accion_esi(int fdEsi) {
 					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 
 						header.comando = msj_esi_tiene_tomada_clave;
-						header.tamanio = 0;
-
 						bufferAEnviar = serializar(header, buffer);
-
 						enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header.tamanio); //Pregunto al PLANI si el ESI tiene la clave tomada como para operar.
+						free(bufferAEnviar);
 
 						recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
 						printf("Se recibió mensaje del planificador\n");
-						free(bufferAEnviar);
-						if (retornoPlanificador == msj_clave_permitida_para_operar){
+						if (retornoPlanificador == msj_ok_solicitud_operacion){
 							header.comando = msj_sentencia_store;
 							header.tamanio = strlen(clave)+1;
 
 							bufferAEnviar = serializar(header,buffer);
-							enviar_mensaje(instanciaConClave->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+							enviar_mensaje(instanciaConClave->fd, bufferAEnviar, sizeof(header_t) + header.tamanio);
+
+							//Responder a ESI que salio todo OK
+							header.comando = msj_sentencia_finalizada;
+							header.tamanio = 0;
+							enviar_mensaje(fdEsi, &header, sizeof(header_t));
+							printf("MSJ Sentencia STORE finalizada enviado a ESI\n");
+
 						}else{
 							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
 							header.comando = msj_error_clave_no_identificada;

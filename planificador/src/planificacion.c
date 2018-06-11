@@ -165,7 +165,12 @@ void procesoTerminado(int exitStatus) {
 	procesoEjecucion->exitStatus = exitStatus;
 	queue_push(colaTerminados, (void*)procesoEjecucion);
 	liberarRecursos(procesoEjecucion);
-	procesoEjecutar(colaListosPop());
+	proceso_t* procesoListo = colaListosPop();
+	if (procesoListo != NULL) {
+		procesoEjecutar(colaListosPop());
+	} else {
+		procesoEjecucion = 0;
+	}
 }
 
 void procesoBloquear(char* clave){
@@ -206,7 +211,7 @@ void sentenciaFinalizada(int socket_esi) {
 	if (planificadorConDesalojo()) {
 		planificarConDesalojo();
 	} else {
-		 mandar_a_ejecutar_esi(procesoEjecucion->socketESI);
+		procesoEjecutar(procesoEjecucion);
 		 //TODO: Manejar error Send.
 	}
 }
@@ -287,7 +292,11 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 		retorno.respuestaACoordinador = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
 		retorno.fdESIAAbortar = (retorno.respuestaACoordinador == 1) ? -1 : procesoEjecucion->socketESI;
 		break;
+	default:
+		printf("Llegó un mensaje desconocido: %d\n", comando);
+		break;
 	}
+
 
 	return retorno;
 

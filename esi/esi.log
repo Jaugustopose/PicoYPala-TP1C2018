@@ -88,3 +88,44 @@
 [INFO] 01:20:35:614 ESI/(19285:19285): Parseando linea: GET futbol:ansaldi
 
 [INFO] 01:20:52:936 ESI/(19285:19285): Msg Sentencia finalizada recibido del Coordinador
+[DEBUG] 12:56:28:813 ESI/(3323:3323): Ruta Script: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/ESI_1
+[DEBUG] 12:56:28:852 ESI/(3323:3323): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 12:56:28:852 ESI/(3323:3323): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 12:56:28:852 ESI/(3323:3323): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 12:56:28:852 ESI/(3323:3323): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 12:56:28:852 ESI/(3323:3323): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 12:57:47:379 ESI/(3323:3323): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 12:57:47:379 ESI/(3323:3323): Parseando linea: GET futbol:messi
+
+[INFO] 12:58:23:52 ESI/(3323:3323): Msg Sentencia finalizada recibido del Coordinador
+[INFO] 13:01:22:449 ESI/(3323:3323): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 13:01:27:438 ESI/(3323:3323): Parseando linea: SET futbol:messi TraemeLaCopa
+
+[ERROR] 13:20:13:374 ESI/(3323:3323): Se perdió la conexión con el Coordinador
+[DEBUG] 21:48:07:245 ESI/(9667:9667): Ruta Script: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/ESI_1
+[DEBUG] 21:48:07:245 ESI/(9667:9667): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 21:48:07:246 ESI/(9667:9667): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 21:48:07:246 ESI/(9667:9667): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 21:48:07:246 ESI/(9667:9667): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 21:48:07:246 ESI/(9667:9667): IP_COORDINADOR: 127.0.0.1
+
+[INFO] 21:48:07:246 ESI/(9667:9667): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 21:48:07:246 ESI/(9667:9667): Parseando linea: GET futbol:messi
+
+[INFO] 21:48:27:636 ESI/(9667:9667): Msg Sentencia finalizada recibido del Coordinador
+[INFO] 21:48:27:636 ESI/(9667:9667): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 21:48:27:636 ESI/(9667:9667): Parseando linea: SET futbol:messi TraemeLaCopa
+
+[INFO] 21:49:24:80 ESI/(9667:9667): Msg Sentencia finalizada recibido del Coordinador
+[INFO] 21:49:24:80 ESI/(9667:9667): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 21:49:24:80 ESI/(9667:9667): Parseando linea: STORE futbol:messi
+[INFO] 21:50:05:588 ESI/(9667:9667): Msg Sentencia finalizada recibido del Coordinador
+[INFO] 21:50:05:588 ESI/(9667:9667): Msg requerimiento de ejecución recibido del Planificador
+[INFO] 21:50:27:960 ESI/(9667:9667): Fin Script
