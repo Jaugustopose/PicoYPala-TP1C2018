@@ -1,1 +1,45 @@
 [ERROR] 22:51:59:300 Instance/(12089:12089): Error conectar_a_server
+[DEBUG] 14:37:59:115 Instance/(14202:14202): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 14:37:59:212 Instance/(14202:14202): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 14:37:59:212 Instance/(14202:14202): PUERTO_COORDINADOR: 8030
+[DEBUG] 14:37:59:212 Instance/(14202:14202): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 14:37:59:212 Instance/(14202:14202): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 14:37:59:212 Instance/(14202:14202): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 14:37:59:212 Instance/(14202:14202): INTERVALO_DUMP: 1
+[DEBUG] 14:37:59:249 Instance/(14202:14202): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 14:37:59:249 Instance/(14202:14202): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 14:37:59:249 Instance/(14202:14202): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 14:38:19:230 Instance/(14202:14202): INICIO procesado GET
+[DEBUG] 14:40:22:701 Instance/(14286:14286): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 14:40:22:701 Instance/(14286:14286): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 14:40:22:701 Instance/(14286:14286): PUERTO_COORDINADOR: 8030
+[DEBUG] 14:40:22:701 Instance/(14286:14286): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 14:40:22:701 Instance/(14286:14286): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 14:40:22:701 Instance/(14286:14286): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 14:40:22:701 Instance/(14286:14286): INTERVALO_DUMP: 1
+[DEBUG] 14:40:22:738 Instance/(14286:14286): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 14:40:22:739 Instance/(14286:14286): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 14:40:22:739 Instance/(14286:14286): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 14:41:11:57 Instance/(14348:14348): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 14:41:11:57 Instance/(14348:14348): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 14:41:11:57 Instance/(14348:14348): PUERTO_COORDINADOR: 8030
+[DEBUG] 14:41:11:57 Instance/(14348:14348): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 14:41:11:57 Instance/(14348:14348): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 14:41:11:57 Instance/(14348:14348): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 14:41:11:58 Instance/(14348:14348): INTERVALO_DUMP: 1
+[DEBUG] 14:41:11:99 Instance/(14348:14348): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 14:41:11:99 Instance/(14348:14348): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 14:41:11:99 Instance/(14348:14348): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 14:54:15:422 Instance/(15099:15099): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 14:54:15:422 Instance/(15099:15099): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 14:54:15:422 Instance/(15099:15099): PUERTO_COORDINADOR: 8030
+[DEBUG] 14:54:15:422 Instance/(15099:15099): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 14:54:15:422 Instance/(15099:15099): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 14:54:15:422 Instance/(15099:15099): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 14:54:15:422 Instance/(15099:15099): INTERVALO_DUMP: 1
+[DEBUG] 14:54:15:461 Instance/(15099:15099): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 14:54:15:462 Instance/(15099:15099): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 14:54:15:462 Instance/(15099:15099): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 14:54:18:672 Instance/(15099:15099): Inicio bucle principal
+[DEBUG] 14:54:40:784 Instance/(15099:15099): INICIO procesado GET
+[DEBUG] 14:54:47:114 Instance/(15099:15099): Inicio bucle principal

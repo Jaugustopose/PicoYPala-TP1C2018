@@ -559,6 +559,7 @@ void atender_accion_esi(int fdEsi) {
 
 void atender_accion_instancia(int fdInstancia) {
 	printf("Atendiendo acción instancia en socket %d!!!\n", fdInstancia);
+	conexion_de_cliente_finalizada();
 }
 
 int main(void) {
@@ -607,23 +608,6 @@ int main(void) {
 					}
 
 				} else {
-					/* LUCAS CABELLO: Te comenté esto porque estaba recibiendo un byte y rompiendo el header de esta manera
-					// Gestionar datos de un cliente.
-					int id_operacion_mensaje;
-					int cantBytes = recibir_mensaje(fdCliente,&id_operacion_mensaje,sizeof(int));
-					//Handlear errores en el recibir
-					if (cantBytes == ERROR_RECV_DISCONNECTED) {
-						conexion_de_cliente_finalizada();
-						break; //Salimos del for
-					} else if (cantBytes == ERROR_RECV) {
-						printf("Error inesperado al recibir datos del cliente!\n");
-						//TODO Si el interlcutor esperaba respuesta hay que responderle con algún código de error
-						// 		Por ejemplo: handlearError(cantBytes); el cual haría un send
-						break; //Salimos del for.
-					}
-					//Se recibió OK. Atender de acuerdo a proceso.
-					 *
-					 */
 					if (FD_ISSET(fdCliente, &bolsa_esis)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UN ESI.
 						atender_accion_esi(fdCliente);
 					} else if (FD_ISSET(fdCliente, &bolsa_instancias)) { // EN CASO DE QUE EL MENSAJE LO HAYA ENVIADO UNA INSTANCIA.

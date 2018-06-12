@@ -73,7 +73,7 @@ struct sockaddr_in crear_direccion_servidor(int puerto);
 int cerrar_socket(int socket);
 int listen_socket(int socket);
 int aceptar_conexion(int socket);
-paquete_t recibirPaquete(int socket);
+paquete_t* recibirPaquete(int socket);
 void responder_ok_handshake(int identificacion, int socket_destinatario);
 void* serializar(header_t paquete, void* payload);
 int conectarConProceso(char* ip, int puerto,int identidad);

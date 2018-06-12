@@ -15,13 +15,6 @@
 
 //struct t_dictionary* mapArchivoTablaDeEntrada;
 //char* texto;
-int seguir;
-int entradasCantidad ;
-int entradasTamanio ;
-int punteroIUltimoInsertadoMatriz;
-int timer;
-int timerDump;
-t_log * log_errores;
 
 /*defino estructura de datanode*/
 typedef struct{
@@ -42,10 +35,8 @@ typedef struct  {
 
 }t_entrada;
 
-
-
-config_t cargarConfiguracion(char *path);
 //char* creacion_y_mapeo_archivo(int entradaCantidad, int entradaTamanio,		char* pathArchivo);
 void escribirEntrada(char* matriz, int tamanioEntradas,int numEntrada,char* textoAEscribir) ;
 char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud);
 int redondearArribaDivision(int divisor, int dividendo);
+char * crearMatrizEntradas(int numeroEntradas, int tamanioEntradas);

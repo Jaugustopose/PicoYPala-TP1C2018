@@ -73,21 +73,24 @@ void* iniciarEscucha(void* sockets) {
 					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
 					printf("Notificacion recibida del coordinador\n");
-					paquete_t paquete = recibirPaquete(fdCliente);
+					paquete_t* paquete = recibirPaquete(fdCliente);
+					if(paquete->header.comando < 0){
+						//TODO: Manejar desconexion
+					}
 					printf("Paquete recibido del coordinador\n");
-					retorno = procesar_notificacion_coordinador(paquete.header.comando, paquete.header.tamanio, paquete.cuerpo);
+					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
 					int respuesta;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-						if (paquete.header.comando == msj_error_clave_no_identificada) {
+						if (paquete->header.comando == msj_error_clave_no_identificada) {
 							respuesta = msj_abortar_esi;
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
 					} else { //La operación del coordinador se procesó mal, abortar el ESI cuando sea necesario
 						respuesta = msj_fail_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-						if (paquete.header.comando == msj_esi_tiene_tomada_clave) {
+						if (paquete->header.comando == msj_esi_tiene_tomada_clave) {
 							respuesta = msj_abortar_esi;
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}

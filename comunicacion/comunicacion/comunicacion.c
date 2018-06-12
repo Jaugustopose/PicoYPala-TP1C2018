@@ -10,6 +10,7 @@
 #include <string.h>
 #include <errno.h>
 #include "commons/string.h"
+#include "commons/log.h"
 
 int conectar_a_server(char* ip, int puerto) {
 
@@ -45,13 +46,6 @@ int conectar_a_server(char* ip, int puerto) {
 }
 
 int recibir_mensaje(int socket, void* buffer, int tamanio) {
-	/** Del Man del Recv:
-	 * RETURN VALUE
-       These  calls  return  the  number  of bytes received, or -1 if an error
-       occurred.  In the event of an error,  errno  is  set  to  indicate  the
-       error.   The  return  value  will  be  0 when the peer has performed an
-       orderly shutdown.
-	 */
 
 	int retorno = recv(socket, buffer, tamanio, MSG_WAITALL);
 
@@ -89,8 +83,7 @@ int crear_socket_escucha(int puerto) {
 		puts("Error al crear socket\n");
 		exit(EXIT_FAILURE);
 	} else {
-		if (setsockopt(socket_escucha, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 }, sizeof(int)) < 0)
-		    error("setsockopt(SO_REUSEADDR) failed");
+		setsockopt(socket_escucha, SOL_SOCKET, SO_REUSEADDR, &(int){ 1 }, sizeof(int));
 
 		struct sockaddr_in direccionServidor = crear_direccion_servidor(puerto);
 
@@ -138,6 +131,7 @@ int aceptar_conexion(int socket_server) {
 		return socket_cliente;
 	}
 }
+
 int conectarConProceso(char* ip, int puerto,int proceso){
 	int socketProceso = conectar_a_server(ip, puerto);
 	//Preparo mensaje handshake
@@ -155,21 +149,31 @@ int conectarConProceso(char* ip, int puerto,int proceso){
 	//Libero Buffer
 	free(buff);
 	//Recibo Respuesta del Handshake
-	paquete_t paquete = recibirPaquete(socketProceso);
-	if(paquete.header.comando == msj_handshake && *(int*)paquete.cuerpo == proceso)
+	paquete_t* paquete = recibirPaquete(socketProceso);
+	if(paquete->header.comando == msj_handshake && *(int*)paquete->cuerpo == proceso)
 		printf("Conectado correctamente al Proceso %d\n",proceso);
 
 	return socketProceso;
 
 }
-paquete_t recibirPaquete(int socket) {
-	//TODO Manejar error que puede devolver recibir_mensaje
-	paquete_t paquete;
-	paquete.cuerpo = 0;
-	recibir_mensaje(socket, &paquete.header, sizeof(header_t));
-	if(paquete.header.tamanio){
-		paquete.cuerpo = malloc(paquete.header.tamanio);
-		recibir_mensaje(socket,paquete.cuerpo,paquete.header.tamanio);
+
+paquete_t* recibirPaquete(int socket) {
+	paquete_t* paquete = malloc(sizeof(paquete_t));
+	printf("Socket: %d\n", socket);
+	paquete->cuerpo = 0;
+	int resultado = recibir_mensaje(socket, &paquete->header, sizeof(header_t));
+	printf("Resultado: %d\n", resultado);
+	if (resultado < 0) {
+		paquete->header.comando = resultado;
+		return paquete;
+	}
+	if(paquete->header.tamanio){
+		paquete->cuerpo = malloc(paquete->header.tamanio);
+		recibir_mensaje(socket,paquete->cuerpo,paquete->header.tamanio);
+		if (resultado < 0) {
+			paquete->header.comando = resultado;
+			return paquete;
+		}
 	}
 	return paquete;
 }
