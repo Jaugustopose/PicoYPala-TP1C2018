@@ -63,7 +63,6 @@ config_t cargarConfiguracion() {
 	}
 	log_debug(logInstancia, "Path archivo configuración: %s", pat);
 	t_config* configInstancia = config_create(pat);
-	free(pat);
 	if(!configInstancia){
 		log_error(logInstancia, "No se encontró archivo de configuración.");
 		exitFailure();
@@ -122,7 +121,7 @@ config_t cargarConfiguracion() {
 		log_error(logInstancia, "No se encontró INTERVALO_DUMP en el archivo de configuraciones.");
 		exitFailure();
 	}
-
+	free(configInstancia);
 	return config;
 }
 
@@ -133,6 +132,7 @@ void inicializarComunicacionCordinadoor(){
 	header.tamanio = strlen(configuracion.nombre_instancia) + 1;
 	void* buffer = serializar(header, configuracion.nombre_instancia);
 	int retorno = enviar_mensaje(socketCoordinador, buffer, sizeof(header_t) + header.tamanio);
+	free(buffer);
 	if (retorno < 0) {
 		log_error(logInstancia, "Se perdió la conexión con el Coordinador");
 		exitFailure();
@@ -198,7 +198,8 @@ int abrirArchivoTablaEntradas(){
 }
 
 t_entrada* mapearTablaEntradas(int fd){
-	t_entrada* retorno = mmap(0, tamanioArchivoTablaEntradas, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+	t_entrada* retorno = malloc(sizeof(t_entrada) * entradasCantidad);
+	retorno = mmap(0, tamanioArchivoTablaEntradas, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	//Checkeo error de mmap
 	if (mapArchivoTablaDeEntradas == MAP_FAILED) {
 		close(fd);
@@ -258,6 +259,7 @@ void inicializarEstructurasAdministrativas(){
 	//Abro archivo para mmap
 	int fd = abrirArchivoTablaEntradas();
 	//Mapeo archivo a memoria
+	t_entrada* mapArchivoTablaDeEntradas = malloc(sizeof(t_entrada) * entradasCantidad);
 	mapArchivoTablaDeEntradas = mapearTablaEntradas(fd);
 	//Inicializar Tabla de Entradas
 	inicializarTablaEntradas();

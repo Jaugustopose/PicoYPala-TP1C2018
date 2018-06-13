@@ -35,6 +35,7 @@ int conectar_a_server(char* ip, int puerto) {
 	int retorno = connect(server_socket, server_info->ai_addr, server_info->ai_addrlen);
 
 	freeaddrinfo(server_info);  // No lo necesitamos mas
+	free(puerto_s);
 
 	if (retorno != 0) {
 	  printf("Error al conectar a server! Detalle: %d - %s\n", errno, strerror(errno)); //TODO Aplicar logger
@@ -152,7 +153,8 @@ int conectarConProceso(char* ip, int puerto,int proceso){
 	paquete_t* paquete = recibirPaquete(socketProceso);
 	if(paquete->header.comando == msj_handshake && *(int*)paquete->cuerpo == proceso)
 		printf("Conectado correctamente al Proceso %d\n",proceso);
-
+	free(paquete->cuerpo);
+	free(paquete);
 	return socketProceso;
 
 }
