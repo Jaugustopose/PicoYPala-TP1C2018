@@ -43,3 +43,187 @@
 [DEBUG] 14:54:18:672 Instance/(15099:15099): Inicio bucle principal
 [DEBUG] 14:54:40:784 Instance/(15099:15099): INICIO procesado GET
 [DEBUG] 14:54:47:114 Instance/(15099:15099): Inicio bucle principal
+[DEBUG] 19:40:17:525 Instance/(4534:4534): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 19:40:17:525 Instance/(4534:4534): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 19:40:17:525 Instance/(4534:4534): PUERTO_COORDINADOR: 8030
+[DEBUG] 19:40:17:525 Instance/(4534:4534): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 19:40:17:525 Instance/(4534:4534): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 19:40:17:525 Instance/(4534:4534): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 19:40:17:525 Instance/(4534:4534): INTERVALO_DUMP: 1
+[DEBUG] 19:40:17:525 Instance/(4534:4534): Socket coordinador: 4
+[DEBUG] 19:40:17:562 Instance/(4534:4534): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 19:43:39:291 Instance/(4534:4534): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 19:48:20:882 Instance/(4534:4534): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 19:50:56:904 Instance/(4534:4534): INICIO procesado GET
+[ERROR] 19:56:14:911 Instance/(4534:4534): Error al recibir
+[DEBUG] 19:58:46:933 Instance/(5157:5157): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 19:58:46:934 Instance/(5157:5157): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 19:58:46:934 Instance/(5157:5157): PUERTO_COORDINADOR: 8030
+[DEBUG] 19:58:46:934 Instance/(5157:5157): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 19:58:46:934 Instance/(5157:5157): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 19:58:46:934 Instance/(5157:5157): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 19:58:46:934 Instance/(5157:5157): INTERVALO_DUMP: 1
+[DEBUG] 19:58:46:934 Instance/(5157:5157): Socket coordinador: 4
+[DEBUG] 19:58:46:975 Instance/(5157:5157): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 19:58:49:533 Instance/(5157:5157): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 19:58:49:533 Instance/(5157:5157): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 19:59:23:860 Instance/(5238:5238): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 19:59:23:860 Instance/(5238:5238): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 19:59:23:860 Instance/(5238:5238): PUERTO_COORDINADOR: 8030
+[DEBUG] 19:59:23:860 Instance/(5238:5238): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 19:59:23:860 Instance/(5238:5238): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 19:59:23:860 Instance/(5238:5238): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 19:59:23:860 Instance/(5238:5238): INTERVALO_DUMP: 1
+[DEBUG] 19:59:23:860 Instance/(5238:5238): Socket coordinador: 4
+[DEBUG] 19:59:23:897 Instance/(5238:5238): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 19:59:25:87 Instance/(5238:5238): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 19:59:25:87 Instance/(5238:5238): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 19:59:32:4 Instance/(5238:5238): INICIO procesado GET
+[ERROR] 19:59:33:5 Instance/(5238:5238): Error al recibir
+[DEBUG] 20:07:19:336 Instance/(5527:5527): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 20:07:19:336 Instance/(5527:5527): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 20:07:19:336 Instance/(5527:5527): PUERTO_COORDINADOR: 8030
+[DEBUG] 20:07:19:336 Instance/(5527:5527): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 20:07:19:336 Instance/(5527:5527): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 20:07:19:336 Instance/(5527:5527): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 20:07:19:336 Instance/(5527:5527): INTERVALO_DUMP: 1
+[DEBUG] 20:07:19:337 Instance/(5527:5527): Socket coordinador: 4
+[DEBUG] 20:07:19:374 Instance/(5527:5527): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 20:07:28:86 Instance/(5527:5527): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 20:07:28:86 Instance/(5527:5527): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 20:10:11:136 Instance/(5667:5667): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 20:10:11:136 Instance/(5667:5667): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 20:10:11:136 Instance/(5667:5667): PUERTO_COORDINADOR: 8030
+[DEBUG] 20:10:11:136 Instance/(5667:5667): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 20:10:11:136 Instance/(5667:5667): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 20:10:11:136 Instance/(5667:5667): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 20:10:11:136 Instance/(5667:5667): INTERVALO_DUMP: 1
+[DEBUG] 20:10:11:137 Instance/(5667:5667): Socket coordinador: 4
+[DEBUG] 20:10:11:173 Instance/(5667:5667): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 20:10:11:174 Instance/(5667:5667): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 20:10:11:174 Instance/(5667:5667): Se mapeo Tabla de Entradas correctamente
+[INFO] 20:10:44:641 Instance/(5667:5667): Procesando GET. Clave: futbol:messi
+[INFO] 20:11:07:163 Instance/(5667:5667): Procesando SET. Clave: futbol:messi - Valor:TraemeLaCopa
+[DEBUG] 20:57:01:431 Instance/(7292:7292): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 20:57:01:431 Instance/(7292:7292): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 20:57:01:431 Instance/(7292:7292): PUERTO_COORDINADOR: 8030
+[DEBUG] 20:57:01:431 Instance/(7292:7292): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 20:57:01:431 Instance/(7292:7292): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 20:57:01:431 Instance/(7292:7292): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 20:57:01:431 Instance/(7292:7292): INTERVALO_DUMP: 1
+[DEBUG] 20:57:01:431 Instance/(7292:7292): Socket coordinador: 4
+[DEBUG] 20:57:01:473 Instance/(7292:7292): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 20:57:01:473 Instance/(7292:7292): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 20:57:01:473 Instance/(7292:7292): Se mapeo Tabla de Entradas correctamente
+[INFO] 20:57:12:387 Instance/(7292:7292): Procesando GET. Clave: futbol:messi
+[DEBUG] 20:57:14:16 Instance/(7292:7292): Tabla de Entradas:
+[DEBUG] 20:57:14:16 Instance/(7292:7292): 0		0	0	0
+[DEBUG] 20:57:14:16 Instance/(7292:7292): 1		0	0	0
+[DEBUG] 20:57:14:16 Instance/(7292:7292): 2		0	0	0
+[DEBUG] 20:57:14:16 Instance/(7292:7292): 3		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 4		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 5		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 6		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 7		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 8		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 9		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 10		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 11		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 12		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 13		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 14		0	0	0
+[DEBUG] 20:57:14:17 Instance/(7292:7292): 15		0	0	0
+[DEBUG] 20:57:14:18 Instance/(7292:7292): 16		0	0	0
+[DEBUG] 20:57:14:18 Instance/(7292:7292): 17		0	0	0
+[DEBUG] 20:57:14:19 Instance/(7292:7292): 18		0	0	0
+[DEBUG] 20:57:14:19 Instance/(7292:7292): 19		0	0	0
+[DEBUG] 20:58:30:576 Instance/(7292:7292): mapArchivoTablaDeEntradas con clave ocupada indice 0, numeroEntrada: 0 tamanioValor 0
+[DEBUG] 20:58:43:575 Instance/(7292:7292): mapArchivoTablaDeEntradas con clave ocupada indice 0, numeroEntrada: 0 tamanioValor 0
+[DEBUG] 20:58:45:764 Instance/(7292:7292): mapArchivoTablaDeEntradas con clave ocupada indice 0, numeroEntrada: 0 tamanioValor 0
+[DEBUG] 20:58:48:650 Instance/(7292:7292): mapArchivoTablaDeEntradas con clave ocupada indice 0, numeroEntrada: 0 tamanioValor 0
+[DEBUG] 20:58:50:115 Instance/(7292:7292): mapArchivoTablaDeEntradas con clave ocupada indice 0, numeroEntrada: 0 tamanioValor 0
+[DEBUG] 20:58:51:601 Instance/(7292:7292): mapArchivoTablaDeEntradas con clave ocupada indice 0, numeroEntrada: 0 tamanioValor 0
+[DEBUG] 21:08:04:981 Instance/(7681:7681): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 21:08:04:981 Instance/(7681:7681): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 21:08:04:981 Instance/(7681:7681): PUERTO_COORDINADOR: 8030
+[DEBUG] 21:08:04:981 Instance/(7681:7681): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 21:08:04:981 Instance/(7681:7681): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 21:08:04:981 Instance/(7681:7681): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 21:08:04:981 Instance/(7681:7681): INTERVALO_DUMP: 1
+[DEBUG] 21:08:04:981 Instance/(7681:7681): Socket coordinador: 4
+[DEBUG] 21:08:05:22 Instance/(7681:7681): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 21:08:05:24 Instance/(7681:7681): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 21:08:05:24 Instance/(7681:7681): Se mapeo Tabla de Entradas correctamente
+[INFO] 21:08:17:519 Instance/(7681:7681): Procesando GET. Clave: futbol:messi
+[DEBUG] 21:08:18:256 Instance/(7681:7681): Tabla de Entradas:
+[DEBUG] 21:08:46:264 Instance/(7681:7681): Tabla de Entradas:
+[DEBUG] 21:08:49:526 Instance/(7681:7681): leerDesdeHasta INICIO
+[DEBUG] 21:08:49:526 Instance/(7681:7681): leerDesdeHasta puntoInicio 0 puntoFin 0
+[DEBUG] 21:08:49:526 Instance/(7681:7681): leerDesdeHasta fin Texto 
+[DEBUG] 21:08:49:527 Instance/(7681:7681): leerDesdeHasta  logitud strlen 0
+[DEBUG] 21:08:49:527 Instance/(7681:7681): leerDesdeHasta string_length 0
+[DEBUG] 21:08:49:527 Instance/(7681:7681): IMPORTANTE linea 746 texto:  0
+[DEBUG] 21:08:49:527 Instance/(7681:7681): Se eliminó archivo satifactoriamente
+[ERROR] 21:08:49:527 Instance/(7681:7681): Error al abrir para escritura
+[DEBUG] 22:50:36:311 Instance/(10807:10807): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 22:50:36:311 Instance/(10807:10807): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 22:50:36:311 Instance/(10807:10807): PUERTO_COORDINADOR: 8030
+[DEBUG] 22:50:36:311 Instance/(10807:10807): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 22:50:36:311 Instance/(10807:10807): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 22:50:36:311 Instance/(10807:10807): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 22:50:36:311 Instance/(10807:10807): INTERVALO_DUMP: 1
+[DEBUG] 22:50:36:311 Instance/(10807:10807): Socket coordinador: 4
+[DEBUG] 22:50:36:350 Instance/(10807:10807): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 22:50:36:350 Instance/(10807:10807): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 22:50:36:350 Instance/(10807:10807): Se mapeo Tabla de Entradas correctamente
+[INFO] 22:50:43:606 Instance/(10807:10807): Procesando GET. Clave: futbol:messi
+[DEBUG] 22:50:43:606 Instance/(10807:10807): mapArchivoTablaDeEntradas Se encontro clave libre indice 0, numeroEntrada: 0
+[DEBUG] 22:50:43:606 Instance/(10807:10807): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 22:50:43:606 Instance/(10807:10807): Tabla de Entradas:
+[DEBUG] 22:50:43:606 Instance/(10807:10807): 0	futbol:messi	0	0	0
+[INFO] 22:50:50:887 Instance/(10807:10807): Procesando SET. Clave: futbol:messi - Valor:TraemeLaCopa
+[DEBUG] 22:56:17:85 Instance/(10995:10995): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 22:56:17:85 Instance/(10995:10995): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 22:56:17:85 Instance/(10995:10995): PUERTO_COORDINADOR: 8030
+[DEBUG] 22:56:17:85 Instance/(10995:10995): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 22:56:17:85 Instance/(10995:10995): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 22:56:17:85 Instance/(10995:10995): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 22:56:17:85 Instance/(10995:10995): INTERVALO_DUMP: 1
+[DEBUG] 22:56:17:86 Instance/(10995:10995): Socket coordinador: 4
+[DEBUG] 22:56:17:125 Instance/(10995:10995): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 22:56:17:125 Instance/(10995:10995): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 22:56:17:126 Instance/(10995:10995): Se mapeo Tabla de Entradas correctamente
+[INFO] 22:56:20:605 Instance/(10995:10995): Procesando GET. Clave: futbol:messi
+[DEBUG] 22:56:20:605 Instance/(10995:10995): mapArchivoTablaDeEntradas Se encontro clave libre indice 0, numeroEntrada: 0
+[DEBUG] 22:56:20:605 Instance/(10995:10995): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 22:56:20:605 Instance/(10995:10995): Tabla de Entradas:
+[DEBUG] 22:56:20:605 Instance/(10995:10995): 0	futbol:messi	0	0	0
+[INFO] 22:56:31:36 Instance/(10995:10995): Procesando SET. Clave: futbol:messi - Valor:TraemeLaCopa
+[DEBUG] 22:58:43:538 Instance/(11130:11130): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 22:58:43:538 Instance/(11130:11130): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 22:58:43:538 Instance/(11130:11130): PUERTO_COORDINADOR: 8030
+[DEBUG] 22:58:43:538 Instance/(11130:11130): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 22:58:43:538 Instance/(11130:11130): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 22:58:43:538 Instance/(11130:11130): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 22:58:43:538 Instance/(11130:11130): INTERVALO_DUMP: 1
+[DEBUG] 22:58:43:538 Instance/(11130:11130): Socket coordinador: 4
+[DEBUG] 22:58:43:577 Instance/(11130:11130): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 22:58:43:578 Instance/(11130:11130): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 22:58:43:578 Instance/(11130:11130): Se mapeo Tabla de Entradas correctamente
+[INFO] 22:58:45:743 Instance/(11130:11130): Procesando GET. Clave: futbol:messi
+[DEBUG] 22:58:50:322 Instance/(11130:11130): mapArchivoTablaDeEntradas Se encontro clave libre indice 0, numeroEntrada: 0
+[DEBUG] 22:59:12:164 Instance/(11130:11130): Clave inexistente. Se crea registro en Tabla de Entradas indice: -1073746576
+[DEBUG] 23:00:10:506 Instance/(11221:11221): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 23:00:10:506 Instance/(11221:11221): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 23:00:10:506 Instance/(11221:11221): PUERTO_COORDINADOR: 8030
+[DEBUG] 23:00:10:506 Instance/(11221:11221): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 23:00:10:507 Instance/(11221:11221): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 23:00:10:507 Instance/(11221:11221): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 23:00:10:507 Instance/(11221:11221): INTERVALO_DUMP: 1
+[DEBUG] 23:00:10:507 Instance/(11221:11221): Socket coordinador: 4
+[DEBUG] 23:00:10:546 Instance/(11221:11221): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 23:00:10:546 Instance/(11221:11221): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 23:00:10:546 Instance/(11221:11221): Se mapeo Tabla de Entradas correctamente
+[INFO] 23:00:15:410 Instance/(11221:11221): Procesando GET. Clave: futbol:messi
+[DEBUG] 23:00:17:651 Instance/(11221:11221): mapArchivoTablaDeEntradas Se encontro clave libre indice 0, numeroEntrada: 0
+[DEBUG] 23:00:19:390 Instance/(11221:11221): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0

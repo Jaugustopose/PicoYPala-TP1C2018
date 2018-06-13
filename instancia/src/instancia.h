@@ -35,8 +35,7 @@ typedef struct  {
 
 }t_entrada;
 
-//char* creacion_y_mapeo_archivo(int entradaCantidad, int entradaTamanio,		char* pathArchivo);
-void escribirEntrada(char* matriz, int tamanioEntradas,int numEntrada,char* textoAEscribir) ;
-char* leerEntrada(char * matriz, int tamanioEntradas, int numEntrada,int longitud);
 int redondearArribaDivision(int divisor, int dividendo);
-char * crearMatrizEntradas(int numeroEntradas, int tamanioEntradas);
+void crearMatrizEntradas();
+void escribirValorEnMatriz(int indexEntrada, char* valor);
+char* leerValorEnMatriz(int indexEntrada, int tamanio);
