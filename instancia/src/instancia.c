@@ -34,7 +34,7 @@ int timerDump = 0;
 config_t configuracion;
 t_log * logInstancia;
 int socketCoordinador;
-char* matrizEntradas;
+char* matrizValores;
 t_entrada * tablaEntradas;
 t_dictionary *diccionarioEntradas;
 int archivoNuevo;
@@ -65,6 +65,16 @@ int buscarEntradasContiguas(int cantidad){
 		}
 	}
 	return -1;
+}
+
+int verificarEntradasLibres(int indice, int cantidad){
+	int i;
+	for(i = 0; i < cantidad; ++i){
+		if(bitarray_test_bit(bitmap, indice + i)){
+			return 0;
+		}
+	}
+	return 1;
 }
 
 void liberarEntrada(int index, int cantidad){
@@ -292,7 +302,7 @@ void inicializarTablaEntradas(){
 				if(file){
 					char *valor = malloc(tablaEntradas[i].tamanioValor + 1);
 					fgets(valor, tablaEntradas[i].tamanioValor + 1, file);
-					escribirValorEnMatriz(tablaEntradas[i].numeroEntrada, valor);
+					escribirMatrizValores(tablaEntradas[i].numeroEntrada, valor);
 					free(valor);
 					fclose(file);
 				}else{
@@ -337,21 +347,21 @@ int redondearArribaDivision(int divisor, int dividendo) {
 	return resultado;
 }
 
-void escribirValorEnMatriz(int indexEntrada, char* valor){
+void escribirMatrizValores(int index, char* valor){
 	int tamanio = strlen(valor);
-	memcpy(matrizEntradas + indexEntrada * entradasTamanio, valor, tamanio);
+	memcpy(matrizValores + index * entradasTamanio, valor, tamanio);
 }
 
-char* leerValorEnMatriz(int indexEntrada, int tamanio){
+char* leerMatrizValores(int index, int tamanio){
 	char* texto = malloc(tamanio + 1);
-	memcpy(texto, matrizEntradas + indexEntrada * entradasTamanio, tamanio);
+	memcpy(texto, matrizValores + index * entradasTamanio, tamanio);
 	texto[tamanio] = '\0';
 	return texto;
 }
 
 void crearMatrizEntradas(){
-	matrizEntradas = malloc(entradasCantidad * entradasTamanio);
-	memset(matrizEntradas, 0, entradasCantidad * entradasTamanio);
+	matrizValores = malloc(entradasCantidad * entradasTamanio);
+	memset(matrizValores, 0, entradasCantidad * entradasTamanio);
 }
 
 void imprimirPorPantallaEstucturas() {
@@ -370,6 +380,13 @@ void agregarNuevaClave(char* clave, int indice){
 	agregarClaveEnDiccionario(clave, indice);
 	strcpy(tablaEntradas[indice].clave, clave);
 	punteroIUltimoInsertadoMatriz = indice;
+}
+
+void setValorEntrada(t_entrada* entrada, char*valor, int tamanio, int indice){
+	entrada->tamanioValor = tamanio;
+	entrada->numeroEntrada = indice;
+	escribirMatrizValores(indice, valor);
+	log_debug(logInstancia, "Se inserta Valor:%s en Indice:%d", valor, indice);
 }
 
 void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
@@ -511,6 +528,54 @@ void ejecutarGet(void* buffer){
 	imprimirPorPantallaEstucturas();
 }
 
+void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias) {
+	//Se inserta por primera vez, busco entradas libres
+	int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+	//Verifico si se encontraron entradas libres
+	if (indiceEntrada < 0) {
+		//TODO: No hay entradas libres, ejecutar algoritmo de sustitución
+	} else {
+		//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas
+		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+		reservarEntrada(indiceEntrada, entradasNecesarias);
+	}
+}
+
+void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias) {
+	//Se reemplaza valor previo, se debe verificar si el valor nuevo entra en las entradas ya asignadas a la clave
+	int entradasAsignadas = redondearArribaDivision(entrada->tamanioValor, entradasTamanio);
+	if (entradasAsignadas == entradasNecesarias) {
+		//Coincide justo, simplemente se escribe el nuevo valor
+		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
+	} else if (entradasAsignadas > entradasNecesarias) {
+		//Sobran entradas, se deben liberar las que sobran y escribir el valor
+		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
+		int cantLiberar = entradasAsignadas - entradasNecesarias;
+		liberarEntrada(entrada->numeroEntrada + cantLiberar - 1, cantLiberar);
+	} else {
+		//Faltan entradas, se debe verificar si hay entradas contiguas libres o si se debe escribir el valor en otro lado
+		int cantEntradas = entradasAsignadas - entradasNecesarias;
+		int respuesta = verificarEntradasLibres(entrada->numeroEntrada + entradasAsignadas, cantEntradas);
+		if (respuesta) {
+			//Habia lugar libre, se inserta nuevo valor y se marca en el bitmap las entradas nuevas usadas
+			setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
+			reservarEntrada(entrada->numeroEntrada + entradasAsignadas, cantEntradas);
+		} else {
+			//No habia lugar contiguo, se debe grabar el valor en otro lugar
+			int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+			//Verifico si se encontraron entradas libres
+			if (indiceEntrada < 0) {
+				//TODO: No hay entradas libres, ejecutar algoritmo de sustitución
+			} else {
+				//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas
+				liberarEntrada(entrada->numeroEntrada, entradasAsignadas);
+				setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+				reservarEntrada(indiceEntrada, entradasNecesarias);
+			}
+		}
+	}
+}
+
 void ejecutarSet(void* buffer){
 	// Vos fuma que esta lógica de punteros no falla
 	char* clave = (char*) buffer;
@@ -520,27 +585,22 @@ void ejecutarSet(void* buffer){
 
 	//Se verifica que la clave exista
 	if(existeClave(clave)) {
-
+		//Existe la clave
+		//Obtengo indice, entrada, tamanio y cantidad de entradas necesarias
 		int indice = obtenerIndiceClave(clave);
-
-		int entradasNecesarias = redondearArribaDivision(strlen(valor), entradasTamanio);
-
-		log_debug(logInstancia, "Valor:%s Tamaño:%d Cantidad Entradas Necesarias:%d", valor, strlen(valor), entradasNecesarias);
-		if (tablaEntradas[indice].tamanioValor == 0) {
+		t_entrada* entrada = tablaEntradas + indice;
+		int tamanio = strlen(valor);
+		int entradasNecesarias = redondearArribaDivision(tamanio, entradasTamanio);
+		//Verifico si se inserta por primera vez o si se reemplaza valor
+		if (entrada->tamanioValor == 0) {
 			//Se inserta por primera vez
-			int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
-			if(indiceEntrada < 0){
-				//TODO: Algoritmo de reemplazo
-			}else{
-				tablaEntradas[indice].tamanioValor = strlen(valor);
-				tablaEntradas[indice].numeroEntrada = indiceEntrada;
-				escribirValorEnMatriz(indiceEntrada, valor);
-				log_debug(logInstancia, "Se inserta Valor:%s en Indice:%d", valor, indiceEntrada);
-			}
+			setSinValorPrevio(entrada, valor, tamanio, entradasNecesarias);
 		}else{
-			//TODO: La clave ya tenia un valor previo, se debe analizar si el valor nuevo entra o no
+			//Se reemplaza valor previo
+			setConValorPrevio(entrada, valor, tamanio, entradasNecesarias);
 		}
 	}else{
+		//No existe la clave TODO que mas hacemos? Se avisa al coordinador?
 		log_error(logInstancia, "Error, se intento hacer SET de una clave inexistente");
 	}
 	imprimirPorPantallaEstucturas();
@@ -559,7 +619,7 @@ void ejecutarStore(void* buffer){
 		string_append(&pathArchivo, ".txt");
 
 		//se accede a la tabla de entradas
-		char* textoValor = leerValorEnMatriz(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);
+		char* textoValor = leerMatrizValores(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);
 		log_debug(logInstancia, "texto: %s", textoValor);
 		int tamanioArchivo = strlen(textoValor) * sizeof(char);
 		if (remove(pathArchivo)) {
@@ -595,7 +655,7 @@ void ejecutarStore(void* buffer){
 			}
 		}
 		free(textoValor);
-		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizEntradas, entradasCantidad, entradasTamanio);
+		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizValores, entradasCantidad, entradasTamanio);
 	} else {
 		log_debug(logInstancia, "Error de Clave no Identificada");
 	}
@@ -619,7 +679,7 @@ void procesarDump(){
 						tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
 				//se accede a la tabla de entradas
-				char* textoValor = leerValorEnMatriz(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);
+				char* textoValor = leerMatrizValores(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);
 				int tamanioArchivo = 0;
 				tamanioArchivo = string_length(textoValor);
 				log_debug(logInstancia, "IMPORTANTE linea 746 texto: %s %d", textoValor, tamanioArchivo);
