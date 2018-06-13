@@ -89,8 +89,17 @@ void agregarClaveEnDiccionario(char* clave, int index){
 	dictionary_put(diccionarioEntradas, clave, indice);
 }
 
+void removerClaveEnDiccionario(char* clave){
+	void* elemento = dictionary_remove(diccionarioEntradas, clave);
+	free(elemento);
+}
+
 int obtenerIndiceClave(char* clave){
 	return *(int*)dictionary_get(diccionarioEntradas, clave);
+}
+
+bool existeClave(char* clave){
+	return dictionary_has_key(diccionarioEntradas, clave);
 }
 
 void exitFailure(){
@@ -267,20 +276,11 @@ t_entrada* mapearTablaEntradas(int fd){
 }
 
 void inicializarTablaEntradas(){
-	int i = 0;
-	if(archivoNuevo){
-		/*
-		//Si el archivo es nuevo se lo inicializa en -1
-		for (i = 0; i < entradasCantidad; i++) {
-			mapArchivoTablaDeEntradas[i].numeroEntrada = -1;
-			mapArchivoTablaDeEntradas[i].tamanioValor = -1;
-			mapArchivoTablaDeEntradas[i].tiempo = -1;
-
-		}*/
-	}else{
+	if(!archivoNuevo){
 		//Si el archivo ya existia se carga diccionarioEntradas y matrizValoresEntradas con sus datos
+		int i = 0;
 		for (i = 0; i < entradasCantidad; i++) {
-			if (tablaEntradas[i].clave[0] != '\0') {
+			if (*tablaEntradas[i].clave) {
 				agregarClaveEnDiccionario(tablaEntradas[i].clave, i);
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
@@ -288,21 +288,33 @@ void inicializarTablaEntradas(){
 				string_append(&pathArchivo, tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
 				FILE* file = fopen(pathArchivo, "r");
-
-				char *valor = malloc(tablaEntradas[i].tamanioValor + 1);
-				fgets(valor, tablaEntradas[i].tamanioValor + 1, file);
-				escribirValorEnMatriz(tablaEntradas[i].numeroEntrada, valor);
-
-				free(valor);
 				free(pathArchivo);
-				fclose(file);
+				if(file){
+					char *valor = malloc(tablaEntradas[i].tamanioValor + 1);
+					fgets(valor, tablaEntradas[i].tamanioValor + 1, file);
+					escribirValorEnMatriz(tablaEntradas[i].numeroEntrada, valor);
+					free(valor);
+					fclose(file);
+				}else{
+					//TODO: Que hacemos si no esta el archivo?? Por ahora borro la entrada
+					log_debug(logInstancia, "Se borra entrada porque no se encontró archivo de dump. Clave:%s", tablaEntradas[i].clave);
+					removerClaveEnDiccionario(tablaEntradas[i].clave);
+					tablaEntradas[i].clave[0]=0;
+				}
 			}
+		}
+		imprimirPorPantallaEstucturas();
+	}
+}
 
-			//cargar diccionario con lo rescatado en el archivo
+int buscarPosicionLibreTablaEntradas(){
+	int i;
+	for (i = 0; i < entradasCantidad; i++) {
+		if(*tablaEntradas[i].clave == 0){
+			return i;
 		}
 	}
-
-
+	return -1;
 }
 
 void inicializarEstructurasAdministrativas(){
@@ -344,13 +356,20 @@ void crearMatrizEntradas(){
 
 void imprimirPorPantallaEstucturas() {
 	int i = 0;
-	log_debug(logInstancia, "Tabla de Entradas:");
+	log_debug(logInstancia, "Tabla Entradas");
+	log_debug(logInstancia, "I\tClave\t\tEntrada\tTamaño\tTiempo");
 	for (i = 0; i < entradasCantidad; i++) {
 		if(*tablaEntradas[i].clave){
 			log_debug(logInstancia, "%d\t%s\t%d\t%d\t%d",i, tablaEntradas[i].clave, tablaEntradas[i].numeroEntrada,
 					tablaEntradas[i].tamanioValor, tablaEntradas[i].tiempo);
 		}
 	}
+}
+
+void agregarNuevaClave(char* clave, int indice){
+	agregarClaveEnDiccionario(clave, indice);
+	strcpy(tablaEntradas[indice].clave, clave);
+	punteroIUltimoInsertadoMatriz = indice;
 }
 
 void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
@@ -369,7 +388,7 @@ void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz
 			if (redondearArribaDivision(matriz[i].tamanioValor, entradasTamanio) == 1) {
 				//inserto directo clave
 				log_debug(logInstancia, "Se remueve de diccionari y matriz clave %s", matriz[i].clave);
-				dictionary_remove(diccionario, matriz[i].clave);
+				removerClaveEnDiccionario(matriz[i].clave);
 				agregarClaveEnDiccionario(clave, i);
 				strcpy(matriz[i].clave, clave);
 
@@ -416,7 +435,7 @@ void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz
 			}
 			if (aSustituir > -1) {
 				//remuevo y sustituyo
-				dictionary_remove(diccionario, matriz[i].clave);
+				removerClaveEnDiccionario(matriz[i].clave);
 				agregarClaveEnDiccionario(clave, aSustituir);
 				strcpy(matriz[aSustituir].clave, clave);
 				//inserto tamanio valor -1
@@ -447,7 +466,7 @@ void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz
 					if (obtenerIndiceClave(matriz[aSustituir].clave) == -1) {
 						log_debug(logInstancia, "Se realizo el put de -1 en la clave");
 					}
-					dictionary_remove_and_destroy(diccionario, matriz[aSustituir].clave, free);
+					removerClaveEnDiccionario(matriz[aSustituir].clave);
 					agregarClaveEnDiccionario(clave, aSustituir);
 					strcpy(matriz[aSustituir].clave,clave);
 
@@ -470,39 +489,26 @@ void ejecutarGet(void* buffer){
 	log_info(logInstancia, "Procesando GET. Clave: %s", clave);
 
 	//Se verifica en el diccionario si la clave existe
-	if (dictionary_has_key(diccionarioEntradas, clave)) {
+	if (existeClave(clave)) {
+		//Existe clave, se trae la entrada correspondiente de la Tabla de Entradas y se la imprime para debug
 		int posicionTablaDeEntradas = obtenerIndiceClave(clave);
-		t_entrada unaEntrada = tablaEntradas[(posicionTablaDeEntradas)];
+		t_entrada unaEntrada = tablaEntradas[posicionTablaDeEntradas];
 		log_debug(logInstancia, "Clave existente. Numero Entrada:%d Tamanio Entrada:%d", unaEntrada.numeroEntrada, unaEntrada.tamanioValor);
 	} else {
-		int fin = 0;
-		int i = 0;
-		while (*tablaEntradas[i].clave && fin == 0) {
-			if (i == entradasCantidad) {
-				//sustituir
-				sustituirMatrizEntradas(configuracion.algoritmo_remplazo,
-						punteroIUltimoInsertadoMatriz, tablaEntradas, diccionarioEntradas, clave);
-				fin = 1;
-			} else {
-				log_debug(logInstancia, "mapArchivoTablaDeEntradas con clave ocupada indice %d, numeroEntrada: %d tamanioValor %d",
-						i, tablaEntradas[i].numeroEntrada,
-						tablaEntradas[i].tamanioValor);
-				i = i + redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) - 1;
-			}
-			i++;
-		}
-
-		if (*tablaEntradas[i].clave == 0 && fin == 0) {
-			log_debug(logInstancia, "mapArchivoTablaDeEntradas Se encontro clave libre indice %d, numeroEntrada: %d",
-					i, tablaEntradas[i].numeroEntrada);
-			agregarClaveEnDiccionario(clave, i );
-			strcpy(tablaEntradas[i].clave, clave);
-			punteroIUltimoInsertadoMatriz = i;
-			log_debug(logInstancia, "Clave inexistente. Se crea registro en Tabla de Entradas indice: %d", i);
+		//No existe clave, se debe crear en tabla de entradas
+		//Primero se busca un lugar libre en la tabla de entradas
+		int indice = buscarPosicionLibreTablaEntradas();
+		if(indice < 0){
+			//No hay lugar libre, se ejecuta algoritmo de sustitución
+			sustituirMatrizEntradas(configuracion.algoritmo_remplazo, punteroIUltimoInsertadoMatriz,
+					tablaEntradas, diccionarioEntradas, clave);
+		}else{
+			//Se inserta nueva entrada en la tabla
+			agregarNuevaClave(clave, indice);
+			log_debug(logInstancia, "Clave inexistente. Se crea registro en Tabla de Entradas indice: %d", indice);
 		}
 	}
 	imprimirPorPantallaEstucturas();
-	//FIN procesado GET
 }
 
 void ejecutarSet(void* buffer){
@@ -513,7 +519,7 @@ void ejecutarSet(void* buffer){
 	log_info(logInstancia, "Procesando SET. Clave: %s - Valor:%s", clave, valor);
 
 	//Se verifica que la clave exista
-	if(dictionary_has_key(diccionarioEntradas, clave)) {
+	if(existeClave(clave)) {
 
 		int indice = obtenerIndiceClave(clave);
 
@@ -543,9 +549,8 @@ void ejecutarSet(void* buffer){
 void ejecutarStore(void* buffer){
 	char* clave = (char*) buffer;
 	log_info(logInstancia, "Procesando STORE. Clave: %s", clave);
-	imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizEntradas, entradasCantidad, entradasTamanio);
 
-	if (dictionary_has_key(diccionarioEntradas, clave)) {
+	if (existeClave(clave)) {
 		//leer entrada en memoria
 		int i = obtenerIndiceClave(clave);
 		char* pathArchivo = string_new();
@@ -592,7 +597,6 @@ void ejecutarStore(void* buffer){
 		free(textoValor);
 		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizEntradas, entradasCantidad, entradasTamanio);
 	} else {
-		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizEntradas, entradasCantidad, entradasTamanio);
 		log_debug(logInstancia, "Error de Clave no Identificada");
 	}
 }

@@ -227,3 +227,25 @@
 [INFO] 23:00:15:410 Instance/(11221:11221): Procesando GET. Clave: futbol:messi
 [DEBUG] 23:00:17:651 Instance/(11221:11221): mapArchivoTablaDeEntradas Se encontro clave libre indice 0, numeroEntrada: 0
 [DEBUG] 23:00:19:390 Instance/(11221:11221): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 13:53:58:386 Instance/(6832:6832): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 13:53:58:484 Instance/(6832:6832): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 13:53:58:484 Instance/(6832:6832): PUERTO_COORDINADOR: 8030
+[DEBUG] 13:53:58:484 Instance/(6832:6832): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 13:53:58:484 Instance/(6832:6832): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 13:53:58:485 Instance/(6832:6832): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 13:53:58:485 Instance/(6832:6832): INTERVALO_DUMP: 1
+[DEBUG] 13:53:58:485 Instance/(6832:6832): Socket coordinador: 4
+[DEBUG] 13:53:58:523 Instance/(6832:6832): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 13:53:58:524 Instance/(6832:6832): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 13:53:58:524 Instance/(6832:6832): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 13:58:28:718 Instance/(7069:7069): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 13:58:28:719 Instance/(7069:7069): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 13:58:28:719 Instance/(7069:7069): PUERTO_COORDINADOR: 8030
+[DEBUG] 13:58:28:719 Instance/(7069:7069): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 13:58:28:719 Instance/(7069:7069): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 13:58:28:719 Instance/(7069:7069): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 13:58:28:719 Instance/(7069:7069): INTERVALO_DUMP: 1
+[DEBUG] 13:58:28:719 Instance/(7069:7069): Socket coordinador: 4
+[DEBUG] 13:58:28:755 Instance/(7069:7069): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 13:58:28:756 Instance/(7069:7069): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 13:58:28:756 Instance/(7069:7069): Se mapeo Tabla de Entradas correctamente
