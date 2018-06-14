@@ -36,7 +36,7 @@ typedef struct  {
 }t_entrada;
 
 int redondearArribaDivision(int divisor, int dividendo);
-void crearMatrizEntradas();
+void crearMatrizValores();
 void escribirMatrizValores(int indexEntrada, char* valor);
 char* leerMatrizValores(int indexEntrada, int tamanio);
 void imprimirPorPantallaEstucturas();

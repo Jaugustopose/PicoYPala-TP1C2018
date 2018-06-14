@@ -67,6 +67,17 @@ int buscarEntradasContiguas(int cantidad){
 	return -1;
 }
 
+int cantEntradasLibres(){
+	int libres = 0;
+	int i;
+	for (i = 0; i < entradasCantidad; ++i) {
+		if(bitarray_test_bit(bitmap, i)==0){
+			libres++;
+		}
+	}
+	return libres;
+}
+
 void liberarEntrada(int index, int cantidad){
 	int i;
 	for(i = 0; i < cantidad; ++i)
@@ -319,7 +330,7 @@ int buscarPosicionLibreTablaEntradas(){
 
 void inicializarEstructurasAdministrativas(){
 	//Creo e inicializo matriz de Entradas
-	crearMatrizEntradas(entradasCantidad, entradasTamanio);
+	crearMatrizValores(entradasCantidad, entradasTamanio);
 	//Creo diccionario de entradas
 	diccionarioEntradas = dictionary_create();
 	//Creo bitmap
@@ -349,7 +360,7 @@ char* leerMatrizValores(int index, int tamanio){
 	return texto;
 }
 
-void crearMatrizEntradas(){
+void crearMatrizValores(){
 	matrizValores = malloc(entradasCantidad * entradasTamanio);
 	memset(matrizValores, 0, entradasCantidad * entradasTamanio);
 }
@@ -518,13 +529,66 @@ void ejecutarGet(void* buffer){
 	imprimirPorPantallaEstucturas();
 }
 
+void moverValorEnMatriz(t_entrada* entrada, int indice, int cantidadEntradas){
+	//Primero obtengo el valor a mover
+	char* valor = leerMatrizValores(entrada->numeroEntrada, entrada->tamanioValor);
+	//Libero entradas usadas previamente
+	liberarEntrada(entrada->numeroEntrada, cantidadEntradas);
+	//Escribo valor en posicion nueva y reservo las entradas usadas
+	setValorEntrada(entrada, valor, entrada->tamanioValor, indice);
+	reservarEntrada(indice, cantidadEntradas);
+}
+
+void compactarMatrizValores(){
+	//Armo Lista de entradas y la ordeno por numero de entrada
+	t_list* listaEntradas = list_create();
+	int i;
+	for (i = 0; i < entradasCantidad; i++) {
+		if(*tablaEntradas[i].clave){
+			list_add(listaEntradas, tablaEntradas + i);
+		}
+	}
+	//Creo funcion local para ordenar lista
+	bool ordenarPorIndice(void* arg1, void* arg2){
+		t_entrada* entrada1 = (t_entrada*)arg1;
+		t_entrada* entrada2 = (t_entrada*)arg2;
+		return entrada1->numeroEntrada > entrada2->numeroEntrada;
+	}
+	//Ordeno lista por numero de entrada
+	list_sort(listaEntradas, &ordenarPorIndice);
+	//Ahora recorro la lista y voy moviendo los valores de cada entrada hacia la izquierda
+	int indice = 0;
+	for(i = 0; i < list_size(listaEntradas); ++i){
+		t_entrada* entrada = list_get(listaEntradas, i);
+		int entradasUsadas = redondearArribaDivision(entrada->tamanioValor, entradasTamanio);
+		moverValorEnMatriz(entrada, indice, entradasUsadas);
+		indice += entradasUsadas;
+	}
+	//Destruyo lista y NO borro los elementos porque son los que estan adentro de la TablaEntradas
+	list_destroy(listaEntradas);
+}
+
+void sustitucionEntrada(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias){
+	//Primero verifico si hay entradas libres para insertar haciendo compactacion en vez de sustituir
+	int entradasLibres = cantEntradasLibres();
+	if(entradasLibres >= entradasNecesarias){
+		//Primero se compacta y luego se inserta normalmente
+		compactarMatrizValores();
+		int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+		reservarEntrada(indiceEntrada, entradasNecesarias);
+	}else{
+		//TODO: sustitucionPorAlgoritmo();
+	}
+}
+
 void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 	//Se inserta por primera vez, busco entradas libres
 	int entradasNecesarias = redondearArribaDivision(tamanio, entradasTamanio);
 	int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
 	//Verifico si se encontraron entradas libres
 	if (indiceEntrada < 0) {
-		//TODO: No hay entradas libres, ejecutar algoritmo de sustitución
+		sustitucionEntrada(entrada, valor, tamanio , entradasNecesarias);
 	} else {
 		//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
@@ -550,7 +614,9 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 		int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
 		//Verifico si se encontraron entradas libres
 		if (indiceEntrada < 0) {
-			//TODO: No hay entradas libres, ejecutar algoritmo de sustitución
+			//No hay lugar, se liberan las entradas usadas y se inicia algoritmo de sustitución
+			liberarEntrada(entrada->numeroEntrada, entradasAsignadas);
+			sustitucionEntrada(entrada, valor, tamanio , entradasNecesarias);
 		} else {
 			//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas
 			setValorEntrada(entrada, valor, tamanio, indiceEntrada);
