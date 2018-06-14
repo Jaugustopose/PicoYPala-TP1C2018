@@ -67,16 +67,6 @@ int buscarEntradasContiguas(int cantidad){
 	return -1;
 }
 
-int verificarEntradasLibres(int indice, int cantidad){
-	int i;
-	for(i = 0; i < cantidad; ++i){
-		if(bitarray_test_bit(bitmap, indice + i)){
-			return 0;
-		}
-	}
-	return 1;
-}
-
 void liberarEntrada(int index, int cantidad){
 	int i;
 	for(i = 0; i < cantidad; ++i)
@@ -528,8 +518,9 @@ void ejecutarGet(void* buffer){
 	imprimirPorPantallaEstucturas();
 }
 
-void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias) {
+void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 	//Se inserta por primera vez, busco entradas libres
+	int entradasNecesarias = redondearArribaDivision(tamanio, entradasTamanio);
 	int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
 	//Verifico si se encontraron entradas libres
 	if (indiceEntrada < 0) {
@@ -541,8 +532,9 @@ void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio, int entrada
 	}
 }
 
-void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias) {
+void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 	//Se reemplaza valor previo, se debe verificar si el valor nuevo entra en las entradas ya asignadas a la clave
+	int entradasNecesarias = redondearArribaDivision(tamanio, entradasTamanio);
 	int entradasAsignadas = redondearArribaDivision(entrada->tamanioValor, entradasTamanio);
 	if (entradasAsignadas == entradasNecesarias) {
 		//Coincide justo, simplemente se escribe el nuevo valor
@@ -553,25 +545,16 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio, int entrada
 		int cantLiberar = entradasAsignadas - entradasNecesarias;
 		liberarEntrada(entrada->numeroEntrada + cantLiberar - 1, cantLiberar);
 	} else {
-		//Faltan entradas, se debe verificar si hay entradas contiguas libres o si se debe escribir el valor en otro lado
-		int cantEntradas = entradasAsignadas - entradasNecesarias;
-		int respuesta = verificarEntradasLibres(entrada->numeroEntrada + entradasAsignadas, cantEntradas);
-		if (respuesta) {
-			//Habia lugar libre, se inserta nuevo valor y se marca en el bitmap las entradas nuevas usadas
-			setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
-			reservarEntrada(entrada->numeroEntrada + entradasAsignadas, cantEntradas);
+		//Faltan entradas, se liberan las entradas usadas y se busca donde guardar el nuevo valor
+		liberarEntrada(entrada->numeroEntrada, entradasAsignadas);
+		int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+		//Verifico si se encontraron entradas libres
+		if (indiceEntrada < 0) {
+			//TODO: No hay entradas libres, ejecutar algoritmo de sustitución
 		} else {
-			//No habia lugar contiguo, se debe grabar el valor en otro lugar
-			int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
-			//Verifico si se encontraron entradas libres
-			if (indiceEntrada < 0) {
-				//TODO: No hay entradas libres, ejecutar algoritmo de sustitución
-			} else {
-				//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas
-				liberarEntrada(entrada->numeroEntrada, entradasAsignadas);
-				setValorEntrada(entrada, valor, tamanio, indiceEntrada);
-				reservarEntrada(indiceEntrada, entradasNecesarias);
-			}
+			//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas
+			setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+			reservarEntrada(indiceEntrada, entradasNecesarias);
 		}
 	}
 }
@@ -582,22 +565,20 @@ void ejecutarSet(void* buffer){
 	int index = strlen(clave);
 	char* valor = (char*) buffer + index + 1;
 	log_info(logInstancia, "Procesando SET. Clave: %s - Valor:%s", clave, valor);
-
 	//Se verifica que la clave exista
 	if(existeClave(clave)) {
 		//Existe la clave
-		//Obtengo indice, entrada, tamanio y cantidad de entradas necesarias
+		//Obtengo indice, entrada, tamanio
 		int indice = obtenerIndiceClave(clave);
 		t_entrada* entrada = tablaEntradas + indice;
 		int tamanio = strlen(valor);
-		int entradasNecesarias = redondearArribaDivision(tamanio, entradasTamanio);
 		//Verifico si se inserta por primera vez o si se reemplaza valor
 		if (entrada->tamanioValor == 0) {
 			//Se inserta por primera vez
-			setSinValorPrevio(entrada, valor, tamanio, entradasNecesarias);
+			setSinValorPrevio(entrada, valor, tamanio);
 		}else{
 			//Se reemplaza valor previo
-			setConValorPrevio(entrada, valor, tamanio, entradasNecesarias);
+			setConValorPrevio(entrada, valor, tamanio);
 		}
 	}else{
 		//No existe la clave TODO que mas hacemos? Se avisa al coordinador?
@@ -611,53 +592,46 @@ void ejecutarStore(void* buffer){
 	log_info(logInstancia, "Procesando STORE. Clave: %s", clave);
 
 	if (existeClave(clave)) {
-		//leer entrada en memoria
-		int i = obtenerIndiceClave(clave);
+		//Se obtiene la entrada correspondiente
+		int indice = obtenerIndiceClave(clave);
+		t_entrada* entrada = tablaEntradas + indice;
+		//Se lee el valor de la matriz de valores
+		char* valor = leerMatrizValores(entrada->numeroEntrada, entrada->tamanioValor);
+		log_debug(logInstancia, "Valor a realizar store:%s", valor);
+		int tamanioArchivo = strlen(valor) * sizeof(char);
+		//Creo path al archivo de store
 		char* pathArchivo = string_new();
 		string_append(&pathArchivo, configuracion.punto_montaje);
 		string_append(&pathArchivo, clave);
 		string_append(&pathArchivo, ".txt");
-
-		//se accede a la tabla de entradas
-		char* textoValor = leerMatrizValores(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);
-		log_debug(logInstancia, "texto: %s", textoValor);
-		int tamanioArchivo = strlen(textoValor) * sizeof(char);
+		//Intento borrar archivo existente
 		if (remove(pathArchivo)) {
-			log_debug(logInstancia, "Se eliminó archivo satifactoriamente");
+			log_debug(logInstancia, "Se eliminó archivo antes de realizar STORE");
 		} else {
-			log_debug(logInstancia, "No se eliminó archivo");
+			log_debug(logInstancia, "No habia un archivo previo al STORE");
 		}
-
+		//Creo archivo para escritura
 		int fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
 		if (fd == -1) {
-			log_error(logInstancia, "Error al abrir para escritura");
+			log_error(logInstancia, "Error al crear el archivo para el STORE");
 			exitFailure();
 		} else {
-
-			int result = write(fd, textoValor, tamanioArchivo);
-
-			log_debug(logInstancia, "result=%d", result);
+			//Escribo archivo
+			int result = write(fd, valor, tamanioArchivo);
 			if (result < 0) {
 				close(fd);
-				log_error(logInstancia, "Error al escribir");
+				log_error(logInstancia, "Error al escribir el archivo de STORE");
 				exitFailure();
 			} else {
-				log_debug(logInstancia, "se guardo archivo");
+				log_debug(logInstancia, "Se escribió correctamente el valor en el archivo de STORE");
 				close(fd);
-				log_debug(logInstancia, "texto de de tabla num i clave:%s", tablaEntradas[i].clave);
-				tablaEntradas[i].tiempo=timer;
-//									//se elimina de memoria la entrada y del diccionario
-//									dictionary_remove(diccionarioEntradas,mapArchivoTablaDeEntradas[i].clave);
-//									mapArchivoTablaDeEntradas[i].clave[0]='\0';
-//									mapArchivoTablaDeEntradas[i].numeroEntrada=-1;
-//									mapArchivoTablaDeEntradas[i].tamanioValor=-1;
-//									mapArchivoTablaDeEntradas[i].tiempo=-1;
+				entrada->tiempo=timer;
 			}
 		}
-		free(textoValor);
+		free(valor);
 		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizValores, entradasCantidad, entradasTamanio);
 	} else {
-		log_debug(logInstancia, "Error de Clave no Identificada");
+		log_debug(logInstancia, "Clave no existente para realizar STORE");
 	}
 }
 
