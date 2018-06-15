@@ -427,68 +427,91 @@ void* atender_accion_instancia(void* info) { //TODO: Ver tema de cuándo termina
 	infoInstancia_t* miInstancia;
 	infoParaHilo_t* informacionQueSeComparte = (infoParaHilo_t*) info;
 
-	pthread_mutex_lock(&informacionQueSeComparte->semaforo); //Hago el wait al mutex
+	for(;;){
 
-	miInstancia = encontrar_instancia_por_fd(informacionQueSeComparte->fd);
+		pthread_mutex_lock(&informacionQueSeComparte->semaforo); //Hago el wait al mutex
 
-	if(miInstancia->desconectada == true){ //Si la instancia que atendia este hilo se desconecto, el hilo muere.
-		pthread_mutex_destroy(&informacionQueSeComparte->semaforo);
-		exit(EXIT_FAILURE);
-	}else{
+		miInstancia = encontrar_instancia_por_fd(informacionQueSeComparte->fd);
 
-		printf("Atendiendo acción instancia en socket %d!!!\n", informacionQueSeComparte->fd);
+		if(miInstancia->desconectada == true){ //Si la instancia que atendia este hilo se desconecto, el hilo muere.
+			pthread_mutex_destroy(&informacionQueSeComparte->semaforo);
+			exit(EXIT_FAILURE);
+		}else{
 
-		switch (operacion->keyword) {
+			printf("Atendiendo acción instancia en socket %d!!!\n", informacionQueSeComparte->fd);
 
-			case GET:
-				header.comando = msj_sentencia_get;
-				header.tamanio = strlen(operacion->argumentos.GET.clave)+1;
-				buffer = malloc(header.tamanio);
-				memcpy(buffer,operacion->argumentos.GET.clave,header.tamanio);
+			switch (operacion->keyword) {
 
-				bufferAEnviar = serializar(header,buffer);
-				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-				break;
+				case GET:
+					header.comando = msj_sentencia_get;
+					header.tamanio = strlen(operacion->argumentos.GET.clave)+1;
+					buffer = malloc(header.tamanio);
+					memcpy(buffer,operacion->argumentos.GET.clave,header.tamanio);
 
-			case SET:
-				header.comando = msj_sentencia_set;
-				header.tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
+					bufferAEnviar = serializar(header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+					break;
 
-				buffer = malloc(header.tamanio);
-				memcpy(buffer,operacion->argumentos.SET.claveYValor,strlen(operacion->argumentos.SET.claveYValor)+1);
+				case SET:
+					header.comando = msj_sentencia_set;
+					header.tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
 
-				bufferAEnviar = serializar(header,buffer);
-				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-				break;
+					buffer = malloc(header.tamanio);
+					memcpy(buffer,operacion->argumentos.SET.claveYValor,strlen(operacion->argumentos.SET.claveYValor)+1);
 
-			case STORE:
-				header.comando = msj_sentencia_store;
-				header.tamanio = strlen(operacion->argumentos.STORE.clave)+1;
+					bufferAEnviar = serializar(header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+					break;
 
-				buffer = malloc(header.tamanio);
-				memcpy(buffer,operacion->argumentos.STORE.clave,header.tamanio);
+				case STORE:
+					header.comando = msj_sentencia_store;
+					header.tamanio = strlen(operacion->argumentos.STORE.clave)+1;
 
-				bufferAEnviar = serializar(header,buffer);
-				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-				break;
+					buffer = malloc(header.tamanio);
+					memcpy(buffer,operacion->argumentos.STORE.clave,header.tamanio);
 
-			case COMPACTAR:
-				header.comando = msj_instancia_compactar;
-				header.tamanio = 0;
+					bufferAEnviar = serializar(header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+					break;
 
-				buffer = malloc(header.tamanio);
+				case COMPACTAR:
+					header.comando = msj_instancia_compactar;
+					header.tamanio = 0;
 
-				bufferAEnviar = serializar(header,buffer);
-				enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t));
-				break;
-			default:
-				break;
+					buffer = malloc(header.tamanio);
+
+					bufferAEnviar = serializar(header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t));
+					break;
+				default:
+					break;
+			}
+
+		pthread_mutex_unlock(&informacionQueSeComparte->semaforo);
+
 		}
-
-	pthread_mutex_unlock(&informacionQueSeComparte->semaforo);
-
 	}
 }
+
+void crear_nueva_instancia(int socket_cliente, const config_t* config,infoInstancia_t* nueva_instancia, char* nombre_instancia) {
+	//No existia anteriormente en el sistema. La creo
+	nueva_instancia->nombre = nombre_instancia;
+	nueva_instancia->fd = socket_cliente;
+	nueva_instancia->espacio_disponible = config->CANT_ENTRADAS;
+	nueva_instancia->desconectada = false;
+	nueva_instancia->letra_inicio = '-';
+	nueva_instancia->letra_fin = '-';
+	nueva_instancia->claves = list_create();
+	pthread_mutex_init(&nueva_instancia->semaforo, NULL);
+}
+
+void crear_info_para_hilo_instancia(int socket_cliente, infoParaHilo_t* info, operacion_compartida_t* operacion, infoInstancia_t* nueva_instancia) {
+	info = malloc(sizeof(infoParaHilo_t));
+	info->fd = socket_cliente;
+	info->operacion = operacion;
+	info->semaforo = nueva_instancia->semaforo;
+}
+
 void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
 	//Recibo identidad y coloco en la bolsa correspondiente.
@@ -527,37 +550,45 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 					recibir_mensaje(socket_cliente, &nombre_instancia, cabecera.tamanio);
 				}
 
-				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
-				if (instancia_existente == 0) { //No existia anteriormente en el sistema.
-					nueva_instancia->nombre = nombre_instancia;
-					nueva_instancia->fd = socket_cliente;
-					nueva_instancia->espacio_disponible = config.CANT_ENTRADAS;
-					nueva_instancia->desconectada = false;
-					nueva_instancia->letra_inicio = '-';
-					nueva_instancia->letra_fin = '-';
-					nueva_instancia->claves = list_create();
-					pthread_mutex_init(&nueva_instancia->semaforo,NULL);
+				//Agrego instancia a bolsa donde guardo todas las instancias.
+				FD_SET(socket_cliente, &master);
+				FD_SET(socket_cliente, &bolsa_instancias);
 
-					//Creo hilo de ejecucion para instancia
+				//Pregunto si la instancia esta conectada.
+				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
+
+				if (instancia_existente == 0) { //No existia anteriormente en el sistema.
+
+					crear_nueva_instancia(socket_cliente, &config, nueva_instancia, nombre_instancia);
+
+					//Creo informacion de ejecucion para hilo instancia.
 					pthread_t hiloInstancia;
 					infoParaHilo_t* info;
-					info = malloc(sizeof(infoParaHilo_t));
-					info->fd = socket_cliente;
-					info->operacion = operacion;
-					info->semaforo = nueva_instancia->semaforo;
+					crear_info_para_hilo_instancia(socket_cliente, info, operacion, nueva_instancia);
 
-					responder_ok_handshake(Instancia, socket_cliente);
-
+					//Creo y mando a ejecutar el hilo.
 					pthread_create(&hiloInstancia, NULL, &atender_accion_instancia,&info);
 					pthread_detach(hiloInstancia);
 
-
+					responder_ok_handshake(Instancia, socket_cliente);
 					list_add(lista_instancias_claves,nueva_instancia); //Agrego nueva instancia a la lista de instancias conectadas al sistema.
 
 				}else { //Para cuando una instancia se quiere reincorporar.
 
+					//Solo le modifico estos campos
 					instancia_existente->desconectada = false;
 					instancia_existente->fd = socket_cliente;
+
+					//Creo informacion de ejecucion para hilo instancia.
+					pthread_t hiloInstancia;
+					infoParaHilo_t* info;
+					crear_info_para_hilo_instancia(socket_cliente,info,operacion,instancia_existente);
+
+					//Creo y mando a ejecutar el hilo.
+					pthread_create(&hiloInstancia, NULL, &atender_accion_instancia,&info);
+					pthread_detach(hiloInstancia);
+
+					responder_ok_handshake(Instancia, socket_cliente);
 
 					//TODO: Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento".
 					//TODO: Verificar si van quedando hilos abiertos a medida que las instancias se van desconectando.
