@@ -14,11 +14,7 @@
 #endif /* SRC_INSTANCIA_H_ */
 
 //struct t_dictionary* mapArchivoTablaDeEntrada;
-
-int entradasCantidad ;
-int entradasTamanio ;
-
-t_log * log_errores;
+//char* texto;
 
 /*defino estructura de datanode*/
 typedef struct{
@@ -31,13 +27,16 @@ typedef struct{
 
 }config_t;
 
-struct t_entrada  {
-	//char* clave;
+typedef struct  {
+	char clave[41];
 	int numeroEntrada;
 	int tamanioValor;
+	int tiempo;
 
-};
+}t_entrada;
 
-config_t cargarConfiguracion(char *path);
-//char* creacion_y_mapeo_archivo(int entradaCantidad, int entradaTamanio,		char* pathArchivo);
-char* escribirEntrada(char* map, int numeroEntrada, char* texto, int cantidadEntradas,int entradasTamanio) ;
+int redondearArribaDivision(int divisor, int dividendo);
+void crearMatrizValores();
+void escribirMatrizValores(int indexEntrada, char* valor);
+char* leerMatrizValores(int indexEntrada, int tamanio);
+void imprimirPorPantallaEstucturas();

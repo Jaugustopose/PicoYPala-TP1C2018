@@ -30,11 +30,15 @@ typedef struct{
 
 void exitFailure(){
 	log_destroy(logESI);
+	close(socket_coordinador);
+	close(socket_planificador);
 	exit(EXIT_FAILURE);
 }
 
 void exitSuccess(){
 	log_destroy(logESI);
+	close(socket_coordinador);
+	close(socket_planificador);
 	exit(EXIT_SUCCESS);
 }
 
@@ -226,6 +230,7 @@ void msgSentenciaFinalizada(){
 		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_planificador);
 		exitFailure();
 	}
+	printf("MSJ Sentencia finalizada enviada al plani\n");
 }
 
 void atenderMsgPlanificador(){
@@ -243,7 +248,7 @@ void atenderMsgPlanificador(){
 			if(retorno.finArchivo){
 				log_info(logESI, "Fin Script");
 				msgFinProceso();
-				exitSuccess();
+//				exitSuccess();
 			}else{
 				msgEjecucion(retorno.parsed);
 			}
@@ -287,20 +292,22 @@ int main(int argc, char **argv) {
 	socket_planificador = conectarConProceso(config.IP_PLANIFICADOR, config.PUERTO_PLANIFICADOR, ESI);
 
 	fd_set master;
+	fd_set readfs;
 	FD_ZERO(&master);
 	FD_SET(socket_coordinador, &master);
 	FD_SET(socket_planificador, &master);
 	int fdmax = socket_planificador;
 	//Loop para atender mensajes
 	for(;;){
-		if(select(fdmax+1, &master, NULL, NULL, NULL) == -1) {
+		readfs = master;
+		if(select(fdmax+1, &readfs, NULL, NULL, NULL) == -1) {
 			log_error(logESI, "Error en select");
 			exitFailure();
 		}
-		if(FD_ISSET(socket_coordinador, &master)){
+		if(FD_ISSET(socket_coordinador, &readfs)){
 			//Atiendo coordinador
 			atenderMsgCoordinador();
-		}else if(FD_ISSET(socket_planificador, &master)){
+		}else if(FD_ISSET(socket_planificador, &readfs)){
 			//Atiendo planificador
 			atenderMsgPlanificador();
 		}else{

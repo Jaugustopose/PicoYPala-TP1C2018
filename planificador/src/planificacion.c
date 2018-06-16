@@ -95,22 +95,25 @@ void ordenarColaListos(){
 }
 
 void planificarConDesalojo(){
-	if(esHRRN()){
-		proceso_t* proceso1 = colaListosPeek();
-		proceso_t* proceso2 = procesoEjecucion;
-		bool cambiarProceso = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) > (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+	if(list_size(colaListos)){
+		bool cambiarProceso;
+		if(esHRRN()){
+			proceso_t* proceso1 = colaListosPeek();
+			proceso_t* proceso2 = procesoEjecucion;
+			cambiarProceso = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) > (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+		}else{
+			proceso_t* proceso1 = colaListosPeek();
+			proceso_t* proceso2 = procesoEjecucion;
+			cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
+		}
 		if(cambiarProceso){
 			colaListosPush(procesoEjecucion);
 			procesoEjecutar(colaListosPop());
+		}else{
+			procesoEjecutar(procesoEjecucion);
 		}
 	}else{
-		proceso_t* proceso1 = colaListosPeek();
-		proceso_t* proceso2 = procesoEjecucion;
-		bool cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
-		if(cambiarProceso){
-			colaListosPush(procesoEjecucion);
-			procesoEjecutar(colaListosPop());
-		}
+		procesoEjecutar(procesoEjecucion);
 	}
 }
 
@@ -166,7 +169,12 @@ void procesoTerminado(int exitStatus) {
 	procesoEjecucion->exitStatus = exitStatus;
 	queue_push(colaTerminados, (void*)procesoEjecucion);
 	liberarRecursos(procesoEjecucion);
-	procesoEjecutar(colaListosPop());
+	proceso_t* procesoListo = colaListosPop();
+	if (procesoListo != NULL) {
+		procesoEjecutar(colaListosPop());
+	} else {
+		procesoEjecucion = 0;
+	}
 }
 
 void procesoBloquear(char* clave){
@@ -205,13 +213,12 @@ void sentenciaFinalizada(int socket_esi) {
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
-	//El socket que envió sentencia finalizada difiere del que está en ejecución => Fue desalojado (bloqueado) por consola.
-	if (socket_esi == procesoEjecucion->socketESI) {
-		if (planificadorConDesalojo()) {
-			planificarConDesalojo();
-		} else {
-			procesoEjecutar(procesoEjecucion); //TODO: Manejar error Send.
-		}
+
+	if (planificadorConDesalojo()) {
+		planificarConDesalojo();
+	} else {
+		procesoEjecutar(procesoEjecucion);
+		 //TODO: Manejar error Send.
 	}
 	pthread_mutex_unlock(&mutex_proceso_ejecucion);
 
@@ -323,7 +330,11 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 		retorno.respuestaACoordinador = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
 		retorno.fdESIAAbortar = (retorno.respuestaACoordinador == 1) ? -1 : procesoEjecucion->socketESI;
 		break;
+	default:
+		printf("Llegó un mensaje desconocido: %d\n", comando);
+		break;
 	}
+
 
 	return retorno;
 

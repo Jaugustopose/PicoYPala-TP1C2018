@@ -60,6 +60,7 @@ void* iniciarEscucha(void* sockets) {
 						// hace al revés: Planificador se conectará a Coordinador previamente.
 						procesar_handshake(socketCliente);
 						FD_SET(socketCliente, &master);
+						maxFd = socketCliente;
 						//TODO Analizar si es necesario sincronizar. En principio el select es secuencial así que no. Pero ver si algún comando
 						//     de consola podría llamar a este método procesoNuevo.
 						int retorno = procesoNuevo(socketCliente);
@@ -72,21 +73,24 @@ void* iniciarEscucha(void* sockets) {
 					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
 					printf("Notificacion recibida del coordinador\n");
-					paquete_t paquete = recibirPaquete(fdCliente);
+					paquete_t* paquete = recibirPaquete(fdCliente);
+					if(paquete->header.comando < 0){
+						//TODO: Manejar desconexion
+					}
 					printf("Paquete recibido del coordinador\n");
-					retorno = procesar_notificacion_coordinador(paquete.header.comando, paquete.header.tamanio, paquete.cuerpo);
+					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
 					int respuesta;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-						if (paquete.header.comando == msj_error_clave_no_identificada) {
+						if (paquete->header.comando == msj_error_clave_no_identificada) {
 							respuesta = msj_abortar_esi;
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
 					} else { //La operación del coordinador se procesó mal, abortar el ESI cuando sea necesario
 						respuesta = msj_fail_solicitud_operacion;
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-						if (paquete.header.comando == msj_esi_tiene_tomada_clave) {
+						if (paquete->header.comando == msj_esi_tiene_tomada_clave) {
 							respuesta = msj_abortar_esi;
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
@@ -101,18 +105,17 @@ void* iniciarEscucha(void* sockets) {
 					} else {
 						switch(header.comando) {
 						case msj_sentencia_finalizada:
-							sentenciaFinalizada(fdCliente);
+
+							printf("MSJ Sentencia finalizada recibido\n");
+							sentenciaFinalizada();
 							break;
+
 						case msj_esi_finalizado:
-							pthread_mutex_lock(&mutex_proceso_ejecucion);
-							if (fdCliente == fdProcesoEnEjecucion()) {
-								procesoTerminado(exit_ok);
-								respuesta = msj_ok_solicitud_operacion;
-								enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
-							}
-							pthread_mutex_unlock(&mutex_proceso_ejecucion);
 
-
+							printf("MSJ ESI finalizado recibido\n");
+							procesoTerminado(exit_ok);
+							respuesta = msj_ok_solicitud_operacion;
+							enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
 							break;
 						}
 					}

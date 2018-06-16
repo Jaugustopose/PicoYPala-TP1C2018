@@ -216,6 +216,7 @@ void procesar_deadlock(char** subBufferSplitted) {
 	}
 }
 
+
 int main(void) {
 
 	config = cargarConfiguracion();

@@ -48,7 +48,9 @@ typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	msj_instancia_compactar = 24,
 	msj_instancia_compactacion_finalizada = 25,
 	msj_instancia_sustituyo_clave = 26,
-	msj_compactacion_finalizada_continuar_planificacion = 27
+	msj_compactacion_finalizada_continuar_planificacion = 27,
+	msj_cantidad_entradas = 28,
+	msj_tamanio_entradas = 29
 }id_mensaje;
 
 typedef struct{
@@ -75,7 +77,7 @@ struct sockaddr_in crear_direccion_servidor(int puerto);
 int cerrar_socket(int socket);
 int listen_socket(int socket);
 int aceptar_conexion(int socket);
-paquete_t recibirPaquete(int socket);
+paquete_t* recibirPaquete(int socket);
 void responder_ok_handshake(int identificacion, int socket_destinatario);
 void* serializar(header_t paquete, void* payload);
 int conectarConProceso(char* ip, int puerto,int identidad);

@@ -17,6 +17,7 @@
 #include <commons/collections/list.h>
 #include <commons/log.h>
 #include <stdbool.h>
+#include <signal.h>
 
 //STRUCTS
 typedef struct config_t {
@@ -91,6 +92,14 @@ infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_operaciones_esis;
 
 //FUNCIONES
+
+void sig_handler(int signo) {
+  if (signo == SIGINT) {
+  printf("SIGINT interceptado. Finalizando... \n");
+  close(socket_coordinador);
+  exit(EXIT_SUCCESS);
+  }
+}
 
 void establecer_configuracion(int puerto_escucha, int puerto_servidor, char* algoritmo, int entradas, int tamanio_entrada, int retard) {
 		char* pat = string_new();
@@ -198,13 +207,13 @@ void* encontrar_instancia_por_clave (char* unaClave){
 	}
 
 	int i;
-	void* instanciaConlistaDeClaves;
+	infoInstancia_t* instanciaConlistaDeClaves;
 	void* instanciaConClave;
 
 	for (i = 0; i < lista_instancias_claves->elements_count; ++i) {
 
-		instanciaConlistaDeClaves = list_get(lista_instancias_claves,i);
-		instanciaConClave = list_find(instanciaConlistaDeClaves,(void*) misma_clave);
+		instanciaConlistaDeClaves = (infoInstancia_t*)list_get(lista_instancias_claves,i);
+		instanciaConClave = list_find(instanciaConlistaDeClaves->claves,(void*) misma_clave);
 
 		if(instanciaConClave != NULL){
 			return list_get(lista_instancias_claves,i);
@@ -421,6 +430,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
 							preparar_operacion_compartida_GET(operacion, clave);
+
 
 							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
 							pthread_mutex_unlock(&instanciaConClave->semaforo);
@@ -785,17 +795,18 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 		default:
 			break;
 	}
-
-
-
-
-
 }
 
 int main(void) {
 
 	//Creo log de operaciones de los ESI
 	log_operaciones_esis = log_create("coordinador.log", "Coordinador", true, LOG_LEVEL_TRACE);
+	lista_instancias_claves = list_create();
+
+	if (signal(SIGINT, sig_handler) == SIG_ERR){
+	  printf("Error al interceptar SIGINT\n");
+	  return EXIT_SUCCESS;
+	}
 
 	//Extraer informacion del archivo de configuracion.
 	establecer_configuracion(config.PUERTO,config.PUERTO_PLANIFICADOR,config.ALGORITMO_DISTRIBUCION,config.CANT_ENTRADAS, config.ENTRADA_SIZE,config.RETARDO);
