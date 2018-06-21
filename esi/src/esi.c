@@ -23,26 +23,26 @@ int socket_planificador;
 t_log *logESI;
 FILE * fp;
 
-typedef struct{
+typedef struct {
 	t_esi_operacion parsed;
 	int finArchivo;
-}t_retornoParsearLinea;
+} t_retornoParsearLinea;
 
-void exitFailure(){
+void exitFailure() {
 	log_destroy(logESI);
 	close(socket_coordinador);
 	close(socket_planificador);
 	exit(EXIT_FAILURE);
 }
 
-void exitSuccess(){
+void exitSuccess() {
 	log_destroy(logESI);
 	close(socket_coordinador);
 	close(socket_planificador);
 	exit(EXIT_SUCCESS);
 }
 
-void inicializarLogger(){
+void inicializarLogger() {
 	logESI = log_create("esi.log", "ESI", true, LOG_LEVEL_DEBUG);
 }
 
@@ -59,47 +59,53 @@ configuracion_t cargarConfiguracion() {
 	log_debug(logESI, "Path archivo configuración: %s", pat);
 	t_config* configEsi = config_create(pat);
 	free(pat);
-	if(!configEsi){
+	if (!configEsi) {
 		log_error(logESI, "No se encontró archivo de configuración.");
 		exitFailure();
 	}
 	if (config_has_property(configEsi, "PUERTO_PLANIFICADOR")) {
 		config.PUERTO_PLANIFICADOR = config_get_int_value(configEsi,
 				"PUERTO_PLANIFICADOR");
-		log_debug(logESI, "PUERTO_PLANIFICADOR: %d\n", config.PUERTO_PLANIFICADOR);
-	}else{
-		log_error(logESI, "No se encontró PUERTO_PLANIFICADOR en el archivo de configuraciones.");
+		log_debug(logESI, "PUERTO_PLANIFICADOR: %d\n",
+				config.PUERTO_PLANIFICADOR);
+	} else {
+		log_error(logESI,
+				"No se encontró PUERTO_PLANIFICADOR en el archivo de configuraciones.");
 		exitFailure();
 	}
 	if (config_has_property(configEsi, "IP_PLANIFICADOR")) {
 		config.IP_PLANIFICADOR = config_get_string_value(configEsi,
 				"IP_PLANIFICADOR");
 		log_debug(logESI, "IP_PLANIFICADOR: %s\n", config.IP_PLANIFICADOR);
-	}else{
-		log_error(logESI, "No se encontró IP_PLANIFICADOR en el archivo de configuraciones.");
+	} else {
+		log_error(logESI,
+				"No se encontró IP_PLANIFICADOR en el archivo de configuraciones.");
 		exitFailure();
 	}
 	if (config_has_property(configEsi, "PUERTO_COORDINADOR")) {
 		config.PUERTO_COORDINADOR = config_get_int_value(configEsi,
 				"PUERTO_COORDINADOR");
-		log_debug(logESI, "PUERTO_COORDINADOR: %d\n", config.PUERTO_COORDINADOR);
-	}else{
-		log_error(logESI, "No se encontró PUERTO_COORDINADOR en el archivo de configuraciones.");
+		log_debug(logESI, "PUERTO_COORDINADOR: %d\n",
+				config.PUERTO_COORDINADOR);
+	} else {
+		log_error(logESI,
+				"No se encontró PUERTO_COORDINADOR en el archivo de configuraciones.");
 		exitFailure();
 	}
 	if (config_has_property(configEsi, "IP_COORDINADOR")) {
 		config.IP_COORDINADOR = config_get_string_value(configEsi,
 				"IP_COORDINADOR");
 		log_debug(logESI, "IP_COORDINADOR: %s\n", config.IP_COORDINADOR);
-	}else{
-		log_error(logESI, "No se encontró IP_COORDINADOR en el archivo de configuraciones.");
+	} else {
+		log_error(logESI,
+				"No se encontró IP_COORDINADOR en el archivo de configuraciones.");
 		exitFailure();
 	}
 	return config;
 }
 
-void abrirScript(char* path){
-	log_debug(logESI,"Ruta Script: %s", path);
+void abrirScript(char* path) {
+	log_debug(logESI, "Ruta Script: %s", path);
 	fp = fopen(path, "r");
 	if (fp == NULL) {
 		log_error(logESI, "Error al abrir el archivo");
@@ -107,31 +113,30 @@ void abrirScript(char* path){
 	}
 }
 
-t_retornoParsearLinea parsearLinea(){
+t_retornoParsearLinea parsearLinea() {
 	t_retornoParsearLinea retorno;
 	retorno.finArchivo = 0;
 	char * line = NULL;
 	size_t len = 0;
-	if(getline(&line, &len, fp) != -1){
+	if (getline(&line, &len, fp) != -1) {
 		log_info(logESI, "Parseando linea: %s", line);
 		retorno.parsed = parse(line);
-		if(!retorno.parsed.valido){
+		if (!retorno.parsed.valido) {
 			log_error(logESI, "Error al parsear linea");
 			exitFailure();
 		}
-	}
-	else{
+	} else {
 		retorno.finArchivo = 1;
 	}
 	return retorno;
 }
 
-void leerScript(char **argv){
+void leerScript(char **argv) {
 	FILE * fp;
 	char * line = NULL;
 	size_t len = 0;
 	ssize_t read;
-	log_debug(logESI,"Ruta Archivo: %s\n", argv[1]);
+	log_debug(logESI, "Ruta Archivo: %s\n", argv[1]);
 	fp = fopen(argv[1], "r");
 	if (fp == NULL) {
 		perror("Error al abrir el archivo: ");
@@ -173,108 +178,134 @@ void leerScript(char **argv){
 		free(line);
 }
 
-void msgEjecucion(t_esi_operacion operacion){
+void msgEjecucion(t_esi_operacion operacion) {
 	header_t header;
 	int tamanio;
 	void* buffer;
-	if(operacion.keyword == GET){
+	if (operacion.keyword == GET) {
 		header.comando = msj_sentencia_get;
 		header.tamanio = strlen(operacion.argumentos.GET.clave) + 1; //+1 para que copie tambien el /0
-		tamanio = sizeof(header_t)+header.tamanio;
+		tamanio = sizeof(header_t) + header.tamanio;
 		buffer = malloc(tamanio);
 		memcpy(buffer, &header, sizeof(header_t));
-		memcpy(buffer+sizeof(header_t), operacion.argumentos.GET.clave, header.tamanio);
-	}else if(operacion.keyword == SET){
+		memcpy(buffer + sizeof(header_t), operacion.argumentos.GET.clave,
+				header.tamanio);
+	} else if (operacion.keyword == SET) {
 		header.comando = msj_sentencia_set;
 		int tamanioClave = strlen(operacion.argumentos.SET.clave) + 1; //+1 para que copie tambien el /0
 		int tamanioValor = strlen(operacion.argumentos.SET.valor) + 1; //+1 para que copie tambien el /0
 		header.tamanio = tamanioClave + tamanioValor;
-		tamanio = sizeof(header_t)+header.tamanio;
+		tamanio = sizeof(header_t) + header.tamanio;
 		buffer = malloc(tamanio);
 		memcpy(buffer, &header, sizeof(header_t));
-		memcpy(buffer+sizeof(header_t), operacion.argumentos.SET.clave, tamanioClave);
-		memcpy(buffer+sizeof(header_t) + tamanioClave, operacion.argumentos.SET.valor, tamanioValor);
-	}else{
+		memcpy(buffer + sizeof(header_t), operacion.argumentos.SET.clave,
+				tamanioClave);
+		memcpy(buffer + sizeof(header_t) + tamanioClave,
+				operacion.argumentos.SET.valor, tamanioValor);
+	} else {
 		header.comando = msj_sentencia_store;
 		header.tamanio = strlen(operacion.argumentos.STORE.clave) + 1; //+1 para que copie tambien el /0
-		tamanio = sizeof(header_t)+header.tamanio;
+		tamanio = sizeof(header_t) + header.tamanio;
 		buffer = malloc(tamanio);
 		memcpy(buffer, &header, sizeof(header_t));
-		memcpy(buffer+sizeof(header_t), operacion.argumentos.STORE.clave, header.tamanio);
+		memcpy(buffer + sizeof(header_t), operacion.argumentos.STORE.clave,
+				header.tamanio);
 	}
 	int retorno = enviar_mensaje(socket_coordinador, buffer, tamanio);
 	free(buffer);
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_coordinador);
+		log_error(logESI,
+				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
+				socket_coordinador);
 		exitFailure();
 	}
 }
 
-void msgFinProceso(){
+void msgFinProceso() {
 	header_t header;
 	header.comando = msj_esi_finalizado;
 	header.tamanio = 0;
-	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
+	int retorno = enviar_mensaje(socket_planificador, &header,
+			sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_planificador);
+		log_error(logESI,
+				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
+				socket_planificador);
 		exitFailure();
 	}
+	int respuestaFinalizacion;
+	recibir_mensaje(socket_planificador, &respuestaFinalizacion,
+			sizeof(respuestaFinalizacion));
+
 }
 
-void msgSentenciaFinalizada(){
+void msgSentenciaFinalizada() {
 	header_t header;
 	header.comando = msj_sentencia_finalizada;
 	header.tamanio = 0;
-	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
+	int retorno = enviar_mensaje(socket_planificador, &header,
+			sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_planificador);
+		log_error(logESI,
+				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
+				socket_planificador);
 		exitFailure();
 	}
 	printf("MSJ Sentencia finalizada enviada al plani\n");
 }
 
-void atenderMsgPlanificador(){
+void atenderMsgPlanificador() {
 	//Recibo mensaje de Planificador
 	header_t header;
-	int bytesRecibidos = recibir_mensaje(socket_planificador, &header, sizeof(header_t));
-	if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
+	int bytesRecibidos = recibir_mensaje(socket_planificador, &header,
+			sizeof(header_t));
+	if (bytesRecibidos == ERROR_RECV_DISCONNECTED
+			|| bytesRecibidos == ERROR_RECV_DISCONNECTED) {
 		log_error(logESI, "Se perdió la conexión con el Planificador");
 		exitFailure();
 	} else {
-		switch(header.comando) {
+		switch (header.comando) {
 		case msj_requerimiento_ejecucion:
-			log_info(logESI, "Msg requerimiento de ejecución recibido del Planificador");
+			log_info(logESI,
+					"Msg requerimiento de ejecución recibido del Planificador");
 			t_retornoParsearLinea retorno = parsearLinea();
-			if(retorno.finArchivo){
+			if (retorno.finArchivo) {
 				log_info(logESI, "Fin Script");
 				msgFinProceso();
-//				exitSuccess();
-			}else{
+				exitSuccess();
+			} else {
 				msgEjecucion(retorno.parsed);
 			}
 			break;
 		default:
-			log_error(logESI,"Se recibió comando desconocido (Planificador): %d", header.comando);
+			log_error(logESI,
+					"Se recibió comando desconocido (Planificador): %d",
+					header.comando);
 			break;
 		}
 	}
 }
 
-void atenderMsgCoordinador(){
+void atenderMsgCoordinador() {
 	//Recibo mensaje de Coordinador
 	header_t header;
-	int bytesRecibidos = recibir_mensaje(socket_coordinador, &header, sizeof(header_t));
-	if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
+	int bytesRecibidos = recibir_mensaje(socket_coordinador, &header,
+			sizeof(header_t));
+	if (bytesRecibidos == ERROR_RECV_DISCONNECTED
+			|| bytesRecibidos == ERROR_RECV_DISCONNECTED) {
 		log_error(logESI, "Se perdió la conexión con el Coordinador");
 		exitFailure();
 	} else {
-		switch(header.comando) {
+		switch (header.comando) {
 		case msj_sentencia_finalizada:
-			log_info(logESI, "Msg Sentencia finalizada recibido del Coordinador");
+			log_info(logESI,
+					"Msg Sentencia finalizada recibido del Coordinador");
 			msgSentenciaFinalizada();
 			break;
 		default:
-			log_error(logESI,"Se recibió comando desconocido (Coordinador): %d", header.comando);
+			log_error(logESI,
+					"Se recibió comando desconocido (Coordinador): %d",
+					header.comando);
 			break;
 		}
 	}
@@ -282,14 +313,17 @@ void atenderMsgCoordinador(){
 
 int main(int argc, char **argv) {
 	inicializarLogger();
-	if(argc<2){
-		printf("Falta argumento para ejecución. Uso correcto: ./esi \"Path_script\"\n");
+	if (argc < 2) {
+		printf(
+				"Falta argumento para ejecución. Uso correcto: ./esi \"Path_script\"\n");
 		return EXIT_FAILURE;
 	}
 	abrirScript(argv[1]);
 	configuracion_t config = cargarConfiguracion();
-	socket_coordinador = conectarConProceso(config.IP_COORDINADOR, config.PUERTO_COORDINADOR, ESI);
-	socket_planificador = conectarConProceso(config.IP_PLANIFICADOR, config.PUERTO_PLANIFICADOR, ESI);
+	socket_coordinador = conectarConProceso(config.IP_COORDINADOR,
+			config.PUERTO_COORDINADOR, ESI);
+	socket_planificador = conectarConProceso(config.IP_PLANIFICADOR,
+			config.PUERTO_PLANIFICADOR, ESI);
 
 	fd_set master;
 	fd_set readfs;
@@ -298,19 +332,19 @@ int main(int argc, char **argv) {
 	FD_SET(socket_planificador, &master);
 	int fdmax = socket_planificador;
 	//Loop para atender mensajes
-	for(;;){
+	for (;;) {
 		readfs = master;
-		if(select(fdmax+1, &readfs, NULL, NULL, NULL) == -1) {
+		if (select(fdmax + 1, &readfs, NULL, NULL, NULL) == -1) {
 			log_error(logESI, "Error en select");
 			exitFailure();
 		}
-		if(FD_ISSET(socket_coordinador, &readfs)){
+		if (FD_ISSET(socket_coordinador, &readfs)) {
 			//Atiendo coordinador
 			atenderMsgCoordinador();
-		}else if(FD_ISSET(socket_planificador, &readfs)){
+		} else if (FD_ISSET(socket_planificador, &readfs)) {
 			//Atiendo planificador
 			atenderMsgPlanificador();
-		}else{
+		} else {
 			//No dedeberia pasar jamas
 		}
 	}

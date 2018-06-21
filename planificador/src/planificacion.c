@@ -2,6 +2,7 @@
 #include "includes.h"
 #include "conexiones.h"
 #include "comunicacion/comunicacion.h"
+#include <commons/log.h>
 #include <stdbool.h>
 #include <string.h>
 
@@ -10,6 +11,7 @@ proceso_t* procesoEjecucion;
 t_queue* colaTerminados;
 t_list* listaBloqueados;
 t_dictionary* claves;
+t_log* logPlanificador;
 
 extern configuracion_t config;
 int contadorProcesos = 1;
@@ -167,7 +169,7 @@ void procesoTerminado(int exitStatus) {
 	liberarRecursos(procesoEjecucion);
 	proceso_t* procesoListo = colaListosPop();
 	if (procesoListo != NULL) {
-		procesoEjecutar(colaListosPop());
+		procesoEjecutar(procesoListo);
 	} else {
 		procesoEjecucion = 0;
 	}
@@ -223,7 +225,10 @@ void estimarRafaga(proceso_t* proceso) {
 }
 
 bool verificarClave(char* clave){
-	return dictionary_has_key(claves, clave);
+	bool _soy_clave_buscada(char* p) {
+		return strcmp(p, clave) == 0;
+	}
+	return !list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada) && dictionary_has_key(claves, clave);
 }
 
 void bloquearClave(char* clave){
@@ -258,7 +263,9 @@ void liberarClave(char* clave){
 }
 
 void liberarRecursos(proceso_t* proceso) {
+	log_debug(logPlanificador, "Liberando claves...");
 	list_iterate(proceso->clavesBloqueadas, (void*)desbloquearClave);
+	log_debug(logPlanificador, "Se liberaron las claves.");
 }
 
 respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo) {
@@ -273,27 +280,30 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 	//El cuerpo siempre tiene que ser una clave
 	switch(comando) {
 	case msj_solicitud_get_clave: //Procesar GET
-		printf("Solicitud de clave recibida\n");
+		log_debug(logPlanificador, "Notificacion Coordinador - Solicitud de GET clave recibida");
 		retorno.respuestaACoordinador = solicitarClave(cuerpo);
 		retorno.fdESIAAbortar = -1;
 		break;
 	case msj_store_clave: //Procesar STORE
+		log_debug(logPlanificador, "Notificacion Coordinador - Solicitud de STORE clave recibida");
 		liberarClave(cuerpo);
 		procesoDesbloquear(cuerpo); //TODO Si hay desalojo acá se puede pisar procesoEnEjecucion
 		retorno.respuestaACoordinador = 1;
 		retorno.fdESIAAbortar = -1;
 		break;
 	case msj_error_clave_no_identificada: //Procesar inexistancia clave
+		log_debug(logPlanificador, "Notificacion Coordinador - Error clave no identificada recibido");
 		retorno.fdESIAAbortar = procesoEjecucion->socketESI;
 		procesoTerminado(exit_abortado_por_clave_inexistente);
 		retorno.respuestaACoordinador = 1;
 		break;
 	case msj_esi_tiene_tomada_clave:
+		log_debug(logPlanificador, "Notificacion Coordinador - Consulta ESI por clave tomada recibida");
 		retorno.respuestaACoordinador = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
 		retorno.fdESIAAbortar = (retorno.respuestaACoordinador == 1) ? -1 : procesoEjecucion->socketESI;
 		break;
 	default:
-		printf("Llegó un mensaje desconocido: %d\n", comando);
+		log_debug(logPlanificador, "Notificacion Coordinador - Llegó un mensaje desconocido: %d", comando);
 		break;
 	}
 
