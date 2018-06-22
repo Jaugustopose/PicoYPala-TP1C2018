@@ -2,9 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <commons/log.h>
 #include "comunicacion/comunicacion.h"
 #include "planificacion.h"
 #include "includes.h"
+
+t_log* logPlanificador;
 
 void procesar_handshake(int socketCliente) {
 	header_t cabecera;
@@ -12,12 +15,14 @@ void procesar_handshake(int socketCliente) {
 	//Recibimos Header con info de operación
 	int resultado = recibir_mensaje(socketCliente, &cabecera, sizeof(header_t));
 	if (resultado == ERROR_RECV) {
-		printf("Error en el recv para socket %d!!!\n", socketCliente); //TODO Manejar el error de cierta forma si queremos.
+		//TODO Manejar el error de cierta forma si queremos.
+		log_error(logPlanificador, "Error en el recv para socket %d!!!", socketCliente);
 	} else {
 		//Recibimos identificación del handshake
 		resultado = recibir_mensaje(socketCliente, &identificacion, cabecera.tamanio);
 		if(resultado == ERROR_RECV) {
-			printf("Error en el recv para socket %d al hacer handshake!!!\n", socketCliente); //TODO Manejar el error de cierta forma si queremos.
+			//TODO Manejar el error de cierta forma si queremos.
+			log_error(logPlanificador, "Error en el recv para socket %d al hacer handshake!!!\n", socketCliente);
 		} else {
 			//Respondemos el ok del handshake
 			responder_ok_handshake(Planificador, socketCliente);
@@ -45,7 +50,7 @@ void* iniciarEscucha(void* sockets) {
 	for (;;) {
 		read_fds = master;
 		if (select(maxFd + 1, &read_fds, NULL, NULL, NULL) == -1) { //Compruebo si algun cliente quiere interactuar.
-			printf("Error en select\n");
+			log_error(logPlanificador, "Error en select");
 			exit(1);
 		}
 		for (fdCliente = 0; fdCliente <= maxFd; fdCliente++) {
@@ -53,7 +58,7 @@ void* iniciarEscucha(void* sockets) {
 				if (fdCliente == sockets_predefinidos.socket_escucha_esis) {
 					socketCliente = aceptar_conexion(sockets_predefinidos.socket_escucha_esis);
 					if (socketCliente == ERROR_ACCEPT) {
-						printf("Error en el accept\n"); //TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
+						log_error(logPlanificador, "Error en el accept");//TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
 						exit(ERROR_ACCEPT);
 					} else {
 						// Procesamos el handshake e ingresamos el nuevo ESI en el sistema. Siempre será un ESI, el handshake con coordinador se
@@ -72,12 +77,12 @@ void* iniciarEscucha(void* sockets) {
 				} else if (fdCliente == sockets_predefinidos.socket_coordinador) {
 					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
-					printf("Notificacion recibida del coordinador\n");
+					log_debug(logPlanificador, "Notificacion recibida del coordinador");
 					paquete_t* paquete = recibirPaquete(fdCliente);
 					if(paquete->header.comando < 0){
 						//TODO: Manejar desconexion
 					}
-					printf("Paquete recibido del coordinador\n");
+					log_debug(logPlanificador, "Paquete recibido del coordinador");
 					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
 					int respuesta;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
@@ -102,17 +107,20 @@ void* iniciarEscucha(void* sockets) {
 					if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
 						//TODO: ESI se desconectó. Sacar de los FD, el close del socket ya lo hizo el recibir_mensaje.
 						FD_CLR(fdCliente, &master);
+						FD_CLR(fdCliente, &read_fds);
 					} else {
 						switch(header.comando) {
 						case msj_sentencia_finalizada:
 
-							printf("MSJ Sentencia finalizada recibido\n");
+							log_debug(logPlanificador, "MSJ Sentencia finalizada recibido");
+
 							sentenciaFinalizada();
 							break;
 
 						case msj_esi_finalizado:
 
-							printf("MSJ ESI finalizado recibido\n");
+							log_debug(logPlanificador, "MSJ ESI finalizado recibido");
+
 							procesoTerminado(exit_ok);
 							respuesta = msj_ok_solicitud_operacion;
 							enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
@@ -133,7 +141,7 @@ int mandar_a_ejecutar_esi(int socket_esi) {
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(socket_esi, &header, sizeof(header_t));
 	if (retorno < 0) {
-		printf("Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_esi);
+		log_error(logPlanificador, "Problema con el ESI en el socket %d. Se cierra conexión con él.", socket_esi);
 	}
 
 	//TODO: Qué hacemos acá? Se podría mandar el ESI a la cola de finalizados, pero no sería un proceso terminado normalmente.

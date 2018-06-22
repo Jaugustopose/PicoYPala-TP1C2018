@@ -1,6 +1,7 @@
 #include "planificador.h"
 #include "includes.h"
 #include "commons/config.h"
+#include <commons/log.h>
 #include "comunicacion/comunicacion.h"
 #include "planificacion.h"
 #include "conexiones.h"
@@ -34,6 +35,7 @@ void procesar_deadlock(char** subBufferSplitted);
 
 int socket_coordinador;
 configuracion_t config;
+extern t_log * logPlanificador;
 
 configuracion_t cargarConfiguracion() {
 	configuracion_t config;
@@ -50,43 +52,45 @@ configuracion_t cargarConfiguracion() {
 
 	if (config_has_property(configPlanificador, "PUERTO")) {
 		config.PUERTO = config_get_int_value(configPlanificador, "PUERTO");
-		printf("PUERTO: %d\n", config.PUERTO);
+		log_debug(logPlanificador, "PUERTO: %d", config.PUERTO);
 	}
 	if (config_has_property(configPlanificador, "ESTIMACION_INICIAL")) {
 		config.ESTIMACION_INICIAL = config_get_int_value(configPlanificador, "ESTIMACION_INICIAL");
-		printf("ESTIMACION_INICIAL: %d\n", config.ESTIMACION_INICIAL);
+		log_debug(logPlanificador, "ESTIMACION_INICIAL: %d", config.ESTIMACION_INICIAL);
 	}
 	if (config_has_property(configPlanificador, "ALGORITMO_PLANIFICACION")) {
 		config.ALGORITMO_PLANIFICACION = config_get_string_value(configPlanificador, "ALGORITMO_PLANIFICACION");
-		printf("ALGORITMO_PLANIFICACION: %s\n", config.ALGORITMO_PLANIFICACION);
+		log_debug(logPlanificador, "ALGORITMO_PLANIFICACION: %s", config.ALGORITMO_PLANIFICACION);
 	}
 	if (config_has_property(configPlanificador, "ALFA_PLANIFICACION")) {
-			config.ALFA_PLANIFICACION = config_get_int_value(configPlanificador, "ALFA_PLANIFICACION");
-			printf("ALFA_PLANIFICACION: %d\n", config.ALFA_PLANIFICACION);
-		}
+		config.ALFA_PLANIFICACION = config_get_int_value(configPlanificador, "ALFA_PLANIFICACION");
+		log_debug(logPlanificador, "ALFA_PLANIFICACION: %d", config.ALFA_PLANIFICACION);
+	}
 	if (config_has_property(configPlanificador, "IP_COORDINADOR")) {
 		config.IP_COORDINADOR = config_get_string_value(configPlanificador, "IP_COORDINADOR");
-		printf("IP_COORDINADOR: %s\n", config.IP_COORDINADOR);
+		log_debug(logPlanificador, "IP_COORDINADOR: %s", config.IP_COORDINADOR);
 	}
 	if (config_has_property(configPlanificador, "PUERTO_COORDINADOR")) {
 		config.PUERTO_COORDINADOR = config_get_int_value(configPlanificador, "PUERTO_COORDINADOR");
-		printf("PUERTO_COORDINADOR: %d\n", config.PUERTO_COORDINADOR);
+		log_debug(logPlanificador, "PUERTO_COORDINADOR: %d", config.PUERTO_COORDINADOR);
 	}
 	if (config_has_property(configPlanificador, "CLAVES_BLOQUEADAS")) {
 		config.CLAVES_BLOQUEADAS = config_get_array_value(configPlanificador, "CLAVES_BLOQUEADAS");
-		printf("CLAVES_BLOQUEADAS: [");
+		char* claves = string_new();
+		string_append(&claves, "CLAVES_BLOQUEADAS: [");
 		char** p = config.CLAVES_BLOQUEADAS;
 		int flag = 1;
 		while(p[0]){
 			if(flag){
 				flag=0;
 			}else{
-				printf(",");
+				string_append(&claves, ",");//log_debug(logPlanificador, ",");
 			}
-			printf("%s",p[0]);
+			string_append(&claves, p[0]);
 			p++;
 		}
-		printf("]\n");
+		string_append(&claves, "]");
+		log_debug(logPlanificador, claves);
 	}
 	return config;
 }
@@ -133,7 +137,7 @@ void procesar_entrada(char* buffer) {
 	} else if (!strcmp(subBufferSplitted[0], DEADLOCK)){
 		procesar_deadlock(subBufferSplitted);
 	} else {
-		printf("¡No se reconece el comando %s!\n", buffer);
+		log_info(logPlanificador, "¡No se reconece el comando %s!", buffer);
 	}
 
 	free(subBufferSplitted);
@@ -141,84 +145,88 @@ void procesar_entrada(char* buffer) {
 
 void procesar_pausa_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Pausar Planificación!\n");
-		sem_wait(&planificacion_habilitada);
+
+		log_info(logPlanificador, "Pausar Planificación!");
+
 	} else {
-		printf("Comando 'pausar' no requiere parámetros!\n");
+		log_info(logPlanificador, "Comando 'pausar' no requiere parámetros!");
 	}
 }
 
 void procesar_continuar_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Continuar Planificación!\n");
-		sem_wait(&planificacion_habilitada);
+
+		log_info(logPlanificador, "Pausar Planificación!");
+
 	} else {
-		printf("Comando 'continuar' no requiere parámetros!\n");
+		log_info(logPlanificador, "Comando 'continuar' no requiere parámetros!");
 	}
 }
 
 void procesar_bloqueo_esi(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL || subBufferSplitted[2] == NULL) {
-		printf("Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'\n");
+		log_info(logPlanificador, "Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'");
 	} else if (subBufferSplitted[3] == NULL) {
-		printf("Bloqueo Esi %s de la cola del recurso %s!\n", subBufferSplitted[2], subBufferSplitted[1]);
-		bloquearEsiPorConsola(strtol(subBufferSplitted[2], NULL, 10) , subBufferSplitted[1]);
+
+		log_info(logPlanificador, "Bloqueo Esi %s de la cola del recurso %s!", subBufferSplitted[2], subBufferSplitted[1]);
+
 	} else {
-		printf("Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'\n");
+		log_info(logPlanificador, "Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'");
 	}
 }
 
 void procesar_desbloqueo_esi(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'\n");
+		log_info(logPlanificador, "Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		printf("Desbloqueo Esi %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Desbloqueo Esi %s!\n", subBufferSplitted[1]);
 	} else {
-		printf("Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'\n");
+		log_info(logPlanificador, "Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'");
 	}
 }
 
 void procesar_listar_recurso(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Comando 'listar' incompleto! Se requiere formato 'listar <recurso>'\n");
+		log_info(logPlanificador, "Comando 'listar' incompleto! Se requiere formato 'listar <recurso>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		printf("Listar procesos en cola de espera para recurso %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Listar procesos en cola de espera para recurso %s!\n", subBufferSplitted[1]);
 	} else {
-		printf("Comando 'listar' con demasiados parámetros! Se requiere formato 'listar <recurso>'\n");
+		log_info(logPlanificador, "Comando 'listar' con demasiados parámetros! Se requiere formato 'listar <recurso>'");
 	}
 }
 
 void procesar_kill_proceso(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Comando 'kill' incompleto! Se requiere formato 'kill <ID>'\n");
+		log_info(logPlanificador, "Comando 'kill' incompleto! Se requiere formato 'kill <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		printf("Kill proceso %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Kill proceso %s!\n", subBufferSplitted[1]);
 	} else {
-		printf("Comando 'kill' con demasiados parámetros! Se requiere formato 'kill <ID>'\n");
+		log_info(logPlanificador, "Comando 'kill' con demasiados parámetros! Se requiere formato 'kill <ID>'");
 	}
 }
 
 void procesar_status_instancias(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Comando 'status' incompleto! Se requiere formato 'status <clave>'\n");
+		log_info(logPlanificador, "Comando 'status' incompleto! Se requiere formato 'status <clave>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		printf("Status instancias para clave %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Status instancias para clave %s!\n", subBufferSplitted[1]);
 	} else {
-		printf("Comando 'status' con demasiados parámetros! Se requiere formato 'status <clave>'\n");
+		log_info(logPlanificador, "Comando 'status' con demasiados parámetros! Se requiere formato 'status <clave>'");
 	}
 }
 
 void procesar_deadlock(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-		printf("Analizar deadlocks!\n");
+		log_info(logPlanificador, "Analizar deadlocks!");
 	} else {
-		printf("Comando 'deadlock' no requiere parámetros!\n");
+		log_info(logPlanificador, "Comando 'deadlock' no requiere parámetros!");
 	}
 }
 
 
 int main(void) {
 
+	logPlanificador = log_create("planificador.log", "Planificador", true, LOG_LEVEL_DEBUG);
 	config = cargarConfiguracion();
 	inicializarPlanificacion();
 
