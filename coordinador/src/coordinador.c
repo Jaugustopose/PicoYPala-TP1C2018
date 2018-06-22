@@ -63,8 +63,6 @@ typedef struct {
 
 typedef struct infoParaHilo_t{
 	int fd;
-	pthread_mutex_t semaforo;
-	operacion_compartida_t* operacion;
 }infoParaHilo_t;
 
 
@@ -90,6 +88,7 @@ bool compactacionFinalizada = false;
 int ultimaOperacion = 0;
 infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_operaciones_esis;
+int esiActual = 0;
 
 //FUNCIONES
 
@@ -176,7 +175,7 @@ void conexion_de_cliente_finalizada() {
 
 	if (FD_ISSET(fdCliente, &bolsa_instancias)){
 		FD_CLR(fdCliente, &bolsa_instancias);
-		printf("Se desconecto instancia del socket %d\n", fdCliente); //TODO: Reorganizar la distribucion para las claves.
+		printf("Se desconecto instancia del socket %d\n", fdCliente); //Reorganizar la distribucion para las claves no se hace. Nos quitan Key Explicit
 	}
 
 	close(fdCliente); // Si se perdio la conexion, la cierro.
@@ -346,31 +345,44 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 
 }
 
-void preparar_operacion_compartida_GET(operacion_compartida_t* operacion,
-		char* clave) {
-	operacion->keyword = msj_sentencia_get;
-	operacion->argumentos.GET.clave = clave;
+operacion_compartida_t* preparar_operacion_compartida_GET(char* clave) {
+
+	operacion_compartida_t* operacionX = malloc(sizeof(operacion_compartida_t));
+
+	operacionX->keyword = GET;
+	operacionX->argumentos.GET.clave = clave;
+
+	return operacionX;
 }
 
-void preparar_operacion_compartida_SET(operacion_compartida_t* operacion,
-		char* clave) {
-	operacion->keyword = msj_sentencia_set;
-	operacion->argumentos.SET.claveYValor = clave;
+operacion_compartida_t* preparar_operacion_compartida_SET(char* clave) {
+
+	operacion_compartida_t* operacionX = malloc(sizeof(operacion_compartida_t));
+
+	operacionX->keyword = SET;
+	operacionX->argumentos.SET.claveYValor = clave;
+
+	return operacionX;
 }
 
-void preparar_operacion_compartida_STORE(operacion_compartida_t* operacion,
-		char* clave) {
-	operacion->keyword = msj_sentencia_store;
-	operacion->argumentos.STORE.clave = clave;
+operacion_compartida_t* preparar_operacion_compartida_STORE(char* clave) {
+
+	operacion_compartida_t* operacionX = malloc(sizeof(operacion_compartida_t));
+
+	operacionX->keyword = STORE;
+	operacionX->argumentos.STORE.clave = clave;
+
+	return operacionX;
 }
 
 void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en creacion del hilo.
 
 	int fdEsi = (int) fd;
+	esiActual = (int) fd;
 	header_t header;
 	int resultado;
 
-	for(;;){ //Comienzo a atender el esi en el hilo hasta que el header sea msj_esi_finalizado
+	while(1){ //Comienzo a atender el esi en el hilo hasta que el header sea msj_esi_finalizado
 
 		printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
@@ -431,7 +443,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 							list_add(instanciaConClave->claves, clave);
 
 							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
-							preparar_operacion_compartida_GET(operacion, clave);
+							operacion = preparar_operacion_compartida_GET(clave);
 
 
 							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
@@ -453,10 +465,10 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 							//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
 							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
 
-							if (resultado == msj_clave_permitida_para_operar){
+							if (resultado == msj_ok_solicitud_operacion){
 
 								//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
-								preparar_operacion_compartida_SET(operacion, clave);
+								operacion = preparar_operacion_compartida_SET(clave);
 
 								//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
 								pthread_mutex_unlock(&instanciaConClave->semaforo);
@@ -490,13 +502,15 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 							//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
 							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
 
-							if (resultado == msj_clave_permitida_para_operar){
+							if (resultado == msj_ok_solicitud_operacion){
 
 								//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
-								preparar_operacion_compartida_STORE(operacion, clave);
+								operacion = preparar_operacion_compartida_STORE(clave);
 
 								//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
 								pthread_mutex_unlock(&instanciaConClave->semaforo);
+
+								//TODO: Avisarle al planificador que se libero la clave con STORE.
 
 							}else{
 								//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
@@ -509,31 +523,34 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 					}else {
 						//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave no identificada y recibo su respuesta.
 						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_identificada);
-						}
+					}
 				break;
+
 				default:
-					printf("Se recibio comando desconocido desde ESI");
+					log_error(log_operaciones_esis,"Se recibio comando desconocido desde ESI");
+				break;
 			}
 		}
-	} //Fin del ciclo for
+	} //Fin del while
 }
 
 void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo en creacion de hilo.
 
-	header_t header;
+	header_t* header = malloc(sizeof(header));
 	void* buffer;
 	void* bufferAEnviar;
-	infoInstancia_t* miInstancia;
-	infoParaHilo_t* informacionQueSeComparte = (infoParaHilo_t*) info;
+	infoInstancia_t* miInstancia = malloc(sizeof(infoInstancia_t));
+	infoParaHilo_t* informacionQueSeComparte = malloc(sizeof(infoParaHilo_t));
+	informacionQueSeComparte = (infoParaHilo_t*) info;
 
-	for(;;){
+	miInstancia = encontrar_instancia_por_fd(informacionQueSeComparte->fd);
 
-		pthread_mutex_lock(&informacionQueSeComparte->semaforo); //Hago el wait al mutex
+	while(1){
 
-		miInstancia = encontrar_instancia_por_fd(informacionQueSeComparte->fd);
+		pthread_mutex_lock(&miInstancia->semaforo); //Hago el wait al mutex
 
 		if(miInstancia->desconectada == true){ //Si la instancia que atendia este hilo se desconecto, el hilo muere.
-			pthread_mutex_destroy(&informacionQueSeComparte->semaforo);
+			pthread_mutex_destroy(&miInstancia->semaforo);
 			exit(EXIT_FAILURE);
 		}else{
 
@@ -542,55 +559,54 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 			switch (operacion->keyword) {
 
 				case GET:
-					header.comando = msj_sentencia_get;
-					header.tamanio = strlen(operacion->argumentos.GET.clave)+1;
-					buffer = malloc(header.tamanio);
-					memcpy(buffer,operacion->argumentos.GET.clave,header.tamanio);
+					header->comando = msj_sentencia_get;
+					header->tamanio = strlen(operacion->argumentos.GET.clave)+1;
+					buffer = malloc(header->tamanio);
+					memcpy(buffer,operacion->argumentos.GET.clave,header->tamanio);
 
-					bufferAEnviar = serializar(header,buffer);
-					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-					break;
+					bufferAEnviar = serializar(*header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header->tamanio);
+				break;
 
 				case SET:
-					header.comando = msj_sentencia_set;
-					header.tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
+					header->comando = msj_sentencia_set;
+					header->tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
 
-					buffer = malloc(header.tamanio);
+					buffer = malloc(header->tamanio);
 					memcpy(buffer,operacion->argumentos.SET.claveYValor,strlen(operacion->argumentos.SET.claveYValor)+1);
 
-					bufferAEnviar = serializar(header,buffer);
-					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
+					bufferAEnviar = serializar(*header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header->tamanio);
 					break;
 
 				case STORE:
-					header.comando = msj_sentencia_store;
-					header.tamanio = strlen(operacion->argumentos.STORE.clave)+1;
+					header->comando = msj_sentencia_store;
+					header->tamanio = strlen(operacion->argumentos.STORE.clave)+1;
 
-					buffer = malloc(header.tamanio);
-					memcpy(buffer,operacion->argumentos.STORE.clave,header.tamanio);
+					buffer = malloc(header->tamanio);
+					memcpy(buffer,operacion->argumentos.STORE.clave,header->tamanio);
 
-					bufferAEnviar = serializar(header,buffer);
-					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header.tamanio);
-					break;
+					bufferAEnviar = serializar(*header,buffer);
+					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header->tamanio);
+				break;
 
 				case COMPACTAR:
-					header.comando = msj_instancia_compactar;
-					header.tamanio = 0;
+					header->comando = msj_instancia_compactar;
+					header->tamanio = 0;
 
-					buffer = malloc(header.tamanio);
+					buffer = malloc(header->tamanio);
 
-					bufferAEnviar = serializar(header,buffer);
+					bufferAEnviar = serializar(*header,buffer);
 					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t));
-					break;
+				break;
+
 				default:
-					break;
+					printf("Le metieron cualquier cosa al keyword de la operacion compartida\n");
+				break;
 			}
-
-		pthread_mutex_unlock(&informacionQueSeComparte->semaforo);
-
 		}
 	}
-}
+}//Fin del for
 
 void* crear_nueva_instancia(int socket_cliente, const config_t* config, char* nombre_instancia) {
 	//No existia anteriormente en el sistema. La creo
@@ -605,15 +621,53 @@ void* crear_nueva_instancia(int socket_cliente, const config_t* config, char* no
 	nueva_instancia->letra_fin = '-';
 	nueva_instancia->claves = list_create();
 	pthread_mutex_init(&nueva_instancia->semaforo, NULL);
+	pthread_mutex_lock(&nueva_instancia->semaforo);
 
 	return nueva_instancia;
 }
 
-void crear_info_para_hilo_instancia(int socket_cliente, infoParaHilo_t* info, operacion_compartida_t* operacion, infoInstancia_t* nueva_instancia) {
-	info = malloc(sizeof(infoParaHilo_t));
+infoParaHilo_t* crear_info_para_hilo_instancia(int socket_cliente, operacion_compartida_t* operacion, infoInstancia_t* nueva_instancia) {
+
+	infoParaHilo_t* info = malloc(sizeof(infoParaHilo_t));
+
 	info->fd = socket_cliente;
-	info->operacion = operacion;
-	info->semaforo = nueva_instancia->semaforo;
+	return info;
+}
+
+operacion_compartida_t* inicializar_operacion_compartida(){
+
+	operacion_compartida_t* operacionX = malloc(sizeof(operacion_compartida_t));
+
+	operacionX->keyword = 0;
+	operacionX->argumentos.GET.clave = string_new();
+	operacionX->argumentos.SET.claveYValor = string_new();
+	operacionX->argumentos.STORE.clave = string_new();
+
+	return operacionX;
+}
+
+void enviar_ok_sentencia_a_ESI(){
+	header_t header;
+	header.comando = msj_sentencia_finalizada;
+	header.tamanio = 0;
+
+	enviar_mensaje(esiActual,&header,sizeof(header_t));
+}
+
+void enviar_configuracion_entradas_a_instancia(header_t* cabecera, config_t* config, int socket_cliente) {
+
+	//Envio cantidad y tamaño de entradas a la instancia.
+	cabecera->comando = msj_cantidad_entradas;
+	cabecera->tamanio = sizeof(int);
+	void* buffer = serializar(*cabecera, &config->CANT_ENTRADAS);
+	enviar_mensaje(socket_cliente, buffer, sizeof(header_t) + cabecera->tamanio);
+	free(buffer);
+
+	cabecera->comando = msj_tamanio_entradas;
+	cabecera->tamanio = sizeof(int);
+	buffer = serializar(*cabecera, &config->ENTRADA_SIZE);
+	enviar_mensaje(socket_cliente, buffer, sizeof(header_t) + cabecera->tamanio);
+	free(buffer);
 }
 
 void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
@@ -641,9 +695,9 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
 				//Creo el hilo para su ejecucion
 				pthread_t hiloESI;
-				pthread_create(&hiloESI,NULL,&atender_accion_esi, &socket_cliente);
+				pthread_create(&hiloESI,NULL,&atender_accion_esi, (void*)socket_cliente);
 				pthread_detach(hiloESI);
-				break;
+			break;
 
 			case Instancia:
 				responder_ok_handshake(Instancia, socket_cliente);
@@ -659,6 +713,9 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 				FD_SET(socket_cliente, &master);
 				FD_SET(socket_cliente, &bolsa_instancias);
 
+				//Envio cantidad y tamaño de entradas a la instancia.
+				enviar_configuracion_entradas_a_instancia(&cabecera, &config, socket_cliente);
+
 				//Pregunto si la instancia esta conectada.
 				instancia_existente = instancia_conectada_anteriormente(nombre_instancia);
 
@@ -669,14 +726,16 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 					//Creo informacion de ejecucion para hilo instancia.
 					pthread_t hiloInstancia;
 					infoParaHilo_t* info;
-					crear_info_para_hilo_instancia(socket_cliente, info, operacion, nueva_instancia);
+
+					info = crear_info_para_hilo_instancia(socket_cliente, operacion, nueva_instancia);
+
+					//Agrego nueva instancia a la lista de instancias conectadas al sistema.
+					list_add(lista_instancias_claves,nueva_instancia);
+					printf("Se ha conectado una nueva Instancia de ReDis al sistema en fd %d\n", socket_cliente);
 
 					//Creo y mando a ejecutar el hilo.
-					pthread_create(&hiloInstancia, NULL, &atender_accion_instancia,&info);
+					pthread_create(&hiloInstancia, NULL, &atender_accion_instancia,(void*) info);
 					pthread_detach(hiloInstancia);
-
-					printf("Se ha conectado una nueva Instancia de ReDis al sistema en fd %d\n", socket_cliente);
-					list_add(lista_instancias_claves,nueva_instancia); //Agrego nueva instancia a la lista de instancias conectadas al sistema.
 
 				}else { //Para cuando una instancia se quiere reincorporar.
 
@@ -687,7 +746,8 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 					//Creo informacion de ejecucion para hilo instancia.
 					pthread_t hiloInstancia;
 					infoParaHilo_t* info;
-					crear_info_para_hilo_instancia(socket_cliente,info,operacion,instancia_existente);
+
+					info = crear_info_para_hilo_instancia(socket_cliente,operacion,instancia_existente);
 
 					//Creo y mando a ejecutar el hilo.
 					pthread_create(&hiloInstancia, NULL, &atender_accion_instancia,&info);
@@ -695,8 +755,8 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
 					responder_ok_handshake(Instancia, socket_cliente);
 
-					//TODO: Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento".
-					//TODO: Verificar si van quedando hilos abiertos a medida que las instancias se van desconectando.
+					//Reincorporo la instancia al sistema. Ver tema de Dump en el enunciado: seccion "Almacenamiento". Nos quitan reincorporacion de instancias.
+					//Verificar si van quedando hilos abiertos a medida que las instancias se van desconectando. Nos quitan reincorporacion de instancias.
 				}
 				break;
 
@@ -740,15 +800,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	resultado = recibir_mensaje(unFileDescriptor,&header,sizeof(header_t));
 
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
-		printf("Error al recibir header del ESI \n");
-		conexion_de_cliente_finalizada();
-		exit(EXIT_FAILURE);
-	}
-
-	void* buffer = malloc(header.tamanio);
-	resultado = recibir_mensaje(unFileDescriptor,buffer,header.tamanio);
-	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
-		printf("Error al recibir payload del ESI \n");
+		printf("Error al recibir header de INSTANCIA \n");
 		conexion_de_cliente_finalizada();
 		exit(EXIT_FAILURE);
 	}
@@ -756,8 +808,8 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	switch (header.comando) {
 
 		case msj_instancia_compactar:
-			//Notifico al planificador para que pare por pedido de compactacion.
-			enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_instancia_compactar);
+//			//Notifico al planificador para que pare por pedido de compactacion.
+//			enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_instancia_compactar);
 
 			//Guardo la ultima sentencia enviada por un esi para enviar de vuelta a la instancia que solicito compactar.
 			ultimaOperacion = operacion->keyword;
@@ -789,14 +841,21 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 				instanciaQuePidioCompactacion = encontrar_instancia_por_fd(unFileDescriptor);
 				pthread_mutex_unlock(&instanciaQuePidioCompactacion->semaforo);
 
-				//Notifico al PLANIFICADOR que ya se compactaron todas las instancias y hay que continuar la ejecucion.
-				enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_compactacion_finalizada_continuar_planificacion);
+//				//Notifico al PLANIFICADOR que ya se compactaron todas las instancias y hay que continuar la ejecucion.
+//				enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_compactacion_finalizada_continuar_planificacion);
 			}
 		break;
 
 		case msj_instancia_sustituyo_clave:
 
 			//TODO: Actualizar las claves que tiene esta instancia
+		break;
+
+		case msj_sentencia_finalizada:
+
+			//Recibi ok de la instancia. Tengo que avisar al ESI que salio bien. Crear variable global que mantenga el fd del ESI que mando ultima operacion
+			enviar_ok_sentencia_a_ESI();
+		break;
 
 		default:
 			break;
@@ -821,7 +880,9 @@ int main(void) {
 	socket_coordinador = crear_socket_escucha(config.PUERTO);
 
 	//Inicializo estructura de operacion compartida
-	operacion = malloc(sizeof(operacion_compartida_t));
+	operacion = inicializar_operacion_compartida();
+
+	//operacion = malloc(sizeof(operacion_compartida_t));
 
 	//Acciones necesarias para identificar los esi o instancias entrantes.
 
@@ -850,7 +911,7 @@ int main(void) {
 						identificar_proceso_y_crear_su_hilo(socket_cliente);
 					}
 
-				}else if (FD_ISSET(fdCliente, &bolsa_instancias)) { // Una instancia envio un mensaje. 1)Necesita compactar. 2)Finalizo compactacion. 3) Libero una clave (entrada).
+				}else if (FD_ISSET(fdCliente, &bolsa_instancias)) { // Una instancia envio un mensaje. 1)Necesita compactar. 2)Finalizo compactacion. 3) Libero una clave (entrada). 4)Me envio un OK.
 						escuchar_mensaje_de_instancia(fdCliente);
 				}
 			}

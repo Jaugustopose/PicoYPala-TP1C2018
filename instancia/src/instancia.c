@@ -390,6 +390,14 @@ void setValorEntrada(t_entrada* entrada, char*valor, int tamanio, int indice){
 	log_debug(logInstancia, "Se inserta Valor:%s en Indice:%d", valor, indice);
 }
 
+void enviar_ok_sentencia_a_Coordinador(){
+	header_t header;
+	header.comando = msj_sentencia_finalizada;
+	header.tamanio = 0;
+
+	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
+}
+
 void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
 
 	log_debug(logInstancia, "Sustituye Algoritmo declarado %s",algoritmo);
@@ -526,6 +534,7 @@ void ejecutarGet(void* buffer){
 			log_debug(logInstancia, "Clave inexistente. Se crea registro en Tabla de Entradas indice: %d", indice);
 		}
 	}
+	enviar_ok_sentencia_a_Coordinador();
 	imprimirPorPantallaEstucturas();
 }
 
@@ -646,6 +655,7 @@ void ejecutarSet(void* buffer){
 			//Se reemplaza valor previo
 			setConValorPrevio(entrada, valor, tamanio);
 		}
+		enviar_ok_sentencia_a_Coordinador();
 	}else{
 		//No existe la clave TODO que mas hacemos? Se avisa al coordinador?
 		log_error(logInstancia, "Error, se intento hacer SET de una clave inexistente");
@@ -695,6 +705,7 @@ void ejecutarStore(void* buffer){
 			}
 		}
 		free(valor);
+		enviar_ok_sentencia_a_Coordinador();
 		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizValores, entradasCantidad, entradasTamanio);
 	} else {
 		log_debug(logInstancia, "Clave no existente para realizar STORE");
