@@ -116,6 +116,10 @@ bool existeClave(char* clave){
 void exitFailure(){
 	log_destroy(logInstancia);
 	destruirBitmap(bitmap);
+//	if (munmap(tablaEntradas, tamanioArchivoTablaEntradas) == -1) {
+//		perror("Error unmapping file");
+//	}
+//	close(fdTablaEntradas);
 	close(socketCoordinador);
 	exit(EXIT_FAILURE);
 }

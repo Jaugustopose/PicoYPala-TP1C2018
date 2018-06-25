@@ -268,13 +268,13 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 		case msj_solicitud_get_clave:
 
 			header->comando = msj_solicitud_get_clave;
-			header->tamanio = 0;
 			bufferAEnviar = serializar(*header, buffer);
+			log_debug(log_operaciones_esis, "Header.tamanio = %d", header->tamanio);
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
-			printf("Se envió mensaje SOLICITUD CLAVE al planificador\n");
+			log_debug(log_operaciones_esis, "Se envió mensaje SOLICITUD CLAVE al planificador");
 			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
-			printf("Se recibió respuesta del planificador\n"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_error_clave_inaccesible:
@@ -284,21 +284,20 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			bufferAEnviar = serializar(*header,buffer);
 			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t));
 			free(bufferAEnviar);
-			printf("Se envió mensaje ERROR CLAVE INACCESIBLE al planificador\n");
+			log_debug(log_operaciones_esis, "Se envió mensaje ERROR CLAVE INACCESIBLE al planificador");
 			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			printf("Se recibió respuesta del planificador\n"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_esi_tiene_tomada_clave:
 
 			header->comando = msj_esi_tiene_tomada_clave;
-			header->tamanio = 0;
 			bufferAEnviar = serializar(*header, buffer);
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio); //Pregunto al PLANI si el ESI tiene la clave tomada como para operar.
 			free(bufferAEnviar);
-			printf("Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador\n");
+			log_debug(log_operaciones_esis, "Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador");
 			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			printf("Se recibió respuesta del planificador\n"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_error_clave_no_identificada:
@@ -308,21 +307,9 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			bufferAEnviar = serializar(*header, buffer);
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
-			printf("Se envió mensaje ERROR CLAVE NO IDENTIFICADA al planificador\n");
+			log_debug(log_operaciones_esis, "Se envió mensaje ERROR CLAVE NO IDENTIFICADA al planificador");
 			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			printf("Se recibió respuesta del planificador\n"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
-		break;
-
-		case msj_error_clave_no_bloqueada: //TODO: Hablarlo con los chicos, tal vez es innecesario que le mande este mensaje porque lo deducen solos cuando les pregunto si tiene bloqueada la clave.
-
-			header->comando = msj_error_clave_no_identificada;
-			header->tamanio = 0;
-			bufferAEnviar = serializar(*header, buffer);
-			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio);
-			free(bufferAEnviar);
-			printf("Se envió mensaje ERROR CLAVE NO BLOQUEADA al planificador\n");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			printf("Se recibió respuesta del planificador\n"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_instancia_compactar:
@@ -331,9 +318,9 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			bufferAEnviar = serializar(*header,buffer);
 			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
-			printf("Se envió necesidad de COMPACTAR al planificador\n");
+			log_debug(log_operaciones_esis, "Se envió necesidad de COMPACTAR al planificador");
 			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			printf("Se recibió respuesta del planificador\n"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		default:
@@ -425,17 +412,17 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 						if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 							if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-
+								printf("GET - Instancia con clave %s\n", instanciaConClave->nombre);
 								//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y recibo su respuesta.
 								enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
-
+								pthread_mutex_unlock(&instanciaConClave->semaforo);
 							}else {
+								printf("GET - No hay instancia con esa clave!\n");
 								//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
 								enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
-
 							}
 						}else { //Entro aqui si no encontre la clave en mi sistema
-
+							printf("GET - No se encontro clave en el sistema!!\n");
 							//Selecciono instancia victima segun algoritmo de distribucion
 							instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION);
 
@@ -445,8 +432,9 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
 							operacion = preparar_operacion_compartida_GET(clave);
 
-
 							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
+							printf("Envio solicitud GET a planificador! %d\n", msj_solicitud_get_clave);
+							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
 							pthread_mutex_unlock(&instanciaConClave->semaforo);
 						}
 				break;
@@ -455,13 +443,25 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 					log_trace(log_operaciones_esis, "ESI %d realizo un SET clave %s",fdEsi,(char*) buffer);
 					clave = (char*)buffer; //Anda de una porque como separamos con /0
-
+					printf("clave = %s\n", clave);
+					int fin = 0;
+					int i = 0;
+					int cantidadTerminator = 0;
+					while (!fin) {
+						if(clave[i] == '\0'){
+							cantidadTerminator++;
+						}
+						printf("%c", clave[i]);
+						fin = (cantidadTerminator == 2);
+						i++;
+					}
+					printf("\n");
 					instanciaConClave = encontrar_instancia_por_clave(clave);
 
 					if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-
+							printf("SET - Instancia con clave %s\n", instanciaConClave->nombre);
 							//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
 							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
 
@@ -479,7 +479,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 							}
 						}else {
 							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
-							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
+//							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
 
 						}
 					}else {
@@ -570,23 +570,19 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 
 				case SET:
 					header->comando = msj_sentencia_set;
-					header->tamanio = strlen(operacion->argumentos.SET.claveYValor)+1; //Va +1 y no +2 porque  esto tiene un \0 en el medio.
+					int index = strlen(operacion->argumentos.SET.claveYValor);
+					char* valor = operacion->argumentos.SET.claveYValor + index + 1;
+					header->tamanio = strlen(operacion->argumentos.SET.claveYValor) + strlen(valor) + 2; //los dos caracteres nulos
 
-					buffer = malloc(header->tamanio);
-					memcpy(buffer,operacion->argumentos.SET.claveYValor,strlen(operacion->argumentos.SET.claveYValor)+1);
-
-					bufferAEnviar = serializar(*header,buffer);
-					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header->tamanio);
+					bufferAEnviar = serializar(*header, operacion->argumentos.SET.claveYValor);
+					enviar_mensaje(informacionQueSeComparte->fd, bufferAEnviar, sizeof(header_t) + header->tamanio);
 					break;
 
 				case STORE:
 					header->comando = msj_sentencia_store;
-					header->tamanio = strlen(operacion->argumentos.STORE.clave)+1;
+					header->tamanio = strlen(operacion->argumentos.STORE.clave) + 1;
 
-					buffer = malloc(header->tamanio);
-					memcpy(buffer,operacion->argumentos.STORE.clave,header->tamanio);
-
-					bufferAEnviar = serializar(*header,buffer);
+					bufferAEnviar = serializar(*header, operacion->argumentos.STORE.clave);
 					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header->tamanio);
 				break;
 

@@ -215,12 +215,14 @@ void sentenciaFinalizada(int socket_esi) {
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
-
-	if (planificadorConDesalojo()) {
-		planificarConDesalojo();
-	} else {
-		procesoEjecutar(procesoEjecucion);
-		 //TODO: Manejar error Send.
+	//El socket que envió sentencia finalizada difiere del que está en ejecución => Fue desalojado (bloqueado) por consola.
+	if (socket_esi == procesoEjecucion->socketESI) {
+		if (planificadorConDesalojo()) {
+			planificarConDesalojo();
+		} else {
+			procesoEjecutar(procesoEjecucion);
+			 //TODO: Manejar error Send.
+		}
 	}
 	pthread_mutex_unlock(&mutex_proceso_ejecucion);
 
@@ -312,7 +314,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 
 	//Closure para buscar si el proceso tiene la clave que intenta bloquear
 	bool _soy_clave_buscada(char* p) {
-		return strcmp(p, cuerpo) == 0;
+		return strcmp(p, (char*)cuerpo) == 0;
 	}
 
 	//El cuerpo siempre tiene que ser una clave
@@ -320,6 +322,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 	case msj_solicitud_get_clave: //Procesar GET
 		log_debug(logPlanificador, "Notificacion Coordinador - Solicitud de GET clave recibida");
 		retorno.respuestaACoordinador = solicitarClave(cuerpo);
+		log_debug(logPlanificador, "Pudo solicitar clave? => %d", retorno.respuestaACoordinador);
 		retorno.fdESIAAbortar = -1;
 		break;
 	case msj_store_clave: //Procesar STORE
@@ -338,6 +341,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 	case msj_esi_tiene_tomada_clave:
 		log_debug(logPlanificador, "Notificacion Coordinador - Consulta ESI por clave tomada recibida");
 		retorno.respuestaACoordinador = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
+		log_debug(logPlanificador, "Esi tiene tomada clave %s? => %d", (char*)cuerpo, retorno.respuestaACoordinador);
 		retorno.fdESIAAbortar = (retorno.respuestaACoordinador == 1) ? -1 : procesoEjecucion->socketESI;
 		break;
 	default:

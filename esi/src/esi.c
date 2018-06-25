@@ -266,8 +266,7 @@ void atenderMsgPlanificador() {
 	} else {
 		switch (header.comando) {
 		case msj_requerimiento_ejecucion:
-			log_info(logESI,
-					"Msg requerimiento de ejecución recibido del Planificador");
+			log_info(logESI, "Msg requerimiento de ejecución recibido del Planificador");
 			t_retornoParsearLinea retorno = parsearLinea();
 			if (retorno.finArchivo) {
 				log_info(logESI, "Fin Script");
@@ -277,10 +276,12 @@ void atenderMsgPlanificador() {
 				msgEjecucion(retorno.parsed);
 			}
 			break;
+		case msj_abortar_esi:
+			log_info(logESI, "Msg para abortar recibido del Planificador");
+//			exitFailure(); //TODO descomentar. El Esi se tiene que abortar por el Planificador.
+			break;
 		default:
-			log_error(logESI,
-					"Se recibió comando desconocido (Planificador): %d",
-					header.comando);
+			log_error(logESI, "Se recibió comando desconocido (Planificador): %d", header.comando);
 			break;
 		}
 	}

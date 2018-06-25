@@ -145,9 +145,8 @@ void procesar_entrada(char* buffer) {
 
 void procesar_pausa_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-
 		log_info(logPlanificador, "Pausar Planificación!");
-
+		sem_wait(&planificacion_habilitada);
 	} else {
 		log_info(logPlanificador, "Comando 'pausar' no requiere parámetros!");
 	}
@@ -155,9 +154,8 @@ void procesar_pausa_planificacion(char** subBufferSplitted) {
 
 void procesar_continuar_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
-
-		log_info(logPlanificador, "Pausar Planificación!");
-
+		log_info(logPlanificador, "Continuar Planificación!");
+		sem_post(&planificacion_habilitada);
 	} else {
 		log_info(logPlanificador, "Comando 'continuar' no requiere parámetros!");
 	}
@@ -167,9 +165,8 @@ void procesar_bloqueo_esi(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL || subBufferSplitted[2] == NULL) {
 		log_info(logPlanificador, "Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'");
 	} else if (subBufferSplitted[3] == NULL) {
-
 		log_info(logPlanificador, "Bloqueo Esi %s de la cola del recurso %s!", subBufferSplitted[2], subBufferSplitted[1]);
-
+		bloquearEsiPorConsola(strtol(subBufferSplitted[2], NULL, 10) , subBufferSplitted[1]);
 	} else {
 		log_info(logPlanificador, "Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'");
 	}
