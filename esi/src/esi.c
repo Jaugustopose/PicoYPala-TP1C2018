@@ -17,6 +17,7 @@
 #include "commons/config.h"
 #include <commons/log.h>
 #include <parsi/parser.h>
+#include <signal.h>
 
 int socket_coordinador;
 int socket_planificador;
@@ -221,21 +222,17 @@ void msgEjecucion(t_esi_operacion operacion) {
 	}
 }
 
-void msgFinProceso() {
+void msgFinProceso(int unSocket) {
 	header_t header;
 	header.comando = msj_esi_finalizado;
 	header.tamanio = 0;
-	int retorno = enviar_mensaje(socket_planificador, &header,
-			sizeof(header_t));
+	int retorno = enviar_mensaje(unSocket, &header, sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI,
-				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
-				socket_planificador);
+		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", unSocket);
 		exitFailure();
 	}
 	int respuestaFinalizacion;
-	recibir_mensaje(socket_planificador, &respuestaFinalizacion,
-			sizeof(respuestaFinalizacion));
+	recibir_mensaje(unSocket, &respuestaFinalizacion, sizeof(respuestaFinalizacion));
 
 }
 
@@ -243,15 +240,22 @@ void msgSentenciaFinalizada() {
 	header_t header;
 	header.comando = msj_sentencia_finalizada;
 	header.tamanio = 0;
-	int retorno = enviar_mensaje(socket_planificador, &header,
-			sizeof(header_t));
+	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI,
-				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
-				socket_planificador);
+		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_planificador);
 		exitFailure();
 	}
 	printf("MSJ Sentencia finalizada enviada al plani\n");
+}
+
+void sig_handler(int signo) {
+  if (signo == SIGINT) {
+  printf("SIGINT interceptado. Finalizando... \n");
+  msgFinProceso(socket_coordinador);
+  msgFinProceso(socket_planificador);
+  close(socket_coordinador);
+  exit(EXIT_SUCCESS);
+  }
 }
 
 void atenderMsgPlanificador() {
@@ -270,7 +274,8 @@ void atenderMsgPlanificador() {
 			t_retornoParsearLinea retorno = parsearLinea();
 			if (retorno.finArchivo) {
 				log_info(logESI, "Fin Script");
-				msgFinProceso();
+				msgFinProceso(socket_planificador);
+				msgFinProceso(socket_coordinador);
 				exitSuccess();
 			} else {
 				msgEjecucion(retorno.parsed);
@@ -279,6 +284,7 @@ void atenderMsgPlanificador() {
 		case msj_abortar_esi:
 			log_info(logESI, "Msg para abortar recibido del Planificador");
 //			exitFailure(); //TODO descomentar. El Esi se tiene que abortar por el Planificador.
+			msgFinProceso(socket_coordinador);
 			break;
 		default:
 			log_error(logESI, "Se recibió comando desconocido (Planificador): %d", header.comando);
@@ -319,6 +325,12 @@ int main(int argc, char **argv) {
 				"Falta argumento para ejecución. Uso correcto: ./esi \"Path_script\"\n");
 		return EXIT_FAILURE;
 	}
+
+	if (signal(SIGINT, sig_handler) == SIG_ERR){ //Manejar el ctrl+c del ESI.
+		printf("Error al interceptar SIGINT\n");
+		return EXIT_SUCCESS;
+	}
+
 	abrirScript(argv[1]);
 	configuracion_t config = cargarConfiguracion();
 	socket_coordinador = conectarConProceso(config.IP_COORDINADOR,

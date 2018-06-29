@@ -51,7 +51,7 @@ int recibir_mensaje(int socket, void* buffer, int tamanio) {
 	int retorno = recv(socket, buffer, tamanio, MSG_WAITALL);
 
 	if (retorno == 0) {
-		printf("Error al recibir mensaje! El cliente conectado en socket %d ha cerrado la conexión\n", socket); //TODO Aplicar logger
+		printf("Se ha cerrado la conexion en socket %d\n", socket); //TODO Aplicar logger
 		close(socket);
 		return ERROR_RECV_DISCONNECTED;
 	} else if (retorno < 0) {

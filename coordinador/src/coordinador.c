@@ -167,18 +167,18 @@ void* instancia_conectada_anteriormente(char* unNombre){
 
 }
 
-void conexion_de_cliente_finalizada() {
+void conexion_de_cliente_finalizada(int unFD) {
 	// conexión cerrada.
-	printf("Server: socket %d termino la conexion\n", fdCliente);
+	printf("Server: socket %d termino la conexion\n", unFD);
 	// Eliminar del conjunto maestro y su respectiva bolsa.
 	FD_CLR(fdCliente, &master);
 
-	if (FD_ISSET(fdCliente, &bolsa_instancias)){
-		FD_CLR(fdCliente, &bolsa_instancias);
-		printf("Se desconecto instancia del socket %d\n", fdCliente); //Reorganizar la distribucion para las claves no se hace. Nos quitan Key Explicit
+	if (FD_ISSET(unFD, &bolsa_instancias)){
+		FD_CLR(unFD, &bolsa_instancias);
+		printf("Se desconecto instancia del socket %d\n", unFD); //Reorganizar la distribucion para las claves no se hace. Nos quitan Key Explicit
 	}
 
-	close(fdCliente); // Si se perdio la conexion, la cierro.
+	close(unFD); // Si se perdio la conexion, la cierro.
 }
 
 infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning sale porque no estan implementados LSU y KEY.
@@ -376,23 +376,28 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 		resultado = recibir_mensaje(fdEsi,&header,sizeof(header_t));
 		if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 			printf("Error al recibir header del ESI \n");
-			conexion_de_cliente_finalizada();
-			exit(EXIT_FAILURE);
-		}
-		void* buffer = malloc(header.tamanio);
-		resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
-		if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
-			printf("Error al recibir payload del ESI \n");
-			conexion_de_cliente_finalizada();
-			exit(EXIT_FAILURE);
+			conexion_de_cliente_finalizada(fdEsi);
+			int ret = EXIT_FAILURE;
+			pthread_exit(&ret);
 		}
 
 		if(header.comando == msj_esi_finalizado){ //Si el ESI me indica que termino, cierro el hilo
-			conexion_de_cliente_finalizada();
-			printf("Se desconecto esi del socket %d\n", fdCliente); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
-			exit(EXIT_FAILURE);
+			conexion_de_cliente_finalizada(fdEsi);
+			printf("ESI ha finalizado, se interrumpe la conexion en fd %d\n", fdCliente); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+			int ret = EXIT_FAILURE;
+			pthread_exit(&ret);
 
 		}else{ //Veo que sentencia me envio
+
+			void* buffer = malloc(header.tamanio);
+			resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
+
+			if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
+				printf("Error al recibir payload del ESI \n");
+				conexion_de_cliente_finalizada(fdEsi);
+				int ret = EXIT_FAILURE;
+				pthread_exit(&ret);
+			}
 
 			switch (header.comando) {
 				infoInstancia_t* instanciaConClave;
@@ -688,6 +693,7 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 			switch (identificacion){
 			case ESI:
 				responder_ok_handshake(ESI, socket_cliente);
+				printf("Se ha conectado un nuevo ESI al sistema en fd %d\n", socket_cliente);
 
 				//Creo el hilo para su ejecucion
 				pthread_t hiloESI;
@@ -797,7 +803,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 		printf("Error al recibir header de INSTANCIA \n");
-		conexion_de_cliente_finalizada();
+		conexion_de_cliente_finalizada(unFileDescriptor);
 		exit(EXIT_FAILURE);
 	}
 
