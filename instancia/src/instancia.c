@@ -402,6 +402,31 @@ void enviar_ok_sentencia_a_Coordinador(){
 	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
 }
 
+//LAG
+void enviar_msj_instancia_sustituyo_clave(){
+	header_t header;
+	header.comando = msj_instancia_sustituyo_clave;
+	header.tamanio = 0;
+
+	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
+}
+
+void enviar_msj_instancia_compactar(){
+	header_t header;
+	header.comando = msj_instancia_compactar;
+	header.tamanio = 0;
+
+	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
+}
+
+void enviar_msj_instancia_compactacion_finalizada(){
+	header_t header;
+	header.comando = msj_instancia_compactacion_finalizada;
+	header.tamanio = 0;
+
+	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
+}
+// fin LAG
 void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz,t_entrada * matriz,t_dictionary * diccionario,char * clave){
 
 	log_debug(logInstancia, "Sustituye Algoritmo declarado %s",algoritmo);
@@ -505,11 +530,6 @@ void sustituirMatrizEntradas(char * algoritmo,int  punteroIUltimoInsertadoMatriz
 					matriz[aSustituir].tiempo=0;
 				}
 
-		} else {
-			if (string_equals_ignore_case(algoritmo, "BSU")) {
-
-			}
-
 		}
 }
 }
@@ -579,6 +599,10 @@ void compactarMatrizValores(){
 	}
 	//Destruyo lista y NO borro los elementos porque son los que estan adentro de la TablaEntradas
 	list_destroy(listaEntradas);
+
+	//LAG
+	enviar_msj_instancia_compactacion_finalizada();
+	//fin LAG
 }
 
 void sustitucionEntrada(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias){
@@ -586,12 +610,21 @@ void sustitucionEntrada(t_entrada* entrada, char* valor, int tamanio, int entrad
 	int entradasLibres = cantEntradasLibres();
 	if(entradasLibres >= entradasNecesarias){
 		//Primero se compacta y luego se inserta normalmente
-		compactarMatrizValores();
+	/*	compactarMatrizValores();
 		int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 		reservarEntrada(indiceEntrada, entradasNecesarias);
+	*/
+		//LAG
+		//Se avisa a coordinador de que se nescesita compactar
+		enviar_msj_instancia_compactar();
+		// fin LAG
 	}else{
 		//TODO: sustitucionPorAlgoritmo();
+		//LAG
+		sustituirMatrizEntradas(configuracion.algoritmo_remplazo, punteroIUltimoInsertadoMatriz,
+				tablaEntradas, diccionarioEntradas, entrada->clave);
+		// fin LAG
 	}
 }
 
@@ -636,6 +669,9 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 			reservarEntrada(indiceEntrada, entradasNecesarias);
 		}
 	}
+
+
+
 }
 
 void ejecutarSet(void* buffer){
@@ -799,6 +835,20 @@ void* recibirBuffer(int tamanio){
 	return buffer;
 }
 
+//LAG
+
+
+int enviarBuffer(void*buffer,int tamanio){
+
+	int resultado = enviar_mensaje(socketCoordinador,&buffer,tamanio);
+	if(resultado < 0){
+		log_error(logInstancia, "Error al enviar");
+		exitFailure();
+	}
+	return resultado;
+}
+//fin LAG
+
 int main(int argc, char *argv[]) {
 
 	//Creo el log
@@ -839,9 +889,13 @@ int main(int argc, char *argv[]) {
 		case msj_sentencia_store:
 			ejecutarStore(buffer);
 			break;
+		case msj_instancia_compactar:
+			compactarMatrizValores();
+			break;
 		}
 		//Verifico y realizo el Dump en caso de que sea necesario
 		//TODO: Revisar y descomentar procesarDump();
+		procesarDump();
 	}
 	close(socketCoordinador);
 	return EXIT_SUCCESS;

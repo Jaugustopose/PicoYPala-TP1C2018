@@ -1,6 +1,6 @@
-GET futbol:ansaldi
-SET futbol:ansaldi TraeVodka
-GET futbol:messi
-SET futbol:messi PorqueMessi
-STORE futbol:ansaldi
-STORE futbol:messi
+GET futbol:ansaldi1
+SET futbol:ansaldi1 TraeVino
+GET futbol:messi1
+SET futbol:messi1 PorQueMessiNoHayPorque
+STORE futbol:ansaldi1
+STORE futbol:messi1
