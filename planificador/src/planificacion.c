@@ -269,7 +269,7 @@ void liberarClave(char* clave){
 	}
 	void* elem = list_remove_by_condition(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
 	desbloquearClave(clave);
-	free(elem);
+	//free(elem);
 }
 
 void liberarRecursos(proceso_t* proceso) {

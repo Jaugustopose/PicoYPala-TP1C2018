@@ -330,6 +330,16 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
+		case msj_store_clave:
+			header->comando = msj_store_clave;
+			bufferAEnviar = serializar(*header,buffer);
+			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header->tamanio);
+			free(bufferAEnviar);
+			log_debug(log_operaciones_esis, "Se envió mensaje LIBERAR CLAVES POR STORE al planificador");
+			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
+			log_debug(log_operaciones_esis, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+		break;
+
 		default:
 			printf("Encabezado erroneo. No envie nada al planificador\n");
 			break;
@@ -488,14 +498,16 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
 							sem_post(&instanciaConClave->semaforo);
-
 						}else{
-							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
-							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_bloqueada);
+							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR termina el hilo si el planificador contesta que no tenia bloqueada la clave..
+							conexion_de_cliente_finalizada(fdEsi);
+							printf("ESI ha finalizado por intentar acceder a una clave no bloqueada %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+							int ret = EXIT_FAILURE;
+							pthread_exit(&ret);
 						}
 					}else {
 						//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
-//							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
+							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
 
 					}
 				}else {
@@ -530,7 +542,10 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 						}else{
 							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
-							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_bloqueada);
+							conexion_de_cliente_finalizada(fdEsi);
+							printf("ESI ha finalizado por intentar acceder a una clave no bloqueada %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+							int ret = EXIT_FAILURE;
+							pthread_exit(&ret);
 						}
 					}else {
 						//Se envia al PLANI que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
@@ -565,7 +580,7 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 
 	while(1){
 
-		sem_wait(&miInstancia->semaforo); //Hago el wait al mutex
+		sem_wait(&miInstancia->semaforo); //Hago el wait al semaforo binario.
 
 		//sem_wait(&atenderInstancia); //Semaforo bloqueante para orden
 
@@ -816,6 +831,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	int resultado = 0;
 	int cantidadInstanciasConectadas = 0;
 	t_list* instanciasConectadas;
+	void* buffer;
 
 	resultado = recibir_mensaje(unFileDescriptor,&header,sizeof(header_t));
 
@@ -874,6 +890,15 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 		case msj_sentencia_finalizada:
 
 			//Recibi ok de la instancia. Tengo que avisar al ESI que salio bien. Crear variable global que mantenga el fd del ESI que mando ultima operacion
+			log_debug(log_operaciones_esis,"Instancia ejecuto operacion correctamente");
+			if (operacion->keyword == STORE){
+				log_debug(log_operaciones_esis,"Enviando LIBERAR CLAVES a Planificador. Clave %s", operacion->argumentos.STORE.clave);
+				header.tamanio = strlen(operacion->argumentos.STORE.clave) + 1;
+				buffer = malloc(header.tamanio);
+				memcpy(buffer,operacion->argumentos.STORE.clave, header.tamanio);
+				enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_store_clave);
+				free(buffer);
+			}
 			enviar_ok_sentencia_a_ESI();
 		break;
 
