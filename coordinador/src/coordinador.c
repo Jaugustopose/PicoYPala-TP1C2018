@@ -18,6 +18,7 @@
 #include <commons/log.h>
 #include <stdbool.h>
 #include <signal.h>
+#include <semaphore.h>
 
 //STRUCTS
 typedef struct config_t {
@@ -38,7 +39,7 @@ typedef struct infoInstancia_t{
 	char letra_fin;
 	int desconectada;
 	t_list* claves;
-	pthread_mutex_t semaforo;
+	sem_t semaforo;
 }infoInstancia_t;
 
 typedef struct {
@@ -89,6 +90,10 @@ int ultimaOperacion = 0;
 infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_operaciones_esis;
 int esiActual = 0;
+sem_t atenderEsi;
+sem_t atenderInstancia;
+sem_t escucharInstancia;
+pthread_mutex_t mutexMaster;
 
 //FUNCIONES
 
@@ -168,16 +173,18 @@ void* instancia_conectada_anteriormente(char* unNombre){
 }
 
 void conexion_de_cliente_finalizada(int unFD) {
+	pthread_mutex_lock(&mutexMaster);
 	// conexión cerrada.
 	printf("Server: socket %d termino la conexion\n", unFD);
 	// Eliminar del conjunto maestro y su respectiva bolsa.
-	FD_CLR(fdCliente, &master);
+	FD_CLR(unFD, &master);
 
 	if (FD_ISSET(unFD, &bolsa_instancias)){
 		FD_CLR(unFD, &bolsa_instancias);
 		printf("Se desconecto instancia del socket %d\n", unFD); //Reorganizar la distribucion para las claves no se hace. Nos quitan Key Explicit
 	}
 
+	pthread_mutex_unlock(&mutexMaster);
 	close(unFD); // Si se perdio la conexion, la cierro.
 }
 
@@ -255,7 +262,7 @@ void signal_a_todos_los_semaforos_hiloInstancia(t_list* listaInstancias){
 	for (i = 0; i < listaInstancias->elements_count; ++i) {
 
 		unaInstancia = list_get(listaInstancias,i);
-		pthread_mutex_unlock(&unaInstancia->semaforo);
+		sem_post(&unaInstancia->semaforo);
 	}
 }
 
@@ -371,6 +378,8 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 	while(1){ //Comienzo a atender el esi en el hilo hasta que el header sea msj_esi_finalizado
 
+		sem_wait(&atenderEsi); //Semaforo bloqueante para orden
+
 		printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
 		resultado = recibir_mensaje(fdEsi,&header,sizeof(header_t));
@@ -383,165 +392,169 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 		if(header.comando == msj_esi_finalizado){ //Si el ESI me indica que termino, cierro el hilo
 			conexion_de_cliente_finalizada(fdEsi);
-			printf("ESI ha finalizado, se interrumpe la conexion en fd %d\n", fdCliente); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+			printf("ESI ha finalizado, se interrumpe la conexion en fd %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
 			int ret = EXIT_FAILURE;
 			pthread_exit(&ret);
 
-		}else{ //Veo que sentencia me envio
+		}
 
-			void* buffer = malloc(header.tamanio);
-			resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
+		void* buffer = malloc(header.tamanio);
+		resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
 
-			if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
-				printf("Error al recibir payload del ESI \n");
-				conexion_de_cliente_finalizada(fdEsi);
-				int ret = EXIT_FAILURE;
-				pthread_exit(&ret);
-			}
+		if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
+			printf("Error al recibir payload del ESI \n");
+			conexion_de_cliente_finalizada(fdEsi);
+			int ret = EXIT_FAILURE;
+			pthread_exit(&ret);
+		}
 
-			switch (header.comando) {
-				infoInstancia_t* instanciaConClave;
-				char* clave;
 
-				case msj_sentencia_get:
 
-					log_trace(log_operaciones_esis, "ESI %d realizo un GET clave %s",fdEsi,(char*) buffer);
+		switch (header.comando) {
+			infoInstancia_t* instanciaConClave;
+			char* clave;
 
-					/* 1) Le pregunto al planificador si puede hacer el get de la clave indicada
-					 *		1.1) Si puede, el PLANIFICADOR le avisa al ESI que ejecute la siguiente instruccion.
-					 *		1.2) Si no puede, el planificador lo para y le dice a otro ESI que me mande una instruccion.
-					 */
-						clave = (char*)buffer;
-						instanciaConClave = encontrar_instancia_por_clave(clave);
+			case msj_sentencia_get:
 
-						if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
+				log_trace(log_operaciones_esis, "ESI %d realizo un GET clave %s",fdEsi,(char*) buffer);
 
-							if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-								printf("GET - Instancia con clave %s\n", instanciaConClave->nombre);
-								//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y recibo su respuesta.
-								enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
-								pthread_mutex_unlock(&instanciaConClave->semaforo);
-							}else {
-								printf("GET - No hay instancia con esa clave!\n");
-								//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
-								enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
-							}
-						}else { //Entro aqui si no encontre la clave en mi sistema
-							printf("GET - No se encontro clave en el sistema!!\n");
-							//Selecciono instancia victima segun algoritmo de distribucion
-							instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION);
-
-							//Agrego clave a la lista de claves que tiene la respectiva instancia.
-							list_add(instanciaConClave->claves, clave);
-
-							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
-							operacion = preparar_operacion_compartida_GET(clave);
-
-							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
-							printf("Envio solicitud GET a planificador! %d\n", msj_solicitud_get_clave);
-							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
-							pthread_mutex_unlock(&instanciaConClave->semaforo);
-						}
-				break;
-
-				case msj_sentencia_set:
-
-					log_trace(log_operaciones_esis, "ESI %d realizo un SET clave %s",fdEsi,(char*) buffer);
-					clave = (char*)buffer; //Anda de una porque como separamos con /0
-					printf("clave = %s\n", clave);
-					int fin = 0;
-					int i = 0;
-					int cantidadTerminator = 0;
-					while (!fin) {
-						if(clave[i] == '\0'){
-							cantidadTerminator++;
-						}
-						printf("%c", clave[i]);
-						fin = (cantidadTerminator == 2);
-						i++;
-					}
-					printf("\n");
-					instanciaConClave = encontrar_instancia_por_clave(clave);
-
-					if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
-
-						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-							printf("SET - Instancia con clave %s\n", instanciaConClave->nombre);
-							//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
-							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
-
-							if (resultado == msj_ok_solicitud_operacion){
-
-								//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
-								operacion = preparar_operacion_compartida_SET(clave);
-
-								//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
-								pthread_mutex_unlock(&instanciaConClave->semaforo);
-
-							}else{
-								//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
-								enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_bloqueada);
-							}
-						}else {
-							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
-//							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
-
-						}
-					}else {
-						//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave no identificada y recibo su respuesta.
-						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_identificada);
-					}
-				break;
-
-				case msj_sentencia_store:
-
-					log_trace(log_operaciones_esis, "ESI %d realizo un STORE clave %s",fdEsi,(char*) buffer);
+				/* 1) Le pregunto al planificador si puede hacer el get de la clave indicada
+				 *		1.1) Si puede, el PLANIFICADOR le avisa al ESI que ejecute la siguiente instruccion.
+				 *		1.2) Si no puede, el planificador lo para y le dice a otro ESI que me mande una instruccion.
+				 */
 					clave = (char*)buffer;
-
 					instanciaConClave = encontrar_instancia_por_clave(clave);
 
 					if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
-
-							//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
-							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
-
-							if (resultado == msj_ok_solicitud_operacion){
-
-								//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
-								operacion = preparar_operacion_compartida_STORE(clave);
-
-								//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
-								pthread_mutex_unlock(&instanciaConClave->semaforo);
-
-								//TODO: Avisarle al planificador que se libero la clave con STORE.
-
-							}else{
-								//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
-								enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_bloqueada);
-							}
+							printf("GET - Instancia con clave %s\n", instanciaConClave->nombre);
+							//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y recibo su respuesta.
+							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
+							sem_post(&instanciaConClave->semaforo);
 						}else {
-							//Se envia al PLANI que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
+							printf("GET - No hay instancia con esa clave!\n");
+							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
 							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
 						}
-					}else {
-						//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave no identificada y recibo su respuesta.
-						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_identificada);
-					}
-				break;
+					}else { //Entro aqui si no encontre la clave en mi sistema
+						printf("GET - No se encontro clave en el sistema!!\n");
+						//Selecciono instancia victima segun algoritmo de distribucion
+						instanciaConClave = elegir_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION);
 
-				default:
-					log_error(log_operaciones_esis,"Se recibio comando desconocido desde ESI");
-				break;
-			}
-		}
-	} //Fin del while
-}
+						//Agrego clave a la lista de claves que tiene la respectiva instancia.
+						list_add(instanciaConClave->claves, clave);
+
+						//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
+						operacion = preparar_operacion_compartida_GET(clave);
+
+						//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
+						printf("Envio solicitud GET a planificador! %d\n", msj_solicitud_get_clave);
+						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
+						sem_post(&instanciaConClave->semaforo);
+					}
+			break;
+
+			case msj_sentencia_set:
+
+				log_trace(log_operaciones_esis, "ESI %d realizo un SET clave %s",fdEsi,(char*) buffer);
+				clave = (char*)buffer; //Anda de una porque como separamos con /0
+				printf("clave = %s\n", clave);
+				int fin = 0;
+				int i = 0;
+				int cantidadTerminator = 0;
+				while (!fin) {
+					if(clave[i] == '\0'){
+						cantidadTerminator++;
+					}
+					printf("%c", clave[i]);
+					fin = (cantidadTerminator == 2);
+					i++;
+				}
+				printf("\n");
+				instanciaConClave = encontrar_instancia_por_clave(clave);
+
+				if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
+
+					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
+						printf("SET - Instancia con clave %s\n", instanciaConClave->nombre);
+						//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
+						resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
+
+						if (resultado == msj_ok_solicitud_operacion){
+
+							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
+							operacion = preparar_operacion_compartida_SET(clave);
+
+							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
+							sem_post(&instanciaConClave->semaforo);
+
+						}else{
+							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
+							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_bloqueada);
+						}
+					}else {
+						//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
+//							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
+
+					}
+				}else {
+					//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave no identificada y recibo su respuesta.
+					enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_identificada);
+				}
+			break;
+
+			case msj_sentencia_store:
+
+				log_trace(log_operaciones_esis, "ESI %d realizo un STORE clave %s",fdEsi,(char*) buffer);
+				clave = (char*)buffer;
+
+				instanciaConClave = encontrar_instancia_por_clave(clave);
+
+				if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
+
+					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
+
+						//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
+						resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
+
+						if (resultado == msj_ok_solicitud_operacion){
+
+							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
+							operacion = preparar_operacion_compartida_STORE(clave);
+
+							//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
+							sem_post(&instanciaConClave->semaforo);
+
+							//TODO: Avisarle al planificador que se libero la clave con STORE.
+
+						}else{
+							//El ESI no tiene geteada la clave para operar con SET o STORE. PLANI hace lo que tenga que hacer, COORDINADOR no toca nada, solo avisa al PLANI.
+							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_bloqueada);
+						}
+					}else {
+						//Se envia al PLANI que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
+						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
+					}
+				}else {
+					//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave no identificada y recibo su respuesta.
+					enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_no_identificada);
+				}
+			break;
+
+			default:
+				log_error(log_operaciones_esis,"Se recibio comando desconocido desde ESI");
+			break;
+
+		} //Fin del switch
+
+		sem_post(&atenderInstancia); //Signal a semaforo para que sea el turno del hilo atender instancia.
+	}
+} //Fin del while
 
 void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo en creacion de hilo.
 
-	header_t* header = malloc(sizeof(header));
+	header_t* header = malloc(sizeof(header_t));
 	void* buffer;
 	void* bufferAEnviar;
 	infoInstancia_t* miInstancia = malloc(sizeof(infoInstancia_t));
@@ -552,10 +565,12 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 
 	while(1){
 
-		pthread_mutex_lock(&miInstancia->semaforo); //Hago el wait al mutex
+		sem_wait(&miInstancia->semaforo); //Hago el wait al mutex
+
+		sem_wait(&atenderInstancia); //Semaforo bloqueante para orden
 
 		if(miInstancia->desconectada == true){ //Si la instancia que atendia este hilo se desconecto, el hilo muere.
-			pthread_mutex_destroy(&miInstancia->semaforo);
+			sem_destroy(&miInstancia->semaforo);
 			exit(EXIT_FAILURE);
 		}else{
 
@@ -604,7 +619,9 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 				default:
 					printf("Le metieron cualquier cosa al keyword de la operacion compartida\n");
 				break;
-			}
+			}//Fin del switch
+
+			sem_post(&escucharInstancia); //Signal a semaforo para que sea el turno del hilo main.
 		}
 	}
 }//Fin del for
@@ -621,8 +638,7 @@ void* crear_nueva_instancia(int socket_cliente, const config_t* config, char* no
 	nueva_instancia->letra_inicio = '-';
 	nueva_instancia->letra_fin = '-';
 	nueva_instancia->claves = list_create();
-	pthread_mutex_init(&nueva_instancia->semaforo, NULL);
-	pthread_mutex_lock(&nueva_instancia->semaforo);
+	sem_init(&nueva_instancia->semaforo,0,0);
 
 	return nueva_instancia;
 }
@@ -794,6 +810,8 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
 void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
+	sem_wait(&escucharInstancia); //Semaforo bloqueante para orden
+
 	header_t header;
 	int resultado = 0;
 	int cantidadInstanciasConectadas = 0;
@@ -841,7 +859,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 				//Levanto el semaforo de la instancia que solicito compactacion para que vuelva a ejecutar sobre la operacion compartida.
 				instanciaQuePidioCompactacion = encontrar_instancia_por_fd(unFileDescriptor);
-				pthread_mutex_unlock(&instanciaQuePidioCompactacion->semaforo);
+				sem_post(&instanciaQuePidioCompactacion->semaforo);
 
 //				//Notifico al PLANIFICADOR que ya se compactaron todas las instancias y hay que continuar la ejecucion.
 //				enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_compactacion_finalizada_continuar_planificacion);
@@ -861,10 +879,18 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 		default:
 			break;
-	}
+	} //Fin del switch
+
+	sem_post(&atenderEsi); //Signal a semaforo para que sea el turno del hilo atender esi.
 }
 
 int main(void) {
+
+	//Inicializar semaforos para sincronizacion de hilos
+	pthread_mutex_init(&mutexMaster,NULL);
+	sem_init(&atenderEsi,0,1);
+	sem_init(&atenderInstancia,0,0);
+	sem_init(&escucharInstancia,0,0);
 
 	//Creo log de operaciones de los ESI
 	log_operaciones_esis = log_create("coordinador.log", "Coordinador", true, LOG_LEVEL_TRACE);
@@ -893,7 +919,10 @@ int main(void) {
 
 	//Bucle principal
 	for (;;) {
+		pthread_mutex_lock(&mutexMaster);
 		read_fds = master;
+		pthread_mutex_unlock(&mutexMaster);
+
 		if (select(maxfd + 1, &read_fds, NULL, NULL, NULL) == -1) { //Compruebo si algun cliente quiere interactuar.
 			perror("Se ha producido un error en el Select a la espera de actividad en sockets");
 			exit(EXIT_FAILURE);
