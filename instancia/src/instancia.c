@@ -759,15 +759,11 @@ void procesarDump(){
 		//recorro matriz de entradas de 0 a cantidad de entradas
 		int i = 0;
 		while (i < entradasCantidad) {
-			if (tablaEntradas[i].numeroEntrada > -1
-					&& tablaEntradas[i].numeroEntrada < entradasCantidad
-					&& tablaEntradas[i].tamanioValor > -1) {
-
+			if (*tablaEntradas[i].clave	&& tablaEntradas[i].tamanioValor) {
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
 				string_append(&pathArchivo, "DUMP/");
-				string_append(&pathArchivo,
-						tablaEntradas[i].clave);
+				string_append(&pathArchivo,	tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
 				//se accede a la tabla de entradas
 				char* textoValor = leerMatrizValores(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);

@@ -90,9 +90,9 @@ int ultimaOperacion = 0;
 infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_operaciones_esis;
 int esiActual = 0;
-sem_t atenderEsi;
-sem_t atenderInstancia;
-sem_t escucharInstancia;
+//sem_t atenderEsi;
+//sem_t atenderInstancia;
+//sem_t escucharInstancia;
 pthread_mutex_t mutexMaster;
 
 //FUNCIONES
@@ -378,7 +378,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 	while(1){ //Comienzo a atender el esi en el hilo hasta que el header sea msj_esi_finalizado
 
-		sem_wait(&atenderEsi); //Semaforo bloqueante para orden
+		//sem_wait(&atenderEsi); //Semaforo bloqueante para orden
 
 		printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
@@ -548,7 +548,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 		} //Fin del switch
 
-		sem_post(&atenderInstancia); //Signal a semaforo para que sea el turno del hilo atender instancia.
+		//sem_post(&atenderInstancia); //Signal a semaforo para que sea el turno del hilo atender instancia.
 	}
 } //Fin del while
 
@@ -567,7 +567,7 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 
 		sem_wait(&miInstancia->semaforo); //Hago el wait al mutex
 
-		sem_wait(&atenderInstancia); //Semaforo bloqueante para orden
+		//sem_wait(&atenderInstancia); //Semaforo bloqueante para orden
 
 		if(miInstancia->desconectada == true){ //Si la instancia que atendia este hilo se desconecto, el hilo muere.
 			sem_destroy(&miInstancia->semaforo);
@@ -621,7 +621,7 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 				break;
 			}//Fin del switch
 
-			sem_post(&escucharInstancia); //Signal a semaforo para que sea el turno del hilo main.
+			//sem_post(&escucharInstancia); //Signal a semaforo para que sea el turno del hilo main.
 		}
 	}
 }//Fin del for
@@ -810,7 +810,7 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
 void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
-	sem_wait(&escucharInstancia); //Semaforo bloqueante para orden
+	//sem_wait(&escucharInstancia); //Semaforo bloqueante para orden
 
 	header_t header;
 	int resultado = 0;
@@ -881,16 +881,16 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 			break;
 	} //Fin del switch
 
-	sem_post(&atenderEsi); //Signal a semaforo para que sea el turno del hilo atender esi.
+	//sem_post(&atenderEsi); //Signal a semaforo para que sea el turno del hilo atender esi.
 }
 
 int main(void) {
 
 	//Inicializar semaforos para sincronizacion de hilos
 	pthread_mutex_init(&mutexMaster,NULL);
-	sem_init(&atenderEsi,0,1);
-	sem_init(&atenderInstancia,0,0);
-	sem_init(&escucharInstancia,0,0);
+	//sem_init(&atenderEsi,0,1);
+	//sem_init(&atenderInstancia,0,0);
+	//sem_init(&escucharInstancia,0,0);
 
 	//Creo log de operaciones de los ESI
 	log_operaciones_esis = log_create("coordinador.log", "Coordinador", true, LOG_LEVEL_TRACE);
