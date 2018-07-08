@@ -17,3 +17,26 @@
 [DEBUG] 20:26:15:88 Instance/(19773:19773): Tabla Entradas
 [DEBUG] 20:26:15:88 Instance/(19773:19773): I	Clave		Entrada	Tamaño	Tiempo
 [DEBUG] 20:26:15:88 Instance/(19773:19773): 0	futbol:messi	0	0	0
+[DEBUG] 17:38:27:556 Instance/(15679:15679): Path archivo configuración: /home/utnso/TP_SO_2018/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 17:38:27:560 Instance/(15679:15679): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 17:38:27:560 Instance/(15679:15679): PUERTO_COORDINADOR: 8030
+[DEBUG] 17:38:27:560 Instance/(15679:15679): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 17:38:27:560 Instance/(15679:15679): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 17:38:27:560 Instance/(15679:15679): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 17:38:27:560 Instance/(15679:15679): INTERVALO_DUMP: 1
+[DEBUG] 17:38:27:570 Instance/(15679:15679): Socket coordinador: 4
+[DEBUG] 17:38:27:609 Instance/(15679:15679): Cantidad Entradas: 4 Tamaño Entradas: 9
+[DEBUG] 17:38:27:609 Instance/(15679:15679): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/instancia1/TablaDeEntradas.bin
+[ERROR] 17:38:27:609 Instance/(15679:15679): Error al crear el archivo de Tabla de Entradas
+[DEBUG] 17:57:21:140 Instance/(16449:16449): Path archivo configuración: /home/utnso/TP_SO_2018/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 17:57:21:141 Instance/(16449:16449): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 17:57:21:141 Instance/(16449:16449): PUERTO_COORDINADOR: 8030
+[DEBUG] 17:57:21:141 Instance/(16449:16449): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 17:57:21:141 Instance/(16449:16449): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 17:57:21:141 Instance/(16449:16449): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 17:57:21:141 Instance/(16449:16449): INTERVALO_DUMP: 1
+[DEBUG] 17:57:21:827 Instance/(16449:16449): Socket coordinador: 4
+[DEBUG] 17:57:21:865 Instance/(16449:16449): Cantidad Entradas: 4 Tamaño Entradas: 9
+[DEBUG] 17:57:21:865 Instance/(16449:16449): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/instancia1/TablaDeEntradas.bin
+[DEBUG] 17:57:21:865 Instance/(16449:16449): Se mapeo Tabla de Entradas correctamente
+[ERROR] 17:57:22:109 Instance/(16449:16449): Error al recibir

@@ -241,6 +241,8 @@ int abrirArchivoTablaEntradas(){
 	//Path archivo Tabla de Entradas
 	char* pathArchivo = string_new();
 	string_append(&pathArchivo, configuracion.punto_montaje);
+	string_append(&pathArchivo, configuracion.nombre_instancia);
+	string_append(&pathArchivo, "/");
 	string_append(&pathArchivo, "TablaDeEntradas.bin");
 	log_debug(logInstancia, "Path para mmap de Tabla de Entradas: %s", pathArchivo);
 
@@ -299,6 +301,8 @@ void inicializarTablaEntradas(){
 				agregarClaveEnDiccionario(tablaEntradas[i].clave, i);
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
+				string_append(&pathArchivo, configuracion.nombre_instancia);
+				string_append(&pathArchivo, "/");
 				string_append(&pathArchivo, "DUMP/");
 				string_append(&pathArchivo, tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
@@ -736,6 +740,8 @@ void ejecutarStore(void* buffer){
 		//Creo path al archivo de store
 		char* pathArchivo = string_new();
 		string_append(&pathArchivo, configuracion.punto_montaje);
+		string_append(&pathArchivo, configuracion.nombre_instancia);
+		string_append(&pathArchivo, "/");
 		string_append(&pathArchivo, clave);
 		string_append(&pathArchivo, ".txt");
 		//Intento borrar archivo existente
@@ -780,6 +786,8 @@ void procesarDump(){
 			if (tablaEntradas[i].clave[0]	&& tablaEntradas[i].tamanioValor) {
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
+				string_append(&pathArchivo, configuracion.nombre_instancia);
+				string_append(&pathArchivo, "/");
 				string_append(&pathArchivo, "DUMP/");
 				string_append(&pathArchivo,	tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
@@ -801,13 +809,13 @@ void procesarDump(){
 					exitFailure();
 				} else {
 					int result = write(fd, textoValor, tamanioArchivo);
-					log_debug(logInstancia, "result=%d", result);
+
 					if (result < 0) {
 						close(fd);
 						log_error(logInstancia, "Error al escribir");
 						exit(EXIT_FAILURE);
 					} else {
-						log_debug(logInstancia, "se guardo archivo");
+						log_debug(logInstancia, "Se guardo archivo");
 						close(fd);
 
 					}
@@ -870,6 +878,20 @@ int main(int argc, char *argv[]) {
 
 	//Lee archivo de configuraciones
 	configuracion = cargarConfiguracion();
+
+
+	//creo carpeta si no existe
+char * path= string_new();
+string_append(&path,"mkdir ");
+string_append(&path,configuracion.punto_montaje);
+string_substring(&path,0,strlen(&path)-1);
+system(path);
+string_append(&path,"/");
+string_append(&path,configuracion.nombre_instancia);
+printf("DIRECTORIO DATOS: %s\n",path);
+system(path);
+string_append(&path,"/DUMP");
+system(path);
 
 	//Conexion Coordinador
 	socketCoordinador = conectarConProceso(configuracion.ip_coordinador, configuracion.puerto_coordinador, Instancia);
