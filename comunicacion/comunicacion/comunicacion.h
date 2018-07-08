@@ -22,8 +22,35 @@ typedef enum id_proceso {
 
 
 typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
-	handshake = 1,
-	imposibilidad_conexion = 2
+	msj_handshake = 1,
+	msj_imposibilidad_conexion = 2,
+	msj_nombre_instancia = 3,
+	msj_instruccion_esi = 4,
+	msj_solicitud_get_clave = 5,
+	msj_clave_permitida_para_operar = 6,
+	msj_crear_clave_get = 7,
+	msj_store_clave = 8,
+	msj_requerimiento_ejecucion = 9,
+	msj_sentencia_finalizada = 10,
+	msj_esi_finalizado = 11,
+	msj_esi_tiene_tomada_clave = 12,
+	msj_ok_solicitud_operacion = 13,
+	msj_fail_solicitud_operacion = 14,
+	msj_abortar_esi = 15,
+	msj_sentencia_get = 16,
+	msj_sentencia_set = 17,
+	msj_sentencia_store = 18,
+	msj_error_tamanio_clave = 19,
+	msj_error_clave_no_identificada = 20,
+	msj_error_comunicacion = 21,
+	msj_error_clave_inaccesible = 22,
+	msj_error_clave_no_bloqueada = 23,
+	msj_instancia_compactar = 24,
+	msj_instancia_compactacion_finalizada = 25,
+	msj_instancia_sustituyo_clave = 26,
+	msj_compactacion_finalizada_continuar_planificacion = 27,
+	msj_cantidad_entradas = 28,
+	msj_tamanio_entradas = 29
 }id_mensaje;
 
 typedef struct{
@@ -36,6 +63,12 @@ typedef struct{
 	void* cuerpo;
 } paquete_t;
 
+typedef enum t_operacion{
+	get,
+	set,
+	store
+} operacion_t;
+
 int conectar_a_server(char* ip, int puerto);
 int recibir_mensaje(int socket, void* buffer, int tamanio);
 int enviar_mensaje(int socket, void* buffer, int tamanio);
@@ -44,7 +77,7 @@ struct sockaddr_in crear_direccion_servidor(int puerto);
 int cerrar_socket(int socket);
 int listen_socket(int socket);
 int aceptar_conexion(int socket);
-paquete_t recibirPaquete(int socket);
+paquete_t* recibirPaquete(int socket);
 void responder_ok_handshake(int identificacion, int socket_destinatario);
 void* serializar(header_t paquete, void* payload);
 int conectarConProceso(char* ip, int puerto,int identidad);

@@ -1,0 +1,11 @@
+[DEBUG] 19:43:26:710 Planificador/(3649:3649): PUERTO: 8020
+[DEBUG] 19:43:26:710 Planificador/(3649:3649): ESTIMACION_INICIAL: 5
+[DEBUG] 19:43:26:710 Planificador/(3649:3649): ALGORITMO_PLANIFICACION: SJF-CD
+[DEBUG] 19:43:26:710 Planificador/(3649:3649): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 19:43:26:710 Planificador/(3649:3649): PUERTO_COORDINADOR: 8030
+[DEBUG] 19:43:26:710 Planificador/(3649:3649): CLAVES_BLOQUEADAS: [materias:K3002,materias:K3001]
+[DEBUG] 19:43:36:26 Planificador/(3649:3657): Notificacion recibida del coordinador
+[DEBUG] 19:43:36:26 Planificador/(3649:3657): Paquete recibido del coordinador
+[DEBUG] 19:43:36:26 Planificador/(3649:3657): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 19:43:36:26 Planificador/(3649:3657): Pudo solicitar clave? => 1
+[DEBUG] 19:44:09:304 Planificador/(3649:3657): MSJ Sentencia finalizada recibido

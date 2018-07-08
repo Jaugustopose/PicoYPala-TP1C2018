@@ -1,0 +1,19 @@
+[DEBUG] 20:24:07:289 Instance/(19773:19773): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 20:24:07:289 Instance/(19773:19773): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 20:24:07:289 Instance/(19773:19773): PUERTO_COORDINADOR: 8030
+[DEBUG] 20:24:07:289 Instance/(19773:19773): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 20:24:07:289 Instance/(19773:19773): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 20:24:07:289 Instance/(19773:19773): NOMBRE_INSTANCIA: instancia1
+[DEBUG] 20:24:07:289 Instance/(19773:19773): INTERVALO_DUMP: 1
+[DEBUG] 20:24:14:805 Instance/(19773:19773): Socket coordinador: 4
+[DEBUG] 20:24:14:845 Instance/(19773:19773): Cantidad Entradas: 20 Tamaño Entradas: 100
+[DEBUG] 20:24:28:956 Instance/(19773:19773): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 20:24:28:957 Instance/(19773:19773): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 20:24:28:957 Instance/(19773:19773): Se borra entrada porque no se encontró archivo de dump. Clave:futbol:messi
+[DEBUG] 20:24:28:957 Instance/(19773:19773): Tabla Entradas
+[DEBUG] 20:24:28:957 Instance/(19773:19773): I	Clave		Entrada	Tamaño	Tiempo
+[INFO] 20:26:15:87 Instance/(19773:19773): Procesando GET. Clave: futbol:messi
+[DEBUG] 20:26:15:88 Instance/(19773:19773): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 20:26:15:88 Instance/(19773:19773): Tabla Entradas
+[DEBUG] 20:26:15:88 Instance/(19773:19773): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 20:26:15:88 Instance/(19773:19773): 0	futbol:messi	0	0	0
