@@ -869,6 +869,22 @@ int enviarBuffer(void*buffer,int tamanio){
 	}
 	return resultado;
 }
+
+void crearCarpetasSiNoExisten(const config_t* configuracion) {
+	//creo carpeta si no existe
+	char* path = string_new();
+	string_append(&path, "mkdir ");
+	string_append(&path, configuracion->punto_montaje);
+	string_substring(&path, 0, strlen(&path) - 1);
+	system(path);
+	string_append(&path, "/");
+	string_append(&path, configuracion->nombre_instancia);
+	printf("DIRECTORIO DATOS: %s\n", path);
+	system(path);
+	string_append(&path, "/DUMP");
+	system(path);
+}
+
 //fin LAG
 
 int main(int argc, char *argv[]) {
@@ -881,18 +897,7 @@ int main(int argc, char *argv[]) {
 
 
 	//creo carpeta si no existe
-char * path= string_new();
-string_append(&path,"mkdir ");
-string_append(&path,configuracion.punto_montaje);
-string_substring(&path,0,strlen(&path)-1);
-system(path);
-string_append(&path,"/");
-string_append(&path,configuracion.nombre_instancia);
-printf("DIRECTORIO DATOS: %s\n",path);
-system(path);
-string_append(&path,"/DUMP");
-system(path);
-
+	crearCarpetasSiNoExisten(&configuracion);
 	//Conexion Coordinador
 	socketCoordinador = conectarConProceso(configuracion.ip_coordinador, configuracion.puerto_coordinador, Instancia);
 	log_debug(logInstancia, "Socket coordinador: %d", socketCoordinador);
