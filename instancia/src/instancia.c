@@ -384,7 +384,6 @@ void imprimirPorPantallaEstucturas() {
 void agregarNuevaClave(char* clave, int indice){
 	agregarClaveEnDiccionario(clave, indice);
 	strcpy(tablaEntradas[indice].clave, clave);
-	//punteroSustitucion = indice;
 }
 
 void setValorEntrada(t_entrada* entrada, char*valor, int tamanio, int indice){
@@ -426,131 +425,133 @@ void enviar_msj_instancia_compactacion_finalizada(){
 	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
 }
 
-void borrarClave(int index){
-	t_entrada* entrada = tablaEntradas + index;
-	int cantidad = redondearArribaDivision(entrada->tamanioValor, entradasTamanio);
-	liberarEntrada(entrada->numeroEntrada, cantidad);
+void borrarEntradaAtomica(t_entrada* entrada){
+	liberarEntrada(entrada->numeroEntrada, 1);
 	removerClaveEnDiccionario(entrada->clave);
 	//TODO: Avisar al coordinador que la clave se borró
 	entrada->clave[0] = 0;
 }
 
+int cantidadEntradasAtomicas(){
+	int i;
+	int cantidad = 0;
+	for(i=0;i<entradasCantidad;i++){
+		if(redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) == 1)
+			cantidad++;
+	}
+	return cantidad;
+}
+
 void sustituirCiclico(t_entrada* entrada, char* valor, int tamanio, int entradasASustituir){
-
-	int i = punteroSustitucion;
-	int aSustituir[entradasASustituir];
-	int encontradas = 0;
-	for(;;) {
-		if(redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) < 2) {
-			//Era una entrada atómica, se guarda indice para borrarla luego
-			log_debug(logInstancia, "Entrada atómica a borrar: %s", tablaEntradas[i].clave);
-			aSustituir[encontradas]= i;
-			encontradas++;
-			if(encontradas == entradasASustituir){
-				//Conseguí todas las entradas necesarias asi que salgo del for
-				break;
-			}else{
-				//Faltan mas entradas, incremento indice y continuo
-				i = (i + 1) % entradasCantidad;
-			}
-		} else {
-			//No era atomica la ignoro
-			i = (i + 1) % entradasCantidad;
+	int sustituidas = 0;
+	while(sustituidas < entradasASustituir) {
+		t_entrada* entradaLocal = tablaEntradas + punteroSustitucion;
+		if(redondearArribaDivision(entradaLocal->tamanioValor, entradasTamanio) == 1 && entradaLocal->clave[0]) {
+			//Era una entrada atómica, se procede a borrarla
+			log_debug(logInstancia, "Entrada atómica a borrar: %s", entradaLocal->clave);
+			borrarEntradaAtomica(entradaLocal);
+			sustituidas++;
 		}
-		if (i == punteroSustitucion){
-			//Di toda la vuelta a la tabla y llegue al mismo puntero inicial
-			//Lo que significa que no hay suficientes entradas atómicas para reemplazar
-			break;
-		}
+		//Incremento puntero y me aseguro que quede entre 0 y entradasCantidad -1
+		punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
 	}
-	if(encontradas == entradasASustituir){
-		//Se encontraron la cantidad de entradas necesarias así que se deben borrar todas
-		for(i=0; i < entradasASustituir; i++){
-			borrarClave(aSustituir[i]);
-		}
-		//Actualizo puntero de sustitución
-		punteroSustitucion = (aSustituir[i-1] + 1) % entradasCantidad;
-		//Me fijo si de casualidad quedaron todos los espacios contiguos
-		int entradasNecesarias =  redondearArribaDivision(tamanio, entradasTamanio);
-		int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
-		//Verifico si se encontraron entradas libres
-		if (indiceEntrada < 0) {
-			//No quedaron contiguas asi que se compacta
-			enviar_msj_instancia_compactar();
-		} else {
-			//Quedaron contiguas asi que se inserta directamente
-			setValorEntrada(entrada, valor, tamanio, indiceEntrada);
-			reservarEntrada(indiceEntrada, entradasASustituir);
-		}
-	}else{
-		//No se encontraron entradas suficientes,
-		//TODO: Se debe avisar al coordinador que no se puede sustituir
+	//Me fijo si de casualidad quedaron todos los espacios contiguos
+	int entradasNecesarias =  redondearArribaDivision(tamanio, entradasTamanio);
+	int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+	//Verifico si se encontraron entradas libres
+	if (indiceEntrada < 0) {
+		//No quedaron contiguas asi que se compacta
+		enviar_msj_instancia_compactar();
+	} else {
+		//Quedaron contiguas asi que se inserta directamente
+		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+		reservarEntrada(indiceEntrada, entradasASustituir);
 	}
 }
 
-void sustituirLRU(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias){
-	/*int i = 0;
-	int aSustituir = -1;
-	int aSustituirTiempo = 0;
-	while (i < entradasCantidad) {
-		if (redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) == 1) {
-			if (timer - tablaEntradas[i].tiempo > aSustituirTiempo) {
-				aSustituirTiempo = tablaEntradas[i].tiempo;
-				aSustituir = i;
+void sustituirLRU(t_entrada* entrada, char* valor, int tamanio, int entradasASustituir){
+	int sustituidas = 0;
+	while(sustituidas < entradasASustituir) {
+		int i;
+		int indiceSustituir = 0;
+		int tiempoSustituir = 0;
+		for(i=0;i<entradasCantidad;i++){
+			int indice = (i + punteroSustitucion) % entradasCantidad;
+			t_entrada* entradaLocal = tablaEntradas + indice;
+			if(redondearArribaDivision(entradaLocal->tamanioValor, entradasTamanio) == 1 && entradaLocal->clave[0]) {
+				if(timer-entradaLocal->tiempo > tiempoSustituir){
+					indiceSustituir = indice;
+					tiempoSustituir = timer-entradaLocal->tiempo;
+				}
 			}
 		}
-		log_debug(logInstancia, "IdEntrada: %d timerEntrada: %d timerSistema: %d",i ,tablaEntradas[i].tiempo, timer);
-		if (i + redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) <= entradasCantidad) {
-			//salto al proximo
-			i = i + redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio);
+		if(indiceSustituir == punteroSustitucion){
+			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
+			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
 		}
+		log_debug(logInstancia, "Entrada atómica a borrar: %s", tablaEntradas[indiceSustituir].clave);
+		borrarEntradaAtomica(tablaEntradas + indiceSustituir);
+		sustituidas++;
 	}
-	if (aSustituir > -1) {
-		//remuevo y sustituyo
-		removerClaveEnDiccionario(tablaEntradas[i].clave);
-		agregarClaveEnDiccionario(clave, aSustituir);
-		strcpy(tablaEntradas[aSustituir].clave, clave);
-		//inserto tamanio valor -1
-		tablaEntradas[aSustituir].tamanioValor=0;
-		tablaEntradas[aSustituir].tiempo=0;
-	}*/
+	//Me fijo si de casualidad quedaron todos los espacios contiguos
+	int entradasNecesarias =  redondearArribaDivision(tamanio, entradasTamanio);
+	int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+	//Verifico si se encontraron entradas libres
+	if (indiceEntrada < 0) {
+		//No quedaron contiguas asi que se compacta
+		enviar_msj_instancia_compactar();
+	} else {
+		//Quedaron contiguas asi que se inserta directamente
+		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+		reservarEntrada(indiceEntrada, entradasASustituir);
+	}
 }
 
-void sustituirBSU(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias){
-	/*int i = 0;
-	int aSustituir = -1;
-	int aSustituirTamanio = 0;
-	while (i < entradasCantidad) {
-		if (redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) == 1) {
-			if (tablaEntradas[i].tamanioValor > aSustituirTamanio) {
-				aSustituirTamanio=tablaEntradas[i].tamanioValor;
-				aSustituir=i;
+void sustituirBSU(t_entrada* entrada, char* valor, int tamanio, int entradasASustituir){
+	int sustituidas = 0;
+	while(sustituidas < entradasASustituir) {
+		int i;
+		int indiceSustituir = 0;
+		double tamanioSustituir = 0;
+		for(i=0;i<entradasCantidad;i++){
+			int indice = (i + punteroSustitucion) % entradasCantidad;
+			t_entrada* entradaLocal = tablaEntradas + indice;
+			if(redondearArribaDivision(entradaLocal->tamanioValor, entradasTamanio) == 1 && entradaLocal->clave[0]) {
+				if(entradaLocal->tamanioValor/entradasCantidad > tamanioSustituir){
+					indiceSustituir = indice;
+					tamanioSustituir = entradaLocal->tamanioValor/entradasCantidad;
+				}
 			}
 		}
-		if (i + redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) <= entradasCantidad) {
-			//salto al proximo
-			i = i + redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio);
+		if(indiceSustituir == punteroSustitucion){
+			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
+			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
 		}
+		log_debug(logInstancia, "Entrada atómica a borrar: %s", tablaEntradas[indiceSustituir].clave);
+		borrarEntradaAtomica(tablaEntradas + indiceSustituir);
+		sustituidas++;
 	}
-	if (aSustituir > -1) {
-		//remuevo y sustituyo
-		int valorRemover = -1;
-		agregarClaveEnDiccionario(tablaEntradas[aSustituir].clave, valorRemover);
-
-		if (obtenerIndiceClave(tablaEntradas[aSustituir].clave) == -1) {
-			log_debug(logInstancia, "Se realizo el put de -1 en la clave");
-		}
-		removerClaveEnDiccionario(tablaEntradas[aSustituir].clave);
-		agregarClaveEnDiccionario(clave, aSustituir);
-		strcpy(tablaEntradas[aSustituir].clave,clave);
-
-		//inserto tamanio valor -1
-		tablaEntradas[aSustituir].tamanioValor=0;
-		tablaEntradas[aSustituir].tiempo=0;
-	}*/
+	//Me fijo si de casualidad quedaron todos los espacios contiguos
+	int entradasNecesarias =  redondearArribaDivision(tamanio, entradasTamanio);
+	int indiceEntrada = buscarEntradasContiguas(entradasNecesarias);
+	//Verifico si se encontraron entradas libres
+	if (indiceEntrada < 0) {
+		//No quedaron contiguas asi que se compacta
+		enviar_msj_instancia_compactar();
+	} else {
+		//Quedaron contiguas asi que se inserta directamente
+		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
+		reservarEntrada(indiceEntrada, entradasASustituir);
+	}
 }
 
 void sustituirMatrizEntradas(t_entrada* entrada, char* valor, int tamanio, int entradasASustituir){
+
+	if(entradasASustituir > cantidadEntradasAtomicas()){
+		//No hay suficientes entradas atómicas para insertar el nuevo valor
+		//TODO: Se debe avisar al coordinador que no se puede sustituir
+	}
+
 	char* algoritmo = configuracion.algoritmo_remplazo;
 
 	log_debug(logInstancia, "Sustituye por algoritmo %s",algoritmo);
@@ -561,6 +562,50 @@ void sustituirMatrizEntradas(t_entrada* entrada, char* valor, int tamanio, int e
 	} else if (string_equals_ignore_case(algoritmo, "BSU")){
 		sustituirBSU(entrada, valor, tamanio, entradasASustituir);
 	}
+}
+
+void sustituirMatrizEntradasGet(char* clave){
+	char* algoritmo = configuracion.algoritmo_remplazo;
+
+	log_debug(logInstancia, "Sustituye por algoritmo %s",algoritmo);
+	int indiceSustituir = 0;
+	if(string_equals_ignore_case(algoritmo,"Ciclico")){
+		indiceSustituir = punteroSustitucion;
+		punteroSustitucion++;
+	} else if (string_equals_ignore_case(algoritmo,"LRU")){
+		int i;
+		int tiempoSustituir = 0;
+		for(i=0;i<entradasCantidad;i++){
+			int indice = (i + punteroSustitucion) % entradasCantidad;
+			t_entrada* entradaLocal = tablaEntradas + indice;
+			if(timer-entradaLocal->tiempo > tiempoSustituir){
+				indiceSustituir = indice;
+				tiempoSustituir = timer-entradaLocal->tiempo;
+			}
+		}
+		if(indiceSustituir == punteroSustitucion){
+			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
+			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+		}
+	} else if (string_equals_ignore_case(algoritmo, "BSU")){
+		int i;
+		double tamanioSustituir = 0;
+		for(i=0;i<entradasCantidad;i++){
+			int indice = (i + punteroSustitucion) % entradasCantidad;
+			t_entrada* entradaLocal = tablaEntradas + indice;
+			if(entradaLocal->tamanioValor/entradasCantidad > tamanioSustituir){
+				indiceSustituir = indice;
+				tamanioSustituir = entradaLocal->tamanioValor/entradasCantidad;
+			}
+		}
+		if(indiceSustituir == punteroSustitucion){
+			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
+			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+		}
+	}
+	removerClaveEnDiccionario(tablaEntradas[indiceSustituir].clave);
+	agregarNuevaClave(clave, indiceSustituir);
+	tablaEntradas[indiceSustituir].tamanioValor = 0;
 }
 
 void ejecutarGet(void* buffer){
@@ -580,7 +625,7 @@ void ejecutarGet(void* buffer){
 		if(indice < 0){
 			//No hay lugar libre, se ejecuta algoritmo de sustitución
 			//TODO: Revisar LC
-			sustituirMatrizEntradas(0, "", 0, 0);
+			sustituirMatrizEntradasGet(clave);
 		}else{
 			//Se inserta nueva entrada en la tabla
 			agregarNuevaClave(clave, indice);
@@ -614,7 +659,7 @@ void compactarMatrizValores(){
 	bool ordenarPorIndice(void* arg1, void* arg2){
 		t_entrada* entrada1 = (t_entrada*)arg1;
 		t_entrada* entrada2 = (t_entrada*)arg2;
-		return entrada1->numeroEntrada > entrada2->numeroEntrada;
+		return entrada1->numeroEntrada < entrada2->numeroEntrada;
 	}
 	//Ordeno lista por numero de entrada
 	list_sort(listaEntradas, &ordenarPorIndice);
@@ -908,7 +953,6 @@ int main(int argc, char *argv[]) {
 			break;
 		}
 		//Verifico y realizo el Dump en caso de que sea necesario
-		//TODO: Revisar y descomentar procesarDump();
 		procesarDump();
 	}
 	close(socketCoordinador);
