@@ -364,6 +364,13 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
+		case msj_status_clave:
+			log_debug(log_coordinador, "Se envia respuesta de status al planificador");
+			bufferAEnviar = serializar(*header,buffer);
+			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header->tamanio);
+
+		break;
+
 		default:
 			printf("Encabezado erroneo. No envie nada al planificador\n");
 			break;
@@ -676,6 +683,8 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 				break;
 
 				case STATUS:
+					operacion->keyword = ultimaOperacion;
+
 					header->comando = msj_status_clave;
 					header->tamanio = strlen(statusClave) + 1;
 
@@ -864,7 +873,7 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 			case Planificador:
 				if (planificador_conectado == 0){
 					FD_SET(socket_cliente, &master);
-//					FD_SET(socket_cliente, &bolsa_planificador);
+					FD_SET(socket_cliente, &bolsa_planificador);
 					printf("Se ha conectado el planificador al sistema en fd %d\n", socket_cliente);
 					planificador_conectado = 1; //Para que no se conecte mas de un planificador.
 					responder_ok_handshake(Planificador, socket_cliente);
@@ -907,6 +916,8 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	int tamanioValorClave = 0;
 	int tamanioNombreInstanciaConClave = 0;
 	int tamanioNombreInstanciaCandidata = 0;
+	int tamanioParaBufferStatus = 0;
+
 
 
 	resultado = recibir_mensaje(unFileDescriptor,&header,sizeof(header_t));
@@ -963,9 +974,9 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 		case msj_instancia_sustituyo_clave:
 
 			//Quitar clave sustituida de la lista de claves en la instancia
+			claveVieja = malloc(header.tamanio);
 
 			log_debug(log_coordinador, "Se ha sustituido una clave en la instancia conectada en fd %d",unFileDescriptor);
-			claveVieja = malloc(header.tamanio);
 			recibir_mensaje(unFileDescriptor,claveVieja,header.tamanio);
 			instanciaQueSustituyo = encontrar_instancia_por_fd(unFileDescriptor); //Encuentro la misma instancia que me mando el mensaje.
 
@@ -1006,7 +1017,21 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 			statusNombreInstanciaCandidata = "";
 			tamanioNombreInstanciaCandidata = sizeof(char);
 
+			//Armado de buffer para enviar a Planificador
+			tamanioParaBufferStatus = sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata;
 
+			void* buffer = malloc(tamanioParaBufferStatus);
+
+			memcpy(buffer, &tamanioValorClave, sizeof(int));
+			memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
+			memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
+			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
+			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
+			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+
+			header.comando = msj_status_clave;
+			header.tamanio = tamanioParaBufferStatus;
+			enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
 		break;
 
 		default:
@@ -1016,26 +1041,28 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	//sem_post(&atenderEsi); //Signal a semaforo para que sea el turno del hilo atender esi.
 }
 
-void* preparar_buffer_status_clave(int tamanioValorClave,int tamanioNombreInstanciaConClave, int tamanioNombreInstanciaCandidata, int tamanioBuffer, char* statusValorClave, char* statusNombreInstanciaConClave, char* statusNombreInstanciaCandidata){
-
-	void* buffer = malloc(tamanioBuffer);
-
-	memcpy(buffer, &tamanioValorClave, sizeof(int));
-	memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
-	memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
-	memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),&statusNombreInstanciaConClave, sizeof(char));
-	memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
-	memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), &statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
-
-	return buffer;
-}
+//void* preparar_buffer_status_clave(int tamanioValorClave,int tamanioNombreInstanciaConClave, int tamanioNombreInstanciaCandidata, int tamanioBuffer, char* statusValorClave, char* statusNombreInstanciaConClave, char* statusNombreInstanciaCandidata){
+//
+//	void* buffer = malloc(tamanioBuffer);
+//
+//	memcpy(buffer, &tamanioValorClave, sizeof(int));
+//	memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
+//	memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
+//	memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
+//	memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
+//	memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+//
+//	return buffer;
+//}
 
 void responder_mensaje_status_clave(){
 
 	header_t header;
 	infoInstancia_t* instanciaConClave = malloc(sizeof(infoInstancia_t));
 	infoInstancia_t* candidata = malloc(sizeof(infoInstancia_t));
-	void* buffer;
+
+	recibir_mensaje(socket_planificador,&header,sizeof(header_t));
+
 
 	if (header.comando == msj_status_clave){
 
@@ -1046,6 +1073,8 @@ void responder_mensaje_status_clave(){
 		instanciaConClave = encontrar_instancia_por_clave(statusClave);
 
 		if(instanciaConClave != 0){ //Si hay una instancia que tenga la clave, levanto el semaforo de su hilo para que envie el respectivo mensaje a la instancia.
+
+			ultimaOperacion = operacion->keyword;
 
 			operacion->keyword = STATUS;
 			sem_post(&instanciaConClave->semaforo);
@@ -1063,7 +1092,15 @@ void responder_mensaje_status_clave(){
 			int tamanioTotalParaBuffer = sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int) + tamanioNombreInstanciaCandidata;
 			//El malloc es: tamanioValor + sizeof(char) para guardar \0 por valor vacio + tamanioNombreInstanciaConClave + sizeof(char) para guardar \0 por instancia vacia + tamanioNombreCandidata + longitudNombreCandidata
 
-			buffer = preparar_buffer_status_clave(tamanioValorClave, tamanioNombreInstanciaConClave, tamanioNombreInstanciaCandidata, tamanioTotalParaBuffer, statusValorClave, statusNombreInstanciaConClave, statusNombreInstanciaCandidata);
+			void* buffer = malloc(tamanioTotalParaBuffer);
+
+			memcpy(buffer, &tamanioValorClave, sizeof(int));
+			memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
+			memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
+			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
+			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
+			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+
 			header.tamanio = tamanioTotalParaBuffer;
 			enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
 		}
@@ -1072,7 +1109,7 @@ void responder_mensaje_status_clave(){
 	}
 }
 
-void inicializar_estructuras_status(){
+void inicializar_status(){
 
 	statusClave = string_new();
 	statusNombreInstanciaCandidata = string_new();
@@ -1094,7 +1131,7 @@ int main(void) {
 
 	lista_instancias_claves = list_create();
 
-	inicializar_estructuras_status();
+	inicializar_status();
 
 	if (signal(SIGINT, sig_handler) == SIG_ERR){
 	  printf("Error al interceptar SIGINT\n");
