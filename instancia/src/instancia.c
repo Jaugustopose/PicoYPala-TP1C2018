@@ -583,17 +583,18 @@ void sustituirMatrizEntradas(t_entrada* entrada, char* valor, int tamanio, int e
 	if(entradasASustituir > cantidadEntradasAtomicas()){
 		//No hay suficientes entradas atómicas para insertar el nuevo valor
 		//TODO: Se debe avisar al coordinador que no se puede sustituir
-	}
+		log_debug(logInstancia, "No hay lugar para sustituir");
+	}else{
+		char* algoritmo = configuracion.algoritmo_remplazo;
 
-	char* algoritmo = configuracion.algoritmo_remplazo;
-
-	log_debug(logInstancia, "Sustituye por algoritmo %s",algoritmo);
-	if(string_equals_ignore_case(algoritmo,"Ciclico")){
-		sustituirCiclico(entrada, valor, tamanio, entradasASustituir);
-	} else if (string_equals_ignore_case(algoritmo,"LRU")){
-		sustituirLRU(entrada, valor, tamanio, entradasASustituir);
-	} else if (string_equals_ignore_case(algoritmo, "BSU")){
-		sustituirBSU(entrada, valor, tamanio, entradasASustituir);
+		log_debug(logInstancia, "Sustituye por algoritmo %s",algoritmo);
+		if(string_equals_ignore_case(algoritmo,"Ciclico")){
+			sustituirCiclico(entrada, valor, tamanio, entradasASustituir);
+		} else if (string_equals_ignore_case(algoritmo,"LRU")){
+			sustituirLRU(entrada, valor, tamanio, entradasASustituir);
+		} else if (string_equals_ignore_case(algoritmo, "BSU")){
+			sustituirBSU(entrada, valor, tamanio, entradasASustituir);
+		}
 	}
 }
 
@@ -757,7 +758,7 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 		//Sobran entradas, se deben liberar las que sobran y escribir el valor
 		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
 		int cantLiberar = entradasAsignadas - entradasNecesarias;
-		liberarEntrada(entrada->numeroEntrada + cantLiberar - 1, cantLiberar);
+		liberarEntrada(entrada->numeroEntrada + entradasAsignadas - cantLiberar, cantLiberar);
 		enviar_ok_sentencia_a_Coordinador();
 	} else {
 		//Faltan entradas, se liberan las entradas usadas y se busca donde guardar el nuevo valor

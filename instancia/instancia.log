@@ -2100,3 +2100,348 @@
 [DEBUG] 18:07:55:400 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
 [DEBUG] 18:07:55:401 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
 [INFO] 18:07:55:401 Instance/(20380:20380): Esperando acción
+[DEBUG] 18:28:37:420 Instance/(21077:21077): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:28:37:420 Instance/(21077:21077): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:28:37:420 Instance/(21077:21077): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:28:37:420 Instance/(21077:21077): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:28:37:420 Instance/(21077:21077): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:28:37:420 Instance/(21077:21077): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:28:37:420 Instance/(21077:21077): INTERVALO_DUMP: 10
+[DEBUG] 18:28:37:461 Instance/(21077:21077): Socket coordinador: 4
+[DEBUG] 18:28:37:501 Instance/(21077:21077): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:28:37:501 Instance/(21077:21077): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:28:37:501 Instance/(21077:21077): Se mapeo Tabla de Entradas correctamente
+[INFO] 18:28:37:504 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:911 Instance/(21077:21077): Procesando GET. Clave: opcion1
+[DEBUG] 18:28:40:911 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:28:40:911 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:911 Instance/(21077:21077): 0	opcion1	0	0	0	
+[INFO] 18:28:40:911 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:912 Instance/(21077:21077): Procesando GET. Clave: opcion2
+[DEBUG] 18:28:40:912 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:28:40:912 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:912 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:912 Instance/(21077:21077): 1	opcion2	0	0	0	
+[INFO] 18:28:40:912 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:913 Instance/(21077:21077): Procesando GET. Clave: opcion3
+[DEBUG] 18:28:40:913 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:28:40:913 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:913 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:913 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:913 Instance/(21077:21077): 2	opcion3	0	0	0	
+[INFO] 18:28:40:914 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:914 Instance/(21077:21077): Procesando GET. Clave: opcion4
+[DEBUG] 18:28:40:914 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:28:40:914 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:914 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:914 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:914 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:914 Instance/(21077:21077): 3	opcion4	0	0	0	
+[INFO] 18:28:40:914 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:915 Instance/(21077:21077): Procesando GET. Clave: opcion5
+[DEBUG] 18:28:40:915 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 18:28:40:915 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:915 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:915 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:915 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:915 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:915 Instance/(21077:21077): 4	opcion5	0	0	0	
+[INFO] 18:28:40:915 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:916 Instance/(21077:21077): Procesando GET. Clave: opcion6
+[DEBUG] 18:28:40:916 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 18:28:40:916 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:916 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:917 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:917 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:917 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:917 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:917 Instance/(21077:21077): 5	opcion6	0	0	0	
+[INFO] 18:28:40:917 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:918 Instance/(21077:21077): Procesando GET. Clave: opcion7
+[DEBUG] 18:28:40:918 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 18:28:40:918 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 5	opcion6	0	0	0	
+[DEBUG] 18:28:40:918 Instance/(21077:21077): 6	opcion7	0	0	0	
+[INFO] 18:28:40:918 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:919 Instance/(21077:21077): Procesando GET. Clave: opcion8
+[DEBUG] 18:28:40:919 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 7
+[DEBUG] 18:28:40:920 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 5	opcion6	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 6	opcion7	0	0	0	
+[DEBUG] 18:28:40:920 Instance/(21077:21077): 7	opcion8	0	0	0	
+[INFO] 18:28:40:920 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:924 Instance/(21077:21077): Procesando GET. Clave: opcion9
+[DEBUG] 18:28:40:924 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 18:28:40:924 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:924 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:924 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:924 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:924 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:924 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:924 Instance/(21077:21077): 5	opcion6	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 6	opcion7	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 7	opcion8	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 8	opcion9	0	0	0	
+[INFO] 18:28:40:925 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:925 Instance/(21077:21077): Procesando GET. Clave: opcion10
+[DEBUG] 18:28:40:925 Instance/(21077:21077): Clave inexistente. Se crea registro en Tabla de Entradas indice: 9
+[DEBUG] 18:28:40:925 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 0	opcion1	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:925 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:928 Instance/(21077:21077): 5	opcion6	0	0	0	
+[DEBUG] 18:28:40:928 Instance/(21077:21077): 6	opcion7	0	0	0	
+[DEBUG] 18:28:40:928 Instance/(21077:21077): 7	opcion8	0	0	0	
+[DEBUG] 18:28:40:928 Instance/(21077:21077): 8	opcion9	0	0	0	
+[DEBUG] 18:28:40:928 Instance/(21077:21077): 9	opcion10	0	0	0	
+[INFO] 18:28:40:928 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:928 Instance/(21077:21077): Procesando SET. Clave: opcion1 - Valor:docenadecarnealcuchillo
+[DEBUG] 18:28:40:928 Instance/(21077:21077): Se inserta Valor:docenadecarnealcuchillo en Indice:0
+[DEBUG] 18:28:40:928 Instance/(21077:21077): Matriz Valores: [XXX00000]
+[DEBUG] 18:28:40:928 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 0	opcion1	0	23	10	docenadecarnealcuchillo
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 1	opcion2	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 5	opcion6	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 6	opcion7	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 7	opcion8	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 8	opcion9	0	0	0	
+[DEBUG] 18:28:40:929 Instance/(21077:21077): 9	opcion10	0	0	0	
+[INFO] 18:28:40:929 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:930 Instance/(21077:21077): Procesando SET. Clave: opcion2 - Valor:dosdocenasdecarnesuave
+[DEBUG] 18:28:40:930 Instance/(21077:21077): Se inserta Valor:dosdocenasdecarnesuave en Indice:3
+[DEBUG] 18:28:40:930 Instance/(21077:21077): Matriz Valores: [XXXXXX00]
+[DEBUG] 18:28:40:930 Instance/(21077:21077): Tabla Entradas
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 0	opcion1	0	23	10	docenadecarnealcuchillo
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 1	opcion2	3	22	11	dosdocenasdecarnesuave
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 2	opcion3	0	0	0	
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 3	opcion4	0	0	0	
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 4	opcion5	0	0	0	
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 5	opcion6	0	0	0	
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 6	opcion7	0	0	0	
+[DEBUG] 18:28:40:930 Instance/(21077:21077): 7	opcion8	0	0	0	
+[DEBUG] 18:28:40:931 Instance/(21077:21077): 8	opcion9	0	0	0	
+[DEBUG] 18:28:40:931 Instance/(21077:21077): 9	opcion10	0	0	0	
+[INFO] 18:28:40:931 Instance/(21077:21077): Esperando acción
+[INFO] 18:28:40:931 Instance/(21077:21077): Procesando SET. Clave: opcion3 - Valor:cuatrodocenasdehumita
+[DEBUG] 18:28:40:931 Instance/(21077:21077): Sustituye por algoritmo BSU
+[DEBUG] 18:33:04:379 Instance/(21077:21077): Entrada atómica a borrar: opcion1
+[DEBUG] 18:36:38:766 Instance/(21306:21306): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:36:38:766 Instance/(21306:21306): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:36:38:766 Instance/(21306:21306): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:36:38:766 Instance/(21306:21306): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:36:38:766 Instance/(21306:21306): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:36:38:766 Instance/(21306:21306): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:36:38:766 Instance/(21306:21306): INTERVALO_DUMP: 10
+[DEBUG] 18:36:38:797 Instance/(21306:21306): Socket coordinador: 4
+[DEBUG] 18:36:38:837 Instance/(21306:21306): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:36:38:837 Instance/(21306:21306): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:36:38:837 Instance/(21306:21306): Se mapeo Tabla de Entradas correctamente
+[INFO] 18:36:38:839 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:769 Instance/(21306:21306): Procesando GET. Clave: opcion1
+[DEBUG] 18:36:41:769 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:36:41:769 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:769 Instance/(21306:21306): 0	opcion1	0	0	0	
+[INFO] 18:36:41:769 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:775 Instance/(21306:21306): Procesando GET. Clave: opcion2
+[DEBUG] 18:36:41:775 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:36:41:775 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:775 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:775 Instance/(21306:21306): 1	opcion2	0	0	0	
+[INFO] 18:36:41:775 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:775 Instance/(21306:21306): Procesando GET. Clave: opcion3
+[DEBUG] 18:36:41:775 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:36:41:775 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:775 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:776 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:776 Instance/(21306:21306): 2	opcion3	0	0	0	
+[INFO] 18:36:41:776 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:776 Instance/(21306:21306): Procesando GET. Clave: opcion4
+[DEBUG] 18:36:41:776 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:36:41:776 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:776 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:776 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:776 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:777 Instance/(21306:21306): 3	opcion4	0	0	0	
+[INFO] 18:36:41:777 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:777 Instance/(21306:21306): Procesando GET. Clave: opcion5
+[DEBUG] 18:36:41:777 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 18:36:41:777 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:777 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:777 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:777 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:777 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:778 Instance/(21306:21306): 4	opcion5	0	0	0	
+[INFO] 18:36:41:778 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:778 Instance/(21306:21306): Procesando GET. Clave: opcion6
+[DEBUG] 18:36:41:778 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 18:36:41:778 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:778 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:778 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:778 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:778 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:779 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:779 Instance/(21306:21306): 5	opcion6	0	0	0	
+[INFO] 18:36:41:779 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:779 Instance/(21306:21306): Procesando GET. Clave: opcion7
+[DEBUG] 18:36:41:779 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 18:36:41:779 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:779 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:779 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:779 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:780 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:780 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:780 Instance/(21306:21306): 5	opcion6	0	0	0	
+[DEBUG] 18:36:41:780 Instance/(21306:21306): 6	opcion7	0	0	0	
+[INFO] 18:36:41:780 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:780 Instance/(21306:21306): Procesando GET. Clave: opcion8
+[DEBUG] 18:36:41:780 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 7
+[DEBUG] 18:36:41:780 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:780 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:780 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:781 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:781 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:781 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:781 Instance/(21306:21306): 5	opcion6	0	0	0	
+[DEBUG] 18:36:41:781 Instance/(21306:21306): 6	opcion7	0	0	0	
+[DEBUG] 18:36:41:781 Instance/(21306:21306): 7	opcion8	0	0	0	
+[INFO] 18:36:41:781 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:781 Instance/(21306:21306): Procesando GET. Clave: opcion9
+[DEBUG] 18:36:41:781 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 18:36:41:782 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 5	opcion6	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 6	opcion7	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 7	opcion8	0	0	0	
+[DEBUG] 18:36:41:782 Instance/(21306:21306): 8	opcion9	0	0	0	
+[INFO] 18:36:41:782 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:783 Instance/(21306:21306): Procesando GET. Clave: opcion10
+[DEBUG] 18:36:41:783 Instance/(21306:21306): Clave inexistente. Se crea registro en Tabla de Entradas indice: 9
+[DEBUG] 18:36:41:783 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:783 Instance/(21306:21306): 0	opcion1	0	0	0	
+[DEBUG] 18:36:41:783 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:783 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:783 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:783 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:785 Instance/(21306:21306): 5	opcion6	0	0	0	
+[DEBUG] 18:36:41:785 Instance/(21306:21306): 6	opcion7	0	0	0	
+[DEBUG] 18:36:41:785 Instance/(21306:21306): 7	opcion8	0	0	0	
+[DEBUG] 18:36:41:785 Instance/(21306:21306): 8	opcion9	0	0	0	
+[DEBUG] 18:36:41:785 Instance/(21306:21306): 9	opcion10	0	0	0	
+[INFO] 18:36:41:785 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:789 Instance/(21306:21306): Procesando SET. Clave: opcion1 - Valor:docenadecarnealcuchillo
+[DEBUG] 18:36:41:789 Instance/(21306:21306): Se inserta Valor:docenadecarnealcuchillo en Indice:0
+[DEBUG] 18:36:41:789 Instance/(21306:21306): Matriz Valores: [XXX00000]
+[DEBUG] 18:36:41:789 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:789 Instance/(21306:21306): 0	opcion1	0	23	10	docenadecarnealcuchillo
+[DEBUG] 18:36:41:789 Instance/(21306:21306): 1	opcion2	0	0	0	
+[DEBUG] 18:36:41:789 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 5	opcion6	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 6	opcion7	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 7	opcion8	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 8	opcion9	0	0	0	
+[DEBUG] 18:36:41:790 Instance/(21306:21306): 9	opcion10	0	0	0	
+[INFO] 18:36:41:790 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:791 Instance/(21306:21306): Procesando SET. Clave: opcion2 - Valor:dosdocenasdecarnesuave
+[DEBUG] 18:36:41:791 Instance/(21306:21306): Se inserta Valor:dosdocenasdecarnesuave en Indice:3
+[DEBUG] 18:36:41:791 Instance/(21306:21306): Matriz Valores: [XXXXXX00]
+[DEBUG] 18:36:41:791 Instance/(21306:21306): Tabla Entradas
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 0	opcion1	0	23	10	docenadecarnealcuchillo
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 1	opcion2	3	22	11	dosdocenasdecarnesuave
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 2	opcion3	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 3	opcion4	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 4	opcion5	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 5	opcion6	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 6	opcion7	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 7	opcion8	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 8	opcion9	0	0	0	
+[DEBUG] 18:36:41:791 Instance/(21306:21306): 9	opcion10	0	0	0	
+[INFO] 18:36:41:791 Instance/(21306:21306): Esperando acción
+[INFO] 18:36:41:792 Instance/(21306:21306): Procesando SET. Clave: opcion3 - Valor:cuatrodocenasdehumita
+[DEBUG] 18:50:03:392 Instance/(21719:21719): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:50:03:393 Instance/(21719:21719): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:50:03:393 Instance/(21719:21719): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:50:03:393 Instance/(21719:21719): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:50:03:393 Instance/(21719:21719): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:50:03:393 Instance/(21719:21719): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:50:03:393 Instance/(21719:21719): INTERVALO_DUMP: 10
+[DEBUG] 18:50:03:440 Instance/(21719:21719): Socket coordinador: 4
+[DEBUG] 18:50:03:477 Instance/(21719:21719): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:50:03:477 Instance/(21719:21719): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:50:03:477 Instance/(21719:21719): Se mapeo Tabla de Entradas correctamente
+[INFO] 18:50:03:478 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:90 Instance/(21719:21719): Procesando GET. Clave: opcion1
+[DEBUG] 18:50:05:90 Instance/(21719:21719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:50:05:90 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:90 Instance/(21719:21719): 0	opcion1	0	0	0	
+[INFO] 18:50:05:90 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:91 Instance/(21719:21719): Procesando GET. Clave: opcion2
+[DEBUG] 18:50:05:91 Instance/(21719:21719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:50:05:91 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:91 Instance/(21719:21719): 0	opcion1	0	0	0	
+[DEBUG] 18:50:05:92 Instance/(21719:21719): 1	opcion2	0	0	0	
+[INFO] 18:50:05:92 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:98 Instance/(21719:21719): Procesando GET. Clave: opcion3
+[DEBUG] 18:50:05:98 Instance/(21719:21719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:50:05:99 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:99 Instance/(21719:21719): 0	opcion1	0	0	0	
+[DEBUG] 18:50:05:99 Instance/(21719:21719): 1	opcion2	0	0	0	
+[DEBUG] 18:50:05:99 Instance/(21719:21719): 2	opcion3	0	0	0	
+[INFO] 18:50:05:99 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:105 Instance/(21719:21719): Procesando GET. Clave: opcion4
+[DEBUG] 18:50:05:105 Instance/(21719:21719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:50:05:105 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:105 Instance/(21719:21719): 0	opcion1	0	0	0	
+[DEBUG] 18:50:05:105 Instance/(21719:21719): 1	opcion2	0	0	0	
+[DEBUG] 18:50:05:105 Instance/(21719:21719): 2	opcion3	0	0	0	
+[DEBUG] 18:50:05:105 Instance/(21719:21719): 3	opcion4	0	0	0	
+[INFO] 18:50:05:105 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:106 Instance/(21719:21719): Procesando SET. Clave: opcion1 - Valor:fugazzetarellenagrande
+[DEBUG] 18:50:05:106 Instance/(21719:21719): Se inserta Valor:fugazzetarellenagrande en Indice:0
+[DEBUG] 18:50:05:106 Instance/(21719:21719): Matriz Valores: [XXX00000]
+[DEBUG] 18:50:05:106 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:106 Instance/(21719:21719): 0	opcion1	0	22	4	fugazzetarellenagrande
+[DEBUG] 18:50:05:106 Instance/(21719:21719): 1	opcion2	0	0	0	
+[DEBUG] 18:50:05:106 Instance/(21719:21719): 2	opcion3	0	0	0	
+[DEBUG] 18:50:05:106 Instance/(21719:21719): 3	opcion4	0	0	0	
+[INFO] 18:50:05:106 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:107 Instance/(21719:21719): Procesando SET. Clave: opcion2 - Valor:promomuzzarella
+[DEBUG] 18:50:05:107 Instance/(21719:21719): Se inserta Valor:promomuzzarella en Indice:3
+[DEBUG] 18:50:05:107 Instance/(21719:21719): Matriz Valores: [XXXXX000]
+[DEBUG] 18:50:05:107 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:107 Instance/(21719:21719): 0	opcion1	0	22	4	fugazzetarellenagrande
+[DEBUG] 18:50:05:107 Instance/(21719:21719): 1	opcion2	3	15	5	promomuzzarella
+[DEBUG] 18:50:05:107 Instance/(21719:21719): 2	opcion3	0	0	0	
+[DEBUG] 18:50:05:107 Instance/(21719:21719): 3	opcion4	0	0	0	
+[INFO] 18:50:05:107 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:107 Instance/(21719:21719): Procesando SET. Clave: opcion3 - Valor:pizzacuatroquesosgrande
+[DEBUG] 18:50:05:107 Instance/(21719:21719): Se inserta Valor:pizzacuatroquesosgrande en Indice:5
+[DEBUG] 18:50:05:107 Instance/(21719:21719): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:50:05:108 Instance/(21719:21719): Tabla Entradas
+[DEBUG] 18:50:05:108 Instance/(21719:21719): 0	opcion1	0	22	4	fugazzetarellenagrande
+[DEBUG] 18:50:05:108 Instance/(21719:21719): 1	opcion2	3	15	5	promomuzzarella
+[DEBUG] 18:50:05:108 Instance/(21719:21719): 2	opcion3	5	23	6	pizzacuatroquesosgrande
+[DEBUG] 18:50:05:108 Instance/(21719:21719): 3	opcion4	0	0	0	
+[INFO] 18:50:05:108 Instance/(21719:21719): Esperando acción
+[INFO] 18:50:05:108 Instance/(21719:21719): Procesando SET. Clave: opcion1 - Valor:napolitanagrande
+[DEBUG] 18:52:06:844 Instance/(21719:21719): Se inserta Valor:napolitanagrande en Indice:0
