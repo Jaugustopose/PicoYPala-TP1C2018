@@ -440,8 +440,17 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 							printf("GET - Instancia con clave %s\n", instanciaConClave->nombre);
 							//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y recibo su respuesta.
-							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
-							sem_post(&instanciaConClave->semaforo);
+							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
+
+							if (resultado == msj_ok_solicitud_operacion){
+								operacion->keyword = GET;
+								sem_post(&instanciaConClave->semaforo);
+							}else{ //El ESI no puede hacer el GET porque la clave ya estaba bloqueada.
+								conexion_de_cliente_finalizada(fdEsi);
+								printf("ESI ha finalizado por intentar acceder a una clave no bloqueada %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+								int ret = EXIT_FAILURE;
+								pthread_exit(&ret);
+							}
 						}else {
 							printf("GET - No hay instancia con esa clave!\n");
 							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
