@@ -48,9 +48,12 @@ typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	msj_instancia_compactar = 24,
 	msj_instancia_compactacion_finalizada = 25,
 	msj_instancia_sustituyo_clave = 26,
-	msj_compactacion_finalizada_continuar_planificacion = 27,
-	msj_cantidad_entradas = 28,
-	msj_tamanio_entradas = 29
+	msj_status_clave = 27,
+	msj_compactacion_finalizada_continuar_planificacion = 28,
+	msj_cantidad_entradas = 29,
+	msj_tamanio_entradas = 30
+
+
 }id_mensaje;
 
 typedef struct{
@@ -66,7 +69,8 @@ typedef struct{
 typedef enum t_operacion{
 	get,
 	set,
-	store
+	store,
+	status
 } operacion_t;
 
 int conectar_a_server(char* ip, int puerto);

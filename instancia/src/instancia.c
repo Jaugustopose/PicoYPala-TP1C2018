@@ -930,6 +930,23 @@ void crearCarpetasSiNoExisten(const config_t* configuracion) {
 	system(path);
 }
 
+void ejecutarStatus(void* buffer) {
+
+	int indice = obtenerIndiceClave(buffer);
+	t_entrada* entrada = tablaEntradas + indice;
+	//Se lee el valor de la matriz de valores
+	char* valor = leerMatrizValores(entrada->numeroEntrada,
+			entrada->tamanioValor);
+	header_t *header;
+
+	header->comando = msj_status_clave;
+	void* bufferAEnviar = serializar(*header, valor);
+	log_debug(logInstancia, "Header.tamanio = %d", header->tamanio);
+	enviar_mensaje(logInstancia, bufferAEnviar,
+			sizeof(header_t) + header->tamanio);
+	free(bufferAEnviar);
+}
+
 //fin LAG
 
 int main(int argc, char *argv[]) {
@@ -977,6 +994,9 @@ int main(int argc, char *argv[]) {
 			break;
 		case msj_instancia_compactar:
 			compactarMatrizValores();
+			break;
+		case msj_status_clave:
+			ejecutarStatus(buffer);
 			break;
 		}
 		//Verifico y realizo el Dump en caso de que sea necesario
