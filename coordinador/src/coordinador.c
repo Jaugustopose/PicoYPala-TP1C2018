@@ -90,6 +90,7 @@ int ultimaOperacion = 0;
 int fdQuePidioCompactacion;
 infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_operaciones_esis;
+t_log* log_operaciones_instancias;
 int esiActual = 0;
 //sem_t atenderEsi;
 //sem_t atenderInstancia;
@@ -380,6 +381,14 @@ operacion_compartida_t* preparar_operacion_compartida_STORE(char* clave) {
 	return operacionX;
 }
 
+void enviar_ok_sentencia_a_ESI(){
+	header_t header;
+	header.comando = msj_sentencia_finalizada;
+	header.tamanio = 0;
+
+	enviar_mensaje(esiActual,&header,sizeof(header_t));
+}
+
 void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en creacion del hilo.
 
 	int fdEsi = (int) fd;
@@ -445,7 +454,9 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 							if (resultado == msj_ok_solicitud_operacion){
 								operacion->keyword = GET;
-								sem_post(&instanciaConClave->semaforo);
+								log_debug(log_operaciones_esis,"Se realizo GET sobre clave ya existente pero no bloqueada");
+								enviar_ok_sentencia_a_ESI();
+								//sem_post(&instanciaConClave->semaforo);
 							}else{ //El ESI no puede hacer el GET porque la clave ya estaba bloqueada.
 								conexion_de_cliente_finalizada(fdEsi);
 								printf("ESI ha finalizado por intentar acceder a una clave no bloqueada %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
@@ -689,14 +700,6 @@ operacion_compartida_t* inicializar_operacion_compartida(){
 	return operacionX;
 }
 
-void enviar_ok_sentencia_a_ESI(){
-	header_t header;
-	header.comando = msj_sentencia_finalizada;
-	header.tamanio = 0;
-
-	enviar_mensaje(esiActual,&header,sizeof(header_t));
-}
-
 void enviar_configuracion_entradas_a_instancia(header_t* cabecera, config_t* config, int socket_cliente) {
 
 	//Envio cantidad y tamaño de entradas a la instancia.
@@ -711,6 +714,24 @@ void enviar_configuracion_entradas_a_instancia(header_t* cabecera, config_t* con
 	buffer = serializar(*cabecera, &config->ENTRADA_SIZE);
 	enviar_mensaje(socket_cliente, buffer, sizeof(header_t) + cabecera->tamanio);
 	free(buffer);
+}
+
+int posicion_de_clave_en_lista(t_list* unaListaDeClaves, char* claveBuscada){
+
+	int posicion,i = 0;
+	char* valor = string_new();
+
+	for (i = 0; i < unaListaDeClaves->elements_count; ++i) {
+
+		valor = list_get(unaListaDeClaves,i);
+
+		if(string_equals_ignore_case(valor,claveBuscada)){
+			posicion = i;
+			return posicion;
+		}
+	}
+	printf("La clave no esta en la lista dada\n");
+	return -1; //Retorna -1 en caso que la clave no este en la lista
 }
 
 void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
@@ -841,8 +862,12 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	header_t header;
 	int resultado = 0;
 	int cantidadInstanciasConectadas = 0;
+	int indiceClaveVieja = 0;
 	t_list* instanciasConectadas;
+	infoInstancia_t* instanciaQueSustituyo;
 	void* buffer;
+	void* claveVieja;
+
 
 	resultado = recibir_mensaje(unFileDescriptor,&header,sizeof(header_t));
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
@@ -854,9 +879,8 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	switch (header.comando) {
 
 		case msj_instancia_compactar:
-			log_debug(log_operaciones_esis, "Mensaje compactación recibido");
-//			//Notifico al planificador para que pare por pedido de compactacion.
-//			enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_instancia_compactar);
+			log_trace(log_operaciones_instancias,"Una instancia ha solicitado compactacion");
+
 
 			//Guardo la ultima sentencia enviada por un esi para enviar de vuelta a la instancia que solicito compactar.
 			ultimaOperacion = operacion->keyword;
@@ -873,12 +897,14 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 		break;
 
 		case msj_instancia_compactacion_finalizada:
+			log_debug(log_operaciones_instancias,"Una instancia finalizo su compactacion");
 			//Recibo msj de compactacion OK. Incremento la cantidad de compactaciones hechas hasta que sea igual al total de instancias conectadas.
 			compactaciones++;
 			instanciasConectadas = filtrar_instancias_conectadas();
 			cantidadInstanciasConectadas = instanciasConectadas->elements_count;
 
 			if (compactaciones == cantidadInstanciasConectadas) {
+				log_debug(log_operaciones_instancias,"Todas las instancias se han compactado correctamente");
 				//Reseteo compactaciones para futura solicitud de compactacion.
 				compactaciones = 0;
 
@@ -896,7 +922,18 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 		case msj_instancia_sustituyo_clave:
 
-			//TODO: Actualizar las claves que tiene esta instancia
+			//Quitar clave sustituida de la lista de claves en la instancia
+
+			log_debug(log_operaciones_instancias, "Se ha sustituido una clave en la instancia conectada en fd %d",unFileDescriptor);
+
+			recibir_mensaje(unFileDescriptor,claveVieja,header.tamanio);
+			instanciaQueSustituyo = encontrar_instancia_por_fd(unFileDescriptor); //Encuentro la misma instancia que me mando el mensaje.
+
+			indiceClaveVieja = posicion_de_clave_en_lista(instanciaQueSustituyo->claves,claveVieja);
+
+			list_remove(instanciaQueSustituyo,indiceClaveVieja);
+
+			log_trace(log_operaciones_instancias,"Se ha reemplazado la clave %s del sistema", claveVieja);
 		break;
 
 		case msj_sentencia_finalizada:
@@ -930,7 +967,8 @@ int main(void) {
 	//sem_init(&escucharInstancia,0,0);
 
 	//Creo log de operaciones de los ESI
-	log_operaciones_esis = log_create("coordinador.log", "Coordinador", true, LOG_LEVEL_TRACE);
+	log_operaciones_esis = log_create("coordinadorESI.log", "CoordinadorESI", true, LOG_LEVEL_TRACE);
+	log_operaciones_instancias = log_create("coordinadorINST.log","CoordinadorINST", true, LOG_LEVEL_TRACE);
 	lista_instancias_claves = list_create();
 
 	if (signal(SIGINT, sig_handler) == SIG_ERR){
