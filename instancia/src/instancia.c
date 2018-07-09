@@ -260,8 +260,8 @@ int abrirArchivoTablaEntradas(){
 	//Path archivo Tabla de Entradas
 	char* pathArchivo = string_new();
 	string_append(&pathArchivo, configuracion.punto_montaje);
-	string_append(&pathArchivo, configuracion.nombre_instancia);
-	string_append(&pathArchivo, "/");
+	//string_append(&pathArchivo, configuracion.nombre_instancia);
+	//string_append(&pathArchivo, "/");
 	string_append(&pathArchivo, "TablaDeEntradas.bin");
 	log_debug(logInstancia, "Path para mmap de Tabla de Entradas: %s", pathArchivo);
 
@@ -320,8 +320,8 @@ void inicializarTablaEntradas(){
 				agregarClaveEnDiccionario(tablaEntradas[i].clave, i);
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
-				string_append(&pathArchivo, configuracion.nombre_instancia);
-				string_append(&pathArchivo, "/");
+				//string_append(&pathArchivo, configuracion.nombre_instancia);
+				//string_append(&pathArchivo, "/");
 				string_append(&pathArchivo, "DUMP/");
 				string_append(&pathArchivo, tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
@@ -821,8 +821,8 @@ void ejecutarStore(void* buffer){
 		//Creo path al archivo de store
 		char* pathArchivo = string_new();
 		string_append(&pathArchivo, configuracion.punto_montaje);
-		string_append(&pathArchivo, configuracion.nombre_instancia);
-		string_append(&pathArchivo, "/");
+		//string_append(&pathArchivo, configuracion.nombre_instancia);
+		//string_append(&pathArchivo, "/");
 		string_append(&pathArchivo, clave);
 		string_append(&pathArchivo, ".txt");
 		//Intento borrar archivo existente
@@ -867,8 +867,8 @@ void procesarDump(){
 			if (tablaEntradas[i].clave[0]	&& tablaEntradas[i].tamanioValor) {
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
-				string_append(&pathArchivo, configuracion.nombre_instancia);
-				string_append(&pathArchivo, "/");
+			//	string_append(&pathArchivo, configuracion.nombre_instancia);
+			//	string_append(&pathArchivo, "/");
 				string_append(&pathArchivo, "DUMP/");
 				string_append(&pathArchivo,	tablaEntradas[i].clave);
 				string_append(&pathArchivo, ".txt");
@@ -958,11 +958,11 @@ void crearCarpetasSiNoExisten(const config_t* configuracion) {
 	string_append(&path, configuracion->punto_montaje);
 	string_substring(path, 0, strlen(path) - 1);
 	system(path);
-	string_append(&path, "/");
-	string_append(&path, configuracion->nombre_instancia);
+	//string_append(&path, "/");
+	//string_append(&path, configuracion->nombre_instancia);
 	printf("DIRECTORIO DATOS: %s\n", path);
 	system(path);
-	string_append(&path, "/DUMP");
+	string_append(&path, "DUMP");
 	system(path);
 }
 
