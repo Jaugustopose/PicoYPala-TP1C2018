@@ -965,7 +965,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 			//Quitar clave sustituida de la lista de claves en la instancia
 
 			log_debug(log_coordinador, "Se ha sustituido una clave en la instancia conectada en fd %d",unFileDescriptor);
-
+			claveVieja = malloc(header.tamanio);
 			recibir_mensaje(unFileDescriptor,claveVieja,header.tamanio);
 			instanciaQueSustituyo = encontrar_instancia_por_fd(unFileDescriptor); //Encuentro la misma instancia que me mando el mensaje.
 

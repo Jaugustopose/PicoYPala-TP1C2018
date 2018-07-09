@@ -103,3 +103,2000 @@
 [DEBUG] 12:02:02:601 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
 [DEBUG] 12:02:02:601 Instance/(10544:10544): 0	futbol:messi3	0	7	0
 [DEBUG] 12:02:02:601 Instance/(10544:10544): 1	futbol:messi1	1	13	0
+[DEBUG] 17:54:43:308 Instance/(19719:19719): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 17:54:43:309 Instance/(19719:19719): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 17:54:43:309 Instance/(19719:19719): PUERTO_COORDINADOR: 8030
+[DEBUG] 17:54:43:309 Instance/(19719:19719): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 17:54:43:309 Instance/(19719:19719): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 17:54:43:309 Instance/(19719:19719): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 17:54:43:309 Instance/(19719:19719): INTERVALO_DUMP: 10
+[DEBUG] 17:54:43:353 Instance/(19719:19719): Socket coordinador: 4
+[DEBUG] 17:54:43:393 Instance/(19719:19719): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 17:54:43:393 Instance/(19719:19719): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 17:54:43:393 Instance/(19719:19719): Se mapeo Tabla de Entradas correctamente
+[INFO] 17:54:43:394 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:447 Instance/(19719:19719): Procesando GET. Clave: sony:consola:ps1
+[DEBUG] 17:54:48:447 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 17:54:48:447 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:447 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[INFO] 17:54:48:447 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:448 Instance/(19719:19719): Procesando GET. Clave: sony:consola:ps2
+[DEBUG] 17:54:48:448 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 17:54:48:449 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:449 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:449 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[INFO] 17:54:48:451 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:456 Instance/(19719:19719): Procesando GET. Clave: sony:consola:ps3
+[DEBUG] 17:54:48:456 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 17:54:48:457 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:457 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:457 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:457 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[INFO] 17:54:48:457 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:461 Instance/(19719:19719): Procesando GET. Clave: sony:consola:ps4
+[DEBUG] 17:54:48:461 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 17:54:48:461 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:461 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:461 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:461 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:461 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[INFO] 17:54:48:461 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:462 Instance/(19719:19719): Procesando GET. Clave: microsoft:consola:xbox
+[DEBUG] 17:54:48:462 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 17:54:48:462 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:462 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:462 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:462 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:462 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:463 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[INFO] 17:54:48:463 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:463 Instance/(19719:19719): Procesando GET. Clave: microsoft:consola:xbox360
+[DEBUG] 17:54:48:463 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 17:54:48:463 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:463 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:463 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:463 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:464 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:464 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:464 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[INFO] 17:54:48:464 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:464 Instance/(19719:19719): Procesando GET. Clave: microsoft:consola:xboxone
+[DEBUG] 17:54:48:464 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 17:54:48:464 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:465 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[INFO] 17:54:48:465 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:466 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:nes
+[DEBUG] 17:54:48:466 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 7
+[DEBUG] 17:54:48:466 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:466 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[INFO] 17:54:48:466 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:477 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:snes
+[DEBUG] 17:54:48:477 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 17:54:48:477 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:477 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:477 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:477 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[INFO] 17:54:48:478 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:478 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:nintendo64
+[DEBUG] 17:54:48:478 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 9
+[DEBUG] 17:54:48:478 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:478 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 17:54:48:479 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[INFO] 17:54:48:479 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:479 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:gamecube
+[DEBUG] 17:54:48:479 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 10
+[DEBUG] 17:54:48:480 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 17:54:48:480 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[INFO] 17:54:48:480 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:481 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:wii
+[DEBUG] 17:54:48:481 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 11
+[DEBUG] 17:54:48:481 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 17:54:48:481 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[INFO] 17:54:48:482 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:482 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:wiiu
+[DEBUG] 17:54:48:482 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 12
+[DEBUG] 17:54:48:482 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:482 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[INFO] 17:54:48:483 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:483 Instance/(19719:19719): Procesando GET. Clave: nintendo:consola:switch
+[DEBUG] 17:54:48:483 Instance/(19719:19719): Clave inexistente. Se crea registro en Tabla de Entradas indice: 13
+[DEBUG] 17:54:48:483 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:483 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:484 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:484 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:485 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:nes - Valor:Mario
+[DEBUG] 17:54:48:485 Instance/(19719:19719): Se inserta Valor:Mario en Indice:0
+[DEBUG] 17:54:48:485 Instance/(19719:19719): Matriz Valores: [X0000000]
+[DEBUG] 17:54:48:485 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:485 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:486 Instance/(19719:19719): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 17:54:48:486 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 17:54:48:486 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 17:54:48:486 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 17:54:48:486 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:486 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:486 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:486 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:snes - Valor:SuperMario
+[DEBUG] 17:54:48:486 Instance/(19719:19719): Se inserta Valor:SuperMario en Indice:1
+[DEBUG] 17:54:48:486 Instance/(19719:19719): Matriz Valores: [XX000000]
+[DEBUG] 17:54:48:487 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:487 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:487 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:492 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 17:54:48:495 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 17:54:48:496 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 17:54:48:496 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:496 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:496 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:496 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:Mario64
+[DEBUG] 17:54:48:496 Instance/(19719:19719): Se inserta Valor:Mario64 en Indice:2
+[DEBUG] 17:54:48:496 Instance/(19719:19719): Matriz Valores: [XXX00000]
+[DEBUG] 17:54:48:496 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:496 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:496 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:497 Instance/(19719:19719): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 17:54:48:513 Instance/(19719:19719): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 17:54:48:513 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 17:54:48:513 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:513 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:513 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:513 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:gamecube - Valor:FinalFantasyTactics
+[DEBUG] 17:54:48:513 Instance/(19719:19719): Se inserta Valor:FinalFantasyTactics en Indice:3
+[DEBUG] 17:54:48:513 Instance/(19719:19719): Matriz Valores: [XXXXX000]
+[DEBUG] 17:54:48:514 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 17:54:48:514 Instance/(19719:19719): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 17:54:48:515 Instance/(19719:19719): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 17:54:48:515 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:515 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:515 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:515 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy
+[DEBUG] 17:54:48:515 Instance/(19719:19719): Se inserta Valor:MarioGalaxy en Indice:5
+[DEBUG] 17:54:48:515 Instance/(19719:19719): Matriz Valores: [XXXXXXX0]
+[DEBUG] 17:54:48:516 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 11	nintendo:consola:wii	5	11	18	MarioGalaxy
+[DEBUG] 17:54:48:516 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:517 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:517 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:517 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy2
+[DEBUG] 17:54:48:517 Instance/(19719:19719): Se inserta Valor:MarioGalaxy2 en Indice:5
+[DEBUG] 17:54:48:517 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:517 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 17:54:48:518 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:519 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:519 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:wiiu - Valor:RIP
+[DEBUG] 17:54:48:519 Instance/(19719:19719): Se inserta Valor:RIP en Indice:7
+[DEBUG] 17:54:48:519 Instance/(19719:19719): Matriz Valores: [XXXXXXXX]
+[DEBUG] 17:54:48:520 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:520 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:521 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:521 Instance/(19719:19719): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 17:54:48:522 Instance/(19719:19719): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 17:54:48:522 Instance/(19719:19719): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 17:54:48:522 Instance/(19719:19719): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 17:54:48:522 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:522 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:522 Instance/(19719:19719): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:MarioKart
+[DEBUG] 17:54:48:522 Instance/(19719:19719): Se inserta Valor:MarioKart en Indice:2
+[DEBUG] 17:54:48:523 Instance/(19719:19719): Tabla Entradas
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 17:54:48:524 Instance/(19719:19719): 13	nintendo:consola:switch	0	0	0	
+[INFO] 17:54:48:524 Instance/(19719:19719): Esperando acción
+[INFO] 17:54:48:524 Instance/(19719:19719): Procesando SET. Clave: sony:consola:ps1 - Valor:FF7
+[DEBUG] 17:54:48:524 Instance/(19719:19719): Sustituye por algoritmo BSU
+[DEBUG] 18:02:13:29 Instance/(20025:20025): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:02:13:30 Instance/(20025:20025): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:02:13:30 Instance/(20025:20025): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:02:13:30 Instance/(20025:20025): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:02:13:30 Instance/(20025:20025): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:02:13:30 Instance/(20025:20025): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:02:13:30 Instance/(20025:20025): INTERVALO_DUMP: 10
+[DEBUG] 18:02:13:63 Instance/(20025:20025): Socket coordinador: 4
+[DEBUG] 18:02:13:101 Instance/(20025:20025): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:02:13:101 Instance/(20025:20025): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:02:13:101 Instance/(20025:20025): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:sony:consola:ps2
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:sony:consola:ps3
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:sony:consola:ps4
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:microsoft:consola:xbox
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:microsoft:consola:xbox360
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:microsoft:consola:xboxone
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:nintendo:consola:wii
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:nintendo:consola:wiiu
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Se borra entrada porque no se encontró archivo de dump. Clave:nintendo:consola:switch
+[DEBUG] 18:02:13:102 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:13:102 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:13:103 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:13:103 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:13:103 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:552 Instance/(20025:20025): Procesando GET. Clave: sony:consola:ps1
+[DEBUG] 18:02:17:552 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:02:17:552 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:552 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:552 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:552 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:552 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:552 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:553 Instance/(20025:20025): Procesando GET. Clave: sony:consola:ps2
+[DEBUG] 18:02:17:553 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:02:17:553 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:553 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:553 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:554 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:554 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:554 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:554 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:558 Instance/(20025:20025): Procesando GET. Clave: sony:consola:ps3
+[DEBUG] 18:02:17:558 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:02:17:558 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:558 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:558 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:558 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:558 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:558 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:558 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:559 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:560 Instance/(20025:20025): Procesando GET. Clave: sony:consola:ps4
+[DEBUG] 18:02:17:560 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:02:17:560 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:561 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:561 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:562 Instance/(20025:20025): Procesando GET. Clave: microsoft:consola:xbox
+[DEBUG] 18:02:17:562 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 18:02:17:562 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:562 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:562 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:563 Instance/(20025:20025): Procesando GET. Clave: microsoft:consola:xbox360
+[DEBUG] 18:02:17:563 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 18:02:17:563 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:563 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:563 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:564 Instance/(20025:20025): Procesando GET. Clave: microsoft:consola:xboxone
+[DEBUG] 18:02:17:564 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 18:02:17:564 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:564 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:565 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:565 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:565 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:566 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:nes
+[DEBUG] 18:02:17:566 Instance/(20025:20025): Clave existente. Numero Entrada:0 Tamanio Entrada:5
+[DEBUG] 18:02:17:566 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:566 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:567 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:567 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:snes
+[DEBUG] 18:02:17:567 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 18:02:17:567 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:567 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:567 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:567 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:567 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:567 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:567 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:568 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:568 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:568 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:568 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:568 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:568 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:568 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:nintendo64
+[DEBUG] 18:02:17:568 Instance/(20025:20025): Clave existente. Numero Entrada:2 Tamanio Entrada:8
+[DEBUG] 18:02:17:568 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:569 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:569 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:573 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:gamecube
+[DEBUG] 18:02:17:573 Instance/(20025:20025): Clave existente. Numero Entrada:3 Tamanio Entrada:19
+[DEBUG] 18:02:17:573 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:573 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:574 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[INFO] 18:02:17:575 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:575 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:wii
+[DEBUG] 18:02:17:575 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 11
+[DEBUG] 18:02:17:575 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:576 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:577 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:577 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[INFO] 18:02:17:577 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:577 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:wiiu
+[DEBUG] 18:02:17:577 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 12
+[DEBUG] 18:02:17:577 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:577 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:577 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:578 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[DEBUG] 18:02:17:582 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[INFO] 18:02:17:582 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:582 Instance/(20025:20025): Procesando GET. Clave: nintendo:consola:switch
+[DEBUG] 18:02:17:582 Instance/(20025:20025): Clave inexistente. Se crea registro en Tabla de Entradas indice: 13
+[DEBUG] 18:02:17:582 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:583 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:584 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:584 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[DEBUG] 18:02:17:584 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:584 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:584 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:584 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:nes - Valor:Mario
+[DEBUG] 18:02:17:588 Instance/(20025:20025): Se inserta Valor:Mario en Indice:0
+[DEBUG] 18:02:17:589 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:589 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	
+[DEBUG] 18:02:17:589 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	
+[DEBUG] 18:02:17:589 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:589 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:593 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:593 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:593 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:594 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:594 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:594 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:snes - Valor:SuperMario
+[DEBUG] 18:02:17:594 Instance/(20025:20025): Se inserta Valor:SuperMario en Indice:1
+[DEBUG] 18:02:17:595 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	Mario64
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[DEBUG] 18:02:17:595 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:596 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:596 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:Mario64
+[DEBUG] 18:02:17:596 Instance/(20025:20025): Se inserta Valor:Mario64 en Indice:2
+[DEBUG] 18:02:17:596 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:596 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:597 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:597 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:597 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:gamecube - Valor:FinalFantasyTactics
+[DEBUG] 18:02:17:597 Instance/(20025:20025): Se inserta Valor:FinalFantasyTactics en Indice:3
+[DEBUG] 18:02:17:598 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:598 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:599 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:599 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy
+[DEBUG] 18:02:17:599 Instance/(20025:20025): Se inserta Valor:MarioGalaxy en Indice:5
+[DEBUG] 18:02:17:599 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:599 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:599 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:599 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:599 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:599 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:599 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 11	nintendo:consola:wii	5	11	18	MarioGalaxy
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:600 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:600 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:600 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy2
+[DEBUG] 18:02:17:600 Instance/(20025:20025): Se inserta Valor:MarioGalaxy2 en Indice:5
+[DEBUG] 18:02:17:601 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:601 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:603 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:603 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:02:17:603 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:603 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:603 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	
+[DEBUG] 18:02:17:603 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:603 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:603 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:wiiu - Valor:RIP
+[DEBUG] 18:02:17:603 Instance/(20025:20025): Se inserta Valor:RIP en Indice:7
+[DEBUG] 18:02:17:604 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:604 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:02:17:605 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:605 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:605 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:605 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:605 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:605 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:MarioKart
+[DEBUG] 18:02:17:605 Instance/(20025:20025): Se inserta Valor:MarioKart en Indice:2
+[DEBUG] 18:02:17:605 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:605 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	Sup
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	SuperMar
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:606 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:606 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:606 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps1 - Valor:FF7
+[DEBUG] 18:02:17:607 Instance/(20025:20025): Se inserta Valor:FF7 en Indice:1
+[DEBUG] 18:02:17:607 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:607 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	FF7
+[DEBUG] 18:02:17:607 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	FF7erMar
+[DEBUG] 18:02:17:607 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:607 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:607 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:610 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:610 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	FF7erMario
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:611 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:611 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:611 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:PkmnSnap
+[DEBUG] 18:02:17:612 Instance/(20025:20025): Se inserta Valor:PkmnSnap en Indice:2
+[DEBUG] 18:02:17:612 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:612 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	FF7
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	FF7erMar
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	FF7erMario
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:613 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:613 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:613 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps2 - Valor:GodOfWar
+[DEBUG] 18:02:17:613 Instance/(20025:20025): Se inserta Valor:GodOfWar en Indice:1
+[DEBUG] 18:02:17:614 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 0	sony:consola:ps1	1	3	22	God
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	GodOfWar
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	GodOfWario
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:615 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:621 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:621 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:621 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:621 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:621 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps1 - Valor:FF8
+[DEBUG] 18:02:17:621 Instance/(20025:20025): Se inserta Valor:FF8 en Indice:1
+[DEBUG] 18:02:17:622 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	FF8
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	FF8OfWar
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:02:17:622 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	FF8OfWario
+[DEBUG] 18:02:17:623 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:623 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:623 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:623 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:623 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:623 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:623 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps3 - Valor:TLOU
+[DEBUG] 18:02:17:623 Instance/(20025:20025): Se inserta Valor:TLOU en Indice:0
+[DEBUG] 18:02:17:623 Instance/(20025:20025): Matriz Valores: [X0000000]
+[DEBUG] 18:02:17:624 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	FF8
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 1	sony:consola:ps2	1	8	24	FF8OfWar
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 2	sony:consola:ps3	0	4	26	TLOU
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	TLOUo
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	FF8OfWario
+[DEBUG] 18:02:17:624 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:625 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:625 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:625 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:625 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:625 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:625 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps2 - Valor:GodOfWar2
+[DEBUG] 18:02:17:625 Instance/(20025:20025): Se inserta Valor:GodOfWar2 en Indice:1
+[DEBUG] 18:02:17:626 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	God
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	GodOfWar2
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 2	sony:consola:ps3	0	4	26	TLOU
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	TLOUo
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	GodOfWar2o
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:626 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:627 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:627 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:627 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps4 - Valor:Bloodborne
+[DEBUG] 18:02:17:627 Instance/(20025:20025): Se inserta Valor:Bloodborne en Indice:1
+[DEBUG] 18:02:17:627 Instance/(20025:20025): Matriz Valores: [XX000000]
+[DEBUG] 18:02:17:627 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:627 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:02:17:627 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:02:17:627 Instance/(20025:20025): 2	sony:consola:ps3	0	4	26	TLOU
+[DEBUG] 18:02:17:627 Instance/(20025:20025): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:02:17:627 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	TLOUo
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:628 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:628 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:628 Instance/(20025:20025): Procesando SET. Clave: sony:consola:ps3 - Valor:GodOfWar3
+[DEBUG] 18:02:17:628 Instance/(20025:20025): Se inserta Valor:GodOfWar3 en Indice:0
+[DEBUG] 18:02:17:629 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 2	sony:consola:ps3	0	9	29	GodOfWar3
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	GodOf
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:02:17:629 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:02:17:630 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:630 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:630 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:630 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:630 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:630 Instance/(20025:20025): Procesando SET. Clave: microsoft:consola:xbox - Valor:Halo
+[DEBUG] 18:02:17:630 Instance/(20025:20025): Se inserta Valor:Halo en Indice:2
+[DEBUG] 18:02:17:630 Instance/(20025:20025): Matriz Valores: [XXX00000]
+[DEBUG] 18:02:17:631 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 2	sony:consola:ps3	0	9	29	GodOfWar3
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 4	microsoft:consola:xbox	2	4	30	Halo
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	GodOf
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	HaloSnap
+[DEBUG] 18:02:17:631 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:02:17:632 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:632 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:632 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:632 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:632 Instance/(20025:20025): Procesando SET. Clave: microsoft:consola:xbox360 - Valor:Halo
+[DEBUG] 18:02:17:632 Instance/(20025:20025): Se inserta Valor:Halo en Indice:3
+[DEBUG] 18:02:17:632 Instance/(20025:20025): Matriz Valores: [XXXX0000]
+[DEBUG] 18:02:17:632 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:632 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 2	sony:consola:ps3	0	9	29	GodOfWar3
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 4	microsoft:consola:xbox	2	4	30	Halo
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 5	microsoft:consola:xbox360	3	4	31	Halo
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	GodOf
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	HaloSnap
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	HalolFantasyTactics
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:633 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:633 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:633 Instance/(20025:20025): Procesando SET. Clave: microsoft:consola:xboxone - Valor:Halo
+[DEBUG] 18:02:17:633 Instance/(20025:20025): Se inserta Valor:Halo en Indice:4
+[DEBUG] 18:02:17:634 Instance/(20025:20025): Matriz Valores: [XXXXX000]
+[DEBUG] 18:02:17:634 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:634 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:02:17:634 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:02:17:634 Instance/(20025:20025): 2	sony:consola:ps3	0	9	29	GodOfWar3
+[DEBUG] 18:02:17:634 Instance/(20025:20025): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:02:17:634 Instance/(20025:20025): 4	microsoft:consola:xbox	2	4	30	Halo
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 5	microsoft:consola:xbox360	3	4	31	Halo
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 6	microsoft:consola:xboxone	4	4	32	Halo
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	GodOf
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	HaloSnap
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	HalolFantaHaloctics
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:635 Instance/(20025:20025): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:02:17:635 Instance/(20025:20025): Esperando acción
+[INFO] 18:02:17:635 Instance/(20025:20025): Procesando SET. Clave: nintendo:consola:switch - Valor:ZeldaBOTW
+[DEBUG] 18:02:17:635 Instance/(20025:20025): Se inserta Valor:ZeldaBOTW en Indice:5
+[DEBUG] 18:02:17:635 Instance/(20025:20025): Matriz Valores: [XXXXXX00]
+[DEBUG] 18:02:17:637 Instance/(20025:20025): Tabla Entradas
+[DEBUG] 18:02:17:637 Instance/(20025:20025): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:02:17:637 Instance/(20025:20025): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:02:17:637 Instance/(20025:20025): 2	sony:consola:ps3	0	9	29	GodOfWar3
+[DEBUG] 18:02:17:637 Instance/(20025:20025): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 4	microsoft:consola:xbox	2	4	30	Halo
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 5	microsoft:consola:xbox360	3	4	31	Halo
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 6	microsoft:consola:xboxone	4	4	32	Halo
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 7	nintendo:consola:nes	0	5	14	GodOf
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 9	nintendo:consola:nintendo64	2	8	23	HaloSnap
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 10	nintendo:consola:gamecube	3	19	17	HalolFantaHaloctics
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 11	nintendo:consola:wii	5	12	19	ZeldaBOTWxy2
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:02:17:638 Instance/(20025:20025): 13	nintendo:consola:switch	5	9	33	ZeldaBOTW
+[INFO] 18:02:17:638 Instance/(20025:20025): Esperando acción
+[ERROR] 18:02:39:412 Instance/(20025:20025): Error al recibir
+[DEBUG] 18:03:01:803 Instance/(20091:20091): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:03:01:803 Instance/(20091:20091): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:03:01:803 Instance/(20091:20091): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:03:01:803 Instance/(20091:20091): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:03:01:803 Instance/(20091:20091): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:03:01:803 Instance/(20091:20091): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:03:01:803 Instance/(20091:20091): INTERVALO_DUMP: 10
+[DEBUG] 18:03:01:855 Instance/(20091:20091): Socket coordinador: 4
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Se mapeo Tabla de Entradas correctamente
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Se borra entrada porque no se encontró archivo de dump. Clave:microsoft:consola:xbox
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Se borra entrada porque no se encontró archivo de dump. Clave:microsoft:consola:xbox360
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Se borra entrada porque no se encontró archivo de dump. Clave:microsoft:consola:xboxone
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Se borra entrada porque no se encontró archivo de dump. Clave:nintendo:consola:wii
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Se borra entrada porque no se encontró archivo de dump. Clave:nintendo:consola:switch
+[DEBUG] 18:03:01:894 Instance/(20091:20091): Tabla Entradas
+[DEBUG] 18:03:01:894 Instance/(20091:20091): 0	sony:consola:ps1	1	3	25	Blo
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 1	sony:consola:ps2	1	9	27	Bloodborn
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 2	sony:consola:ps3	0	9	29	GodOfWar3
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 3	sony:consola:ps4	1	10	28	Bloodborne
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 7	nintendo:consola:nes	0	5	14	GodOf
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 8	nintendo:consola:snes	1	10	15	Bloodborne
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:03:01:895 Instance/(20091:20091): 12	nintendo:consola:wiiu	7	3	20	RIP
+[INFO] 18:03:01:895 Instance/(20091:20091): Esperando acción
+[DEBUG] 18:03:57:233 Instance/(20157:20157): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:03:57:234 Instance/(20157:20157): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:03:57:234 Instance/(20157:20157): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:03:57:234 Instance/(20157:20157): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:03:57:234 Instance/(20157:20157): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:03:57:234 Instance/(20157:20157): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:03:57:234 Instance/(20157:20157): INTERVALO_DUMP: 10
+[DEBUG] 18:03:57:263 Instance/(20157:20157): Socket coordinador: 4
+[DEBUG] 18:03:57:304 Instance/(20157:20157): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:03:57:304 Instance/(20157:20157): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:03:57:304 Instance/(20157:20157): Se mapeo Tabla de Entradas correctamente
+[INFO] 18:03:57:305 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:421 Instance/(20157:20157): Procesando GET. Clave: sony:consola:ps1
+[DEBUG] 18:04:01:421 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:04:01:421 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:421 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[INFO] 18:04:01:421 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:422 Instance/(20157:20157): Procesando GET. Clave: sony:consola:ps2
+[DEBUG] 18:04:01:422 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:04:01:422 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:422 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:422 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[INFO] 18:04:01:422 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:425 Instance/(20157:20157): Procesando GET. Clave: sony:consola:ps3
+[DEBUG] 18:04:01:425 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:04:01:425 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:425 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:425 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:425 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[INFO] 18:04:01:425 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:426 Instance/(20157:20157): Procesando GET. Clave: sony:consola:ps4
+[DEBUG] 18:04:01:426 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:04:01:426 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:426 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:426 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:426 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:426 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[INFO] 18:04:01:426 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:427 Instance/(20157:20157): Procesando GET. Clave: microsoft:consola:xbox
+[DEBUG] 18:04:01:427 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 18:04:01:427 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:427 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:427 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:427 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:427 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:427 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[INFO] 18:04:01:427 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:428 Instance/(20157:20157): Procesando GET. Clave: microsoft:consola:xbox360
+[DEBUG] 18:04:01:428 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 18:04:01:428 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:428 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:428 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:428 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:428 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:428 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:428 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[INFO] 18:04:01:428 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:429 Instance/(20157:20157): Procesando GET. Clave: microsoft:consola:xboxone
+[DEBUG] 18:04:01:429 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 18:04:01:429 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:429 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[INFO] 18:04:01:429 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:430 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:nes
+[DEBUG] 18:04:01:430 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 7
+[DEBUG] 18:04:01:430 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:430 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[INFO] 18:04:01:430 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:431 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:snes
+[DEBUG] 18:04:01:431 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 18:04:01:431 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:04:01:431 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[INFO] 18:04:01:431 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:435 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:nintendo64
+[DEBUG] 18:04:01:435 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 9
+[DEBUG] 18:04:01:435 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:435 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:435 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:435 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:435 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:436 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:436 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:436 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:436 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:04:01:436 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:04:01:436 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[INFO] 18:04:01:436 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:441 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:gamecube
+[DEBUG] 18:04:01:441 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 10
+[DEBUG] 18:04:01:441 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:04:01:442 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[INFO] 18:04:01:442 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:443 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:wii
+[DEBUG] 18:04:01:443 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 11
+[DEBUG] 18:04:01:443 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:04:01:443 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:04:01:444 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:04:01:444 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[INFO] 18:04:01:444 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:444 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:wiiu
+[DEBUG] 18:04:01:444 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 12
+[DEBUG] 18:04:01:444 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:444 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:444 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:444 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:444 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:04:01:445 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[INFO] 18:04:01:445 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:446 Instance/(20157:20157): Procesando GET. Clave: nintendo:consola:switch
+[DEBUG] 18:04:01:446 Instance/(20157:20157): Clave inexistente. Se crea registro en Tabla de Entradas indice: 13
+[DEBUG] 18:04:01:446 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:446 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:447 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:447 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:nes - Valor:Mario
+[DEBUG] 18:04:01:447 Instance/(20157:20157): Se inserta Valor:Mario en Indice:0
+[DEBUG] 18:04:01:447 Instance/(20157:20157): Matriz Valores: [X0000000]
+[DEBUG] 18:04:01:447 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:447 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:448 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:448 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:448 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:snes - Valor:SuperMario
+[DEBUG] 18:04:01:448 Instance/(20157:20157): Se inserta Valor:SuperMario en Indice:1
+[DEBUG] 18:04:01:448 Instance/(20157:20157): Matriz Valores: [XX000000]
+[DEBUG] 18:04:01:449 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:449 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:449 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:449 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:449 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:449 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:449 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:450 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:450 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:450 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:Mario64
+[DEBUG] 18:04:01:450 Instance/(20157:20157): Se inserta Valor:Mario64 en Indice:2
+[DEBUG] 18:04:01:450 Instance/(20157:20157): Matriz Valores: [XXX00000]
+[DEBUG] 18:04:01:450 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:455 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:456 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:456 Instance/(20157:20157): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:04:01:456 Instance/(20157:20157): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:04:01:456 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:04:01:456 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:456 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:456 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:456 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:gamecube - Valor:FinalFantasyTactics
+[DEBUG] 18:04:01:456 Instance/(20157:20157): Se inserta Valor:FinalFantasyTactics en Indice:3
+[DEBUG] 18:04:01:456 Instance/(20157:20157): Matriz Valores: [XXXXX000]
+[DEBUG] 18:04:01:457 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:457 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:457 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:457 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:457 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:457 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:457 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:458 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:458 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:458 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy
+[DEBUG] 18:04:01:458 Instance/(20157:20157): Se inserta Valor:MarioGalaxy en Indice:5
+[DEBUG] 18:04:01:458 Instance/(20157:20157): Matriz Valores: [XXXXXXX0]
+[DEBUG] 18:04:01:459 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:04:01:459 Instance/(20157:20157): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 11	nintendo:consola:wii	5	11	18	MarioGalaxy
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:460 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:460 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy2
+[DEBUG] 18:04:01:460 Instance/(20157:20157): Se inserta Valor:MarioGalaxy2 en Indice:5
+[DEBUG] 18:04:01:460 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:460 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:04:01:461 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:462 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:465 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:wiiu - Valor:RIP
+[DEBUG] 18:04:01:465 Instance/(20157:20157): Se inserta Valor:RIP en Indice:7
+[DEBUG] 18:04:01:466 Instance/(20157:20157): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:04:01:466 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:466 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:469 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:470 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:470 Instance/(20157:20157): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:04:01:470 Instance/(20157:20157): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:04:01:470 Instance/(20157:20157): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:04:01:470 Instance/(20157:20157): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:04:01:470 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:470 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:470 Instance/(20157:20157): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:MarioKart
+[DEBUG] 18:04:01:470 Instance/(20157:20157): Se inserta Valor:MarioKart en Indice:2
+[DEBUG] 18:04:01:470 Instance/(20157:20157): Tabla Entradas
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:04:01:471 Instance/(20157:20157): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:04:01:471 Instance/(20157:20157): Esperando acción
+[INFO] 18:04:01:471 Instance/(20157:20157): Procesando SET. Clave: sony:consola:ps1 - Valor:FF7
+[DEBUG] 18:04:01:472 Instance/(20157:20157): Sustituye por algoritmo BSU
+[DEBUG] 18:05:28:168 Instance/(20309:20309): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:05:28:168 Instance/(20309:20309): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:05:28:168 Instance/(20309:20309): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:05:28:168 Instance/(20309:20309): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:05:28:168 Instance/(20309:20309): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:05:28:168 Instance/(20309:20309): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:05:28:168 Instance/(20309:20309): INTERVALO_DUMP: 10
+[DEBUG] 18:05:28:204 Instance/(20309:20309): Socket coordinador: 4
+[DEBUG] 18:05:28:241 Instance/(20309:20309): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:05:28:242 Instance/(20309:20309): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:05:28:242 Instance/(20309:20309): Se mapeo Tabla de Entradas correctamente
+[INFO] 18:05:28:243 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:440 Instance/(20309:20309): Procesando GET. Clave: sony:consola:ps1
+[DEBUG] 18:05:31:440 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:05:31:440 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:440 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[INFO] 18:05:31:440 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:445 Instance/(20309:20309): Procesando GET. Clave: sony:consola:ps2
+[DEBUG] 18:05:31:445 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:05:31:445 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:445 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:445 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[INFO] 18:05:31:445 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:450 Instance/(20309:20309): Procesando GET. Clave: sony:consola:ps3
+[DEBUG] 18:05:31:450 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:05:31:450 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:450 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:450 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:450 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[INFO] 18:05:31:450 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:451 Instance/(20309:20309): Procesando GET. Clave: sony:consola:ps4
+[DEBUG] 18:05:31:451 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:05:31:451 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:451 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:451 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:451 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:451 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[INFO] 18:05:31:451 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:452 Instance/(20309:20309): Procesando GET. Clave: microsoft:consola:xbox
+[DEBUG] 18:05:31:452 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 18:05:31:452 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:452 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:452 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:452 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:452 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:452 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[INFO] 18:05:31:452 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:460 Instance/(20309:20309): Procesando GET. Clave: microsoft:consola:xbox360
+[DEBUG] 18:05:31:460 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 18:05:31:460 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:460 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:460 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:460 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:460 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:460 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:460 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[INFO] 18:05:31:461 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:465 Instance/(20309:20309): Procesando GET. Clave: microsoft:consola:xboxone
+[DEBUG] 18:05:31:465 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 18:05:31:465 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:465 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[INFO] 18:05:31:465 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:466 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:nes
+[DEBUG] 18:05:31:466 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 7
+[DEBUG] 18:05:31:466 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:466 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[INFO] 18:05:31:466 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:467 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:snes
+[DEBUG] 18:05:31:467 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 18:05:31:467 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:05:31:467 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[INFO] 18:05:31:467 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:468 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:nintendo64
+[DEBUG] 18:05:31:468 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 9
+[DEBUG] 18:05:31:468 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:468 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:05:31:469 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:05:31:469 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[INFO] 18:05:31:469 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:469 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:gamecube
+[DEBUG] 18:05:31:469 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 10
+[DEBUG] 18:05:31:469 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:469 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:469 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:469 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:469 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[INFO] 18:05:31:470 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:470 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:wii
+[DEBUG] 18:05:31:470 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 11
+[DEBUG] 18:05:31:470 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:470 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:05:31:471 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[INFO] 18:05:31:471 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:472 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:wiiu
+[DEBUG] 18:05:31:472 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 12
+[DEBUG] 18:05:31:472 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:05:31:472 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:05:31:473 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[INFO] 18:05:31:473 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:473 Instance/(20309:20309): Procesando GET. Clave: nintendo:consola:switch
+[DEBUG] 18:05:31:473 Instance/(20309:20309): Clave inexistente. Se crea registro en Tabla de Entradas indice: 13
+[DEBUG] 18:05:31:473 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:473 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:473 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:473 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:05:31:474 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:05:31:475 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:05:31:475 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:475 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:475 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:475 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:nes - Valor:Mario
+[DEBUG] 18:05:31:475 Instance/(20309:20309): Se inserta Valor:Mario en Indice:0
+[DEBUG] 18:05:31:475 Instance/(20309:20309): Matriz Valores: [X0000000]
+[DEBUG] 18:05:31:475 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:475 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:476 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:476 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:476 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:476 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:476 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:476 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:482 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:482 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:483 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:snes - Valor:SuperMario
+[DEBUG] 18:05:31:483 Instance/(20309:20309): Se inserta Valor:SuperMario en Indice:1
+[DEBUG] 18:05:31:483 Instance/(20309:20309): Matriz Valores: [XX000000]
+[DEBUG] 18:05:31:483 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:483 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:483 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:483 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:483 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:483 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:483 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:484 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:484 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:484 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:Mario64
+[DEBUG] 18:05:31:484 Instance/(20309:20309): Se inserta Valor:Mario64 en Indice:2
+[DEBUG] 18:05:31:488 Instance/(20309:20309): Matriz Valores: [XXX00000]
+[DEBUG] 18:05:31:488 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:488 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:489 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:489 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:489 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:gamecube - Valor:FinalFantasyTactics
+[DEBUG] 18:05:31:489 Instance/(20309:20309): Se inserta Valor:FinalFantasyTactics en Indice:3
+[DEBUG] 18:05:31:490 Instance/(20309:20309): Matriz Valores: [XXXXX000]
+[DEBUG] 18:05:31:490 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:490 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:491 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:491 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy
+[DEBUG] 18:05:31:491 Instance/(20309:20309): Se inserta Valor:MarioGalaxy en Indice:5
+[DEBUG] 18:05:31:491 Instance/(20309:20309): Matriz Valores: [XXXXXXX0]
+[DEBUG] 18:05:31:491 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:491 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 11	nintendo:consola:wii	5	11	18	MarioGalaxy
+[DEBUG] 18:05:31:492 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:493 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:493 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:493 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy2
+[DEBUG] 18:05:31:493 Instance/(20309:20309): Se inserta Valor:MarioGalaxy2 en Indice:5
+[DEBUG] 18:05:31:494 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:494 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:494 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:05:31:495 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:496 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:496 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:wiiu - Valor:RIP
+[DEBUG] 18:05:31:496 Instance/(20309:20309): Se inserta Valor:RIP en Indice:7
+[DEBUG] 18:05:31:496 Instance/(20309:20309): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:05:31:496 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:496 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:496 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:05:31:497 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:497 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:497 Instance/(20309:20309): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:MarioKart
+[DEBUG] 18:05:31:497 Instance/(20309:20309): Se inserta Valor:MarioKart en Indice:2
+[DEBUG] 18:05:31:498 Instance/(20309:20309): Tabla Entradas
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:05:31:498 Instance/(20309:20309): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 18:05:31:499 Instance/(20309:20309): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:05:31:499 Instance/(20309:20309): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:05:31:499 Instance/(20309:20309): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:05:31:499 Instance/(20309:20309): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:05:31:499 Instance/(20309:20309): Esperando acción
+[INFO] 18:05:31:499 Instance/(20309:20309): Procesando SET. Clave: sony:consola:ps1 - Valor:FF7
+[DEBUG] 18:05:31:499 Instance/(20309:20309): Sustituye por algoritmo BSU
+[DEBUG] 18:05:37:105 Instance/(20309:20309): Entrada atómica a borrar: nintendo:consola:snes
+[DEBUG] 18:05:37:105 Instance/(20309:20309): Se inserta Valor:FF7 en Indice:1
+[DEBUG] 18:05:37:106 Instance/(20309:20309): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:06:09:42 Instance/(20380:20380): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 18:06:09:43 Instance/(20380:20380): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:06:09:43 Instance/(20380:20380): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:06:09:43 Instance/(20380:20380): ALGORITMO_REMPLAZO: BSU
+[DEBUG] 18:06:09:43 Instance/(20380:20380): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 18:06:09:43 Instance/(20380:20380): NOMBRE_INSTANCIA: Inst1
+[DEBUG] 18:06:09:43 Instance/(20380:20380): INTERVALO_DUMP: 10
+[DEBUG] 18:06:09:71 Instance/(20380:20380): Socket coordinador: 4
+[DEBUG] 18:06:09:109 Instance/(20380:20380): Cantidad Entradas: 8 Tamaño Entradas: 10
+[DEBUG] 18:06:09:109 Instance/(20380:20380): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/TablaDeEntradas.bin
+[DEBUG] 18:06:09:109 Instance/(20380:20380): Se mapeo Tabla de Entradas correctamente
+[INFO] 18:06:09:110 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:905 Instance/(20380:20380): Procesando GET. Clave: sony:consola:ps1
+[DEBUG] 18:06:11:905 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 18:06:11:905 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:905 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[INFO] 18:06:11:905 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:907 Instance/(20380:20380): Procesando GET. Clave: sony:consola:ps2
+[DEBUG] 18:06:11:907 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 18:06:11:907 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:907 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:907 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[INFO] 18:06:11:907 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:908 Instance/(20380:20380): Procesando GET. Clave: sony:consola:ps3
+[DEBUG] 18:06:11:908 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 18:06:11:908 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:909 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:909 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:909 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[INFO] 18:06:11:909 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:910 Instance/(20380:20380): Procesando GET. Clave: sony:consola:ps4
+[DEBUG] 18:06:11:910 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 3
+[DEBUG] 18:06:11:910 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:910 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:910 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:910 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:910 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[INFO] 18:06:11:910 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:911 Instance/(20380:20380): Procesando GET. Clave: microsoft:consola:xbox
+[DEBUG] 18:06:11:911 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 4
+[DEBUG] 18:06:11:911 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:913 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:913 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:913 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:913 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:913 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[INFO] 18:06:11:913 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:916 Instance/(20380:20380): Procesando GET. Clave: microsoft:consola:xbox360
+[DEBUG] 18:06:11:916 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 5
+[DEBUG] 18:06:11:916 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:916 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:916 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:916 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:916 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:916 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:916 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[INFO] 18:06:11:916 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:919 Instance/(20380:20380): Procesando GET. Clave: microsoft:consola:xboxone
+[DEBUG] 18:06:11:919 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 6
+[DEBUG] 18:06:11:919 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:919 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:919 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:919 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:919 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:919 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[INFO] 18:06:11:920 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:920 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:nes
+[DEBUG] 18:06:11:920 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 7
+[DEBUG] 18:06:11:920 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:920 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[INFO] 18:06:11:920 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:921 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:snes
+[DEBUG] 18:06:11:921 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 8
+[DEBUG] 18:06:11:921 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:06:11:921 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[INFO] 18:06:11:921 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:921 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:nintendo64
+[DEBUG] 18:06:11:921 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 9
+[DEBUG] 18:06:11:922 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[INFO] 18:06:11:922 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:922 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:gamecube
+[DEBUG] 18:06:11:922 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 10
+[DEBUG] 18:06:11:922 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:922 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[INFO] 18:06:11:923 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:923 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:wii
+[DEBUG] 18:06:11:923 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 11
+[DEBUG] 18:06:11:923 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:06:11:923 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[INFO] 18:06:11:923 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:924 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:wiiu
+[DEBUG] 18:06:11:924 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 12
+[DEBUG] 18:06:11:924 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:06:11:924 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[INFO] 18:06:11:924 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:925 Instance/(20380:20380): Procesando GET. Clave: nintendo:consola:switch
+[DEBUG] 18:06:11:925 Instance/(20380:20380): Clave inexistente. Se crea registro en Tabla de Entradas indice: 13
+[DEBUG] 18:06:11:925 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 7	nintendo:consola:nes	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:11:925 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:11:925 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:926 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:nes - Valor:Mario
+[DEBUG] 18:06:11:926 Instance/(20380:20380): Se inserta Valor:Mario en Indice:0
+[DEBUG] 18:06:11:926 Instance/(20380:20380): Matriz Valores: [X0000000]
+[DEBUG] 18:06:11:926 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 8	nintendo:consola:snes	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:11:926 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:926 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:snes - Valor:SuperMario
+[DEBUG] 18:06:11:926 Instance/(20380:20380): Se inserta Valor:SuperMario en Indice:1
+[DEBUG] 18:06:11:926 Instance/(20380:20380): Matriz Valores: [XX000000]
+[DEBUG] 18:06:11:926 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:926 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 9	nintendo:consola:nintendo64	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:06:11:927 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:11:933 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:933 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:Mario64
+[DEBUG] 18:06:11:933 Instance/(20380:20380): Se inserta Valor:Mario64 en Indice:2
+[DEBUG] 18:06:11:933 Instance/(20380:20380): Matriz Valores: [XXX00000]
+[DEBUG] 18:06:11:933 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:933 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 10	nintendo:consola:gamecube	0	0	0	
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:11:934 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:11:935 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:935 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:gamecube - Valor:FinalFantasyTactics
+[DEBUG] 18:06:11:935 Instance/(20380:20380): Se inserta Valor:FinalFantasyTactics en Indice:3
+[DEBUG] 18:06:11:935 Instance/(20380:20380): Matriz Valores: [XXXXX000]
+[DEBUG] 18:06:11:935 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 11	nintendo:consola:wii	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:11:935 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:11:935 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:11:935 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy
+[DEBUG] 18:06:11:935 Instance/(20380:20380): Se inserta Valor:MarioGalaxy en Indice:5
+[DEBUG] 18:06:11:935 Instance/(20380:20380): Matriz Valores: [XXXXXXX0]
+[DEBUG] 18:06:11:935 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:11:936 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:12:4 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:12:4 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:06:12:4 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:06:12:4 Instance/(20380:20380): 11	nintendo:consola:wii	5	11	18	MarioGalaxy
+[DEBUG] 18:06:12:5 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:12:5 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:12:5 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:12:6 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:wii - Valor:MarioGalaxy2
+[DEBUG] 18:06:12:6 Instance/(20380:20380): Se inserta Valor:MarioGalaxy2 en Indice:5
+[DEBUG] 18:06:12:6 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:06:12:7 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:06:12:8 Instance/(20380:20380): 12	nintendo:consola:wiiu	0	0	0	
+[DEBUG] 18:06:12:8 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:12:8 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:12:8 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:wiiu - Valor:RIP
+[DEBUG] 18:06:12:8 Instance/(20380:20380): Se inserta Valor:RIP en Indice:7
+[DEBUG] 18:06:12:8 Instance/(20380:20380): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:06:12:8 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:12:10 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:12:11 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:12:11 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:12:11 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	7	16	Mario64
+[DEBUG] 18:06:12:11 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:06:12:11 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:06:12:14 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:06:12:14 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:12:14 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:12:14 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:MarioKart
+[DEBUG] 18:06:12:15 Instance/(20380:20380): Se inserta Valor:MarioKart en Indice:2
+[DEBUG] 18:06:12:16 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 0	sony:consola:ps1	0	0	0	
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:06:12:17 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 8	nintendo:consola:snes	1	10	15	SuperMario
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:06:12:19 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:06:12:19 Instance/(20380:20380): Esperando acción
+[INFO] 18:06:12:19 Instance/(20380:20380): Procesando SET. Clave: sony:consola:ps1 - Valor:FF7
+[DEBUG] 18:06:12:19 Instance/(20380:20380): Sustituye por algoritmo BSU
+[DEBUG] 18:07:28:983 Instance/(20380:20380): Entrada atómica a borrar: nintendo:consola:snes
+[DEBUG] 18:07:28:983 Instance/(20380:20380): Se inserta Valor:FF7 en Indice:1
+[DEBUG] 18:07:28:983 Instance/(20380:20380): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:07:48:954 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 0	sony:consola:ps1	1	3	22	FF7
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	9	21	MarioKart
+[DEBUG] 18:07:48:954 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:07:48:955 Instance/(20380:20380): Esperando acción
+[INFO] 18:07:48:955 Instance/(20380:20380): Procesando SET. Clave: nintendo:consola:nintendo64 - Valor:PkmnSnap
+[DEBUG] 18:07:48:955 Instance/(20380:20380): Se inserta Valor:PkmnSnap en Indice:2
+[DEBUG] 18:07:48:955 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 0	sony:consola:ps1	1	3	22	FF7
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 1	sony:consola:ps2	0	0	0	
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:07:48:955 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:07:48:956 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:07:48:956 Instance/(20380:20380): 9	nintendo:consola:nintendo64	2	8	23	PkmnSnap
+[DEBUG] 18:07:48:956 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:07:48:956 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:07:48:956 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:07:48:956 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:07:48:956 Instance/(20380:20380): Esperando acción
+[INFO] 18:07:48:956 Instance/(20380:20380): Procesando SET. Clave: sony:consola:ps2 - Valor:GodOfWar
+[DEBUG] 18:07:48:956 Instance/(20380:20380): Sustituye por algoritmo BSU
+[DEBUG] 18:07:55:358 Instance/(20380:20380): Entrada atómica a borrar: nintendo:consola:nintendo64
+[DEBUG] 18:07:55:358 Instance/(20380:20380): Se inserta Valor:GodOfWar en Indice:2
+[DEBUG] 18:07:55:358 Instance/(20380:20380): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:07:55:358 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 0	sony:consola:ps1	1	3	22	FF7
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 1	sony:consola:ps2	2	8	24	GodOfWar
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:07:55:358 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:07:55:358 Instance/(20380:20380): Esperando acción
+[INFO] 18:07:55:398 Instance/(20380:20380): Procesando SET. Clave: sony:consola:ps1 - Valor:FF8
+[DEBUG] 18:07:55:398 Instance/(20380:20380): Se inserta Valor:FF8 en Indice:1
+[DEBUG] 18:07:55:398 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:07:55:398 Instance/(20380:20380): 0	sony:consola:ps1	1	3	25	FF8
+[DEBUG] 18:07:55:398 Instance/(20380:20380): 1	sony:consola:ps2	2	8	24	GodOfWar
+[DEBUG] 18:07:55:398 Instance/(20380:20380): 2	sony:consola:ps3	0	0	0	
+[DEBUG] 18:07:55:398 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:07:55:398 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:07:55:399 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:07:55:399 Instance/(20380:20380): Esperando acción
+[INFO] 18:07:55:399 Instance/(20380:20380): Procesando SET. Clave: sony:consola:ps3 - Valor:TLOU
+[DEBUG] 18:07:55:400 Instance/(20380:20380): Sustituye por algoritmo BSU
+[DEBUG] 18:07:55:400 Instance/(20380:20380): Entrada atómica a borrar: sony:consola:ps2
+[DEBUG] 18:07:55:400 Instance/(20380:20380): Se inserta Valor:TLOU en Indice:2
+[DEBUG] 18:07:55:400 Instance/(20380:20380): Matriz Valores: [XXXXXXXX]
+[DEBUG] 18:07:55:400 Instance/(20380:20380): Tabla Entradas
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 0	sony:consola:ps1	1	3	25	FF8
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 2	sony:consola:ps3	2	4	26	TLOU
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 3	sony:consola:ps4	0	0	0	
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 4	microsoft:consola:xbox	0	0	0	
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 5	microsoft:consola:xbox360	0	0	0	
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 6	microsoft:consola:xboxone	0	0	0	
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 7	nintendo:consola:nes	0	5	14	Mario
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 10	nintendo:consola:gamecube	3	19	17	FinalFantasyTactics
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 11	nintendo:consola:wii	5	12	19	MarioGalaxy2
+[DEBUG] 18:07:55:400 Instance/(20380:20380): 12	nintendo:consola:wiiu	7	3	20	RIP
+[DEBUG] 18:07:55:401 Instance/(20380:20380): 13	nintendo:consola:switch	0	0	0	
+[INFO] 18:07:55:401 Instance/(20380:20380): Esperando acción

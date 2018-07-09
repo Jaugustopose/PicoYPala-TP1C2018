@@ -102,6 +102,7 @@ void liberarEntrada(int index, int cantidad){
 	{
 		bitarray_clean_bit(bitmap, index+i);
 	}
+	imprimirMatrizValores();
 }
 
 void reservarEntrada(int index, int cantidad){
@@ -395,11 +396,11 @@ void crearMatrizValores(){
 void imprimirTablaEntradas() {
 	int i = 0;
 	log_debug(logInstancia, "Tabla Entradas");
-	log_debug(logInstancia, "I\tClave\t\tEntrada\tTamaño\tTiempo");
 	for (i = 0; i < TAMANIO_TABLA_ENTRADAS; i++) {
 		if(tablaEntradas[i].clave[0]){
-			log_debug(logInstancia, "%d\t%s\t%d\t%d\t%d",i, tablaEntradas[i].clave, tablaEntradas[i].numeroEntrada,
-					tablaEntradas[i].tamanioValor, tablaEntradas[i].tiempo);
+			log_debug(logInstancia, "%d\t%s\t%d\t%d\t%d\t%s",i, tablaEntradas[i].clave, tablaEntradas[i].numeroEntrada,
+					tablaEntradas[i].tamanioValor, tablaEntradas[i].tiempo,
+					leerMatrizValores(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor));
 		}
 	}
 }
@@ -547,9 +548,10 @@ void sustituirBSU(t_entrada* entrada, char* valor, int tamanio, int entradasASus
 			int indice = (i + punteroSustitucion) % TAMANIO_TABLA_ENTRADAS;
 			t_entrada* entradaLocal = tablaEntradas + indice;
 			if(redondearArribaDivision(entradaLocal->tamanioValor, entradasTamanio) == 1 && entradaLocal->clave[0]) {
-				if(entradaLocal->tamanioValor/entradasTamanio > tamanioSustituir){
+				double aux = (double)entradaLocal->tamanioValor/entradasTamanio;
+				if(aux > tamanioSustituir){
 					indiceSustituir = indice;
-					tamanioSustituir = entradaLocal->tamanioValor/entradasTamanio;
+					tamanioSustituir = aux;
 				}
 			}
 		}
@@ -790,6 +792,7 @@ void ejecutarSet(void* buffer){
 		//Obtengo indice, entrada, tamanio
 		int indice = obtenerIndiceClave(clave);
 		t_entrada* entrada = tablaEntradas + indice;
+		entrada->tiempo=timer;
 		int tamanio = strlen(valor);
 		//Verifico si se inserta por primera vez o si se reemplaza valor
 		if (entrada->tamanioValor == 0) {
