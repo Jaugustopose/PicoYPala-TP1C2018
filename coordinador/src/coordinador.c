@@ -87,6 +87,7 @@ operacion_compartida_t* operacion; //Estructura que se compartira con todas las 
 int compactaciones = 0;
 bool compactacionFinalizada = false;
 int ultimaOperacion = 0;
+int fdQuePidioCompactacion;
 infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_operaciones_esis;
 int esiActual = 0;
@@ -859,6 +860,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 			//Guardo la ultima sentencia enviada por un esi para enviar de vuelta a la instancia que solicito compactar.
 			ultimaOperacion = operacion->keyword;
+			fdQuePidioCompactacion = unFileDescriptor;
 
 			//Seteo operacion->keyword (region compartida) en COMPACTAR
 			operacion->keyword = COMPACTAR;
@@ -884,7 +886,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 				operacion->keyword = ultimaOperacion;
 
 				//Levanto el semaforo de la instancia que solicito compactacion para que vuelva a ejecutar sobre la operacion compartida.
-				instanciaQuePidioCompactacion = encontrar_instancia_por_fd(unFileDescriptor);
+				instanciaQuePidioCompactacion = encontrar_instancia_por_fd(fdQuePidioCompactacion);
 				sem_post(&instanciaQuePidioCompactacion->semaforo);
 
 //				//Notifico al PLANIFICADOR que ya se compactaron todas las instancias y hay que continuar la ejecucion.

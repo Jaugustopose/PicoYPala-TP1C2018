@@ -41,9 +41,23 @@ int archivoNuevo;
 int tamanioArchivoTablaEntradas;
 t_bitarray* bitmap;
 
+void imprimirMatrizValores(){
+	printf("Matriz Valores :[");
+	int i;
+	for (i = 0; i < entradasCantidad; i++) {
+		if(bitarray_test_bit(bitmap, i)==0){
+			printf("0");
+		}else{
+			printf("X");
+		}
+	}
+	printf("]\n");
+}
+
 void crearBitmap(){
 	char * bitarray = (char*) malloc(sizeof(char)* ((entradasCantidad+8-1)/8)); //Redondeado para arriba
 	bitmap = bitarray_create_with_mode(bitarray,(entradasCantidad+8-1)/8, LSB_FIRST);
+	memset(bitmap->bitarray, 0, bitmap->size);
 }
 
 void destruirBitmap(t_bitarray *bitmap){
@@ -92,6 +106,7 @@ void reservarEntrada(int index, int cantidad){
 	{
 		bitarray_set_bit(bitmap, index+i);
 	}
+	imprimirMatrizValores();
 }
 
 void agregarClaveEnDiccionario(char* clave, int index){
@@ -373,19 +388,6 @@ void crearMatrizValores(){
 	memset(matrizValores, 0, entradasCantidad * entradasTamanio);
 }
 
-void imprimirMatrizValores(){
-	printf("Matriz Valores :[");
-	int i;
-	for (i = 0; i < entradasCantidad; i++) {
-		if(bitarray_test_bit(bitmap, i)==0){
-			printf("0");
-		}else{
-			printf("X");
-		}
-	}
-	printf("]\n");
-}
-
 void imprimirTablaEntradas() {
 	int i = 0;
 	log_debug(logInstancia, "Tabla Entradas");
@@ -418,12 +420,17 @@ void enviar_ok_sentencia_a_Coordinador(){
 	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
 }
 
-void enviar_msj_instancia_sustituyo_clave(){
+void enviar_msj_instancia_sustituyo_clave(char* clave){
 	header_t header;
 	header.comando = msj_instancia_sustituyo_clave;
-	header.tamanio = 0;
+	header.tamanio = strlen(clave)+1;
 
-	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
+	void* buffer = malloc(sizeof(header_t)+header.tamanio);
+	memcpy(buffer, &header, sizeof(header_t));
+	memcpy(buffer + sizeof(header_t), clave, header.tamanio);
+
+	enviar_mensaje(socketCoordinador, buffer, sizeof(header_t)+header.tamanio);
+	free(buffer);
 }
 
 void enviar_msj_instancia_compactar(){
@@ -445,7 +452,7 @@ void enviar_msj_instancia_compactacion_finalizada(){
 void borrarEntradaAtomica(t_entrada* entrada){
 	liberarEntrada(entrada->numeroEntrada, 1);
 	removerClaveEnDiccionario(entrada->clave);
-	//TODO: Avisar al coordinador que la clave se borró
+	enviar_msj_instancia_sustituyo_clave(entrada->clave);
 	entrada->clave[0] = 0;
 }
 
@@ -739,11 +746,13 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 	if (entradasAsignadas == entradasNecesarias) {
 		//Coincide justo, simplemente se escribe el nuevo valor
 		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
+		enviar_ok_sentencia_a_Coordinador();
 	} else if (entradasAsignadas > entradasNecesarias) {
 		//Sobran entradas, se deben liberar las que sobran y escribir el valor
 		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
 		int cantLiberar = entradasAsignadas - entradasNecesarias;
 		liberarEntrada(entrada->numeroEntrada + cantLiberar - 1, cantLiberar);
+		enviar_ok_sentencia_a_Coordinador();
 	} else {
 		//Faltan entradas, se liberan las entradas usadas y se busca donde guardar el nuevo valor
 		liberarEntrada(entrada->numeroEntrada, entradasAsignadas);
@@ -943,7 +952,7 @@ void crearCarpetasSiNoExisten(const config_t* configuracion) {
 	char* path = string_new();
 	string_append(&path, "mkdir ");
 	string_append(&path, configuracion->punto_montaje);
-	string_substring(&path, 0, strlen(&path) - 1);
+	string_substring(path, 0, strlen(path) - 1);
 	system(path);
 	string_append(&path, "/");
 	string_append(&path, configuracion->nombre_instancia);
@@ -958,16 +967,17 @@ void ejecutarStatus(void* buffer) {
 	int indice = obtenerIndiceClave(buffer);
 	t_entrada* entrada = tablaEntradas + indice;
 	//Se lee el valor de la matriz de valores
-	char* valor = leerMatrizValores(entrada->numeroEntrada,
-			entrada->tamanioValor);
-	header_t *header;
+	char* valor = leerMatrizValores(entrada->numeroEntrada,	entrada->tamanioValor);
+	header_t header;
+	header.comando = msj_status_clave;
+	header.tamanio = strlen(valor)+1;
 
-	header->comando = msj_status_clave;
-	void* bufferAEnviar = serializar(*header, valor);
-	log_debug(logInstancia, "Header.tamanio = %d", header->tamanio);
-	enviar_mensaje(logInstancia, bufferAEnviar,
-			sizeof(header_t) + header->tamanio);
-	free(bufferAEnviar);
+	void* bufferEnviar = malloc(sizeof(header_t)+header.tamanio);
+	memcpy(bufferEnviar, &header, sizeof(header_t));
+	memcpy(bufferEnviar + sizeof(header_t), valor, header.tamanio);
+
+	enviar_mensaje(socketCoordinador, bufferEnviar, sizeof(header_t)+header.tamanio);
+	free(bufferEnviar);
 }
 
 //fin LAG
