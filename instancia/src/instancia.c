@@ -26,6 +26,8 @@
 #include <string.h>
 #include <errno.h>
 
+#define TAMANIO_TABLA_ENTRADAS 100
+
 int entradasCantidad ;
 int entradasTamanio ;
 int punteroSustitucion = 0;
@@ -42,16 +44,18 @@ int tamanioArchivoTablaEntradas;
 t_bitarray* bitmap;
 
 void imprimirMatrizValores(){
-	printf("Matriz Valores :[");
+	char* matriz = string_new();
+	string_append(&matriz, "Matriz Valores: [");
 	int i;
 	for (i = 0; i < entradasCantidad; i++) {
 		if(bitarray_test_bit(bitmap, i)==0){
-			printf("0");
+			string_append(&matriz, "0");
 		}else{
-			printf("X");
+			string_append(&matriz, "X");
 		}
 	}
-	printf("]\n");
+	string_append(&matriz, "]");
+	log_debug(logInstancia, matriz);
 }
 
 void crearBitmap(){
@@ -262,7 +266,7 @@ int abrirArchivoTablaEntradas(){
 	log_debug(logInstancia, "Path para mmap de Tabla de Entradas: %s", pathArchivo);
 
 	//Calculo tamaño del archivo para hacer mmap
-	tamanioArchivoTablaEntradas = sizeof(t_entrada) * entradasCantidad;
+	tamanioArchivoTablaEntradas = sizeof(t_entrada) * TAMANIO_TABLA_ENTRADAS;
 	//Intento abrir archivo previamente creado
 	int fd = open(pathArchivo, O_RDWR, (mode_t) 0600);
 	archivoNuevo = 0;
@@ -295,7 +299,7 @@ int abrirArchivoTablaEntradas(){
 }
 
 t_entrada* mapearTablaEntradas(int fd){
-	t_entrada* retorno = malloc(sizeof(t_entrada) * entradasCantidad);
+	t_entrada* retorno = malloc(sizeof(t_entrada) * TAMANIO_TABLA_ENTRADAS);
 	retorno = mmap(0, tamanioArchivoTablaEntradas, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
 	//Checkeo error de mmap
 	if (tablaEntradas == MAP_FAILED) {
@@ -311,7 +315,7 @@ void inicializarTablaEntradas(){
 	if(!archivoNuevo){
 		//Si el archivo ya existia se carga diccionarioEntradas y matrizValoresEntradas con sus datos
 		int i = 0;
-		for (i = 0; i < entradasCantidad; i++) {
+		for (i = 0; i < TAMANIO_TABLA_ENTRADAS; i++) {
 			if (tablaEntradas[i].clave[0]) {
 				agregarClaveEnDiccionario(tablaEntradas[i].clave, i);
 				char* pathArchivo = string_new();
@@ -343,7 +347,7 @@ void inicializarTablaEntradas(){
 
 int buscarPosicionLibreTablaEntradas(){
 	int i;
-	for (i = 0; i < entradasCantidad; i++) {
+	for (i = 0; i < TAMANIO_TABLA_ENTRADAS; i++) {
 		if(tablaEntradas[i].clave[0] == 0){
 			return i;
 		}
@@ -392,7 +396,7 @@ void imprimirTablaEntradas() {
 	int i = 0;
 	log_debug(logInstancia, "Tabla Entradas");
 	log_debug(logInstancia, "I\tClave\t\tEntrada\tTamaño\tTiempo");
-	for (i = 0; i < entradasCantidad; i++) {
+	for (i = 0; i < TAMANIO_TABLA_ENTRADAS; i++) {
 		if(tablaEntradas[i].clave[0]){
 			log_debug(logInstancia, "%d\t%s\t%d\t%d\t%d",i, tablaEntradas[i].clave, tablaEntradas[i].numeroEntrada,
 					tablaEntradas[i].tamanioValor, tablaEntradas[i].tiempo);
@@ -459,7 +463,7 @@ void borrarEntradaAtomica(t_entrada* entrada){
 int cantidadEntradasAtomicas(){
 	int i;
 	int cantidad = 0;
-	for(i=0;i<entradasCantidad;i++){
+	for(i=0;i<TAMANIO_TABLA_ENTRADAS;i++){
 		if(redondearArribaDivision(tablaEntradas[i].tamanioValor, entradasTamanio) == 1)
 			cantidad++;
 	}
@@ -477,7 +481,7 @@ void sustituirCiclico(t_entrada* entrada, char* valor, int tamanio, int entradas
 			sustituidas++;
 		}
 		//Incremento puntero y me aseguro que quede entre 0 y entradasCantidad -1
-		punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+		punteroSustitucion = (punteroSustitucion + 1) % TAMANIO_TABLA_ENTRADAS;
 	}
 	//Me fijo si de casualidad quedaron todos los espacios contiguos
 	int entradasNecesarias =  redondearArribaDivision(tamanio, entradasTamanio);
@@ -500,8 +504,8 @@ void sustituirLRU(t_entrada* entrada, char* valor, int tamanio, int entradasASus
 		int i;
 		int indiceSustituir = 0;
 		int tiempoSustituir = 0;
-		for(i=0;i<entradasCantidad;i++){
-			int indice = (i + punteroSustitucion) % entradasCantidad;
+		for(i=0;i<TAMANIO_TABLA_ENTRADAS;i++){
+			int indice = (i + punteroSustitucion) % TAMANIO_TABLA_ENTRADAS;
 			t_entrada* entradaLocal = tablaEntradas + indice;
 			if(redondearArribaDivision(entradaLocal->tamanioValor, entradasTamanio) == 1 && entradaLocal->clave[0]) {
 				if(timer-entradaLocal->tiempo > tiempoSustituir){
@@ -512,7 +516,7 @@ void sustituirLRU(t_entrada* entrada, char* valor, int tamanio, int entradasASus
 		}
 		if(indiceSustituir == punteroSustitucion){
 			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
-			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+			punteroSustitucion = (punteroSustitucion + 1) % TAMANIO_TABLA_ENTRADAS;
 		}
 		log_debug(logInstancia, "Entrada atómica a borrar: %s", tablaEntradas[indiceSustituir].clave);
 		borrarEntradaAtomica(tablaEntradas + indiceSustituir);
@@ -539,19 +543,19 @@ void sustituirBSU(t_entrada* entrada, char* valor, int tamanio, int entradasASus
 		int i;
 		int indiceSustituir = 0;
 		double tamanioSustituir = 0;
-		for(i=0;i<entradasCantidad;i++){
-			int indice = (i + punteroSustitucion) % entradasCantidad;
+		for(i=0;i<TAMANIO_TABLA_ENTRADAS;i++){
+			int indice = (i + punteroSustitucion) % TAMANIO_TABLA_ENTRADAS;
 			t_entrada* entradaLocal = tablaEntradas + indice;
 			if(redondearArribaDivision(entradaLocal->tamanioValor, entradasTamanio) == 1 && entradaLocal->clave[0]) {
-				if(entradaLocal->tamanioValor/entradasCantidad > tamanioSustituir){
+				if(entradaLocal->tamanioValor/entradasTamanio > tamanioSustituir){
 					indiceSustituir = indice;
-					tamanioSustituir = entradaLocal->tamanioValor/entradasCantidad;
+					tamanioSustituir = entradaLocal->tamanioValor/entradasTamanio;
 				}
 			}
 		}
 		if(indiceSustituir == punteroSustitucion){
 			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
-			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+			punteroSustitucion = (punteroSustitucion + 1) % TAMANIO_TABLA_ENTRADAS;
 		}
 		log_debug(logInstancia, "Entrada atómica a borrar: %s", tablaEntradas[indiceSustituir].clave);
 		borrarEntradaAtomica(tablaEntradas + indiceSustituir);
@@ -602,8 +606,8 @@ void sustituirMatrizEntradasGet(char* clave){
 	} else if (string_equals_ignore_case(algoritmo,"LRU")){
 		int i;
 		int tiempoSustituir = 0;
-		for(i=0;i<entradasCantidad;i++){
-			int indice = (i + punteroSustitucion) % entradasCantidad;
+		for(i=0;i<TAMANIO_TABLA_ENTRADAS;i++){
+			int indice = (i + punteroSustitucion) % TAMANIO_TABLA_ENTRADAS;
 			t_entrada* entradaLocal = tablaEntradas + indice;
 			if(timer-entradaLocal->tiempo > tiempoSustituir){
 				indiceSustituir = indice;
@@ -612,22 +616,22 @@ void sustituirMatrizEntradasGet(char* clave){
 		}
 		if(indiceSustituir == punteroSustitucion){
 			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
-			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+			punteroSustitucion = (punteroSustitucion + 1) % TAMANIO_TABLA_ENTRADAS;
 		}
 	} else if (string_equals_ignore_case(algoritmo, "BSU")){
 		int i;
 		double tamanioSustituir = 0;
-		for(i=0;i<entradasCantidad;i++){
-			int indice = (i + punteroSustitucion) % entradasCantidad;
+		for(i=0;i<TAMANIO_TABLA_ENTRADAS;i++){
+			int indice = (i + punteroSustitucion) % TAMANIO_TABLA_ENTRADAS;
 			t_entrada* entradaLocal = tablaEntradas + indice;
-			if(entradaLocal->tamanioValor/entradasCantidad > tamanioSustituir){
+			if(entradaLocal->tamanioValor/entradasTamanio > tamanioSustituir){
 				indiceSustituir = indice;
-				tamanioSustituir = entradaLocal->tamanioValor/entradasCantidad;
+				tamanioSustituir = entradaLocal->tamanioValor/entradasTamanio;
 			}
 		}
 		if(indiceSustituir == punteroSustitucion){
 			//Solo muevo el puntero circular si justo se reemplazó la entrada inicial
-			punteroSustitucion = (punteroSustitucion + 1) % entradasCantidad;
+			punteroSustitucion = (punteroSustitucion + 1) % TAMANIO_TABLA_ENTRADAS;
 		}
 	}
 	removerClaveEnDiccionario(tablaEntradas[indiceSustituir].clave);
@@ -681,7 +685,7 @@ void compactarMatrizValores(){
 	//Armo Lista de entradas y la ordeno por numero de entrada
 	t_list* listaEntradas = list_create();
 	int i;
-	for (i = 0; i < entradasCantidad; i++) {
+	for (i = 0; i < TAMANIO_TABLA_ENTRADAS; i++) {
 		if(tablaEntradas[i].clave[0] && tablaEntradas[i].tamanioValor){
 			list_add(listaEntradas, tablaEntradas + i);
 		}
@@ -847,7 +851,7 @@ void ejecutarStore(void* buffer){
 		}
 		free(valor);
 		enviar_ok_sentencia_a_Coordinador();
-		imprimirTablaEntradas(tablaEntradas, diccionarioEntradas, matrizValores, entradasCantidad, entradasTamanio);
+		imprimirTablaEntradas();
 	} else {
 		log_debug(logInstancia, "Clave no existente para realizar STORE");
 	}
@@ -859,7 +863,7 @@ void procesarDump(){
 
 		//recorro matriz de entradas de 0 a cantidad de entradas
 		int i = 0;
-		while (i < entradasCantidad) {
+		while (i < TAMANIO_TABLA_ENTRADAS) {
 			if (tablaEntradas[i].clave[0]	&& tablaEntradas[i].tamanioValor) {
 				char* pathArchivo = string_new();
 				string_append(&pathArchivo, configuracion.punto_montaje);
