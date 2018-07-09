@@ -322,7 +322,7 @@ void inicializarTablaEntradas(){
 				}
 			}
 		}
-		imprimirPorPantallaEstucturas();
+		imprimirTablaEntradas();
 	}
 }
 
@@ -373,7 +373,20 @@ void crearMatrizValores(){
 	memset(matrizValores, 0, entradasCantidad * entradasTamanio);
 }
 
-void imprimirPorPantallaEstucturas() {
+void imprimirMatrizValores(){
+	printf("Matriz Valores :[");
+	int i;
+	for (i = 0; i < entradasCantidad; i++) {
+		if(bitarray_test_bit(bitmap, i)==0){
+			printf("0");
+		}else{
+			printf("X");
+		}
+	}
+	printf("]\n");
+}
+
+void imprimirTablaEntradas() {
 	int i = 0;
 	log_debug(logInstancia, "Tabla Entradas");
 	log_debug(logInstancia, "I\tClave\t\tEntrada\tTamaño\tTiempo");
@@ -417,7 +430,7 @@ void enviar_msj_instancia_compactar(){
 	header_t header;
 	header.comando = msj_instancia_compactar;
 	header.tamanio = 0;
-
+	log_debug(logInstancia, "Envio solicitud para compactar");
 	enviar_mensaje(socketCoordinador,&header,sizeof(header_t));
 }
 
@@ -470,6 +483,7 @@ void sustituirCiclico(t_entrada* entrada, char* valor, int tamanio, int entradas
 		//Quedaron contiguas asi que se inserta directamente
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 		reservarEntrada(indiceEntrada, entradasASustituir);
+		enviar_ok_sentencia_a_Coordinador();
 	}
 }
 
@@ -508,6 +522,7 @@ void sustituirLRU(t_entrada* entrada, char* valor, int tamanio, int entradasASus
 		//Quedaron contiguas asi que se inserta directamente
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 		reservarEntrada(indiceEntrada, entradasASustituir);
+		enviar_ok_sentencia_a_Coordinador();
 	}
 }
 
@@ -546,6 +561,7 @@ void sustituirBSU(t_entrada* entrada, char* valor, int tamanio, int entradasASus
 		//Quedaron contiguas asi que se inserta directamente
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 		reservarEntrada(indiceEntrada, entradasASustituir);
+		enviar_ok_sentencia_a_Coordinador();
 	}
 }
 
@@ -637,7 +653,7 @@ void ejecutarGet(void* buffer){
 		}
 	}
 	enviar_ok_sentencia_a_Coordinador();
-	imprimirPorPantallaEstucturas();
+	imprimirTablaEntradas();
 }
 
 void moverValorEnMatriz(t_entrada* entrada, int indice, int cantidadEntradas){
@@ -651,11 +667,15 @@ void moverValorEnMatriz(t_entrada* entrada, int indice, int cantidadEntradas){
 }
 
 void compactarMatrizValores(){
+	log_info(logInstancia, "Procesando Compactacion");
+	log_warning(logInstancia, "Antes de compactación");
+	imprimirMatrizValores();
+	imprimirTablaEntradas();
 	//Armo Lista de entradas y la ordeno por numero de entrada
 	t_list* listaEntradas = list_create();
 	int i;
 	for (i = 0; i < entradasCantidad; i++) {
-		if(tablaEntradas[i].clave[0]){
+		if(tablaEntradas[i].clave[0] && tablaEntradas[i].tamanioValor){
 			list_add(listaEntradas, tablaEntradas + i);
 		}
 	}
@@ -678,9 +698,11 @@ void compactarMatrizValores(){
 	//Destruyo lista y NO borro los elementos porque son los que estan adentro de la TablaEntradas
 	list_destroy(listaEntradas);
 
-	//LAG
+	log_warning(logInstancia, "Después de compactación");
+	imprimirMatrizValores();
+	imprimirTablaEntradas();
+
 	enviar_msj_instancia_compactacion_finalizada();
-	//fin LAG
 }
 
 void sustitucionEntrada(t_entrada* entrada, char* valor, int tamanio, int entradasNecesarias){
@@ -706,6 +728,7 @@ void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 		//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 		reservarEntrada(indiceEntrada, entradasNecesarias);
+		enviar_ok_sentencia_a_Coordinador();
 	}
 }
 
@@ -734,6 +757,7 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 			//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas
 			setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 			reservarEntrada(indiceEntrada, entradasNecesarias);
+			enviar_ok_sentencia_a_Coordinador();
 		}
 	}
 
@@ -762,12 +786,11 @@ void ejecutarSet(void* buffer){
 			//Se reemplaza valor previo
 			setConValorPrevio(entrada, valor, tamanio);
 		}
-		enviar_ok_sentencia_a_Coordinador();
 	}else{
 		//No existe la clave TODO que mas hacemos? Se avisa al coordinador?
 		log_error(logInstancia, "Error, se intento hacer SET de una clave inexistente");
 	}
-	imprimirPorPantallaEstucturas();
+	imprimirTablaEntradas();
 }
 
 void ejecutarStore(void* buffer){
@@ -815,7 +838,7 @@ void ejecutarStore(void* buffer){
 		}
 		free(valor);
 		enviar_ok_sentencia_a_Coordinador();
-		imprimirPorPantallaEstucturas(tablaEntradas, diccionarioEntradas, matrizValores, entradasCantidad, entradasTamanio);
+		imprimirTablaEntradas(tablaEntradas, diccionarioEntradas, matrizValores, entradasCantidad, entradasTamanio);
 	} else {
 		log_debug(logInstancia, "Clave no existente para realizar STORE");
 	}
@@ -840,27 +863,27 @@ void procesarDump(){
 				char* textoValor = leerMatrizValores(tablaEntradas[i].numeroEntrada, tablaEntradas[i].tamanioValor);
 				int tamanioArchivo = 0;
 				tamanioArchivo = string_length(textoValor);
-				log_debug(logInstancia, "IMPORTANTE linea 746 texto: %s %d", textoValor, tamanioArchivo);
+				//log_debug(logInstancia, "IMPORTANTE linea 746 texto: %s %d", textoValor, tamanioArchivo);
 
 				if (remove(pathArchivo)) {
-					log_debug(logInstancia, "Se eliminó archivo satifactoriamente");
+					//log_debug(logInstancia, "Se eliminó archivo satifactoriamente");
 				} else {
-					log_debug(logInstancia, "No se eliminó archivo");
+					//log_debug(logInstancia, "No se eliminó archivo");
 				}
 
 				int fd = open(pathArchivo, O_RDWR | O_CREAT | O_TRUNC, (mode_t) 0600);
 				if (fd == -1) {
-					log_error(logInstancia, "Error al abrir para escritura");
+					//log_error(logInstancia, "Error al abrir para escritura");
 					exitFailure();
 				} else {
 					int result = write(fd, textoValor, tamanioArchivo);
 
 					if (result < 0) {
 						close(fd);
-						log_error(logInstancia, "Error al escribir");
+						//log_error(logInstancia, "Error al escribir");
 						exit(EXIT_FAILURE);
 					} else {
-						log_debug(logInstancia, "Se guardo archivo");
+						//log_debug(logInstancia, "Se guardo archivo");
 						close(fd);
 
 					}
@@ -959,8 +982,12 @@ int main(int argc, char *argv[]) {
 	//Bucle principal
 	for (;;) {
 		//Escucha de mensajes de Coordinador
+		log_info(logInstancia, "Esperando acción");
 		header_t header = recibirHeader();
-		void* buffer = recibirBuffer(header.tamanio);
+		void* buffer;
+		if(header.tamanio){
+			buffer = recibirBuffer(header.tamanio);
+		}
 		if(header.comando < 0){
 			log_error(logInstancia, "Error al recibir mensaje. Detalle: %s", strerror(errno));
 			exitFailure();

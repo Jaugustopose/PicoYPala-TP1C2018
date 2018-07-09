@@ -624,6 +624,7 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 				case COMPACTAR:
 					header->comando = msj_instancia_compactar;
 					header->tamanio = 0;
+					log_debug(log_operaciones_esis, "Envio orden de compactación");
 
 					buffer = malloc(header->tamanio);
 
@@ -834,7 +835,6 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	void* buffer;
 
 	resultado = recibir_mensaje(unFileDescriptor,&header,sizeof(header_t));
-
 	if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 		printf("Error al recibir header de INSTANCIA \n");
 		conexion_de_cliente_finalizada(unFileDescriptor);
@@ -844,6 +844,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	switch (header.comando) {
 
 		case msj_instancia_compactar:
+			log_debug(log_operaciones_esis, "Mensaje compactación recibido");
 //			//Notifico al planificador para que pare por pedido de compactacion.
 //			enviar_mensaje_planificador(socket_planificador, &header, buffer,msj_instancia_compactar);
 

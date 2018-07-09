@@ -40,3 +40,66 @@
 [DEBUG] 17:57:21:865 Instance/(16449:16449): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/instancia1/TablaDeEntradas.bin
 [DEBUG] 17:57:21:865 Instance/(16449:16449): Se mapeo Tabla de Entradas correctamente
 [ERROR] 17:57:22:109 Instance/(16449:16449): Error al recibir
+[DEBUG] 12:00:18:371 Instance/(10544:10544): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/instancia/Debug/instancia.cfg
+[DEBUG] 12:00:18:472 Instance/(10544:10544): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 12:00:18:472 Instance/(10544:10544): PUERTO_COORDINADOR: 8030
+[DEBUG] 12:00:18:472 Instance/(10544:10544): ALGORITMO_REMPLAZO: Ciclico
+[DEBUG] 12:00:18:472 Instance/(10544:10544): PUNTO_MONTAJE: /home/utnso/DATOS_Instancia/
+[DEBUG] 12:00:18:472 Instance/(10544:10544): NOMBRE_INSTANCIA: instancia2
+[DEBUG] 12:00:18:472 Instance/(10544:10544): INTERVALO_DUMP: 1
+[DEBUG] 12:00:18:482 Instance/(10544:10544): Socket coordinador: 4
+[DEBUG] 12:00:18:522 Instance/(10544:10544): Cantidad Entradas: 4 Tamaño Entradas: 9
+[DEBUG] 12:00:18:522 Instance/(10544:10544): Path para mmap de Tabla de Entradas: /home/utnso/DATOS_Instancia/instancia2/TablaDeEntradas.bin
+[DEBUG] 12:00:18:522 Instance/(10544:10544): Se mapeo Tabla de Entradas correctamente
+[INFO] 12:00:37:415 Instance/(10544:10544): Procesando GET. Clave: futbol:messi0
+[DEBUG] 12:00:37:416 Instance/(10544:10544): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 12:00:37:416 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:00:37:416 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:00:37:416 Instance/(10544:10544): 0	futbol:messi0	0	0	0
+[INFO] 12:00:37:416 Instance/(10544:10544): Procesando SET. Clave: futbol:messi0 - Valor:1234567
+[DEBUG] 12:00:37:416 Instance/(10544:10544): Se inserta Valor:1234567 en Indice:0
+[DEBUG] 12:00:37:416 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:00:37:417 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:00:37:417 Instance/(10544:10544): 0	futbol:messi0	0	7	0
+[INFO] 12:00:56:378 Instance/(10544:10544): Procesando GET. Clave: futbol:messi1
+[DEBUG] 12:00:56:378 Instance/(10544:10544): Clave inexistente. Se crea registro en Tabla de Entradas indice: 1
+[DEBUG] 12:00:56:378 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:00:56:379 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:00:56:379 Instance/(10544:10544): 0	futbol:messi0	0	7	0
+[DEBUG] 12:00:56:379 Instance/(10544:10544): 1	futbol:messi1	0	0	0
+[INFO] 12:01:17:139 Instance/(10544:10544): Procesando SET. Clave: futbol:messi1 - Valor:1234567890123
+[DEBUG] 12:01:17:139 Instance/(10544:10544): Se inserta Valor:1234567890123 en Indice:1
+[DEBUG] 12:01:17:139 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:01:17:140 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:01:17:140 Instance/(10544:10544): 0	futbol:messi0	0	7	0
+[DEBUG] 12:01:17:140 Instance/(10544:10544): 1	futbol:messi1	1	13	0
+[INFO] 12:01:20:880 Instance/(10544:10544): Procesando GET. Clave: futbol:messi2
+[DEBUG] 12:01:20:880 Instance/(10544:10544): Clave inexistente. Se crea registro en Tabla de Entradas indice: 2
+[DEBUG] 12:01:20:880 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:01:20:880 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:01:20:880 Instance/(10544:10544): 0	futbol:messi0	0	7	0
+[DEBUG] 12:01:20:880 Instance/(10544:10544): 1	futbol:messi1	1	13	0
+[DEBUG] 12:01:20:880 Instance/(10544:10544): 2	futbol:messi2	0	0	0
+[INFO] 12:01:22:362 Instance/(10544:10544): Procesando SET. Clave: futbol:messi2 - Valor:123456
+[DEBUG] 12:01:22:362 Instance/(10544:10544): Sustituye por algoritmo Ciclico
+[DEBUG] 12:01:22:362 Instance/(10544:10544): Entrada atómica a borrar: futbol:messi0
+[DEBUG] 12:01:22:362 Instance/(10544:10544): Se inserta Valor:123456 en Indice:0
+[DEBUG] 12:01:22:363 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:01:22:363 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:01:22:363 Instance/(10544:10544): 1	futbol:messi1	1	13	0
+[DEBUG] 12:01:22:363 Instance/(10544:10544): 2	futbol:messi2	0	6	0
+[INFO] 12:01:53:830 Instance/(10544:10544): Procesando GET. Clave: futbol:messi3
+[DEBUG] 12:01:53:830 Instance/(10544:10544): Clave inexistente. Se crea registro en Tabla de Entradas indice: 0
+[DEBUG] 12:01:53:831 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:01:53:831 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:01:53:831 Instance/(10544:10544): 0	futbol:messi3	0	7	0
+[DEBUG] 12:01:53:831 Instance/(10544:10544): 1	futbol:messi1	1	13	0
+[DEBUG] 12:01:53:831 Instance/(10544:10544): 2	futbol:messi2	0	6	0
+[INFO] 12:02:02:601 Instance/(10544:10544): Procesando SET. Clave: futbol:messi3 - Valor:1234567890123
+[DEBUG] 12:02:02:601 Instance/(10544:10544): Sustituye por algoritmo Ciclico
+[DEBUG] 12:02:02:601 Instance/(10544:10544): Entrada atómica a borrar: futbol:messi2
+[DEBUG] 12:02:02:601 Instance/(10544:10544): Envio solicitud para compactar
+[DEBUG] 12:02:02:601 Instance/(10544:10544): Tabla Entradas
+[DEBUG] 12:02:02:601 Instance/(10544:10544): I	Clave		Entrada	Tamaño	Tiempo
+[DEBUG] 12:02:02:601 Instance/(10544:10544): 0	futbol:messi3	0	7	0
+[DEBUG] 12:02:02:601 Instance/(10544:10544): 1	futbol:messi1	1	13	0

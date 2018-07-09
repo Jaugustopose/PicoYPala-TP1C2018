@@ -1,2 +1,46 @@
 [TRACE] 20:25:49:284 Coordinador/(19696:19882): ESI 7 realizo un GET clave futbol:messi
 [TRACE] 20:27:53:718 Coordinador/(19696:19882): ESI 7 realizo un SET clave futbol:messi
+[TRACE] 11:51:29:170 Coordinador/(10254:10278): ESI 7 realizo un GET clave futbol:messi0
+[DEBUG] 11:51:29:270 Coordinador/(10254:10278): Header.tamanio = 14
+[DEBUG] 11:51:29:270 Coordinador/(10254:10278): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 11:51:29:274 Coordinador/(10254:10278): Se recibió respuesta del planificador
+[DEBUG] 11:51:29:276 Coordinador/(10254:10254): Instancia ejecuto operacion correctamente
+[TRACE] 11:51:29:277 Coordinador/(10254:10278): ESI 7 realizo un SET clave futbol:messi0
+[DEBUG] 11:51:29:277 Coordinador/(10254:10278): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 11:51:29:277 Coordinador/(10254:10278): Se recibió respuesta del planificador
+[TRACE] 11:52:14:168 Coordinador/(10308:10329): ESI 7 realizo un GET clave futbol:messi0
+[DEBUG] 11:52:14:170 Coordinador/(10308:10329): Header.tamanio = 14
+[DEBUG] 11:52:14:174 Coordinador/(10308:10329): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 11:52:14:174 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:174 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:175 Coordinador/(10308:10329): ESI 7 realizo un SET clave futbol:messi0
+[DEBUG] 11:52:14:175 Coordinador/(10308:10329): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 11:52:14:175 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:175 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:176 Coordinador/(10308:10329): ESI 7 realizo un GET clave futbol:messi1
+[DEBUG] 11:52:14:176 Coordinador/(10308:10329): Header.tamanio = 14
+[DEBUG] 11:52:14:184 Coordinador/(10308:10329): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 11:52:14:184 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:185 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:185 Coordinador/(10308:10329): ESI 7 realizo un SET clave futbol:messi1
+[DEBUG] 11:52:14:185 Coordinador/(10308:10329): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 11:52:14:185 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:185 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:186 Coordinador/(10308:10329): ESI 7 realizo un GET clave futbol:messi2
+[DEBUG] 11:52:14:186 Coordinador/(10308:10329): Header.tamanio = 14
+[DEBUG] 11:52:14:186 Coordinador/(10308:10329): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 11:52:14:186 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:186 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:186 Coordinador/(10308:10329): ESI 7 realizo un SET clave futbol:messi2
+[DEBUG] 11:52:14:187 Coordinador/(10308:10329): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 11:52:14:187 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:187 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:187 Coordinador/(10308:10329): ESI 7 realizo un GET clave futbol:messi3
+[DEBUG] 11:52:14:187 Coordinador/(10308:10329): Header.tamanio = 14
+[DEBUG] 11:52:14:187 Coordinador/(10308:10329): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 11:52:14:187 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:188 Coordinador/(10308:10308): Instancia ejecuto operacion correctamente
+[TRACE] 11:52:14:188 Coordinador/(10308:10329): ESI 7 realizo un SET clave futbol:messi3
+[DEBUG] 11:52:14:188 Coordinador/(10308:10329): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 11:52:14:188 Coordinador/(10308:10329): Se recibió respuesta del planificador
+[DEBUG] 11:52:14:188 Coordinador/(10308:10308): Mensaje compactación recibido

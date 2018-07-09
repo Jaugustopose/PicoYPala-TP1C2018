@@ -39,4 +39,4 @@ int redondearArribaDivision(int divisor, int dividendo);
 void crearMatrizValores();
 void escribirMatrizValores(int indexEntrada, char* valor);
 char* leerMatrizValores(int indexEntrada, int tamanio);
-void imprimirPorPantallaEstucturas();
+void imprimirTablaEntradas();
