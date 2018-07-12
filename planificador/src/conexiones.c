@@ -69,7 +69,11 @@ void* iniciarEscucha(void* sockets) {
 						maxFd = socketCliente;
 						//TODO Analizar si es necesario sincronizar. En principio el select es secuencial así que no. Pero ver si algún comando
 						//     de consola podría llamar a este método procesoNuevo.
+						pthread_mutex_lock(&mutex_cola_listos);
+						pthread_mutex_lock(&mutex_proceso_ejecucion);
 						int retorno = procesoNuevo(socketCliente);
+						pthread_mutex_unlock(&mutex_proceso_ejecucion);
+						pthread_mutex_unlock(&mutex_cola_listos);
 						if (retorno < 0) {
 							//TODO: Revisar manejo de error. Sacar de los SET y listo.
 						}
@@ -84,7 +88,11 @@ void* iniciarEscucha(void* sockets) {
 						//TODO: Manejar desconexion
 					}
 					log_debug(logPlanificador, "Paquete recibido del coordinador");
+					pthread_mutex_lock(&mutex_cola_listos);
+					pthread_mutex_lock(&mutex_proceso_ejecucion);
 					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
+					pthread_mutex_unlock(&mutex_proceso_ejecucion);
+					pthread_mutex_unlock(&mutex_cola_listos);
 					int respuesta;
 					header_t headerParaCoordinador;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
@@ -93,7 +101,8 @@ void* iniciarEscucha(void* sockets) {
 						headerParaCoordinador.comando = msj_ok_solicitud_operacion;
 						headerParaCoordinador.tamanio = 0;
 
-						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(respuesta));
+						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(header_t));
+
 						if (paquete->header.comando == msj_error_clave_no_identificada) {
 							log_info(logPlanificador, "Se aborta ESI en fd %d por clave solicitada no identificada", retorno.fdESIAAbortar);
 							respuesta = msj_abortar_esi;
@@ -105,7 +114,7 @@ void* iniciarEscucha(void* sockets) {
 						headerParaCoordinador.comando = msj_fail_solicitud_operacion;
 						headerParaCoordinador.tamanio = 0;
 
-						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(respuesta));
+						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(header_t));
 						if (paquete->header.comando == msj_esi_tiene_tomada_clave) {
 							log_info(logPlanificador, "Se aborta esi en fd %d por intentar hacer SET o STORE sobre una clave no tomada", retorno.fdESIAAbortar);
 							respuesta = msj_abortar_esi;
@@ -125,20 +134,25 @@ void* iniciarEscucha(void* sockets) {
 						case msj_sentencia_finalizada:
 
 							log_debug(logPlanificador, "MSJ Sentencia finalizada recibido");
-
+							pthread_mutex_lock(&mutex_cola_listos);
+							pthread_mutex_lock(&mutex_proceso_ejecucion);
 							sentenciaFinalizada(fdCliente);
+							pthread_mutex_unlock(&mutex_proceso_ejecucion);
+							pthread_mutex_unlock(&mutex_cola_listos);
 							break;
 
 						case msj_esi_finalizado:
 							log_debug(logPlanificador, "MSJ ESI finalizado recibido");
-							pthread_mutex_lock(&mutex_proceso_ejecucion);
+//							pthread_mutex_lock(&mutex_cola_listos); //PROBLEMA MUTEX
+//							pthread_mutex_lock(&mutex_proceso_ejecucion);
 							if (fdCliente == fdProcesoEnEjecucion()) {
 								procesoTerminado(exit_ok);
 								respuesta = msj_ok_solicitud_operacion;
 								enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+								log_debug(logPlanificador,"Se envio respuesta de ok solicitud finalizacion a ESI");
 							}
-							pthread_mutex_unlock(&mutex_proceso_ejecucion);
-
+//							pthread_mutex_unlock(&mutex_proceso_ejecucion);
+//							pthread_mutex_unlock(&mutex_cola_listos);
 
 //							procesoTerminado(exit_ok);
 //							respuesta = msj_ok_solicitud_operacion;
@@ -169,3 +183,37 @@ int mandar_a_ejecutar_esi(int socket_esi) {
 	// Que lo maneje el select una vez que escalen hacia arriba los retornos de errores y lleguen
 	return retorno;
 }
+
+status_clave_t* procesarStatusClave(int socket_coordinador, char* clave) {
+	enviar_mensaje(socket_coordinador, clave, string_length(clave));
+	paquete_t* paquete = recibirPaquete(socket_coordinador);
+	status_clave_t* status = malloc(sizeof(status_clave_t));
+	int offset = 0;
+	memcpy(&status->tamanioValor, paquete->cuerpo, sizeof(int));
+	status->valor = malloc(status->tamanioValor);
+	offset = offset + sizeof(int);
+
+	memcpy(status->valor, paquete->cuerpo + offset, status->tamanioValor);
+	offset = offset + status->tamanioValor;
+
+	memcpy(&status->tamanioNombreInstanciaClave, paquete->cuerpo + offset, sizeof(int));
+	status->nombreInstanciaClave = malloc(status->tamanioNombreInstanciaClave);
+	offset = offset + sizeof(int);
+
+	memcpy(status->nombreInstanciaClave, paquete->cuerpo + offset, status->tamanioNombreInstanciaClave);
+	offset = offset + status->tamanioNombreInstanciaClave;
+
+	memcpy(&status->tamanioNombreInstanciaCandidata, paquete->cuerpo + offset, sizeof(int));
+	status->nombreInstanciaCandidata = malloc(status->tamanioNombreInstanciaCandidata);
+	offset = offset + sizeof(int);
+
+	memcpy(status->nombreInstanciaCandidata, paquete->cuerpo + offset, status->tamanioNombreInstanciaCandidata);
+
+	return status;
+
+}
+
+
+
+
+

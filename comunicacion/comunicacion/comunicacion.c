@@ -161,10 +161,8 @@ int conectarConProceso(char* ip, int puerto,int proceso){
 
 paquete_t* recibirPaquete(int socket) {
 	paquete_t* paquete = malloc(sizeof(paquete_t));
-	printf("Socket: %d\n", socket);
 	paquete->cuerpo = 0;
 	int resultado = recibir_mensaje(socket, &paquete->header, sizeof(header_t));
-	printf("Resultado: %d\n", resultado);
 	if (resultado < 0) {
 		paquete->header.comando = resultado;
 		return paquete;

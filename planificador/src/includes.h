@@ -38,12 +38,22 @@ typedef struct {
 typedef enum id_exit_status {
 	exit_ok = 1,
 	exit_abortado_por_clave_inexistente = 2,
-	exit_abortado_inesperado = 3 //Por poner algo...
-}id_exit_status;
+	exit_abortado_por_consola = 3,
+	exit_abortado_inesperado = 4
+} id_exit_status;
 
 typedef struct {
 	int respuestaACoordinador;
 	int fdESIAAbortar;
-}respuesta_operacion_t;
+} respuesta_operacion_t;
+
+typedef struct {
+	int tamanioValor;
+	char* valor;
+	int tamanioNombreInstanciaClave;
+	char* nombreInstanciaClave;
+	int tamanioNombreInstanciaCandidata;
+	char* nombreInstanciaCandidata;
+} status_clave_t;
 
 #endif /* SRC_INCLUDES_H_ */

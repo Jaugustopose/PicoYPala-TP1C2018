@@ -176,14 +176,19 @@ void conexion_de_cliente_finalizada(int unFD) {
 	pthread_mutex_lock(&mutexMaster);
 	// conexión cerrada.
 	printf("Server: socket %d termino la conexion\n", unFD);
-	// Eliminar del conjunto maestro y su respectiva bolsa.
-	FD_CLR(unFD, &master);
-
 	if (FD_ISSET(unFD, &bolsa_instancias)){
 		contadorDeInstancias--;
 		FD_CLR(unFD, &bolsa_instancias);
 		printf("Se desconecto instancia del socket %d\n", unFD); //Reorganizar la distribucion para las claves no se hace. Nos quitan Key Explicit
+	}else if (!FD_ISSET(unFD,&bolsa_planificador)){
+
+		int respuesta = 0;
+		respuesta = msj_ok_solicitud_operacion;
+		enviar_mensaje(unFD, &respuesta, sizeof(respuesta));
+
 	}
+	// Eliminar del conjunto maestro y su respectiva bolsa.
+	FD_CLR(unFD, &master);
 
 	pthread_mutex_unlock(&mutexMaster);
 	close(unFD); // Si se perdio la conexion, la cierro.
@@ -294,7 +299,7 @@ void signal_a_todos_los_semaforos_hiloInstancia(t_list* listaInstancias){
 
 void enviar_mensaje_planificador(int socket_planificador, header_t* header, void* buffer, int id_mensaje) {
 	void* bufferAEnviar;
-	int retornoPlanificador = 0;
+//	int retornoPlanificador = 0;
 
 	switch(id_mensaje){
 
@@ -308,6 +313,7 @@ void enviar_mensaje_planificador(int socket_planificador, header_t* header, void
 			log_debug(log_coordinador, "Se envió mensaje SOLICITUD CLAVE al planificador");
 //			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
 //			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+
 		break;
 
 		case msj_error_clave_inaccesible:
@@ -1076,7 +1082,7 @@ void atender_mensaje_planificador(){
 
 	switch (header.comando) {
 
-	}
+
 		case msj_status_clave:
 
 			log_trace(log_coordinador,"Planificador ha solicitado el status de una clave");
@@ -1116,7 +1122,7 @@ void atender_mensaje_planificador(){
 
 				header.tamanio = tamanioTotalParaBuffer;
 				enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
-
+			}
 		break;
 
 		case msj_ok_solicitud_operacion:
@@ -1133,11 +1139,12 @@ void atender_mensaje_planificador(){
 			okPlanificador = msj_fail_solicitud_operacion;
 
 			sem_post(&semRespuestaPlanificador);//Levanto el semaforo con el que me esta esperando el hilo atender_accion_ESI.
-
+		break;
 
 		default:
 			log_error(log_coordinador,"ERROR en el header enviado por el PLANIFICADOR. Probable bloqueo de todo el sistema");
-			break;
+		break;
+
 	}
 
 }
