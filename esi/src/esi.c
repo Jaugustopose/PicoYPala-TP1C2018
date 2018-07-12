@@ -233,6 +233,7 @@ void msgFinProceso(int unSocket) {
 	}
 	int respuestaFinalizacion;
 	recibir_mensaje(unSocket, &respuestaFinalizacion, sizeof(respuestaFinalizacion));
+	printf("Aviso de FIN SCRIPT enviado correctamente\n");
 
 }
 

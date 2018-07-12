@@ -178,7 +178,14 @@ int procesoEjecutar(proceso_t* proceso) {
 void procesoTerminado(int exitStatus) {
 	procesoEjecucion->exitStatus = exitStatus;
 	queue_push(colaTerminados, (void*)procesoEjecucion);
+
+	pthread_mutex_lock(&mutex_cola_listos); //PROBLEMA MUTEX.
+	pthread_mutex_lock(&mutex_lista_bloqueados);
 	liberarRecursos(procesoEjecucion);
+	pthread_mutex_unlock(&mutex_lista_bloqueados);
+	pthread_mutex_unlock(&mutex_cola_listos);
+
+
 	proceso_t* procesoListo = colaListosPop();
 	if (procesoListo != NULL) {
 		procesoEjecutar(procesoListo);
@@ -279,7 +286,11 @@ void liberarClave(char* clave){
 
 void liberarRecursos(proceso_t* proceso) {
 	log_debug(logPlanificador, "Liberando claves tomadas por proceso %d...", proceso->idProceso);
+
+
 	list_iterate(proceso->clavesBloqueadas, (void*)desbloquearClavePorConsola);
+
+
 	log_debug(logPlanificador, "Se liberaron las claves tomadas por el proceso %d", proceso->idProceso);
 }
 
@@ -311,8 +322,7 @@ void desbloquearClavePorConsola(char* clave) {
 		bool tieneClave = strcmp(p->claveBloqueo, clave) == 0;
 		return tieneClave;
 	}
-	pthread_mutex_lock(&mutex_cola_listos);
-	pthread_mutex_lock(&mutex_lista_bloqueados);
+
 	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
 
 	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
@@ -323,8 +333,6 @@ void desbloquearClavePorConsola(char* clave) {
 	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
 		desbloquearClave(clave);
 	}
-	pthread_mutex_unlock(&mutex_lista_bloqueados);
-	pthread_mutex_unlock(&mutex_cola_listos);
 }
 
 void listarRecursosBloqueadosPorClave(char* clave) {
@@ -371,7 +379,11 @@ t_list* killProcesoPorID(int idProceso) {
 		procesoATerminar = list_remove_by_condition(listaBloqueados, (void*)_soy_proceso_buscado);
 		//TODO Armar un procesoDestroy;
 		if (procesoATerminar != NULL) {
+
+
 			liberarRecursos(procesoATerminar);
+
+
 			procesoATerminar->exitStatus = exit_abortado_por_consola;
 		} else {
 			proceso_t* procesoATerminar = list_remove_by_condition(colaListos, (void*)_soy_proceso_buscado);
