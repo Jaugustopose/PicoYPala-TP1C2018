@@ -197,15 +197,21 @@ void conexion_de_cliente_finalizada(int unFD) {
 infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning sale porque no estan implementados LSU y KEY.
 
 	if (string_equals_ignore_case(algoritmo,"EL")){
-		if (puntero_algoritmo_equitative < contadorDeInstancias){
-			return list_get(lista_instancias_claves,puntero_algoritmo_equitative);
-			puntero_algoritmo_equitative++;
-		}else if(puntero_algoritmo_equitative == contadorDeInstancias) {
-			return list_get(lista_instancias_claves,puntero_algoritmo_equitative);
-			puntero_algoritmo_equitative = 0;
-		}
+		int punteroActual = 0;
+		log_debug(log_coordinador, "Estoy distribuyendo por EQUITATIVE LOAD");
+		punteroActual = puntero_algoritmo_equitative;
+
+			if ((puntero_algoritmo_equitative + 1) == contadorDeInstancias){
+
+				puntero_algoritmo_equitative = 0;
+
+			}else{
+				puntero_algoritmo_equitative++;
+			}
+			return list_get(lista_instancias_claves,punteroActual);
 
 	}else if (string_equals_ignore_case(algoritmo, "LSU")){
+		log_debug(log_coordinador, "Estoy distribuyendo por LSU");
 			// TODO: Ordeno la lista_instancias_claves por espacio_disponible
 
 	}else if (string_equals_ignore_case(algoritmo, "KEY")){
