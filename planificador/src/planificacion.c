@@ -303,8 +303,8 @@ void desbloquearClavePorConsola(char* clave) {
 		bool tieneClave = strcmp(p->claveBloqueo, clave) == 0;
 		return tieneClave;
 	}
-	pthread_mutex_lock(&mutex_lista_bloqueados);
 	pthread_mutex_lock(&mutex_cola_listos);
+	pthread_mutex_lock(&mutex_lista_bloqueados);
 	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
 
 	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
@@ -315,8 +315,8 @@ void desbloquearClavePorConsola(char* clave) {
 	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
 		desbloquearClave(clave);
 	}
-	pthread_mutex_unlock(&mutex_cola_listos);
 	pthread_mutex_unlock(&mutex_lista_bloqueados);
+	pthread_mutex_unlock(&mutex_cola_listos);
 }
 
 void listarRecursosBloqueadosPorClave(char* clave) {

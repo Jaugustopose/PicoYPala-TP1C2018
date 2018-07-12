@@ -304,7 +304,7 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
 			log_debug(log_coordinador, "Se envió mensaje SOLICITUD CLAVE al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
+			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(retornoPlanificador)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
 			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 

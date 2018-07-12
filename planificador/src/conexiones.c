@@ -72,8 +72,8 @@ void* iniciarEscucha(void* sockets) {
 						pthread_mutex_lock(&mutex_cola_listos);
 						pthread_mutex_lock(&mutex_proceso_ejecucion);
 						int retorno = procesoNuevo(socketCliente);
-						pthread_mutex_lock(&mutex_cola_listos);
-						pthread_mutex_lock(&mutex_proceso_ejecucion);
+						pthread_mutex_unlock(&mutex_proceso_ejecucion);
+						pthread_mutex_unlock(&mutex_cola_listos);
 						if (retorno < 0) {
 							//TODO: Revisar manejo de error. Sacar de los SET y listo.
 						}
@@ -88,15 +88,17 @@ void* iniciarEscucha(void* sockets) {
 						//TODO: Manejar desconexion
 					}
 					log_debug(logPlanificador, "Paquete recibido del coordinador");
-					pthread_mutex_lock(&mutex_proceso_ejecucion);
 					pthread_mutex_lock(&mutex_cola_listos);
+					pthread_mutex_lock(&mutex_proceso_ejecucion);
 					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
-					pthread_mutex_lock(&mutex_cola_listos);
-					pthread_mutex_lock(&mutex_proceso_ejecucion);
+					pthread_mutex_unlock(&mutex_proceso_ejecucion);
+					pthread_mutex_unlock(&mutex_cola_listos);
 					int respuesta;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
+						printf("Envio ok solicitud operacion coordinador\n");
 						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+						printf("Enviada ok solicitud operacion coordinador\n");
 						if (paquete->header.comando == msj_error_clave_no_identificada) {
 							log_info(logPlanificador, "Se aborta ESI en fd %d por clave solicitada no identificada", retorno.fdESIAAbortar);
 							respuesta = msj_abortar_esi;
@@ -124,24 +126,24 @@ void* iniciarEscucha(void* sockets) {
 						case msj_sentencia_finalizada:
 
 							log_debug(logPlanificador, "MSJ Sentencia finalizada recibido");
+							pthread_mutex_lock(&mutex_cola_listos);
 							pthread_mutex_lock(&mutex_proceso_ejecucion);
-							pthread_mutex_lock(&mutex_cola_listos);
 							sentenciaFinalizada(fdCliente);
-							pthread_mutex_lock(&mutex_cola_listos);
 							pthread_mutex_unlock(&mutex_proceso_ejecucion);
+							pthread_mutex_unlock(&mutex_cola_listos);
 							break;
 
 						case msj_esi_finalizado:
 							log_debug(logPlanificador, "MSJ ESI finalizado recibido");
-							pthread_mutex_lock(&mutex_proceso_ejecucion);
 							pthread_mutex_lock(&mutex_cola_listos);
+							pthread_mutex_lock(&mutex_proceso_ejecucion);
 							if (fdCliente == fdProcesoEnEjecucion()) {
 								procesoTerminado(exit_ok);
 								respuesta = msj_ok_solicitud_operacion;
 								enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
 							}
-							pthread_mutex_unlock(&mutex_cola_listos);
 							pthread_mutex_unlock(&mutex_proceso_ejecucion);
+							pthread_mutex_unlock(&mutex_cola_listos);
 
 //							procesoTerminado(exit_ok);
 //							respuesta = msj_ok_solicitud_operacion;

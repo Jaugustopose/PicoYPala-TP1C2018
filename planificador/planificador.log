@@ -129,3 +129,59 @@
 [DEBUG] 01:52:48:946 Planificador/(5681:5681): PUERTO_COORDINADOR: 8030
 [DEBUG] 01:52:48:947 Planificador/(5681:5681): CLAVES_BLOQUEADAS: [materias:K3002,materias:K3001]
 [INFO] 01:53:05:267 Planificador/(5681:5681): Listar procesos en cola de espera para recurso futbol:messi!
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): PUERTO: 8020
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): ESTIMACION_INICIAL: 3
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): ALFA_PLANIFICACION: 50
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): PUERTO_COORDINADOR: 8030
+[DEBUG] 11:53:00:881 Planificador/(6409:6409): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): PUERTO: 8020
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): ESTIMACION_INICIAL: 3
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): ALFA_PLANIFICACION: 50
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): PUERTO_COORDINADOR: 8030
+[DEBUG] 11:54:33:111 Planificador/(6490:6490): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): PUERTO: 8020
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): ESTIMACION_INICIAL: 3
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): ALFA_PLANIFICACION: 50
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): PUERTO_COORDINADOR: 8030
+[DEBUG] 12:11:44:526 Planificador/(6948:6948): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 12:11:52:63 Planificador/(6948:6957): Notificacion recibida del coordinador
+[DEBUG] 12:11:52:63 Planificador/(6948:6957): Paquete recibido del coordinador
+[DEBUG] 12:11:52:63 Planificador/(6948:6957): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 12:11:52:63 Planificador/(6948:6957): Pudo solicitar clave? => 1
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): PUERTO: 8020
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): ESTIMACION_INICIAL: 3
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): ALFA_PLANIFICACION: 50
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): PUERTO_COORDINADOR: 8030
+[DEBUG] 12:13:11:559 Planificador/(7027:7027): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 12:13:17:595 Planificador/(7027:7037): Notificacion recibida del coordinador
+[DEBUG] 12:13:17:595 Planificador/(7027:7037): Paquete recibido del coordinador
+[DEBUG] 12:13:22:683 Planificador/(7027:7037): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 12:13:31:61 Planificador/(7027:7037): Pudo solicitar clave? => 1
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): PUERTO: 8020
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): ESTIMACION_INICIAL: 3
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): ALFA_PLANIFICACION: 50
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): PUERTO_COORDINADOR: 8030
+[DEBUG] 12:25:08:393 Planificador/(7254:7254): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 12:25:11:940 Planificador/(7254:7264): Notificacion recibida del coordinador
+[DEBUG] 12:25:11:940 Planificador/(7254:7264): Paquete recibido del coordinador
+[DEBUG] 12:25:15:169 Planificador/(7254:7264): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 12:25:35:926 Planificador/(7254:7264): Pudo solicitar clave? => 1
+[DEBUG] 12:28:59:658 Planificador/(7254:7264): MSJ Sentencia finalizada recibido
+[DEBUG] 12:28:59:659 Planificador/(7254:7264): Notificacion recibida del coordinador
+[DEBUG] 12:28:59:659 Planificador/(7254:7264): Paquete recibido del coordinador
+[DEBUG] 12:29:06:395 Planificador/(7254:7264): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 12:29:06:395 Planificador/(7254:7264): Pudo solicitar clave? => 1
+[DEBUG] 12:29:06:395 Planificador/(7254:7264): MSJ Sentencia finalizada recibido
+[DEBUG] 12:29:06:396 Planificador/(7254:7264): Notificacion recibida del coordinador
+[DEBUG] 12:29:06:396 Planificador/(7254:7264): Paquete recibido del coordinador
+[DEBUG] 12:29:06:396 Planificador/(7254:7264): Notificacion Coordinador - Consulta ESI por clave tomada recibida
