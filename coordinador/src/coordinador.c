@@ -465,7 +465,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 			pthread_exit(&ret);
 		}
 
-
+		usleep(config.RETARDO); //Para retardo ficticio. OJO que va a los pedos pero esta bien
 
 		switch (header.comando) {
 			infoInstancia_t* instanciaConClave;
