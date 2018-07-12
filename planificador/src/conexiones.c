@@ -86,9 +86,14 @@ void* iniciarEscucha(void* sockets) {
 					log_debug(logPlanificador, "Paquete recibido del coordinador");
 					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
 					int respuesta;
+					header_t headerParaCoordinador;
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
-						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+
+						headerParaCoordinador.comando = msj_ok_solicitud_operacion;
+						headerParaCoordinador.tamanio = 0;
+
+						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(respuesta));
 						if (paquete->header.comando == msj_error_clave_no_identificada) {
 							log_info(logPlanificador, "Se aborta ESI en fd %d por clave solicitada no identificada", retorno.fdESIAAbortar);
 							respuesta = msj_abortar_esi;
@@ -96,7 +101,11 @@ void* iniciarEscucha(void* sockets) {
 						}
 					} else { //La operación del coordinador se procesó mal, abortar el ESI cuando sea necesario
 						respuesta = msj_fail_solicitud_operacion;
-						enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
+
+						headerParaCoordinador.comando = msj_fail_solicitud_operacion;
+						headerParaCoordinador.tamanio = 0;
+
+						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(respuesta));
 						if (paquete->header.comando == msj_esi_tiene_tomada_clave) {
 							log_info(logPlanificador, "Se aborta esi en fd %d por intentar hacer SET o STORE sobre una clave no tomada", retorno.fdESIAAbortar);
 							respuesta = msj_abortar_esi;

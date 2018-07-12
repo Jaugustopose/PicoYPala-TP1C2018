@@ -82,6 +82,7 @@ config_t config; //Para cuando tenga que traer cosas del .cfg
 int planificador_conectado = 0;
 int puntero_algoritmo_equitative = 0;
 int contadorDeInstancias = 0;
+int okPlanificador = 0;
 t_list* lista_instancias_claves;
 t_list* lista_esis_permisos_setear;
 operacion_compartida_t* operacion; //Estructura que se compartira con todas las instancias. Se sincroniza para su ejecucion particular en una instancia.
@@ -96,6 +97,7 @@ int esiActual = 0;
 //sem_t atenderInstancia;
 //sem_t escucharInstancia;
 pthread_mutex_t mutexMaster;
+sem_t semRespuestaPlanificador;
 char* statusClave;
 char* statusValorClave;
 char* statusNombreInstanciaConClave;
@@ -290,7 +292,7 @@ void signal_a_todos_los_semaforos_hiloInstancia(t_list* listaInstancias){
 	}
 }
 
-int enviar_mensaje_planificador(int socket_planificador, header_t* header, void* buffer, int id_mensaje) {
+void enviar_mensaje_planificador(int socket_planificador, header_t* header, void* buffer, int id_mensaje) {
 	void* bufferAEnviar;
 	int retornoPlanificador = 0;
 
@@ -304,8 +306,8 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
 			log_debug(log_coordinador, "Se envió mensaje SOLICITUD CLAVE al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
-			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+//			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int)); //Posible que rompa aca al no esperarse un header y solo un numero (se rompe protocolo).
+//			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_error_clave_inaccesible:
@@ -316,8 +318,8 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t));
 			free(bufferAEnviar);
 			log_debug(log_coordinador, "Se envió mensaje ERROR CLAVE INACCESIBLE al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+//			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
+//			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_esi_tiene_tomada_clave:
@@ -327,8 +329,8 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio); //Pregunto al PLANI si el ESI tiene la clave tomada como para operar.
 			free(bufferAEnviar);
 			log_debug(log_coordinador, "Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+//			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
+//			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_error_clave_no_identificada:
@@ -339,20 +341,20 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			enviar_mensaje(socket_planificador, bufferAEnviar, sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
 			log_debug(log_coordinador, "Se envió mensaje ERROR CLAVE NO IDENTIFICADA al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+//			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
+//			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
-		case msj_instancia_compactar:
-			header->comando = msj_instancia_compactar;
-			header->tamanio = 0;
-			bufferAEnviar = serializar(*header,buffer);
-			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header->tamanio);
-			free(bufferAEnviar);
-			log_debug(log_coordinador, "Se envió necesidad de COMPACTAR al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
-		break;
+//		case msj_instancia_compactar:
+//			header->comando = msj_instancia_compactar;
+//			header->tamanio = 0;
+//			bufferAEnviar = serializar(*header,buffer);
+//			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header->tamanio);
+//			free(bufferAEnviar);
+//			log_debug(log_coordinador, "Se envió necesidad de COMPACTAR al planificador");
+//			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
+//			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+//		break;
 
 		case msj_store_clave:
 			header->comando = msj_store_clave;
@@ -360,8 +362,8 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			enviar_mensaje(socket_planificador,bufferAEnviar,sizeof(header_t) + header->tamanio);
 			free(bufferAEnviar);
 			log_debug(log_coordinador, "Se envió mensaje LIBERAR CLAVES POR STORE al planificador");
-			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
-			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+//			recibir_mensaje(socket_planificador, &retornoPlanificador, sizeof(int));
+//			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
 		break;
 
 		case msj_status_clave:
@@ -376,7 +378,7 @@ int enviar_mensaje_planificador(int socket_planificador, header_t* header, void*
 			break;
 	}
 
-	return retornoPlanificador;
+//	return retornoPlanificador;
 
 }
 
@@ -478,10 +480,12 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 							printf("GET - Instancia con clave %s\n", instanciaConClave->nombre);
-							//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y recibo su respuesta.
-							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
+							//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y verifico su respuesta en variable global okPlanificador.
+							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
 
-							if (resultado == msj_ok_solicitud_operacion){
+							sem_wait(&semRespuestaPlanificador); //Hasta que el planificador no me responda, no continuo.
+
+							if (okPlanificador == msj_ok_solicitud_operacion){
 								operacion->keyword = GET;
 								log_debug(log_coordinador,"Se realizo GET sobre clave ya existente pero no bloqueada");
 								enviar_ok_sentencia_a_ESI();
@@ -494,7 +498,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 							}
 						}else {
 							printf("GET - No hay instancia con esa clave!\n");
-							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
+							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada.
 							enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_error_clave_inaccesible);
 						}
 					}else { //Entro aqui si no encontre la clave en mi sistema
@@ -511,6 +515,9 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 						//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
 						printf("Envio solicitud GET a planificador! %d\n", msj_solicitud_get_clave);
 						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
+
+						//Aclaracion: no me interesa la respuesta de ok del plani, ya que siempre se permitira el primer get (el que crea) de una clave.
+
 						sem_post(&instanciaConClave->semaforo);
 					}
 			break;
@@ -538,10 +545,12 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 						printf("SET - Instancia con clave %s\n", instanciaConClave->nombre);
-						//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
-						resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
+						//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y verifico su respuesta en variable global okPlanificador.
+						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
 
-						if (resultado == msj_ok_solicitud_operacion){
+						sem_wait(&semRespuestaPlanificador);
+
+						if (okPlanificador == msj_ok_solicitud_operacion){
 
 							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
 							operacion = preparar_operacion_compartida_SET(clave);
@@ -577,10 +586,12 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 					if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 
-						//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y recibo su respuesta.
-						resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
+						//Envio mensaje a planificador con pregunta si ESI tiene tomada la clave y verifico su respuesta en variable global okPlanificador.
+						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_esi_tiene_tomada_clave);
 
-						if (resultado == msj_ok_solicitud_operacion){
+						sem_wait(&semRespuestaPlanificador);
+
+						if (okPlanificador == msj_ok_solicitud_operacion){
 
 							//Modifico estructuras en variable global operacion compartida para que tome la respectiva instancia.
 							operacion = preparar_operacion_compartida_STORE(clave);
@@ -1055,7 +1066,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 //	return buffer;
 //}
 
-void responder_mensaje_status_clave(){
+void atender_mensaje_planificador(){
 
 	header_t header;
 	infoInstancia_t* instanciaConClave = malloc(sizeof(infoInstancia_t));
@@ -1063,50 +1074,72 @@ void responder_mensaje_status_clave(){
 
 	recibir_mensaje(socket_planificador,&header,sizeof(header_t));
 
+	switch (header.comando) {
 
-	if (header.comando == msj_status_clave){
-
-		log_trace(log_coordinador,"Planificador ha solicitado el status de una clave");
-
-		recibir_mensaje(socket_planificador,statusClave,header.tamanio);
-
-		instanciaConClave = encontrar_instancia_por_clave(statusClave);
-
-		if(instanciaConClave != 0){ //Si hay una instancia que tenga la clave, levanto el semaforo de su hilo para que envie el respectivo mensaje a la instancia.
-
-			ultimaOperacion = operacion->keyword;
-
-			operacion->keyword = STATUS;
-			sem_post(&instanciaConClave->semaforo);
-
-		}else{ //Ninguna instancia tiene esta clave. Ver instancia candidata y devolverle informacion al planificador.
-			statusValorClave = "";
-			int tamanioValorClave = sizeof(char);
-			statusNombreInstanciaConClave = "";
-			int tamanioNombreInstanciaConClave = sizeof(char);
-
-			candidata = simular_eleccion_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION);
-
-			statusNombreInstanciaCandidata = candidata->nombre;
-			int tamanioNombreInstanciaCandidata = strlen(statusNombreInstanciaCandidata + 1);
-			int tamanioTotalParaBuffer = sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int) + tamanioNombreInstanciaCandidata;
-			//El malloc es: tamanioValor + sizeof(char) para guardar \0 por valor vacio + tamanioNombreInstanciaConClave + sizeof(char) para guardar \0 por instancia vacia + tamanioNombreCandidata + longitudNombreCandidata
-
-			void* buffer = malloc(tamanioTotalParaBuffer);
-
-			memcpy(buffer, &tamanioValorClave, sizeof(int));
-			memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
-			memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
-			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
-			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
-			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
-
-			header.tamanio = tamanioTotalParaBuffer;
-			enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
-		}
-	}else{
-		log_error(log_coordinador,"ERROR header no pide status_clave");
 	}
+		case msj_status_clave:
+
+			log_trace(log_coordinador,"Planificador ha solicitado el status de una clave");
+
+			recibir_mensaje(socket_planificador,statusClave,header.tamanio);
+
+			instanciaConClave = encontrar_instancia_por_clave(statusClave);
+
+			if(instanciaConClave != 0){ //Si hay una instancia que tenga la clave, levanto el semaforo de su hilo para que envie el respectivo mensaje a la instancia.
+
+				ultimaOperacion = operacion->keyword;
+
+				operacion->keyword = STATUS;
+				sem_post(&instanciaConClave->semaforo);
+
+			}else{ //Ninguna instancia tiene esta clave. Ver instancia candidata y devolverle informacion al planificador.
+				statusValorClave = "";
+				int tamanioValorClave = sizeof(char);
+				statusNombreInstanciaConClave = "";
+				int tamanioNombreInstanciaConClave = sizeof(char);
+
+				candidata = simular_eleccion_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION);
+
+				statusNombreInstanciaCandidata = candidata->nombre;
+				int tamanioNombreInstanciaCandidata = strlen(statusNombreInstanciaCandidata) + 1;
+				int tamanioTotalParaBuffer = sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int) + tamanioNombreInstanciaCandidata;
+				//El malloc es: tamanioValor + sizeof(char) para guardar \0 por valor vacio + tamanioNombreInstanciaConClave + sizeof(char) para guardar \0 por instancia vacia + tamanioNombreCandidata + longitudNombreCandidata
+
+				void* buffer = malloc(tamanioTotalParaBuffer);
+
+				memcpy(buffer, &tamanioValorClave, sizeof(int));
+				memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
+				memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
+				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
+				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
+				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+
+				header.tamanio = tamanioTotalParaBuffer;
+				enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
+
+		break;
+
+		case msj_ok_solicitud_operacion:
+
+			okPlanificador = msj_ok_solicitud_operacion;
+			log_debug(log_coordinador, "Se recibió respuesta del planificador"); //No necesito respuesta del planificador pero lo hago por forma generica de envio de OK en PLANI.
+
+			sem_post(&semRespuestaPlanificador); //Levanto el semaforo con el que me esta esperando el hilo atender_accion_ESI.
+
+		break;
+
+		case msj_fail_solicitud_operacion:
+
+			okPlanificador = msj_fail_solicitud_operacion;
+
+			sem_post(&semRespuestaPlanificador);//Levanto el semaforo con el que me esta esperando el hilo atender_accion_ESI.
+
+
+		default:
+			log_error(log_coordinador,"ERROR en el header enviado por el PLANIFICADOR. Probable bloqueo de todo el sistema");
+			break;
+	}
+
 }
 
 void inicializar_status(){
@@ -1122,6 +1155,7 @@ int main(void) {
 
 	//Inicializar semaforos para sincronizacion de hilos
 	pthread_mutex_init(&mutexMaster,NULL);
+	sem_init(&semRespuestaPlanificador,0,0);
 	//sem_init(&atenderEsi,0,1);
 	//sem_init(&atenderInstancia,0,0);
 	//sem_init(&escucharInstancia,0,0);
@@ -1183,7 +1217,7 @@ int main(void) {
 						escuchar_mensaje_de_instancia(fdCliente);
 				}
 				else if (FD_ISSET(fdCliente,&bolsa_planificador)){
-						responder_mensaje_status_clave();
+						atender_mensaje_planificador();
 				}
 			}
 		}
