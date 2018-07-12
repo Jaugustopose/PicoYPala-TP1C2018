@@ -67,6 +67,11 @@ void inicializarPlanificacion(){
 	colaTerminados = queue_create();
 	listaBloqueados = list_create();
 	claves = dictionary_create();
+	char** p = config.CLAVES_BLOQUEADAS;
+	while(p[0]){
+		bloquearClave(p[0]);
+		p++;
+	}
 	sem_init(&planificacion_habilitada, 1, 1);
 }
 
@@ -164,6 +169,7 @@ int procesoNuevo(int socketESI) {
 int procesoEjecutar(proceso_t* proceso) {
 	procesoEjecucion = proceso;
 	sem_wait(&planificacion_habilitada);
+
 	int resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
 	sem_post(&planificacion_habilitada);
 	return resultado;
@@ -184,7 +190,9 @@ void procesoTerminado(int exitStatus) {
 void procesoBloquear(char* clave){
 	procesoEjecucion->claveBloqueo=clave;
 	list_add(listaBloqueados, (void*)procesoEjecucion);
-	procesoEjecutar(colaListosPop());
+	if(colaListosPeek()){
+		procesoEjecutar(colaListosPop());
+	}
 }
 
 void procesoDesbloquear(char* clave) {

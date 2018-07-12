@@ -414,14 +414,13 @@ void enviar_ok_sentencia_a_ESI(){
 	header_t header;
 	header.comando = msj_sentencia_finalizada;
 	header.tamanio = 0;
-
+	log_debug(log_coordinador,"Se envia sentencia finalizada a esi: %d",esiActual);
 	enviar_mensaje(esiActual,&header,sizeof(header_t));
 }
 
 void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en creacion del hilo.
 
 	int fdEsi = (int) fd;
-	esiActual = (int) fd;
 	header_t header;
 	int resultado;
 
@@ -432,6 +431,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 		printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
 		resultado = recibir_mensaje(fdEsi,&header,sizeof(header_t));
+		esiActual = fdEsi;
 		if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 			printf("Error al recibir header del ESI \n");
 			conexion_de_cliente_finalizada(fdEsi);
@@ -471,27 +471,20 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 				 *		1.1) Si puede, el PLANIFICADOR le avisa al ESI que ejecute la siguiente instruccion.
 				 *		1.2) Si no puede, el planificador lo para y le dice a otro ESI que me mande una instruccion.
 				 */
-					clave = (char*)buffer;
+				clave = (char*)buffer;
+
+				printf("Envio solicitud GET a planificador! %d\n", msj_solicitud_get_clave);
+				resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
+				if(resultado == msj_ok_solicitud_operacion){
 					instanciaConClave = encontrar_instancia_por_clave(clave);
 
 					if (instanciaConClave != 0){ //Distinto de cero indica que se encontro la clave
 
 						if(instanciaConClave->desconectada == false){ //Si la instancia que tiene esa clave no esta desconectada
 							printf("GET - Instancia con clave %s\n", instanciaConClave->nombre);
-							//Envio mensaje a planificador con solicitud de GET clave por parte del ESI y recibo su respuesta.
-							resultado = enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
-
-							if (resultado == msj_ok_solicitud_operacion){
-								operacion->keyword = GET;
-								log_debug(log_coordinador,"Se realizo GET sobre clave ya existente pero no bloqueada");
-								enviar_ok_sentencia_a_ESI();
-								//sem_post(&instanciaConClave->semaforo);
-							}else{ //El ESI no puede hacer el GET porque la clave ya estaba bloqueada.
-								conexion_de_cliente_finalizada(fdEsi);
-								printf("ESI ha finalizado por intentar acceder a una clave no bloqueada %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
-								int ret = EXIT_FAILURE;
-								pthread_exit(&ret);
-							}
+							operacion->keyword = GET;
+							log_debug(log_coordinador,"Se realizo GET sobre clave ya existente pero no bloqueada");
+							enviar_ok_sentencia_a_ESI();
 						}else {
 							printf("GET - No hay instancia con esa clave!\n");
 							//Envio mensaje a planificador diciendo que el ESI debe abortar por tratar de ingresar a una clave en instancia desconectada y recibo su respuesta.
@@ -509,10 +502,9 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 						operacion = preparar_operacion_compartida_GET(clave);
 
 						//Levanto el semaforo de la instancia seleccionada para que trabaje con variable global operacion compartida.
-						printf("Envio solicitud GET a planificador! %d\n", msj_solicitud_get_clave);
-						enviar_mensaje_planificador(socket_planificador, &header, buffer, msj_solicitud_get_clave);
 						sem_post(&instanciaConClave->semaforo);
 					}
+				}
 			break;
 
 			case msj_sentencia_set:
@@ -1183,7 +1175,7 @@ int main(void) {
 						escuchar_mensaje_de_instancia(fdCliente);
 				}
 				else if (FD_ISSET(fdCliente,&bolsa_planificador)){
-						responder_mensaje_status_clave();
+						//responder_mensaje_status_clave();
 				}
 			}
 		}

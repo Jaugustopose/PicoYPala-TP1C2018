@@ -17,6 +17,7 @@ void listarRecursosBloqueadosPorClave(char* clave);
 t_list* killProcesoPorID(int idProceso);
 void analizarDeadlocks();
 int fdProcesoEnEjecucion();
+void bloquearClave(char* clave);
 
 sem_t planificacion_habilitada;
 pthread_mutex_t mutex_cola_listos;
