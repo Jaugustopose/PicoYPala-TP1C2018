@@ -166,7 +166,11 @@ void procesar_bloqueo_esi(char** subBufferSplitted) {
 		log_info(logPlanificador, "Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'");
 	} else if (subBufferSplitted[3] == NULL) {
 		log_info(logPlanificador, "Bloqueo Esi %s de la cola del recurso %s!", subBufferSplitted[2], subBufferSplitted[1]);
+		pthread_mutex_lock(&mutex_proceso_ejecucion);
+		pthread_mutex_lock(&mutex_cola_listos);
 		bloquearEsiPorConsola(strtol(subBufferSplitted[2], NULL, 10) , subBufferSplitted[1]);
+		pthread_mutex_unlock(&mutex_cola_listos);
+		pthread_mutex_unlock(&mutex_proceso_ejecucion);
 	} else {
 		log_info(logPlanificador, "Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'");
 	}
@@ -176,7 +180,8 @@ void procesar_desbloqueo_esi(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		log_info(logPlanificador, "Desbloqueo Esi %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Desbloqueo Esi por clave %s!", subBufferSplitted[1]);
+		desbloquearClavePorConsola(subBufferSplitted[1]);
 	} else {
 		log_info(logPlanificador, "Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'");
 	}
@@ -186,27 +191,48 @@ void procesar_listar_recurso(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Comando 'listar' incompleto! Se requiere formato 'listar <recurso>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		log_info(logPlanificador, "Listar procesos en cola de espera para recurso %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Listar procesos en cola de espera para recurso %s!", subBufferSplitted[1]);
+		listarRecursosBloqueadosPorClave(subBufferSplitted[1]);
 	} else {
 		log_info(logPlanificador, "Comando 'listar' con demasiados parámetros! Se requiere formato 'listar <recurso>'");
 	}
 }
 
 void procesar_kill_proceso(char** subBufferSplitted) {
+	//Closure para recorrer la lista de proceso bloqueados por la clave y guardar el string a imprimir
+	char* stringLog = string_new();
+
+	void _listarClaves(char* clave) {
+		string_append(&stringLog, clave);
+		string_append(&stringLog, "-");
+	}
+
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Comando 'kill' incompleto! Se requiere formato 'kill <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		log_info(logPlanificador, "Kill proceso %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Kill proceso %s!", subBufferSplitted[1]);
+		t_list* claves = killProcesoPorID(strtol(subBufferSplitted[1], NULL, 10));
+		if (claves != NULL && !list_is_empty(claves)) {
+			list_iterate(claves, (void*)_listarClaves);
+			log_info(logPlanificador, "Claves liberadas al hacer 'kill' sobre proceso %s: %s", subBufferSplitted[1], string_substring_until(stringLog, string_length(stringLog) - 1));
+		} else {
+			log_info(logPlanificador, "No se produjo liberación de claves al hacer 'kill' sobre proceso %s:", subBufferSplitted[1]);
+		}
 	} else {
 		log_info(logPlanificador, "Comando 'kill' con demasiados parámetros! Se requiere formato 'kill <ID>'");
 	}
+	free(stringLog);
 }
 
 void procesar_status_instancias(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Comando 'status' incompleto! Se requiere formato 'status <clave>'");
 	} else if (subBufferSplitted[2] == NULL) {
-		log_info(logPlanificador, "Status instancias para clave %s!\n", subBufferSplitted[1]);
+		log_info(logPlanificador, "Status instancias para clave %s!", subBufferSplitted[1]);
+		status_clave_t* status = procesarStatusClave(socket_coordinador, subBufferSplitted[1]);
+		log_info(logPlanificador, "Valor Clave: %s\nNombre Instancia con Clave: %s\nNombre Instancia Candidata para Clave: %s\n"
+								, status->valor, status->nombreInstanciaClave, status->nombreInstanciaCandidata);
+		listarRecursosBloqueadosPorClave(subBufferSplitted[1]);
 	} else {
 		log_info(logPlanificador, "Comando 'status' con demasiados parámetros! Se requiere formato 'status <clave>'");
 	}
@@ -215,6 +241,7 @@ void procesar_status_instancias(char** subBufferSplitted) {
 void procesar_deadlock(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Analizar deadlocks!");
+		analizarDeadlocks();
 	} else {
 		log_info(logPlanificador, "Comando 'deadlock' no requiere parámetros!");
 	}
@@ -240,7 +267,7 @@ int main(void) {
 	pthread_create(&hiloEscucha, NULL, &iniciarEscucha, &sockets);
 	pthread_detach(hiloEscucha);
 
-	procesar_entradas_consola();
+	procesar_entradas_consola(socket_coordinador);
 
 	sem_destroy(&planificacion_habilitada);
 	return EXIT_SUCCESS;
