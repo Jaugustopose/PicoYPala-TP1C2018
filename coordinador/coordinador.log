@@ -44,3 +44,783 @@
 [DEBUG] 11:52:14:188 Coordinador/(10308:10329): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
 [DEBUG] 11:52:14:188 Coordinador/(10308:10329): Se recibió respuesta del planificador
 [DEBUG] 11:52:14:188 Coordinador/(10308:10308): Mensaje compactación recibido
+[TRACE] 23:11:41:33 Coordinador/(15902:15941): ESI 9 realizo un GET clave e3:sony:juegos
+[DEBUG] 23:11:50:57 Coordinador/(15902:15941): Header.tamanio = 15
+[DEBUG] 23:11:50:57 Coordinador/(15902:15941): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:11:50:57 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:57 Coordinador/(15902:15941): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:11:50:57 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:57 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:59 Coordinador/(15902:15941): ESI 9 realizo un GET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:59 Coordinador/(15902:15941): Header.tamanio = 20
+[DEBUG] 23:11:50:59 Coordinador/(15902:15941): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:11:50:59 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:59 Coordinador/(15902:15941): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:11:50:59 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:59 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:61 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:11:50:61 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:61 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:62 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:62 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:63 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:11:50:63 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:63 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:63 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:63 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:64 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:11:50:64 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:65 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:65 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:65 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:66 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:11:50:66 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:66 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:66 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:66 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:67 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:11:50:67 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:72 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:72 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:72 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:73 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:11:50:73 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:73 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:73 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:73 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:75 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:75 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:75 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:76 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:76 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:78 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:78 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:79 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:79 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:79 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:80 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:80 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:80 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:80 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:80 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:82 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:82 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:82 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:82 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:82 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:83 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:83 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:83 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:84 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:84 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:84 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:85 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:85 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:85 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:85 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:86 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:86 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:86 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:87 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:87 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:88 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:88 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:89 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:89 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:90 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:90 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:91 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:91 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:91 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:91 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:92 Coordinador/(15902:15941): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:11:50:93 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:93 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:93 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:93 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:94 Coordinador/(15902:15941): ESI 9 realizo un STORE clave e3:microsoft:juegos
+[DEBUG] 23:11:50:94 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:94 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:94 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:94 Coordinador/(15902:15902): Enviando LIBERAR CLAVES a Planificador. Clave e3:microsoft:juegos
+[DEBUG] 23:11:50:95 Coordinador/(15902:15902): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[DEBUG] 23:11:50:95 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[DEBUG] 23:11:50:97 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[TRACE] 23:11:50:98 Coordinador/(15902:15941): ESI 9 realizo un STORE clave e3:sony:juegos
+[DEBUG] 23:11:50:98 Coordinador/(15902:15941): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:11:50:98 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:98 Coordinador/(15902:15902): Enviando LIBERAR CLAVES a Planificador. Clave e3:sony:juegos
+[DEBUG] 23:11:50:98 Coordinador/(15902:15902): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[DEBUG] 23:11:50:98 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[DEBUG] 23:11:50:99 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[DEBUG] 23:11:50:99 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[TRACE] 23:11:50:101 Coordinador/(15902:15943): ESI 10 realizo un GET clave postre:ingrediente1
+[DEBUG] 23:11:50:101 Coordinador/(15902:15943): Header.tamanio = 20
+[DEBUG] 23:11:50:101 Coordinador/(15902:15943): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:11:50:101 Coordinador/(15902:15943): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:11:50:104 Coordinador/(15902:15902): Instancia ejecuto operacion correctamente
+[DEBUG] 23:11:50:104 Coordinador/(15902:15902): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:11:50:106 Coordinador/(15902:15945): ESI 11 realizo un GET clave sony:consola:ps1
+[DEBUG] 23:11:50:106 Coordinador/(15902:15945): Header.tamanio = 17
+[DEBUG] 23:11:50:106 Coordinador/(15902:15945): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:11:50:106 Coordinador/(15902:15902): Se recibió respuesta del planificador
+[TRACE] 23:13:21:359 Coordinador/(16035:16080): ESI 9 realizo un GET clave e3:sony:juegos
+[DEBUG] 23:13:21:359 Coordinador/(16035:16080): Header.tamanio = 15
+[DEBUG] 23:13:21:359 Coordinador/(16035:16080): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:13:21:359 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:13:36:490 Coordinador/(16035:16080): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:14:39:641 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:14:39:641 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:14:39:642 Coordinador/(16035:16080): ESI 9 realizo un GET clave e3:microsoft:juegos
+[DEBUG] 23:14:39:642 Coordinador/(16035:16080): Header.tamanio = 20
+[DEBUG] 23:14:39:642 Coordinador/(16035:16080): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:14:39:642 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:14:46:5 Coordinador/(16035:16080): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:16:06:179 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:179 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:180 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:16:06:180 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:180 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:180 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:180 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:181 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:16:06:181 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:181 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:182 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:182 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:183 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:16:06:183 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:183 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:183 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:183 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:184 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:16:06:184 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:185 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:185 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:185 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:186 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:16:06:186 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:186 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:186 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:186 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:187 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:16:06:187 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:188 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:188 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:188 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:189 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:189 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:195 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:195 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:195 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:197 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:197 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:197 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:197 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:197 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:198 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:198 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:198 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:198 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:198 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:199 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:199 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:199 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:199 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:199 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:201 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:201 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:201 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:201 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:201 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:202 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:202 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:202 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:202 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:202 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:203 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:204 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:204 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:204 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:204 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:205 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:205 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:205 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:205 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:205 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:206 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:207 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:209 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:209 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:209 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:212 Coordinador/(16035:16080): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:16:06:212 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:212 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:212 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:212 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:16:06:213 Coordinador/(16035:16080): ESI 9 realizo un STORE clave e3:microsoft:juegos
+[DEBUG] 23:16:06:213 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:213 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:213 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:214 Coordinador/(16035:16035): Enviando LIBERAR CLAVES a Planificador. Clave e3:microsoft:juegos
+[DEBUG] 23:16:06:214 Coordinador/(16035:16035): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[DEBUG] 23:16:06:214 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[DEBUG] 23:16:06:214 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[TRACE] 23:16:06:214 Coordinador/(16035:16080): ESI 9 realizo un STORE clave e3:sony:juegos
+[DEBUG] 23:16:06:214 Coordinador/(16035:16080): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:16:06:215 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:06:215 Coordinador/(16035:16035): Enviando LIBERAR CLAVES a Planificador. Clave e3:sony:juegos
+[DEBUG] 23:16:06:215 Coordinador/(16035:16035): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[DEBUG] 23:16:06:215 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 9
+[DEBUG] 23:16:06:215 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:06:215 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[TRACE] 23:16:06:217 Coordinador/(16035:16082): ESI 10 realizo un GET clave postre:ingrediente1
+[DEBUG] 23:16:06:219 Coordinador/(16035:16082): Header.tamanio = 20
+[DEBUG] 23:16:06:219 Coordinador/(16035:16082): Se envió mensaje SOLICITUD CLAVE al planificador
+[TRACE] 23:16:06:220 Coordinador/(16035:16084): ESI 11 realizo un GET clave sony:consola:ps1
+[DEBUG] 23:16:06:220 Coordinador/(16035:16084): Header.tamanio = 17
+[DEBUG] 23:16:06:220 Coordinador/(16035:16084): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:16:06:221 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:16:29:886 Coordinador/(16035:16082): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:16:52:816 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:16:52:817 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:16:52:818 Coordinador/(16035:16084): ESI 11 realizo un GET clave sony:consola:ps2
+[DEBUG] 23:16:52:818 Coordinador/(16035:16084): Header.tamanio = 17
+[DEBUG] 23:16:52:818 Coordinador/(16035:16084): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:16:52:818 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:17:07:818 Coordinador/(16035:16084): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:17:36:764 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:17:36:764 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:17:36:765 Coordinador/(16035:16084): ESI 11 realizo un GET clave sony:consola:ps3
+[DEBUG] 23:17:36:765 Coordinador/(16035:16084): Header.tamanio = 17
+[DEBUG] 23:17:36:765 Coordinador/(16035:16084): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:17:36:765 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[DEBUG] 23:18:03:144 Coordinador/(16035:16084): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:18:19:956 Coordinador/(16035:16035): Instancia ejecuto operacion correctamente
+[DEBUG] 23:18:19:956 Coordinador/(16035:16035): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:18:19:958 Coordinador/(16035:16084): ESI 11 realizo un GET clave sony:consola:ps4
+[DEBUG] 23:18:19:958 Coordinador/(16035:16084): Header.tamanio = 17
+[DEBUG] 23:18:19:958 Coordinador/(16035:16084): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:18:19:958 Coordinador/(16035:16035): Se recibió respuesta del planificador
+[TRACE] 23:20:05:645 Coordinador/(16271:16318): ESI 9 realizo un GET clave e3:sony:juegos
+[DEBUG] 23:20:05:645 Coordinador/(16271:16318): Header.tamanio = 15
+[DEBUG] 23:20:05:645 Coordinador/(16271:16318): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:20:05:645 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:20:08:942 Coordinador/(16271:16318): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:20:21:965 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:20:21:965 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:20:35:625 Coordinador/(16271:16318): ESI 9 realizo un GET clave e3:microsoft:juegos
+[DEBUG] 23:20:35:625 Coordinador/(16271:16318): Header.tamanio = 20
+[DEBUG] 23:20:35:625 Coordinador/(16271:16318): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:20:35:625 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:20:37:622 Coordinador/(16271:16318): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:20:44:517 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:20:44:518 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:562 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:21:01:562 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:563 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:563 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:563 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:565 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:21:01:565 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:565 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:565 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:565 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:566 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:21:01:566 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:567 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:567 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:567 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:568 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:21:01:568 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:568 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:568 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:568 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:569 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:21:01:569 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:570 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:570 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:570 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:579 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 23:21:01:579 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:579 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:579 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:579 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:580 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:581 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:581 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:581 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:581 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:581 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:581 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:582 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:582 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:582 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:582 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:582 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:583 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:583 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:583 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:583 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:583 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:584 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:584 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:584 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:584 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:584 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:585 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:585 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:585 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:585 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:585 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:586 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:586 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:586 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:587 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:587 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:588 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:588 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:588 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:589 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:589 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:589 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:589 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:589 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:590 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:590 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:591 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:591 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:591 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:592 Coordinador/(16271:16318): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 23:21:01:592 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:592 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:592 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:592 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[TRACE] 23:21:01:594 Coordinador/(16271:16318): ESI 9 realizo un STORE clave e3:microsoft:juegos
+[DEBUG] 23:21:01:594 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:595 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:595 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:595 Coordinador/(16271:16271): Enviando LIBERAR CLAVES a Planificador. Clave e3:microsoft:juegos
+[DEBUG] 23:21:01:595 Coordinador/(16271:16271): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[DEBUG] 23:21:01:595 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[DEBUG] 23:21:01:595 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:01:596 Coordinador/(16271:16318): ESI 9 realizo un STORE clave e3:sony:juegos
+[DEBUG] 23:21:01:596 Coordinador/(16271:16318): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:01:596 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:01:596 Coordinador/(16271:16271): Enviando LIBERAR CLAVES a Planificador. Clave e3:sony:juegos
+[DEBUG] 23:21:01:596 Coordinador/(16271:16271): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[DEBUG] 23:21:01:596 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 9
+[DEBUG] 23:21:01:596 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:01:597 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:01:598 Coordinador/(16271:16320): ESI 10 realizo un GET clave postre:ingrediente1
+[DEBUG] 23:21:01:598 Coordinador/(16271:16320): Header.tamanio = 20
+[DEBUG] 23:21:01:598 Coordinador/(16271:16320): Se envió mensaje SOLICITUD CLAVE al planificador
+[TRACE] 23:21:03:73 Coordinador/(16271:16322): ESI 11 realizo un GET clave sony:consola:ps1
+[DEBUG] 23:21:03:73 Coordinador/(16271:16322): Header.tamanio = 17
+[DEBUG] 23:21:03:73 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:03:73 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:05:441 Coordinador/(16271:16320): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:05:442 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:05:442 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:07:227 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:12:790 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:12:790 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:31:230 Coordinador/(16271:16322): ESI 11 realizo un GET clave sony:consola:ps2
+[DEBUG] 23:21:31:230 Coordinador/(16271:16322): Header.tamanio = 17
+[DEBUG] 23:21:31:230 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:31:231 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:33:490 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:41:938 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:41:938 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:53:965 Coordinador/(16271:16322): ESI 11 realizo un GET clave sony:consola:ps3
+[DEBUG] 23:21:53:965 Coordinador/(16271:16322): Header.tamanio = 17
+[DEBUG] 23:21:53:965 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:53:965 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:382 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:383 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:383 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:383 Coordinador/(16271:16322): ESI 11 realizo un GET clave sony:consola:ps4
+[DEBUG] 23:21:58:383 Coordinador/(16271:16322): Header.tamanio = 17
+[DEBUG] 23:21:58:383 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:383 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:384 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:384 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:384 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:384 Coordinador/(16271:16322): ESI 11 realizo un GET clave microsoft:consola:xbox
+[DEBUG] 23:21:58:384 Coordinador/(16271:16322): Header.tamanio = 23
+[DEBUG] 23:21:58:384 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:385 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:385 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:385 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:385 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:385 Coordinador/(16271:16322): ESI 11 realizo un GET clave microsoft:consola:xbox360
+[DEBUG] 23:21:58:385 Coordinador/(16271:16322): Header.tamanio = 26
+[DEBUG] 23:21:58:385 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:386 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:386 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:386 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:386 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:387 Coordinador/(16271:16322): ESI 11 realizo un GET clave microsoft:consola:xboxone
+[DEBUG] 23:21:58:387 Coordinador/(16271:16322): Header.tamanio = 26
+[DEBUG] 23:21:58:387 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:387 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:387 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:388 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:388 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:388 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:nes
+[DEBUG] 23:21:58:388 Coordinador/(16271:16322): Header.tamanio = 21
+[DEBUG] 23:21:58:388 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:389 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:389 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:389 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:389 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:389 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:snes
+[DEBUG] 23:21:58:390 Coordinador/(16271:16322): Header.tamanio = 22
+[DEBUG] 23:21:58:390 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:390 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:390 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:390 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:390 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:nintendo64
+[DEBUG] 23:21:58:391 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:391 Coordinador/(16271:16322): Header.tamanio = 28
+[DEBUG] 23:21:58:391 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:392 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:392 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:392 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:396 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:gamecube
+[DEBUG] 23:21:58:397 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:397 Coordinador/(16271:16322): Header.tamanio = 26
+[DEBUG] 23:21:58:397 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:397 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:397 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:397 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:398 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:398 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:wii
+[DEBUG] 23:21:58:398 Coordinador/(16271:16322): Header.tamanio = 21
+[DEBUG] 23:21:58:398 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:398 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:398 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:398 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:399 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:399 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:wiiu
+[DEBUG] 23:21:58:399 Coordinador/(16271:16322): Header.tamanio = 22
+[DEBUG] 23:21:58:399 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:399 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:400 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:400 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:400 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:401 Coordinador/(16271:16322): ESI 11 realizo un GET clave nintendo:consola:switch
+[DEBUG] 23:21:58:401 Coordinador/(16271:16322): Header.tamanio = 24
+[DEBUG] 23:21:58:401 Coordinador/(16271:16322): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 23:21:58:401 Coordinador/(16271:16322): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 23:21:58:401 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:401 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:401 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:402 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:nes
+[DEBUG] 23:21:58:402 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:402 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:403 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:403 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:404 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:snes
+[DEBUG] 23:21:58:404 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:404 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[DEBUG] 23:21:58:404 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:404 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[TRACE] 23:21:58:405 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:nintendo64
+[DEBUG] 23:21:58:405 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:406 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:406 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:406 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:407 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:gamecube
+[DEBUG] 23:21:58:407 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:408 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:408 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:409 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:409 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:wii
+[DEBUG] 23:21:58:409 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:410 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:410 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:410 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:412 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:wiiu
+[DEBUG] 23:21:58:413 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:413 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:413 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:413 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:414 Coordinador/(16271:16322): ESI 11 realizo un SET clave nintendo:consola:switch
+[DEBUG] 23:21:58:414 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:415 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:415 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:415 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:416 Coordinador/(16271:16322): ESI 11 realizo un SET clave sony:consola:ps1
+[DEBUG] 23:21:58:416 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:416 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:416 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:416 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:421 Coordinador/(16271:16322): ESI 11 realizo un SET clave sony:consola:ps2
+[DEBUG] 23:21:58:421 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:421 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:421 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:421 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:422 Coordinador/(16271:16322): ESI 11 realizo un SET clave sony:consola:ps3
+[DEBUG] 23:21:58:422 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:422 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:422 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:423 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:426 Coordinador/(16271:16322): ESI 11 realizo un SET clave sony:consola:ps4
+[DEBUG] 23:21:58:426 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:427 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:427 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:427 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:428 Coordinador/(16271:16322): ESI 11 realizo un SET clave microsoft:consola:xbox
+[DEBUG] 23:21:58:428 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:428 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:428 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:428 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:429 Coordinador/(16271:16322): ESI 11 realizo un SET clave microsoft:consola:xbox360
+[DEBUG] 23:21:58:429 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:429 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:429 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[DEBUG] 23:21:58:430 Coordinador/(16271:16271): Se recibió respuesta del planificador
+[TRACE] 23:21:58:430 Coordinador/(16271:16322): ESI 11 realizo un SET clave microsoft:consola:xboxone
+[DEBUG] 23:21:58:430 Coordinador/(16271:16322): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 23:21:58:430 Coordinador/(16271:16271): Instancia ejecuto operacion correctamente
+[DEBUG] 23:21:58:431 Coordinador/(16271:16271): Se envia sentencia finalizada a esi: 11
+[ERROR] 23:21:59:23 Coordinador/(16271:16271): ERROR en el header enviado por el PLANIFICADOR. Probable bloqueo de todo el sistema
+[TRACE] 17:00:02:713 Coordinador/(5955:6053): ESI 9 realizo un GET clave e3:sony:juegos
+[DEBUG] 17:00:02:867 Coordinador/(5955:6053): Header.tamanio = 15
+[DEBUG] 17:00:02:867 Coordinador/(5955:6053): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 17:00:02:867 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:867 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:867 Coordinador/(5955:6053): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 17:00:02:868 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:868 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:869 Coordinador/(5955:6053): ESI 9 realizo un GET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:869 Coordinador/(5955:6053): Header.tamanio = 20
+[DEBUG] 17:00:02:869 Coordinador/(5955:6053): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 17:00:02:869 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:869 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:869 Coordinador/(5955:6053): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 17:00:02:869 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:869 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:870 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:00:02:870 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:870 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:870 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:876 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:876 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:877 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:00:02:877 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:877 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:877 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:880 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:880 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:881 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:00:02:881 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:882 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:882 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:882 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:882 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:883 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:00:02:883 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:884 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:884 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:884 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:884 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:887 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:00:02:887 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:887 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:887 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:888 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:888 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:889 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:00:02:889 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:889 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:889 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:889 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:889 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:891 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:891 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:891 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:891 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:891 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:891 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:893 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:893 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:893 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:893 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:895 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:895 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:898 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:898 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:898 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:898 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:898 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:898 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:899 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:899 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:899 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:899 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:899 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:899 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:901 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:901 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:901 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:901 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:901 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:901 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:902 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:903 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:903 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:903 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:903 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:903 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:904 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:905 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:905 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:905 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:905 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:905 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:906 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:906 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:906 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:906 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:907 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:907 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:907 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:907 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:908 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:908 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:908 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:908 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:909 Coordinador/(5955:6053): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:00:02:909 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:02:910 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:02:910 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:02:910 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:02:910 Coordinador/(5955:5955): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:00:02:911 Coordinador/(5955:6053): ESI 9 realizo un STORE clave e3:microsoft:juegos
+[DEBUG] 17:00:08:985 Coordinador/(5955:6053): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:00:08:985 Coordinador/(5955:5955): Se recibió respuesta del planificador: 13
+[DEBUG] 17:00:19:564 Coordinador/(5955:6053): Despues semaforo: 13
+[DEBUG] 17:00:26:425 Coordinador/(5955:5955): Instancia ejecuto operacion correctamente
+[DEBUG] 17:00:26:425 Coordinador/(5955:5955): Enviando LIBERAR CLAVES a Planificador. Clave e3:microsoft:juegos
+[DEBUG] 17:00:26:425 Coordinador/(5955:5955): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
+[TRACE] 17:06:13:486 Coordinador/(6208:6316): ESI 9 realizo un GET clave e3:sony:juegos
+[DEBUG] 17:06:13:486 Coordinador/(6208:6316): Header.tamanio = 15
+[DEBUG] 17:06:13:486 Coordinador/(6208:6316): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 17:06:13:486 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:486 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:486 Coordinador/(6208:6316): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 17:06:13:486 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:486 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:488 Coordinador/(6208:6316): ESI 9 realizo un GET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:488 Coordinador/(6208:6316): Header.tamanio = 20
+[DEBUG] 17:06:13:488 Coordinador/(6208:6316): Se envió mensaje SOLICITUD CLAVE al planificador
+[DEBUG] 17:06:13:488 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:488 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:488 Coordinador/(6208:6316): Estoy distribuyendo por EQUITATIVE LOAD
+[DEBUG] 17:06:13:488 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:488 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:489 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:06:13:490 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:490 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:490 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:490 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:490 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:492 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:06:13:492 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:492 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:492 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:492 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:492 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:493 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:06:13:494 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:494 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:494 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:494 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:494 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:495 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:06:13:495 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:496 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:496 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:496 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:496 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:500 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:06:13:500 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:500 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:500 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:501 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:501 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:501 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:sony:juegos
+[DEBUG] 17:06:13:501 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:502 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:502 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:502 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:502 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:503 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:503 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:503 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:503 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:503 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:503 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:504 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:504 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:505 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:505 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:505 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:505 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:506 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:506 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:507 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:507 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:507 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:507 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:508 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:508 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:511 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:511 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:511 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:511 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:515 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:515 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:516 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:516 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:516 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:516 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:517 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:517 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:517 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:517 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:517 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:517 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:518 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:519 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:519 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:519 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:519 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:519 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:521 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:522 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:522 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:522 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:522 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:522 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:523 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:523 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:523 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:523 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:523 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:523 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:525 Coordinador/(6208:6316): ESI 9 realizo un SET clave e3:microsoft:juegos
+[DEBUG] 17:06:13:525 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:13:525 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:13:525 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:13:525 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:13:525 Coordinador/(6208:6208): Se envia sentencia finalizada a esi: 9
+[TRACE] 17:06:13:526 Coordinador/(6208:6316): ESI 9 realizo un STORE clave e3:microsoft:juegos
+[DEBUG] 17:06:25:465 Coordinador/(6208:6316): Se envió pregunta ESI_TIENE_TOMADA_CLAVE al planificador
+[DEBUG] 17:06:25:466 Coordinador/(6208:6208): Se recibió respuesta del planificador: 13
+[DEBUG] 17:06:29:332 Coordinador/(6208:6316): Despues semaforo: 13
+[DEBUG] 17:06:31:761 Coordinador/(6208:6208): Instancia ejecuto operacion correctamente
+[DEBUG] 17:06:35:486 Coordinador/(6208:6208): Enviando LIBERAR CLAVES a Planificador. Clave e3:microsoft:juegos
+[DEBUG] 17:06:39:763 Coordinador/(6208:6208): Se envió mensaje LIBERAR CLAVES POR STORE al planificador
