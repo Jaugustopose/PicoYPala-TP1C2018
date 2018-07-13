@@ -655,6 +655,7 @@ void enviar_espacio_disponible_a_coordinador(){
 	void* bufferAEnviar = serializar(*header,buffer);
 
 	enviar_mensaje(socketCoordinador,bufferAEnviar,sizeof(header_t) + sizeof(int));
+	log_debug(logInstancia, "Cantidad de entradas libres enviada al COORDINADOR");
 }
 
 void ejecutarGet(void* buffer){
