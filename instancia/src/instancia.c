@@ -642,6 +642,21 @@ void sustituirMatrizEntradasGet(char* clave){
 	tablaEntradas[indiceSustituir].tamanioValor = 0;
 }
 
+void enviar_espacio_disponible_a_coordinador(){
+
+	int entradasLibres = 0;
+	header_t* header = malloc(sizeof(header_t));
+	void* buffer = malloc(sizeof(int));
+	entradasLibres = cantEntradasLibres();
+	header->comando = msj_instancia_entradas_libres;
+	header->tamanio = sizeof(int);
+
+	memcpy(buffer,&entradasLibres,sizeof(int));
+	void* bufferAEnviar = serializar(*header,buffer);
+
+	enviar_mensaje(socketCoordinador,bufferAEnviar,sizeof(header_t) + sizeof(int));
+}
+
 void ejecutarGet(void* buffer){
 	char* clave = (char*)buffer;
 	log_info(logInstancia, "Procesando GET. Clave: %s", clave);
@@ -730,6 +745,7 @@ void sustitucionEntrada(t_entrada* entrada, char* valor, int tamanio, int entrad
 		int entradasASustituir = entradasNecesarias - entradasLibres;
 		sustituirMatrizEntradas(entrada, valor, tamanio, entradasASustituir);
 	}
+	//TODO: Se avisa al coordinador
 }
 
 void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
@@ -743,6 +759,7 @@ void setSinValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 		//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas
 		setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 		reservarEntrada(indiceEntrada, entradasNecesarias);
+		enviar_espacio_disponible_a_coordinador();
 		enviar_ok_sentencia_a_Coordinador();
 	}
 }
@@ -754,12 +771,14 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 	if (entradasAsignadas == entradasNecesarias) {
 		//Coincide justo, simplemente se escribe el nuevo valor
 		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
+		enviar_espacio_disponible_a_coordinador();
 		enviar_ok_sentencia_a_Coordinador();
 	} else if (entradasAsignadas > entradasNecesarias) {
 		//Sobran entradas, se deben liberar las que sobran y escribir el valor
 		setValorEntrada(entrada, valor, tamanio, entrada->numeroEntrada);
 		int cantLiberar = entradasAsignadas - entradasNecesarias;
 		liberarEntrada(entrada->numeroEntrada + entradasAsignadas - cantLiberar, cantLiberar);
+		enviar_espacio_disponible_a_coordinador();
 		enviar_ok_sentencia_a_Coordinador();
 	} else {
 		//Faltan entradas, se liberan las entradas usadas y se busca donde guardar el nuevo valor
@@ -774,6 +793,7 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 			//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas
 			setValorEntrada(entrada, valor, tamanio, indiceEntrada);
 			reservarEntrada(indiceEntrada, entradasNecesarias);
+			enviar_espacio_disponible_a_coordinador();
 			enviar_ok_sentencia_a_Coordinador();
 		}
 	}
