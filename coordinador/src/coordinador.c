@@ -198,7 +198,7 @@ infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning s
 
 	//Funcion solo para dentro de este scope.
 	bool _instancia_menor_espacio(infoInstancia_t* unaInstancia, infoInstancia_t* instanciaConMenosEspacio) {
-		return unaInstancia->espacio_disponible < instanciaConMenosEspacio->espacio_disponible;
+		return (unaInstancia->espacio_disponible > instanciaConMenosEspacio->espacio_disponible);
 	}
 
 	if (string_equals_ignore_case(algoritmo,"EL")){
@@ -1069,6 +1069,8 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 			recibir_mensaje(unFileDescriptor,&entradasLibres,sizeof(int));
 			unaInstancia = encontrar_instancia_por_fd(unFileDescriptor);
+
+			log_debug(log_coordinador, "Se actualizan la cantidad de entradas libres de instancia %d con CantLibres = %d", unFileDescriptor, entradasLibres);
 
 			unaInstancia->espacio_disponible = entradasLibres;
 
