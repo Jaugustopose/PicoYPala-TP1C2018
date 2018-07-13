@@ -18,16 +18,19 @@
 #include <commons/log.h>
 #include <parsi/parser.h>
 #include <signal.h>
-
-int socket_coordinador;
-int socket_planificador;
-t_log *logESI;
-FILE * fp;
+#include <stdbool.h>
 
 typedef struct {
 	t_esi_operacion parsed;
 	int finArchivo;
 } t_retornoParsearLinea;
+
+int socket_coordinador;
+int socket_planificador;
+t_log *logESI;
+FILE * fp;
+t_retornoParsearLinea lineaParseada;
+bool sentenciaFinalizada = true;
 
 void exitFailure() {
 	log_destroy(logESI);
@@ -114,22 +117,23 @@ void abrirScript(char* path) {
 	}
 }
 
-t_retornoParsearLinea parsearLinea() {
-	t_retornoParsearLinea retorno;
-	retorno.finArchivo = 0;
-	char * line = NULL;
-	size_t len = 0;
-	if (getline(&line, &len, fp) != -1) {
-		log_info(logESI, "Parseando linea: %s", line);
-		retorno.parsed = parse(line);
-		if (!retorno.parsed.valido) {
-			log_error(logESI, "Error al parsear linea");
-			exitFailure();
+void parsearLinea() {
+	if(sentenciaFinalizada){
+		sentenciaFinalizada = false;
+		lineaParseada.finArchivo = 0;
+		char * line = NULL;
+		size_t len = 0;
+		if (getline(&line, &len, fp) != -1) {
+			log_info(logESI, "Parseando linea: %s", line);
+			lineaParseada.parsed = parse(line);
+			if (!lineaParseada.parsed.valido) {
+				log_error(logESI, "Error al parsear linea");
+				exitFailure();
+			}
+		} else {
+			lineaParseada.finArchivo = 1;
 		}
-	} else {
-		retorno.finArchivo = 1;
-	}
-	return retorno;
+	}//Si no entra en el if queda la sentencia anterior
 }
 
 void leerScript(char **argv) {
@@ -262,24 +266,22 @@ void sig_handler(int signo) {
 void atenderMsgPlanificador() {
 	//Recibo mensaje de Planificador
 	header_t header;
-	int bytesRecibidos = recibir_mensaje(socket_planificador, &header,
-			sizeof(header_t));
-	if (bytesRecibidos == ERROR_RECV_DISCONNECTED
-			|| bytesRecibidos == ERROR_RECV_DISCONNECTED) {
+	int bytesRecibidos = recibir_mensaje(socket_planificador, &header, sizeof(header_t));
+	if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
 		log_error(logESI, "Se perdió la conexión con el Planificador");
 		exitFailure();
 	} else {
 		switch (header.comando) {
 		case msj_requerimiento_ejecucion:
 			log_info(logESI, "Msg requerimiento de ejecución recibido del Planificador");
-			t_retornoParsearLinea retorno = parsearLinea();
-			if (retorno.finArchivo) {
+			parsearLinea();
+			if (lineaParseada.finArchivo) {
 				log_info(logESI, "Fin Script");
 				msgFinProceso(socket_planificador);
 				msgFinProceso(socket_coordinador);
 				exitSuccess();
 			} else {
-				msgEjecucion(retorno.parsed);
+				msgEjecucion(lineaParseada.parsed);
 			}
 			break;
 		case msj_abortar_esi:
@@ -306,8 +308,8 @@ void atenderMsgCoordinador() {
 	} else {
 		switch (header.comando) {
 		case msj_sentencia_finalizada:
-			log_info(logESI,
-					"Msg Sentencia finalizada recibido del Coordinador");
+			log_info(logESI, "Msg Sentencia finalizada recibido del Coordinador");
+			sentenciaFinalizada = true;
 			msgSentenciaFinalizada();
 			break;
 		default:
@@ -322,8 +324,7 @@ void atenderMsgCoordinador() {
 int main(int argc, char **argv) {
 	inicializarLogger();
 	if (argc < 2) {
-		printf(
-				"Falta argumento para ejecución. Uso correcto: ./esi \"Path_script\"\n");
+		printf("Falta argumento para ejecución. Uso correcto: ./esi \"Path_script\"\n");
 		return EXIT_FAILURE;
 	}
 

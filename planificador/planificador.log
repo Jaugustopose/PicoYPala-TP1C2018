@@ -236,3 +236,27 @@
 [DEBUG] 17:53:02:542 Planificador/(9927:9936): Notificacion recibida del coordinador
 [DEBUG] 17:53:02:542 Planificador/(9927:9936): Paquete recibido del coordinador
 [DEBUG] 17:53:02:542 Planificador/(9927:9936): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): PUERTO: 8020
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): ESTIMACION_INICIAL: 3
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): ALFA_PLANIFICACION: 50
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): PUERTO_COORDINADOR: 8030
+[DEBUG] 21:53:15:564 Planificador/(13278:13278): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 21:53:22:201 Planificador/(13278:13296): Notificacion recibida del coordinador
+[DEBUG] 21:53:22:202 Planificador/(13278:13296): Paquete recibido del coordinador
+[DEBUG] 21:53:22:202 Planificador/(13278:13296): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 21:53:22:202 Planificador/(13278:13296): Pudo solicitar clave? => 0
+[INFO] 21:53:34:996 Planificador/(13278:13278): Desbloqueo Esi por clave postre:ingrediente1!
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): PUERTO: 8020
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): ESTIMACION_INICIAL: 3
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): ALFA_PLANIFICACION: 50
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): PUERTO_COORDINADOR: 8030
+[DEBUG] 21:54:18:673 Planificador/(13351:13351): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 21:54:21:435 Planificador/(13351:13359): Notificacion recibida del coordinador
+[DEBUG] 21:54:21:435 Planificador/(13351:13359): Paquete recibido del coordinador
+[DEBUG] 21:54:21:435 Planificador/(13351:13359): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 21:54:21:435 Planificador/(13351:13359): Pudo solicitar clave? => 0
+[INFO] 21:54:30:266 Planificador/(13351:13351): Desbloqueo Esi por clave postre:ingrediente1!

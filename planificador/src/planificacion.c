@@ -199,6 +199,8 @@ void procesoBloquear(char* clave){
 	list_add(listaBloqueados, (void*)procesoEjecucion);
 	if(colaListosPeek()){
 		procesoEjecutar(colaListosPop());
+	}else{
+		procesoEjecucion = 0;
 	}
 }
 
