@@ -588,7 +588,7 @@ void sustituirMatrizEntradas(t_entrada* entrada, char* valor, int tamanio, int e
 		char* algoritmo = configuracion.algoritmo_remplazo;
 
 		log_debug(logInstancia, "Sustituye por algoritmo %s",algoritmo);
-		if(string_equals_ignore_case(algoritmo,"Ciclico")){
+		if(string_equals_ignore_case(algoritmo,"CIRC")){
 			sustituirCiclico(entrada, valor, tamanio, entradasASustituir);
 		} else if (string_equals_ignore_case(algoritmo,"LRU")){
 			sustituirLRU(entrada, valor, tamanio, entradasASustituir);
@@ -657,9 +657,10 @@ void ejecutarGet(void* buffer){
 		//Primero se busca un lugar libre en la tabla de entradas
 		int indice = buscarPosicionLibreTablaEntradas();
 		if(indice < 0){
-			//No hay lugar libre, se ejecuta algoritmo de sustitución
-			//TODO: Revisar LC
-			sustituirMatrizEntradasGet(clave);
+			//No hay lugar libre, se ejecuta algoritmo de sustitución NO DEBERIA PASAR NUNCA SEGUN MAIL DEL AYUDANTE
+			//sustituirMatrizEntradasGet(clave);
+			log_error(logInstancia, "Se lleno la tabla de entradas");
+			exitFailure();
 		}else{
 			//Se inserta nueva entrada en la tabla
 			agregarNuevaClave(clave, indice);
