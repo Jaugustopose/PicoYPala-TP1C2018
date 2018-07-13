@@ -196,6 +196,11 @@ void conexion_de_cliente_finalizada(int unFD) {
 
 infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning sale porque no estan implementados LSU y KEY.
 
+	//Funcion solo para dentro de este scope.
+	bool _instancia_menor_espacio(infoInstancia_t* unaInstancia, infoInstancia_t* instanciaConMenosEspacio) {
+		return unaInstancia->espacio_disponible < instanciaConMenosEspacio->espacio_disponible;
+	}
+
 	if (string_equals_ignore_case(algoritmo,"EL")){
 		int punteroActual = 0;
 		log_debug(log_coordinador, "Estoy distribuyendo por EQUITATIVE LOAD");
@@ -211,8 +216,12 @@ infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning s
 			return list_get(lista_instancias_claves,punteroActual);
 
 	}else if (string_equals_ignore_case(algoritmo, "LSU")){
+
 		log_debug(log_coordinador, "Estoy distribuyendo por LSU");
-			// TODO: Ordeno la lista_instancias_claves por espacio_disponible
+		// Ordeno la lista_instancias_claves por espacio_disponible
+		list_sort(lista_instancias_claves,(void*) _instancia_menor_espacio);
+
+		return list_get(lista_instancias_claves,0);
 
 	}else if (string_equals_ignore_case(algoritmo, "KEY")){
 		log_debug(log_coordinador, "El algoritmo KEY EXPLICIT es restriccion de TP por cantidad de integrantes");
@@ -226,11 +235,20 @@ infoInstancia_t* elegir_instancia_por_algoritmo(char* algoritmo){ //El warning s
 
 infoInstancia_t* simular_eleccion_instancia_por_algoritmo(char* algoritmo){ //El warning sale porque no estan implementados LSU y KEY.
 
+	//Funcion solo para dentro de este scope.
+	bool _instancia_menor_espacio(infoInstancia_t* unaInstancia, infoInstancia_t* instanciaConMenosEspacio) {
+		return unaInstancia->espacio_disponible < instanciaConMenosEspacio->espacio_disponible;
+	}
+
 	if (string_equals_ignore_case(algoritmo,"EL")){
 		return list_get(lista_instancias_claves,puntero_algoritmo_equitative);
 
 	}else if (string_equals_ignore_case(algoritmo, "LSU")){
 		// TODO: Ordeno la lista_instancias_claves por espacio_disponible
+		list_sort(lista_instancias_claves,(void*) _instancia_menor_espacio);
+
+		return list_get(lista_instancias_claves,0);
+
 
 	}else if (string_equals_ignore_case(algoritmo, "KEY")){
 		log_debug(log_coordinador, "El algoritmo KEY EXPLICIT es restriccion de TP por cantidad de integrantes");
