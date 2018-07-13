@@ -95,13 +95,16 @@ void* iniciarEscucha(void* sockets) {
 					pthread_mutex_unlock(&mutex_cola_listos);
 					int respuesta;
 					header_t headerParaCoordinador;
+					if(paquete->header.comando == msj_store_clave){
+						continue; //LC Para no responder nada al store
+					}
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
 
 						headerParaCoordinador.comando = msj_ok_solicitud_operacion;
 						headerParaCoordinador.tamanio = 0;
-
 						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(header_t));
+						log_debug(logPlanificador, "Se envio respuesta OK al coordinador");
 
 						if (paquete->header.comando == msj_error_clave_no_identificada) {
 							log_info(logPlanificador, "Se aborta ESI en fd %d por clave solicitada no identificada", retorno.fdESIAAbortar);
@@ -115,6 +118,7 @@ void* iniciarEscucha(void* sockets) {
 						headerParaCoordinador.tamanio = 0;
 
 						enviar_mensaje(fdCliente, &headerParaCoordinador, sizeof(header_t));
+						log_debug(logPlanificador, "Se envio respuesta NOK al coordinador");
 						if (paquete->header.comando == msj_esi_tiene_tomada_clave) {
 							log_info(logPlanificador, "Se aborta esi en fd %d por intentar hacer SET o STORE sobre una clave no tomada", retorno.fdESIAAbortar);
 							respuesta = msj_abortar_esi;

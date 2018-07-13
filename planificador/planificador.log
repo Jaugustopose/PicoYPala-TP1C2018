@@ -260,3 +260,325 @@
 [DEBUG] 21:54:21:435 Planificador/(13351:13359): Notificacion Coordinador - Solicitud de GET clave recibida
 [DEBUG] 21:54:21:435 Planificador/(13351:13359): Pudo solicitar clave? => 0
 [INFO] 21:54:30:266 Planificador/(13351:13351): Desbloqueo Esi por clave postre:ingrediente1!
+[DEBUG] 16:51:03:5 Planificador/(5743:5743): PUERTO: 8020
+[DEBUG] 16:51:03:12 Planificador/(5743:5743): ESTIMACION_INICIAL: 3
+[DEBUG] 16:51:03:12 Planificador/(5743:5743): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 16:51:03:12 Planificador/(5743:5743): ALFA_PLANIFICACION: 50
+[DEBUG] 16:51:03:12 Planificador/(5743:5743): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 16:51:03:12 Planificador/(5743:5743): PUERTO_COORDINADOR: 8030
+[DEBUG] 16:51:03:12 Planificador/(5743:5743): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[INFO] 16:51:11:171 Planificador/(5743:5743): Pausar Planificación!
+[INFO] 16:51:23:379 Planificador/(5743:5743): Continuar Planificación!
+[DEBUG] 16:51:23:380 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:380 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:380 Planificador/(5743:5752): Notificacion Coordinador - Solicitud de GET clave recibida: e3:sony:juegos
+[DEBUG] 16:51:23:380 Planificador/(5743:5752): Pudo solicitar clave? => 1
+[DEBUG] 16:51:23:381 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:385 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:385 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:385 Planificador/(5743:5752): Notificacion Coordinador - Solicitud de GET clave recibida: e3:microsoft:juegos
+[DEBUG] 16:51:23:385 Planificador/(5743:5752): Pudo solicitar clave? => 1
+[DEBUG] 16:51:23:386 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:396 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:396 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:396 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:396 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 16:51:23:396 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:398 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:398 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:398 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:398 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 16:51:23:398 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:399 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:400 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:400 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:400 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 16:51:23:400 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:402 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:402 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:402 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:402 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 16:51:23:402 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:405 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:405 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:405 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:405 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 16:51:23:407 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:411 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:411 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:411 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:411 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 16:51:23:411 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:412 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:412 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:413 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:413 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:413 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:414 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:414 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:414 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:414 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:414 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:415 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:415 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:415 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:415 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:416 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:416 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:416 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:416 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:416 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:417 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:418 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:418 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:418 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:418 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:419 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:420 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:420 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:420 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:420 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:421 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:421 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:421 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:421 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:421 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:422 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:422 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:422 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:422 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:422 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:423 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:424 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:424 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:424 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:424 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:425 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:426 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:426 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:426 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:426 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:427 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
+[DEBUG] 16:51:23:428 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:428 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:23:428 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 16:51:23:428 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 16:51:23:429 Planificador/(5743:5752): Notificacion recibida del coordinador
+[DEBUG] 16:51:23:429 Planificador/(5743:5752): Paquete recibido del coordinador
+[DEBUG] 16:51:44:694 Planificador/(5743:5752): Notificacion Coordinador - Solicitud de STORE clave recibida
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): PUERTO: 8020
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): ESTIMACION_INICIAL: 3
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): ALFA_PLANIFICACION: 50
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): PUERTO_COORDINADOR: 8030
+[DEBUG] 16:59:26:683 Planificador/(6017:6017): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[INFO] 16:59:48:591 Planificador/(6017:6017): Pausar Planificación!
+[INFO] 17:00:02:712 Planificador/(6017:6017): Continuar Planificación!
+[DEBUG] 17:00:02:867 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:867 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:867 Planificador/(6017:6026): Notificacion Coordinador - Solicitud de GET clave recibida: e3:sony:juegos
+[DEBUG] 17:00:02:867 Planificador/(6017:6026): Pudo solicitar clave? => 1
+[DEBUG] 17:00:02:868 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:869 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:869 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:869 Planificador/(6017:6026): Notificacion Coordinador - Solicitud de GET clave recibida: e3:microsoft:juegos
+[DEBUG] 17:00:02:869 Planificador/(6017:6026): Pudo solicitar clave? => 1
+[DEBUG] 17:00:02:869 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:870 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:870 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:870 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:870 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:00:02:876 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:877 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:877 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:877 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:877 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:00:02:880 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:881 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:881 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:881 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:881 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:00:02:882 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:883 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:884 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:884 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:884 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:00:02:885 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:887 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:887 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:887 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:887 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:00:02:888 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:889 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:889 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:889 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:889 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:00:02:890 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:891 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:891 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:891 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:891 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:892 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:893 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:893 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:893 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:893 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:896 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:898 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:898 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:898 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:898 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:898 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:899 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:899 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:899 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:899 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:900 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:901 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:901 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:901 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:901 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:901 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:903 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:903 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:903 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:903 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:903 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:905 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:905 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:905 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:905 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:905 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:906 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:906 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:906 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:906 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:907 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:907 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:908 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:908 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:908 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:908 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:02:909 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:02:909 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:02:910 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:02:910 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:02:910 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
+[DEBUG] 17:00:08:985 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:08:985 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:08:985 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:00:08:985 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:00:26:425 Planificador/(6017:6026): Notificacion recibida del coordinador
+[DEBUG] 17:00:26:426 Planificador/(6017:6026): Paquete recibido del coordinador
+[DEBUG] 17:00:59:67 Planificador/(6017:6026): Notificacion Coordinador - Solicitud de STORE clave recibida
+[DEBUG] 17:05:43:871 Planificador/(6259:6259): PUERTO: 8020
+[DEBUG] 17:05:43:872 Planificador/(6259:6259): ESTIMACION_INICIAL: 3
+[DEBUG] 17:05:43:872 Planificador/(6259:6259): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 17:05:43:872 Planificador/(6259:6259): ALFA_PLANIFICACION: 50
+[DEBUG] 17:05:43:872 Planificador/(6259:6259): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 17:05:43:872 Planificador/(6259:6259): PUERTO_COORDINADOR: 8030
+[DEBUG] 17:05:43:872 Planificador/(6259:6259): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[INFO] 17:05:51:821 Planificador/(6259:6259): Pausar Planificación!
+[INFO] 17:06:13:485 Planificador/(6259:6259): Continuar Planificación!
+[DEBUG] 17:06:13:486 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:486 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:486 Planificador/(6259:6271): Notificacion Coordinador - Solicitud de GET clave recibida: e3:sony:juegos
+[DEBUG] 17:06:13:486 Planificador/(6259:6271): Pudo solicitar clave? => 1
+[DEBUG] 17:06:13:486 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:488 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:488 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:488 Planificador/(6259:6271): Notificacion Coordinador - Solicitud de GET clave recibida: e3:microsoft:juegos
+[DEBUG] 17:06:13:488 Planificador/(6259:6271): Pudo solicitar clave? => 1
+[DEBUG] 17:06:13:489 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:490 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:490 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:490 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:490 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:06:13:490 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:492 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:492 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:492 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:492 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:06:13:493 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:494 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:494 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:494 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:494 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:06:13:494 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:495 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:495 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:495 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:495 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:06:13:499 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:500 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:500 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:500 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:500 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:06:13:501 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:501 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:502 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:502 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:502 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
+[DEBUG] 17:06:13:502 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:503 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:503 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:503 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:503 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:504 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:504 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:504 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:504 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:505 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:505 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:506 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:506 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:506 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:506 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:507 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:508 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:508 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:508 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:508 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:514 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:515 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:516 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:516 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:516 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:516 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:517 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:517 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:517 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:517 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:518 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:519 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:519 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:519 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:519 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:519 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:522 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:522 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:522 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:522 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:522 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:523 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:523 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:523 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:523 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:524 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:13:525 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:13:525 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:13:525 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:13:525 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:13:525 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
+[DEBUG] 17:06:25:465 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:25:466 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:25:466 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:06:25:466 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
+[DEBUG] 17:06:39:764 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:06:39:764 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:06:51:459 Planificador/(6259:6271): Notificacion Coordinador - Solicitud de STORE clave recibida
+[DEBUG] 17:07:31:535 Planificador/(6259:6271): Notificacion recibida del coordinador
+[DEBUG] 17:07:31:542 Planificador/(6259:6271): Paquete recibido del coordinador
+[DEBUG] 17:07:31:542 Planificador/(6259:6271): Notificacion Coordinador - Llegó un mensaje desconocido: -12
+[ERROR] 17:07:31:542 Planificador/(6259:6271): Error en select

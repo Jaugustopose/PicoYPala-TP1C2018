@@ -512,7 +512,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 	//El cuerpo siempre tiene que ser una clave
 	switch(comando) {
 	case msj_solicitud_get_clave: //Procesar GET
-		log_debug(logPlanificador, "Notificacion Coordinador - Solicitud de GET clave recibida");
+		log_debug(logPlanificador, "Notificacion Coordinador - Solicitud de GET clave recibida: %s", cuerpo);
 		retorno.respuestaACoordinador = solicitarClave(cuerpo);
 		log_debug(logPlanificador, "Pudo solicitar clave? => %d", retorno.respuestaACoordinador);
 		retorno.fdESIAAbortar = -1;
