@@ -7,7 +7,7 @@
 
 //Prototipos
 void inicializarPlanificacion();
-int procesoNuevo(int socketESI);
+int procesoNuevo(int socketESI, char* nombre);
 void procesoTerminado(int exitStatus);
 void sentenciaFinalizada();
 respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo);

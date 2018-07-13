@@ -313,12 +313,26 @@ void atenderMsgCoordinador() {
 			msgSentenciaFinalizada();
 			break;
 		default:
-			log_error(logESI,
-					"Se recibió comando desconocido (Coordinador): %d",
-					header.comando);
+			log_error(logESI, "Se recibió comando desconocido (Coordinador): %d", header.comando);
 			break;
 		}
 	}
+}
+
+void enviarNombreESI(char *path){
+	char** pathArray = string_split(path, "/");
+	int contador=0;
+	while(pathArray[contador]){
+		contador++;
+	}
+	char* nombre = pathArray[contador-1];
+
+	header_t header;
+	header.comando = msj_nombre_esi;
+	header.tamanio = strlen(nombre) + 1;
+	void* buffer = serializar(header, nombre);
+	int retorno = enviar_mensaje(socket_planificador, buffer, sizeof(header_t) + header.tamanio);
+	free(buffer);
 }
 
 int main(int argc, char **argv) {
@@ -339,6 +353,9 @@ int main(int argc, char **argv) {
 			config.PUERTO_COORDINADOR, ESI);
 	socket_planificador = conectarConProceso(config.IP_PLANIFICADOR,
 			config.PUERTO_PLANIFICADOR, ESI);
+
+	//Envio nombre ESI a planificador
+	enviarNombreESI(argv[1]);
 
 	fd_set master;
 	fd_set readfs;

@@ -138,7 +138,7 @@ proceso_t* colaListosPeek(){
 	return list_get(colaListos, 0);
 }
 
-int procesoNuevo(int socketESI) {
+int procesoNuevo(int socketESI, char* nombre) {
 	proceso_t* proceso = malloc(sizeof(proceso_t));
 	proceso->idProceso = contadorProcesos;
 	contadorProcesos++;
@@ -148,6 +148,7 @@ int procesoNuevo(int socketESI) {
 	proceso->rafagaEstimada = config.ESTIMACION_INICIAL;
 	proceso->rafagasEsperando = 0;
 	proceso->socketESI = socketESI;
+	proceso->nombreESI = nombre;
 	int retorno;
 
 	if(procesoEjecucion == 0){
@@ -214,6 +215,7 @@ void procesoDesbloquear(char* clave) {
 	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
 
 	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
+		log_debug(logPlanificador, "Proceso desbloqueado: %s",proceso->nombreESI);
 		estimarRafaga(proceso);
 		if (procesoEjecucion == 0) {
 			procesoEjecutar(proceso);

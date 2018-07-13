@@ -31,6 +31,19 @@ void procesar_handshake(int socketCliente) {
 	}
 }
 
+char* recibirNombreESI(int socket){
+	header_t header;
+	char* nombre;
+	int resultado = recibir_mensaje(socket, &header, sizeof(header_t)); //Ahora recibo el nombre de la instancia
+	if ((resultado == ERROR_RECV) || !(header.comando == msj_nombre_esi)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
+		printf("Error al intentar recibir nombre del ESI\n");
+	} else {
+		nombre = malloc(header.tamanio);
+		recibir_mensaje(socket, nombre, header.tamanio);
+	}
+	return nombre;
+}
+
 void* iniciarEscucha(void* sockets) {
 	sockets_escucha_t sockets_predefinidos = *(sockets_escucha_t*) sockets;
 
@@ -46,6 +59,7 @@ void* iniciarEscucha(void* sockets) {
 	int socketCliente;
 	int bytesRecibidos;
 	respuesta_operacion_t retorno;
+	char* nombre;
 
 	//Bucle principal
 	for (;;) {
@@ -65,13 +79,14 @@ void* iniciarEscucha(void* sockets) {
 						// Procesamos el handshake e ingresamos el nuevo ESI en el sistema. Siempre será un ESI, el handshake con coordinador se
 						// hace al revés: Planificador se conectará a Coordinador previamente.
 						procesar_handshake(socketCliente);
+						nombre = recibirNombreESI(socketCliente);
 						FD_SET(socketCliente, &master);
 						maxFd = socketCliente;
 						//TODO Analizar si es necesario sincronizar. En principio el select es secuencial así que no. Pero ver si algún comando
 						//     de consola podría llamar a este método procesoNuevo.
 						pthread_mutex_lock(&mutex_cola_listos);
 						pthread_mutex_lock(&mutex_proceso_ejecucion);
-						int retorno = procesoNuevo(socketCliente);
+						int retorno = procesoNuevo(socketCliente, nombre);
 						pthread_mutex_unlock(&mutex_proceso_ejecucion);
 						pthread_mutex_unlock(&mutex_cola_listos);
 						if (retorno < 0) {
