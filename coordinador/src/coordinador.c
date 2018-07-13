@@ -937,9 +937,11 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 	int resultado = 0;
 	int cantidadInstanciasConectadas = 0;
 	int indiceClaveVieja = 0;
+	int entradasLibres = 0;
 	t_list* instanciasConectadas;
 	infoInstancia_t* instanciaQueSustituyo;
 	infoInstancia_t* instanciaConClave;
+	infoInstancia_t* unaInstancia;
 	void* buffer;
 	void* claveVieja;
 	int tamanioValorClave = 0;
@@ -1061,6 +1063,15 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 			header.comando = msj_status_clave;
 			header.tamanio = tamanioParaBufferStatus;
 			enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
+		break;
+
+		case msj_instancia_entradas_libres:
+
+			recibir_mensaje(unFileDescriptor,&entradasLibres,sizeof(int));
+			unaInstancia = encontrar_instancia_por_fd(unFileDescriptor);
+
+			unaInstancia->espacio_disponible = entradasLibres;
+
 		break;
 
 		default:
