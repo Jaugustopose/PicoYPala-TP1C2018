@@ -29,7 +29,6 @@ bool comparadorHRRN(void* arg1, void* arg2);
 void ordenarColaListos();
 void planificarConDesalojo();
 void procesoBloquear(char* clave);
-void procesoDesbloquear(char* clave);
 void incrementarRafagasEsperando();
 bool solicitarClave(char* clave);
 void liberarClave(char* clave);
@@ -39,6 +38,7 @@ proceso_t* colaListosPeek();
 int procesoEjecutar(proceso_t* proceso);
 void estimarRafaga(proceso_t* proceso);
 void liberarRecursos(proceso_t* proceso);
+void desbloquearClave(char* clave);
 
 //Funciones
 bool esFIFO(){
@@ -203,17 +203,31 @@ void procesoBloquear(char* clave){
 }
 
 void procesoDesbloquear(char* clave) {
-	int i;
-	for (i=0;i<list_size(listaBloqueados);i++) {
-		proceso_t* proceso;
-		proceso = (proceso_t*)list_get(listaBloqueados, i);
-		if (strcmp(proceso->claveBloqueo, clave)==0) {
-			list_remove(listaBloqueados, i);
-			estimarRafaga(proceso);
-			colaListosPush(proceso);
-			break;
-		}
+
+	//Closure para hacer el remove de la lista de procesos bloqueadas
+	bool _soy_esi_bloqueado_por_clave_buscada(proceso_t* p) {
+		return strcmp(p->claveBloqueo, clave) == 0;
 	}
+
+	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
+
+	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
+		estimarRafaga(proceso);
+		if (procesoEjecucion == 0) {
+			procesoEjecutar(proceso);
+		} else {
+			colaListosPush(proceso);
+			if (planificadorConDesalojo()) {
+				planificarConDesalojo();
+			}
+		}
+		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
+			desbloquearClave(clave);
+		}
+	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
+		desbloquearClave(clave);
+	}
+
 }
 
 void incrementarRafagasEsperando() {
@@ -288,7 +302,7 @@ void liberarRecursos(proceso_t* proceso) {
 	log_debug(logPlanificador, "Liberando claves tomadas por proceso %d...", proceso->idProceso);
 
 
-	list_iterate(proceso->clavesBloqueadas, (void*)desbloquearClavePorConsola);
+	list_iterate(proceso->clavesBloqueadas, (void*)procesoDesbloquear);
 
 
 	log_debug(logPlanificador, "Se liberaron las claves tomadas por el proceso %d", proceso->idProceso);
@@ -314,25 +328,6 @@ void bloquearEsiPorConsola(int idEsi, char* clave) {
 		}
 	}
 
-}
-
-void desbloquearClavePorConsola(char* clave) {
-	//Closure para hacer el remove de la lista de claves bloqueadas
-	bool _soy_esi_bloqueado_por_clave_buscada(proceso_t* p) {
-		bool tieneClave = strcmp(p->claveBloqueo, clave) == 0;
-		return tieneClave;
-	}
-
-	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
-
-	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
-		colaListosPush(proceso);
-		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
-			desbloquearClave(clave);
-		}
-	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
-		desbloquearClave(clave);
-	}
 }
 
 void listarRecursosBloqueadosPorClave(char* clave) {
@@ -363,27 +358,18 @@ t_list* killProcesoPorID(int idProceso) {
 
 	proceso_t* procesoATerminar = NULL;
 
-	//Closure para copiar elementos claves bloqueadas del proc en ejecución al terminado
-	void _copiar_elemento_lista(char* claveBloqueada) {
-		list_add(procesoATerminar->clavesBloqueadas, claveBloqueada);
-	}
-
 	sem_wait(&planificacion_habilitada);
 	if (procesoEjecucion != NULL && procesoEjecucion->idProceso == idProceso) {
 		procesoATerminar = malloc(sizeof(proceso_t));
 		procesoATerminar->idProceso = procesoEjecucion->idProceso;
 		procesoATerminar->clavesBloqueadas = list_create();
-		list_iterate(procesoEjecucion->clavesBloqueadas, (void*)_copiar_elemento_lista);
+		list_add_all(procesoATerminar->clavesBloqueadas, procesoEjecucion->clavesBloqueadas);
 		procesoTerminado(exit_abortado_por_consola);
 	} else {
 		procesoATerminar = list_remove_by_condition(listaBloqueados, (void*)_soy_proceso_buscado);
 		//TODO Armar un procesoDestroy;
 		if (procesoATerminar != NULL) {
-
-
 			liberarRecursos(procesoATerminar);
-
-
 			procesoATerminar->exitStatus = exit_abortado_por_consola;
 		} else {
 			proceso_t* procesoATerminar = list_remove_by_condition(colaListos, (void*)_soy_proceso_buscado);
@@ -532,7 +518,7 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 	case msj_store_clave: //Procesar STORE
 		log_debug(logPlanificador, "Notificacion Coordinador - Solicitud de STORE clave recibida");
 		liberarClave(cuerpo);
-		procesoDesbloquear(cuerpo); //TODO Si hay desalojo acá se puede pisar procesoEnEjecucion
+		procesoDesbloquear(cuerpo);
 		retorno.respuestaACoordinador = 1;
 		retorno.fdESIAAbortar = -1;
 		break;
