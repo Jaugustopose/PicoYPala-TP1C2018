@@ -656,3 +656,1132 @@
 [DEBUG] 01:25:04:428 Planificador/(12813:12823): Notificacion recibida del coordinador
 [DEBUG] 01:25:04:428 Planificador/(12813:12823): Paquete recibido del coordinador
 [DEBUG] 01:25:04:428 Planificador/(12813:12823): Notificacion Coordinador - Aviso Coordinador status clave
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): PUERTO: 8020
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): ESTIMACION_INICIAL: 3
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): ALFA_PLANIFICACION: 50
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): PUERTO_COORDINADOR: 8030
+[DEBUG] 12:13:04:538 Planificador/(5511:5511): CLAVES_BLOQUEADAS: [bebida13,segundoplato:ingrediente3]
+[DEBUG] 12:13:13:720 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:13:971 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:13:971 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:13:971 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps1
+[DEBUG] 12:13:13:971 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:13:971 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:13:972 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:13:972 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:14:223 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:14:223 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:14:223 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps2
+[DEBUG] 12:13:14:223 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:14:223 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:14:224 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:14:224 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps3
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:14:475 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:14:726 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:14:726 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:14:726 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps4
+[DEBUG] 12:13:14:726 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:14:726 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:14:727 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:14:727 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:14:978 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:14:978 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:14:978 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xbox
+[DEBUG] 12:13:14:978 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:14:978 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:14:979 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:14:980 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:15:232 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:15:233 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:15:233 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xbox360
+[DEBUG] 12:13:15:233 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:15:233 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:15:233 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:15:233 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:15:484 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:15:484 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:15:484 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xboxone
+[DEBUG] 12:13:15:484 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:15:484 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:15:485 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:15:485 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:15:736 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:15:737 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:15:737 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:nes
+[DEBUG] 12:13:15:737 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:15:737 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:15:738 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:15:738 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:15:989 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:15:989 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:15:989 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:snes
+[DEBUG] 12:13:15:989 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:15:989 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:15:990 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:15:990 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:nintendo64
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:16:241 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:16:492 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:16:492 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:16:492 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:gamecube
+[DEBUG] 12:13:16:492 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:16:493 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:16:494 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:16:494 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:16:745 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:16:745 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:16:745 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:wii
+[DEBUG] 12:13:16:745 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:16:745 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:16:747 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:16:747 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:wiiu
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:16:998 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:17:249 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:17:249 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:17:249 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:switch
+[DEBUG] 12:13:17:249 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:17:249 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:17:251 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:17:251 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:17:502 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:17:502 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:17:502 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:17:502 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 12:13:17:502 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:17:503 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:17:503 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:17:754 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:17:754 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:17:754 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:17:754 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 12:13:17:754 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:17:755 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:17:755 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:18:6 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:18:256 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:18:257 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:18:257 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:18:257 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 12:13:18:257 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:18:258 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:18:258 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:18:509 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:18:509 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:18:509 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:18:509 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 12:13:18:509 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:18:510 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:18:510 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:18:762 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:18:762 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:18:762 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:18:762 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 12:13:18:762 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:18:763 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:18:764 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:19:15 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:19:266 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:19:266 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:19:266 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:19:266 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 12:13:19:266 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:19:268 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:19:268 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:19:519 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:19:519 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:19:519 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:19:519 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 12:13:19:519 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:19:520 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:19:520 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:19:771 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:19:771 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:19:771 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:19:771 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 12:13:19:772 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:19:773 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:19:773 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:20:24 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:20:24 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:20:24 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:20:24 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 12:13:20:24 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:20:25 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:20:25 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:20:276 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:20:276 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:20:276 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:20:276 Planificador/(5511:5517): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 12:13:20:277 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:20:277 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:20:277 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:20:528 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:20:528 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:20:528 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:20:528 Planificador/(5511:5517): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 12:13:20:528 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:20:530 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:20:530 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:20:781 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 12:13:20:782 Planificador/(5511:5517): MSJ ESI finalizado recibido
+[DEBUG] 12:13:20:782 Planificador/(5511:5517): Liberando claves tomadas por proceso 1...
+[DEBUG] 12:13:20:782 Planificador/(5511:5517): Se liberaron las claves tomadas por el proceso 1
+[DEBUG] 12:13:20:782 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:20:782 Planificador/(5511:5517): Se envio respuesta de ok solicitud finalizacion a ESI
+[DEBUG] 12:13:21:32 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:21:33 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:21:33 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps1
+[DEBUG] 12:13:21:33 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:21:33 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:21:33 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:21:33 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:21:284 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:21:284 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:21:284 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps2
+[DEBUG] 12:13:21:284 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:21:284 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:21:285 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:21:285 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:21:536 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:21:536 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:21:536 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps3
+[DEBUG] 12:13:21:536 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:21:536 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:21:537 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:21:537 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:21:788 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:21:788 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:21:788 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps4
+[DEBUG] 12:13:21:788 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:21:788 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:21:788 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:21:789 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:22:39 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:22:39 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:22:39 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xbox
+[DEBUG] 12:13:22:40 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:22:40 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:22:40 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:22:40 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:22:291 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:22:291 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:22:291 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xbox360
+[DEBUG] 12:13:22:291 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:22:291 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:22:292 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:22:292 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:22:544 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:22:544 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:22:544 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xboxone
+[DEBUG] 12:13:22:544 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:22:544 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:22:545 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:22:545 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:22:795 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:22:796 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:22:796 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:nes
+[DEBUG] 12:13:22:796 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:22:796 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:22:796 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:22:796 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:23:48 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:23:48 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:23:48 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:snes
+[DEBUG] 12:13:23:48 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:23:48 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:23:49 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:23:49 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:23:300 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:23:300 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:23:301 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:nintendo64
+[DEBUG] 12:13:23:301 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:23:301 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:23:301 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:23:301 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:23:552 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:23:552 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:23:552 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:gamecube
+[DEBUG] 12:13:23:552 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:23:552 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:23:553 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:23:553 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:23:803 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:23:803 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:23:804 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:wii
+[DEBUG] 12:13:23:804 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:23:804 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:23:804 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:23:804 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:24:56 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:24:56 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:24:56 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:wiiu
+[DEBUG] 12:13:24:56 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:24:56 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:24:56 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:24:57 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:24:307 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:24:307 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:24:308 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:switch
+[DEBUG] 12:13:24:308 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:24:308 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:24:308 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:24:308 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:24:560 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:24:560 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:24:560 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:24:560 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 12:13:24:560 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:24:561 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:24:561 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:24:812 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:24:812 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:24:812 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:24:812 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 12:13:24:812 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:24:813 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:24:813 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:25:64 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:25:64 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:25:64 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:25:64 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 12:13:25:65 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:25:66 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:25:66 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:25:317 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:25:317 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:25:317 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:25:317 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 12:13:25:317 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:25:319 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:25:319 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:25:570 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:25:570 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:25:570 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:25:570 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 12:13:25:570 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:25:571 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:25:571 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:25:822 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:25:822 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:25:822 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:25:822 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 12:13:25:822 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:25:823 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:25:823 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:26:74 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:26:74 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:26:74 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:26:74 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 12:13:26:75 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:26:76 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:26:76 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:26:327 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:26:327 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:26:327 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:26:327 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 12:13:26:327 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:26:329 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:26:329 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:26:579 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:26:579 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:26:580 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:26:580 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 12:13:26:580 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:26:581 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:26:581 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:26:832 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:26:832 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:26:832 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:26:832 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 12:13:26:832 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:26:834 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:26:834 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:27:85 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:27:85 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:27:85 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:27:85 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 12:13:27:85 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:27:87 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:27:87 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:27:338 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:27:338 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:27:338 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:27:338 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 12:13:27:338 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:27:339 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:27:339 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:27:590 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:27:590 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:27:591 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:27:591 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 12:13:27:591 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:27:592 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:27:592 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:27:843 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:27:843 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:27:843 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:27:844 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 12:13:27:844 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:27:844 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:27:844 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:28:95 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:28:95 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:28:95 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:28:95 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 12:13:28:95 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:28:96 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:28:96 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:28:347 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:28:347 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:28:347 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:28:347 Planificador/(5511:5517): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 12:13:28:348 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:28:349 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:28:349 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:28:600 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:28:600 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:28:600 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:28:600 Planificador/(5511:5517): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 12:13:28:600 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:28:601 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:28:601 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:28:852 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:28:852 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:28:852 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:28:852 Planificador/(5511:5517): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 12:13:28:852 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:28:854 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:28:854 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:29:105 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:29:105 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:29:105 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:29:105 Planificador/(5511:5517): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 12:13:29:105 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:29:106 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:29:106 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:29:357 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:29:357 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:29:357 Planificador/(5511:5517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 12:13:29:357 Planificador/(5511:5517): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 12:13:29:357 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:29:358 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:29:358 Planificador/(5511:5517): Se ejecuta proceso ESI_MultiReemplazo.esi(2)
+[DEBUG] 12:13:29:359 Planificador/(5511:5517): MSJ ESI finalizado recibido
+[DEBUG] 12:13:29:359 Planificador/(5511:5517): Liberando claves tomadas por proceso 2...
+[DEBUG] 12:13:29:359 Planificador/(5511:5517): Se liberaron las claves tomadas por el proceso 2
+[DEBUG] 12:13:29:359 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:13:29:359 Planificador/(5511:5517): Se envio respuesta de ok solicitud finalizacion a ESI
+[DEBUG] 12:13:29:610 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:29:610 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:29:610 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida1
+[DEBUG] 12:13:29:610 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:29:610 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:29:612 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:29:612 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:13:29:862 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:29:862 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:29:862 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida10
+[DEBUG] 12:13:29:862 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:29:863 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:29:864 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:29:864 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:13:30:115 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:30:115 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:30:115 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida11
+[DEBUG] 12:13:30:115 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:30:115 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:30:117 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:30:117 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:13:30:368 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:30:368 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:30:368 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida12
+[DEBUG] 12:13:30:368 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:30:368 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:30:370 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:30:370 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida13
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Se bloquea proceso ESI_Bar1.esi(3) por clave bebida13
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Pudo solicitar clave? => 0
+[DEBUG] 12:13:30:621 Planificador/(5511:5517): Se envio respuesta NOK al coordinador
+[DEBUG] 12:13:30:873 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:30:873 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:30:873 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: primerplato:ingrediente1
+[DEBUG] 12:13:30:873 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:30:873 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:30:875 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:30:875 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:31:126 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:31:126 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:31:126 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente1
+[DEBUG] 12:13:31:126 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:31:126 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:31:128 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:31:128 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:31:379 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:31:379 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:31:379 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: segundoplato:ingrediente1
+[DEBUG] 12:13:31:379 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:31:379 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:31:380 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:31:381 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:31:631 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:31:631 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:31:631 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: postre:ingrediente1
+[DEBUG] 12:13:31:631 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:31:631 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:31:633 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:31:633 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:31:884 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:31:884 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:31:884 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: primerplato:ingrediente2
+[DEBUG] 12:13:31:884 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:31:884 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:31:886 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:31:886 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:32:136 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:32:136 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:32:137 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente2
+[DEBUG] 12:13:32:137 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:32:137 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:32:138 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:32:138 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: segundoplato:ingrediente2
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:32:390 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: postre:ingrediente2
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:32:641 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:32:892 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:32:892 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:32:892 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: primerplato:ingrediente3
+[DEBUG] 12:13:32:892 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:32:892 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:32:894 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:32:894 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:33:146 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:33:146 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:33:146 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente3
+[DEBUG] 12:13:33:146 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:33:146 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:33:148 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:33:148 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:13:33:399 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:33:399 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:33:399 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: segundoplato:ingrediente3
+[DEBUG] 12:13:33:399 Planificador/(5511:5517): Se bloquea proceso ESI_MenuCompleto.esi(4) por clave segundoplato:ingrediente3
+[DEBUG] 12:13:33:399 Planificador/(5511:5517): Pudo solicitar clave? => 0
+[DEBUG] 12:13:33:399 Planificador/(5511:5517): Se envio respuesta NOK al coordinador
+[DEBUG] 12:13:36:561 Planificador/(5511:5517): Se ejecuta proceso ESI_MilanesaCompleta.esi(5)
+[DEBUG] 12:13:36:811 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:36:811 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:36:811 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente5
+[DEBUG] 12:13:36:811 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:36:811 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:36:813 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:36:813 Planificador/(5511:5517): Se ejecuta proceso ESI_MilanesaCompleta.esi(5)
+[DEBUG] 12:13:37:64 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:37:64 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:37:64 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente4
+[DEBUG] 12:13:37:64 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:37:64 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:37:66 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:37:66 Planificador/(5511:5517): Se ejecuta proceso ESI_MilanesaCompleta.esi(5)
+[DEBUG] 12:13:37:317 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:37:317 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:37:317 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente3
+[DEBUG] 12:13:37:317 Planificador/(5511:5517): Se bloquea proceso ESI_MilanesaCompleta.esi(5) por clave platoprincipal:ingrediente3
+[DEBUG] 12:13:37:317 Planificador/(5511:5517): Pudo solicitar clave? => 0
+[DEBUG] 12:13:37:317 Planificador/(5511:5517): Se envio respuesta NOK al coordinador
+[DEBUG] 12:13:38:794 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:39:45 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:39:45 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:39:45 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida2
+[DEBUG] 12:13:39:45 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:39:45 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:39:47 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:39:47 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:39:298 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:39:298 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:39:298 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida3
+[DEBUG] 12:13:39:298 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:39:298 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:39:300 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:39:300 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:39:550 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:39:550 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:39:550 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida4
+[DEBUG] 12:13:39:550 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:39:551 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:39:552 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:39:552 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:39:803 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:39:803 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:39:803 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida5
+[DEBUG] 12:13:39:803 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:39:803 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:39:805 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:39:805 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:40:56 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:40:56 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:40:56 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida6
+[DEBUG] 12:13:40:56 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:40:56 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:40:58 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:40:58 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:40:309 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:40:309 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:40:309 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida7
+[DEBUG] 12:13:40:309 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:40:309 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:40:311 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:40:311 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:40:561 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:40:562 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:40:562 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida8
+[DEBUG] 12:13:40:562 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:40:562 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:40:564 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:40:564 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:40:814 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:40:815 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:40:815 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida9
+[DEBUG] 12:13:40:815 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:13:40:815 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:13:40:816 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:13:40:817 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar2.esi(6)
+[DEBUG] 12:13:41:67 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:13:41:67 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:13:41:67 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida10
+[DEBUG] 12:13:41:67 Planificador/(5511:5517): Se bloquea proceso ESI_Bar2.esi(6) por clave bebida10
+[DEBUG] 12:13:41:67 Planificador/(5511:5517): Pudo solicitar clave? => 0
+[DEBUG] 12:13:41:68 Planificador/(5511:5517): Se envio respuesta NOK al coordinador
+[INFO] 12:14:13:498 Planificador/(5511:5511): Desbloqueo Esi por clave bebida13!
+[DEBUG] 12:14:13:498 Planificador/(5511:5511): Se desbloquea ESI_Bar1.esi con una estimación de próxima rafaga de 4.000000
+[WARNING] 12:14:13:498 Planificador/(5511:5511): Valor semaforo planificacion habilitada 1
+[WARNING] 12:14:13:498 Planificador/(5511:5511): Planificación habilitada
+[TRACE] 12:14:13:498 Planificador/(5511:5511): No había procesos en ejecución. Se envía a ejecutar el ESI 3
+[DEBUG] 12:14:13:498 Planificador/(5511:5511): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:14:13:748 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:13:748 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:13:748 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida13
+[DEBUG] 12:14:13:748 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:14:13:748 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:14:13:750 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:14:13:750 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:14:13:0 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:13:0 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:13:0 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida14
+[DEBUG] 12:14:13:1 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:14:13:1 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:14:13:2 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:14:13:2 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:14:14:253 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:14:253 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:14:253 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida15
+[DEBUG] 12:14:14:254 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:14:14:254 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:14:14:256 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:14:14:256 Planificador/(5511:5517): Se ejecuta proceso ESI_Bar1.esi(3)
+[DEBUG] 12:14:14:507 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:14:507 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:14:507 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: bebida2
+[DEBUG] 12:14:14:507 Planificador/(5511:5517): Se bloquea proceso ESI_Bar1.esi(3) por clave bebida2
+[DEBUG] 12:14:14:507 Planificador/(5511:5517): Pudo solicitar clave? => 0
+[DEBUG] 12:14:14:507 Planificador/(5511:5517): Se envio respuesta NOK al coordinador
+[INFO] 12:14:23:415 Planificador/(5511:5511): Desbloqueo Esi por clave segundoplato:ingrediente3!
+[DEBUG] 12:14:23:415 Planificador/(5511:5511): Se desbloquea ESI_MenuCompleto.esi con una estimación de próxima rafaga de 7.000000
+[WARNING] 12:14:23:415 Planificador/(5511:5511): Valor semaforo planificacion habilitada 1
+[WARNING] 12:14:23:415 Planificador/(5511:5511): Planificación habilitada
+[TRACE] 12:14:23:415 Planificador/(5511:5511): No había procesos en ejecución. Se envía a ejecutar el ESI 4
+[DEBUG] 12:14:23:415 Planificador/(5511:5511): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:14:23:666 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:23:666 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:23:666 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: segundoplato:ingrediente3
+[DEBUG] 12:14:23:666 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:14:23:666 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:14:23:668 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:14:23:668 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:14:23:919 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:23:919 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:23:919 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: postre:ingrediente3
+[DEBUG] 12:14:23:919 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:14:23:919 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:14:23:921 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:14:23:921 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:14:24:172 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:24:172 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:24:172 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: primerplato:ingrediente4
+[DEBUG] 12:14:24:172 Planificador/(5511:5517): Pudo solicitar clave? => 1
+[DEBUG] 12:14:24:172 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[DEBUG] 12:14:24:174 Planificador/(5511:5517): MSJ Sentencia finalizada recibido
+[DEBUG] 12:14:24:174 Planificador/(5511:5517): Se ejecuta proceso ESI_MenuCompleto.esi(4)
+[DEBUG] 12:14:24:425 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:24:425 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:24:425 Planificador/(5511:5517): Notificacion Coordinador - Solicitud de GET clave recibida: platoprincipal:ingrediente4
+[DEBUG] 12:14:24:425 Planificador/(5511:5517): Se bloquea proceso ESI_MenuCompleto.esi(4) por clave platoprincipal:ingrediente4
+[DEBUG] 12:14:24:425 Planificador/(5511:5517): Pudo solicitar clave? => 0
+[DEBUG] 12:14:24:425 Planificador/(5511:5517): Se envio respuesta NOK al coordinador
+[INFO] 12:14:31:708 Planificador/(5511:5511): Status instancias para clave bebida13!
+[DEBUG] 12:14:31:708 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:14:31:709 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:14:31:709 Planificador/(5511:5517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 12:14:39:380 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[TRACE] 12:15:01:972 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 12:15:02:487 Planificador/(5511:5517): 
+Se informa status de clave: bebida13
+Valor Clave: 
+Nombre Instancia con Clave: Inst1
+Nombre Instancia Candidata para Clave: 
+
+[INFO] 12:15:05:111 Planificador/(5511:5517): Procesos bloqueados por clave bebida13: 
+[INFO] 12:15:05:111 Planificador/(5511:5517): Procesos bloqueados completo: 5-6-3-4
+[DEBUG] 12:15:09:748 Planificador/(5511:5517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 12:15:42:452 Planificador/(5511:5511): Status instancias para clave jiofds!
+[DEBUG] 12:15:42:452 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:15:42:452 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:15:42:452 Planificador/(5511:5517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 12:15:47:809 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[TRACE] 12:17:47:308 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 12:17:48:231 Planificador/(5511:5517): 
+Se informa status de clave: jiofds
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 12:17:51:875 Planificador/(5511:5517): Procesos bloqueados por clave jiofds: 
+[INFO] 12:17:51:875 Planificador/(5511:5517): Procesos bloqueados completo: 5-6-3-4
+[DEBUG] 12:17:56:52 Planificador/(5511:5517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 12:18:38:859 Planificador/(5511:5511): Status instancias para clave jpoifasdf!
+[DEBUG] 12:18:42:30 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:18:42:30 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:18:42:30 Planificador/(5511:5517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 12:18:43:267 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[TRACE] 12:18:43:267 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 12:18:43:267 Planificador/(5511:5517): 
+Se informa status de clave: jpoifasdf
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 12:18:43:267 Planificador/(5511:5517): Procesos bloqueados por clave jpoifasdf: 
+[INFO] 12:18:43:267 Planificador/(5511:5517): Procesos bloqueados completo: 5-6-3-4
+[DEBUG] 12:18:43:267 Planificador/(5511:5517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 12:18:49:65 Planificador/(5511:5511): Status instancias para clave bebida13!
+[DEBUG] 12:18:49:66 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:18:49:66 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:18:49:66 Planificador/(5511:5517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 12:18:50:862 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[TRACE] 12:18:50:862 Planificador/(5511:5517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 12:18:50:862 Planificador/(5511:5517): 
+Se informa status de clave: bebida13
+Valor Clave: 
+Nombre Instancia con Clave: Inst1
+Nombre Instancia Candidata para Clave: 
+
+[INFO] 12:18:50:862 Planificador/(5511:5517): Procesos bloqueados por clave bebida13: 
+[INFO] 12:18:50:862 Planificador/(5511:5517): Procesos bloqueados completo: 5-6-3-4
+[DEBUG] 12:18:50:863 Planificador/(5511:5517): Notificacion Coordinador - Finalizado análisis status clave
+[DEBUG] 12:18:51:548 Planificador/(5511:5517): Notificacion recibida del coordinador
+[DEBUG] 12:18:51:548 Planificador/(5511:5517): Paquete recibido del coordinador
+[DEBUG] 12:18:51:548 Planificador/(5511:5517): Notificacion Coordinador - Llegó un mensaje desconocido: -13
+[DEBUG] 12:18:51:548 Planificador/(5511:5517): Se envio respuesta OK al coordinador
+[ERROR] 12:19:34:457 Planificador/(5511:5517): Error en select
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): PUERTO: 8020
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): ESTIMACION_INICIAL: 3
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): ALFA_PLANIFICACION: 50
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): PUERTO_COORDINADOR: 8030
+[DEBUG] 12:59:27:958 Planificador/(6510:6510): CLAVES_BLOQUEADAS: [bebida13,segundoplato:ingrediente3]
+[DEBUG] 13:00:19:616 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:19:867 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:19:867 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:19:867 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps1
+[DEBUG] 13:00:19:867 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:19:867 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:19:869 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:19:869 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:20:120 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:20:120 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:20:120 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps2
+[DEBUG] 13:00:20:120 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:20:120 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:20:121 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:20:121 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:20:372 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:20:372 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:20:372 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps3
+[DEBUG] 13:00:20:372 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:20:372 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:20:373 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:20:373 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:20:625 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:20:625 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:20:625 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: sony:consola:ps4
+[DEBUG] 13:00:20:625 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:20:625 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:20:626 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:20:627 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:20:877 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:20:877 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:20:877 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xbox
+[DEBUG] 13:00:20:878 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:20:878 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:20:879 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:20:879 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:21:130 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:21:130 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:21:130 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xbox360
+[DEBUG] 13:00:21:130 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:21:130 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:21:131 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:21:131 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:21:382 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:21:382 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:21:382 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: microsoft:consola:xboxone
+[DEBUG] 13:00:21:382 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:21:382 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:21:383 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:21:384 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:21:634 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:21:635 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:21:635 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:nes
+[DEBUG] 13:00:21:635 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:21:635 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:21:636 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:21:636 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:21:888 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:21:888 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:21:888 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:snes
+[DEBUG] 13:00:21:888 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:21:888 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:21:889 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:21:889 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:22:140 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:22:140 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:22:140 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:nintendo64
+[DEBUG] 13:00:22:140 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:22:141 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:22:142 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:22:142 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:22:393 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:22:393 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:22:393 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:gamecube
+[DEBUG] 13:00:22:393 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:22:393 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:22:394 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:22:395 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:22:646 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:22:646 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:22:646 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:wii
+[DEBUG] 13:00:22:646 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:22:646 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:22:648 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:22:648 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:22:899 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:22:899 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:22:899 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:wiiu
+[DEBUG] 13:00:22:899 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:22:899 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:22:901 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:22:901 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:23:152 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:23:152 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:23:152 Planificador/(6510:6517): Notificacion Coordinador - Solicitud de GET clave recibida: nintendo:consola:switch
+[DEBUG] 13:00:23:152 Planificador/(6510:6517): Pudo solicitar clave? => 1
+[DEBUG] 13:00:23:152 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:23:153 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:23:153 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:23:405 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:23:405 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:23:405 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:23:405 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 13:00:23:405 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:23:406 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:23:406 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:23:657 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:23:657 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:23:657 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:23:657 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 13:00:23:657 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:23:659 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:23:659 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:23:910 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:23:910 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:23:910 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:23:910 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 13:00:23:910 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:23:911 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:23:912 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:24:163 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:24:163 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:24:163 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:24:163 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 13:00:24:163 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:24:164 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:24:164 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:24:415 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:24:415 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:24:415 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:24:415 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 13:00:24:415 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:24:417 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:24:417 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:24:667 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:24:667 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:24:667 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:24:667 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 13:00:24:668 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:24:668 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:24:668 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:24:919 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:24:919 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:24:919 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:24:919 Planificador/(6510:6517): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 13:00:24:920 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:24:920 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:24:920 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:25:171 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:25:171 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:25:171 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:25:171 Planificador/(6510:6517): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 13:00:25:171 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:25:172 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:25:173 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:25:423 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:25:423 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:25:423 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:25:424 Planificador/(6510:6517): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 13:00:25:424 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:25:425 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:25:425 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:25:677 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:25:677 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:25:677 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:25:677 Planificador/(6510:6517): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 13:00:25:677 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:25:679 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:25:679 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:25:930 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:25:930 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:25:930 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:25:930 Planificador/(6510:6517): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 13:00:25:930 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:25:931 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:25:931 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:26:182 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:26:182 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:26:182 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:26:182 Planificador/(6510:6517): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 13:00:26:182 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:26:184 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:26:184 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:26:435 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:26:435 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:26:435 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:26:435 Planificador/(6510:6517): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 13:00:26:435 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:26:436 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:26:436 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:26:687 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:26:687 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:26:687 Planificador/(6510:6517): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 13:00:26:687 Planificador/(6510:6517): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 13:00:26:687 Planificador/(6510:6517): Se envio respuesta OK al coordinador
+[DEBUG] 13:00:26:689 Planificador/(6510:6517): MSJ Sentencia finalizada recibido
+[DEBUG] 13:00:26:689 Planificador/(6510:6517): Se ejecuta proceso ESI_MultiClave.esi(1)
+[DEBUG] 13:00:26:689 Planificador/(6510:6517): MSJ ESI finalizado recibido
+[DEBUG] 13:00:26:689 Planificador/(6510:6517): Liberando claves tomadas por proceso 1...
+[DEBUG] 13:00:26:689 Planificador/(6510:6517): Se liberaron las claves tomadas por el proceso 1
+[DEBUG] 13:00:26:689 Planificador/(6510:6517): Se envio respuesta de ok solicitud finalizacion a ESI
+[INFO] 13:00:36:742 Planificador/(6510:6510): Status instancias para clave clave1!
+[DEBUG] 13:00:36:742 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:36:742 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:36:742 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:00:41:450 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:00:41:450 Planificador/(6510:6517): 
+Se informa status de clave: clave1
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:00:41:450 Planificador/(6510:6517): Procesos bloqueados por clave clave1: 
+[INFO] 13:00:41:450 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:00:41:450 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:00:49:716 Planificador/(6510:6510): Status instancias para clave clave!
+[DEBUG] 13:00:49:716 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:49:716 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:49:716 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:00:49:717 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:00:49:717 Planificador/(6510:6517): 
+Se informa status de clave: clave
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:00:49:717 Planificador/(6510:6517): Procesos bloqueados por clave clave: 
+[INFO] 13:00:49:717 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:00:49:717 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:00:57:354 Planificador/(6510:6510): Status instancias para clave clave!
+[DEBUG] 13:00:57:354 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:57:354 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:57:354 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:00:57:354 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:00:57:354 Planificador/(6510:6517): 
+Se informa status de clave: clave
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:00:57:354 Planificador/(6510:6517): Procesos bloqueados por clave clave: 
+[INFO] 13:00:57:354 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:00:57:354 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:00:58:996 Planificador/(6510:6510): Status instancias para clave clave!
+[DEBUG] 13:00:58:996 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:00:58:996 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:00:58:996 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:00:58:996 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:00:58:996 Planificador/(6510:6517): 
+Se informa status de clave: clave
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:00:58:996 Planificador/(6510:6517): Procesos bloqueados por clave clave: 
+[INFO] 13:00:58:996 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:00:58:996 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:01:00:605 Planificador/(6510:6510): Status instancias para clave poijadsf!
+[DEBUG] 13:01:00:606 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:01:00:606 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:01:00:606 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:01:00:606 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:01:00:606 Planificador/(6510:6517): 
+Se informa status de clave: poijadsf
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:01:00:606 Planificador/(6510:6517): Procesos bloqueados por clave poijadsf: 
+[INFO] 13:01:00:606 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:01:00:606 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:01:02:183 Planificador/(6510:6510): Status instancias para clave poijasdf!
+[DEBUG] 13:01:02:183 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:01:02:184 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:01:02:184 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:01:02:184 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:01:02:184 Planificador/(6510:6517): 
+Se informa status de clave: poijasdf
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:01:02:184 Planificador/(6510:6517): Procesos bloqueados por clave poijasdf: 
+[INFO] 13:01:02:184 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:01:02:184 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:01:04:206 Planificador/(6510:6510): Status instancias para clave pjoiasfd!
+[DEBUG] 13:01:04:207 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:01:04:207 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:01:04:207 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:01:04:207 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:01:04:207 Planificador/(6510:6517): 
+Se informa status de clave: pjoiasfd
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:01:04:207 Planificador/(6510:6517): Procesos bloqueados por clave pjoiasfd: 
+[INFO] 13:01:04:207 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:01:04:207 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:01:09:278 Planificador/(6510:6510): Status instancias para clave bebida13!
+[DEBUG] 13:01:09:278 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:01:09:279 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:01:09:279 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:01:09:279 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:01:09:279 Planificador/(6510:6517): 
+Se informa status de clave: bebida13
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:01:09:279 Planificador/(6510:6517): Procesos bloqueados por clave bebida13: 
+[INFO] 13:01:09:279 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:01:09:279 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:01:12:110 Planificador/(6510:6510): Status instancias para clave bebida13!
+[DEBUG] 13:01:12:110 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:01:12:110 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:01:12:110 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:01:12:110 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:01:12:110 Planificador/(6510:6517): 
+Se informa status de clave: bebida13
+Valor Clave: 
+Nombre Instancia con Clave: 
+Nombre Instancia Candidata para Clave: Inst1
+
+[INFO] 13:01:12:110 Planificador/(6510:6517): Procesos bloqueados por clave bebida13: 
+[INFO] 13:01:12:110 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:01:12:110 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[INFO] 13:04:49:217 Planificador/(6510:6510): Status instancias para clave sony:consola:ps4!
+[DEBUG] 13:04:49:218 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:04:49:218 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:04:49:218 Planificador/(6510:6517): Notificacion Coordinador - Aviso Coordinador status clave
+[TRACE] 13:04:49:218 Planificador/(6510:6517): Recibi respuesta STATUS del COORDINADOR
+[INFO] 13:04:49:218 Planificador/(6510:6517): 
+Se informa status de clave: sony:consola:ps4
+Valor Clave: 
+Nombre Instancia con Clave: Inst2
+Nombre Instancia Candidata para Clave: 
+
+[INFO] 13:04:49:218 Planificador/(6510:6517): Procesos bloqueados por clave sony:consola:ps4: 
+[INFO] 13:04:49:218 Planificador/(6510:6517): Procesos bloqueados completo: 
+[DEBUG] 13:04:49:218 Planificador/(6510:6517): Notificacion Coordinador - Finalizado análisis status clave
+[DEBUG] 13:04:49:219 Planificador/(6510:6517): Notificacion recibida del coordinador
+[DEBUG] 13:04:49:219 Planificador/(6510:6517): Paquete recibido del coordinador
+[DEBUG] 13:06:29:868 Planificador/(6510:6517): Notificacion Coordinador - Llegó un mensaje desconocido: -13
