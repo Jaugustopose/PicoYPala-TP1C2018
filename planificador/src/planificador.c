@@ -232,10 +232,10 @@ void procesar_status_instancias(char** subBufferSplitted) {
 		log_info(logPlanificador, "Comando 'status' incompleto! Se requiere formato 'status <clave>'");
 	} else if (subBufferSplitted[2] == NULL) {
 		log_info(logPlanificador, "Status instancias para clave %s!", subBufferSplitted[1]);
-		status_clave_t* status = procesarStatusClave(socket_coordinador, subBufferSplitted[1]);
-		log_info(logPlanificador, "Valor Clave: %s\nNombre Instancia con Clave: %s\nNombre Instancia Candidata para Clave: %s\n"
-								, status->valor, status->nombreInstanciaClave, status->nombreInstanciaCandidata);
-		listarRecursosBloqueadosPorClave(subBufferSplitted[1]);
+		procesarStatusClave(socket_coordinador, subBufferSplitted[1]);
+//		log_info(logPlanificador, "Valor Clave: %s\nNombre Instancia con Clave: %s\nNombre Instancia Candidata para Clave: %s\n"
+//								, status->valor, status->nombreInstanciaClave, status->nombreInstanciaCandidata);
+//		listarRecursosBloqueadosPorClave(subBufferSplitted[1]);
 	} else {
 		log_info(logPlanificador, "Comando 'status' con demasiados parámetros! Se requiere formato 'status <clave>'");
 	}

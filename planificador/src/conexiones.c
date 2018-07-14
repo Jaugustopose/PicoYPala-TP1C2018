@@ -116,8 +116,8 @@ void* iniciarEscucha(void* sockets) {
 //					pthread_mutex_unlock(&mutex_cola_listos);
 					int respuesta;
 					header_t headerParaCoordinador;
-					if(paquete->header.comando == msj_store_clave){
-						continue; //LC Para no responder nada al store
+					if((paquete->header.comando == msj_store_clave) || paquete->header.comando == msj_status_clave){
+						continue; //LC Para no responder nada al store y al status.
 					}
 					if (retorno.respuestaACoordinador) { //La operación del coordinador se procesó OK, abortar el ESI cuando sea necesario
 						respuesta = msj_ok_solicitud_operacion;
@@ -214,33 +214,64 @@ int mandar_a_ejecutar_esi(int socket_esi) {
 	return retorno;
 }
 
-status_clave_t* procesarStatusClave(int socket_coordinador, char* clave) {
-	enviar_mensaje(socket_coordinador, clave, string_length(clave));
-	paquete_t* paquete = recibirPaquete(socket_coordinador);
-	status_clave_t* status = malloc(sizeof(status_clave_t));
-	int offset = 0;
-	memcpy(&status->tamanioValor, paquete->cuerpo, sizeof(int));
-	status->valor = malloc(status->tamanioValor);
-	offset = offset + sizeof(int);
+void procesarStatusClave(int socket_coordinador, char* clave) {
 
-	memcpy(status->valor, paquete->cuerpo + offset, status->tamanioValor);
-	offset = offset + status->tamanioValor;
+	header_t* header = malloc(sizeof(header_t));
+	header->comando = msj_status_clave;
+	header->tamanio = strlen(clave)+1;
+	void* buffer = malloc(header->tamanio);
+	memcpy(buffer,clave,header->tamanio);
+	void* bufferAEnviar = serializar(*header,buffer);
+	free(buffer);
 
-	memcpy(&status->tamanioNombreInstanciaClave, paquete->cuerpo + offset, sizeof(int));
-	status->nombreInstanciaClave = malloc(status->tamanioNombreInstanciaClave);
-	offset = offset + sizeof(int);
-
-	memcpy(status->nombreInstanciaClave, paquete->cuerpo + offset, status->tamanioNombreInstanciaClave);
-	offset = offset + status->tamanioNombreInstanciaClave;
-
-	memcpy(&status->tamanioNombreInstanciaCandidata, paquete->cuerpo + offset, sizeof(int));
-	status->nombreInstanciaCandidata = malloc(status->tamanioNombreInstanciaCandidata);
-	offset = offset + sizeof(int);
-
-	memcpy(status->nombreInstanciaCandidata, paquete->cuerpo + offset, status->tamanioNombreInstanciaCandidata);
-
-	return status;
-
+	enviar_mensaje(socket_coordinador, bufferAEnviar,sizeof(header_t) + header->tamanio);
+//	paquete_t* paquete = recibirPaquete(socket_coordinador);
+//	status_clave_t* status = malloc(sizeof(status_clave_t));
+//	recibir_mensaje(socket_coordinador,header,sizeof(header_t));
+//
+//	if (header->comando == msj_status_clave){
+//
+//		log_trace(logPlanificador, "Recibi respuesta STATUS del COORDINADOR");
+//
+//		int resultado=recibir_mensaje(socket_coordinador,&status->tamanioValor,sizeof(int));
+//		printf("resultado1 con valor: %d", resultado);
+////		int offset = 0;
+////		memcpy(&status->tamanioValor, buffer, sizeof(int));
+////		status->valor = malloc(status->tamanioValor);
+////		offset = offset + sizeof(int);
+//
+//		resultado= recibir_mensaje(socket_coordinador,&status->valor,status->tamanioValor);
+//		printf("resultado2 con valor: %d\n", resultado);
+////		memcpy(status->valor, buffer + offset, status->tamanioValor);
+////		offset = offset + status->tamanioValor;
+//
+//		resultado= recibir_mensaje(socket_coordinador,&status->tamanioNombreInstanciaClave,sizeof(int));
+//		printf("resultado3 con valor: %d\n", resultado);
+////		memcpy(&status->tamanioNombreInstanciaClave, buffer + offset, sizeof(int));
+////		status->nombreInstanciaClave = malloc(status->tamanioNombreInstanciaClave);
+////		offset = offset + sizeof(int);
+//
+//		resultado= recibir_mensaje(socket_coordinador,status->nombreInstanciaClave,status->tamanioNombreInstanciaClave);
+//		printf("resultado4 con valor: %d\n", resultado);
+////		memcpy(status->nombreInstanciaClave, buffer + offset, status->tamanioNombreInstanciaClave);
+////		offset = offset + status->tamanioNombreInstanciaClave;
+//
+//		resultado= recibir_mensaje(socket_coordinador,&status->tamanioNombreInstanciaCandidata,sizeof(int));
+//		printf("resultado5 con valor: %d\n", resultado);
+////		memcpy(&status->tamanioNombreInstanciaCandidata, buffer + offset, sizeof(int));
+////		status->nombreInstanciaCandidata = malloc(status->tamanioNombreInstanciaCandidata);
+////		offset = offset + sizeof(int);
+//
+//		resultado= recibir_mensaje(socket_coordinador,status->nombreInstanciaCandidata,status->tamanioNombreInstanciaCandidata);
+//		printf("resultado6 con valor: %d\n", resultado);
+////		memcpy(status->nombreInstanciaCandidata, buffer + offset, status->tamanioNombreInstanciaCandidata);
+//
+//	}else{
+//		log_error(logPlanificador,"Error al intentar recibir header con status del COORDINADOR");
+//
+//	}
+//
+//	return status;
 }
 
 

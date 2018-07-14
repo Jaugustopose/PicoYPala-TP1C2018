@@ -999,8 +999,12 @@ void crearCarpetasSiNoExisten(const config_t* configuracion) {
 	system(path);
 }
 
-void ejecutarStatus(void* buffer) {
+void ejecutarStatus(void* unBuffer) {
 
+	log_info(logInstancia, "Procesando STATUS. Clave: %s",(char*) unBuffer);
+
+	char* buffer = malloc(strlen((char*) unBuffer)+1);
+	buffer = (char*) unBuffer;
 	int indice = obtenerIndiceClave(buffer);
 	t_entrada* entrada = tablaEntradas + indice;
 	//Se lee el valor de la matriz de valores
@@ -1070,6 +1074,7 @@ int main(int argc, char *argv[]) {
 			compactarMatrizValores();
 			break;
 		case msj_status_clave:
+			log_info(logInstancia,"He recibido comando STATUS para clave %s", (char*)buffer);
 			ejecutarStatus(buffer);
 			break;
 		}
