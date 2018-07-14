@@ -183,7 +183,7 @@ void procesar_desbloqueo_esi(char** subBufferSplitted) {
 		log_info(logPlanificador, "Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
 		log_info(logPlanificador, "Desbloqueo Esi por clave %s!", subBufferSplitted[1]);
-		procesoDesbloquear(subBufferSplitted[1]);
+		procesoDesbloquearPorConsola(subBufferSplitted[1]);
 	} else {
 		log_info(logPlanificador, "Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'");
 	}

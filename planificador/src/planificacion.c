@@ -234,17 +234,9 @@ void procesoDesbloquear(char* clave) {
 
 		estimarRafaga(proceso);
 		log_debug(logPlanificador, "Se desbloquea %s con una estimación de próxima rafaga de %lf", proceso->nombreESI, proceso->rafagaEstimada);
-		/*
-		if (procesoEjecucion == 0) {
-			log_trace(logPlanificador, "No había procesos en ejecución. Se envía a ejecutar el ESI %d", proceso->idProceso);
-			procesoEjecutar(proceso);
-		} else {
-			log_trace(logPlanificador, "Hay proceso en ejecución y es el %d. Mandamos el ESI %d a cola de listos", procesoEjecucion->idProceso, proceso->idProceso);
-			colaListosPush(proceso);
-			if (planificadorConDesalojo()) {
-				planificarConDesalojo();
-			}
-		}*/
+		int semValue;
+		sem_getvalue(&planificacion_habilitada, &semValue);
+		log_warning(logPlanificador, "Valor semaforo planificacion habilitada %d", semValue);
 		colaListosPush(proceso); //LC solo se mueve a la cola de listos, la planificacion se hace despues de sentencia finalizada
 		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
 			desbloquearClave(clave);
@@ -254,6 +246,48 @@ void procesoDesbloquear(char* clave) {
 	}
 
 }
+
+void procesoDesbloquearPorConsola(char* clave) {
+
+	//Closure para hacer el remove de la lista de procesos bloqueadas
+	bool _soy_esi_bloqueado_por_clave_buscada(proceso_t* p) {
+		return strcmp(p->claveBloqueo, clave) == 0;
+	}
+
+	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
+
+	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
+
+		estimarRafaga(proceso);
+		log_debug(logPlanificador, "Se desbloquea %s con una estimación de próxima rafaga de %lf", proceso->nombreESI, proceso->rafagaEstimada);
+		int semValue;
+		sem_getvalue(&planificacion_habilitada, &semValue);
+		log_warning(logPlanificador, "Valor semaforo planificacion habilitada %d", semValue);
+		if (semValue) { //Si no está pausada la planificación seguimos como estamos?
+			log_warning(logPlanificador, "Planificación habilitada");
+			if (procesoEjecucion == 0) {
+				log_trace(logPlanificador, "No había procesos en ejecución. Se envía a ejecutar el ESI %d", proceso->idProceso);
+				procesoEjecutar(proceso);
+			} else {
+				log_trace(logPlanificador, "Hay proceso en ejecución y es el %d. Mandamos el ESI %d a cola de listos", procesoEjecucion->idProceso, proceso->idProceso);
+				colaListosPush(proceso);
+				if (planificadorConDesalojo()) {
+					planificarConDesalojo();
+				}
+			}
+		} else {
+			colaListosPush(proceso); //LC solo se mueve a la cola de listos, la planificacion se hace despues de sentencia finalizada
+		}
+		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
+			desbloquearClave(clave);
+		}
+	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
+		desbloquearClave(clave);
+	}
+
+}
+
+
 
 void incrementarRafagasEsperando() {
 	int i;

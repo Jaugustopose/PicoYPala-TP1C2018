@@ -10,7 +10,7 @@ void inicializarPlanificacion();
 int procesoNuevo(int socketESI, char* nombre);
 void procesoTerminado(int exitStatus);
 void sentenciaFinalizada();
-respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo, int socketCoordinador);
+respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo);
 void bloquearEsiPorConsola(int idEsi, char* clave);
 void listarRecursosBloqueadosPorClave(char* clave);
 t_list* killProcesoPorID(int idProceso);
@@ -18,6 +18,7 @@ void analizarDeadlocks();
 int fdProcesoEnEjecucion();
 void bloquearClave(char* clave);
 void procesoDesbloquear(char* clave);
+void procesoDesbloquearPorConsola(char* clave);
 void continuarPlanificacion();
 
 sem_t planificacion_habilitada;
