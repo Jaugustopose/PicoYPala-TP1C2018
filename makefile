@@ -1,7 +1,7 @@
 all: 
 	-cd coordinador && $(MAKE) all
 	-cd planificador && $(MAKE) all
-	-cd instanica && $(MAKE) all
+	-cd instancia && $(MAKE) all
 	-cd esi && $(MAKE) all
 
 clean:
