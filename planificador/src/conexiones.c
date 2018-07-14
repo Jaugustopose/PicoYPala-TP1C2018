@@ -69,6 +69,7 @@ void* iniciarEscucha(void* sockets) {
 			log_error(logPlanificador, "Error en select");
 			exit(1);
 		}
+		log_debug(logPlanificador, "Salgo del select");
 		for (fdCliente = 0; fdCliente <= maxFd; fdCliente++) {
 			if (FD_ISSET(fdCliente, &read_fds)) { // Me fijo si tengo datos listos para leer
 				if (fdCliente == sockets_predefinidos.socket_escucha_esis) {
@@ -83,7 +84,9 @@ void* iniciarEscucha(void* sockets) {
 						procesar_handshake(socketCliente);
 						nombre = recibirNombreESI(socketCliente);
 						FD_SET(socketCliente, &master);
-						maxFd = socketCliente;
+						if(socketCliente>maxFd){
+							maxFd = socketCliente;
+						}
 						//TODO Analizar si es necesario sincronizar. En principio el select es secuencial así que no. Pero ver si algún comando
 						//     de consola podría llamar a este método procesoNuevo.
 //						pthread_mutex_lock(&mutex_cola_listos);

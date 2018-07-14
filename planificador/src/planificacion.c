@@ -424,6 +424,7 @@ void analizarDeadlocks() {
 
 	struct Nodo {
 		int pid;
+		char* nombreESI;
 		struct Nodo* bloqueador;
 	};
 
@@ -436,6 +437,7 @@ void analizarDeadlocks() {
 		proceso_t* proceso = list_get(listaTemporal, i);
 		nodos[i] = nodo;
 		nodo->pid = proceso->idProceso;
+		nodo->nombreESI = proceso->nombreESI;
 		nodo->bloqueador = NULL;
 	}
 
@@ -503,11 +505,8 @@ void analizarDeadlocks() {
 	char* stringLog = string_new();
 
 	void _listarProcesosDeadlock(struct Nodo* n) {
-		char* idString = string_new();
-		sprintf(idString, "%d", n->pid);
-		string_append(&stringLog, idString);
+		string_append(&stringLog, n->nombreESI);
 		string_append(&stringLog, "-");
-		free(idString);
 	}
 
 	list_iterate(listaDeadlock, (void*)_listarProcesosDeadlock);
