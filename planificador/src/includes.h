@@ -24,9 +24,9 @@ typedef struct{
 	int socketESI;
 	t_list* clavesBloqueadas;
 	char* claveBloqueo;
-	int rafagaEstimada;
-	int rafagaActual;
-	int rafagasEsperando;
+	double rafagaEstimada;
+	double rafagaActual;
+	double rafagasEsperando;
 	int exitStatus;
 	char* nombreESI;
 }proceso_t;

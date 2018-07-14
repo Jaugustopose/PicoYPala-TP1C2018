@@ -76,6 +76,12 @@ void inicializarPlanificacion(){
 	sem_init(&semaforo_coordinador, 1, 1);
 }
 
+void continuarPlanificacion(){
+	if (procesoEjecucion == 0 && colaListosPeek()) {
+		procesoEjecutar(colaListosPop());
+	}
+}
+
 bool planificadorConDesalojo(){
 	return esSJFCD() || esHRRN();
 }
@@ -116,8 +122,11 @@ void planificarConDesalojo(){
 			cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
 		}
 		if(cambiarProceso){
+			proceso_t* procesoNuevo = colaListosPop();
+			log_warning(logPlanificador, "Se desaloja proceso %s(%d) por %s(%d)",
+					procesoEjecucion->nombreESI, procesoEjecucion->idProceso, procesoNuevo->nombreESI, procesoNuevo->idProceso);
 			colaListosPush(procesoEjecucion);
-			procesoEjecutar(colaListosPop());
+			procesoEjecutar(procesoNuevo);
 		}else{
 			procesoEjecutar(procesoEjecucion);
 		}
@@ -169,12 +178,17 @@ int procesoNuevo(int socketESI, char* nombre) {
 }
 
 int procesoEjecutar(proceso_t* proceso) {
+	log_debug(logPlanificador, "Se ejecuta proceso %s(%d)", proceso->nombreESI, proceso->idProceso);
 	procesoEjecucion = proceso;
-	log_trace(logPlanificador, "Por tomar semaforo de planificacion_habilitada");
-//	sem_wait(&planificacion_habilitada);
-	log_trace(logPlanificador, "Se manda a ejecutar ESI %d", proceso->idProceso);
+	procesoEjecucion->rafagaActual++;
+	if (esHRRN()) {
+		incrementarRafagasEsperando();
+	}
+	//log_trace(logPlanificador, "Por tomar semaforo de planificacion_habilitada");
+	sem_wait(&planificacion_habilitada);
+	//log_trace(logPlanificador, "Se manda a ejecutar ESI %d", proceso->idProceso);
 	int resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
-//	sem_post(&planificacion_habilitada);
+	sem_post(&planificacion_habilitada);
 	return resultado;
 }
 
@@ -198,15 +212,13 @@ void procesoTerminado(int exitStatus) {
 }
 
 void procesoBloquear(char* clave){
-	log_trace(logPlanificador, "Se bloquea proceso %d", procesoEjecucion->idProceso);
+	log_debug(logPlanificador, "Se bloquea proceso %s(%d) por clave %s", procesoEjecucion->nombreESI, procesoEjecucion->idProceso, clave);
 	procesoEjecucion->claveBloqueo=clave;
 	list_add(listaBloqueados, (void*)procesoEjecucion);
 
 	if(colaListosPeek()){
-		log_trace(logPlanificador, "Se toma de la cola de listos para ejecutar");
 		procesoEjecutar(colaListosPop());
 	}else{
-		log_trace(logPlanificador, "No había procesos en la cola de listos. Se setea procesoEjecucion = 0");
 		procesoEjecucion = 0;
 	}
 }
@@ -221,9 +233,10 @@ void procesoDesbloquear(char* clave) {
 	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
 
 	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
-		log_trace(logPlanificador, "Se detectó proceso ESI %d que estaba bloqueado por clave %s", proceso->idProceso, clave);
 
 		estimarRafaga(proceso);
+		log_debug(logPlanificador, "Se desbloquea %s con una estimación de próxima rafaga de %lf", proceso->nombreESI, proceso->rafagaEstimada);
+		/*
 		if (procesoEjecucion == 0) {
 			log_trace(logPlanificador, "No había procesos en ejecución. Se envía a ejecutar el ESI %d", proceso->idProceso);
 			procesoEjecutar(proceso);
@@ -233,13 +246,12 @@ void procesoDesbloquear(char* clave) {
 			if (planificadorConDesalojo()) {
 				planificarConDesalojo();
 			}
-		}
+		}*/
+		colaListosPush(proceso); //LC solo se mueve a la cola de listos, la planificacion se hace despues de sentencia finalizada
 		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
-			log_trace(logPlanificador, "Ya no habia otros procesos bloqueados por esa clave. Se desbloquea %s", clave);
 			desbloquearClave(clave);
 		}
 	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
-		log_trace(logPlanificador, "No se encontró procesos bloqueados por la clave %s", clave);
 		desbloquearClave(clave);
 	}
 
@@ -255,10 +267,12 @@ void incrementarRafagasEsperando() {
 }
 
 void sentenciaFinalizada(int socket_esi) {
+	/* LC: Lo muevo a envio de ejecucion dado que parece que estan contando cuando se envia y no cuando termina (osea cuenta lo get bloqueados)
 	procesoEjecucion->rafagaActual++;
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
+	*/
 	//El socket que envió sentencia finalizada difiere del que está en ejecución => Fue desalojado (bloqueado) por consola.
 	if (socket_esi == procesoEjecucion->socketESI) {
 		if (planificadorConDesalojo()) {
@@ -271,9 +285,10 @@ void sentenciaFinalizada(int socket_esi) {
 }
 
 void estimarRafaga(proceso_t* proceso) {
-	int alfa = config.ALFA_PLANIFICACION;
-	int estimacion = proceso->rafagaActual*alfa/100 + (100-alfa)*proceso->rafagaEstimada/100;
+	double alfa = config.ALFA_PLANIFICACION;
+	double estimacion = proceso->rafagaActual*alfa/100 + (100-alfa)*proceso->rafagaEstimada/100;
 	proceso->rafagaEstimada = estimacion;
+	proceso->rafagaActual = 0;
 }
 
 bool verificarClave(char* clave){
@@ -382,7 +397,7 @@ t_list* killProcesoPorID(int idProceso) {
 
 	proceso_t* procesoATerminar = NULL;
 
-	sem_wait(&planificacion_habilitada);
+	//sem_wait(&planificacion_habilitada);
 	if (procesoEjecucion != NULL && procesoEjecucion->idProceso == idProceso) {
 		procesoATerminar = malloc(sizeof(proceso_t));
 		procesoATerminar->idProceso = procesoEjecucion->idProceso;
@@ -404,7 +419,7 @@ t_list* killProcesoPorID(int idProceso) {
 			}
 		}
 	}
-	sem_post(&planificacion_habilitada);
+	//sem_post(&planificacion_habilitada);
 
 	return (procesoATerminar != NULL) ? procesoATerminar->clavesBloqueadas : NULL;
 }

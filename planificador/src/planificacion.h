@@ -18,6 +18,7 @@ void analizarDeadlocks();
 int fdProcesoEnEjecucion();
 void bloquearClave(char* clave);
 void procesoDesbloquear(char* clave);
+void continuarPlanificacion();
 
 sem_t planificacion_habilitada;
 sem_t semaforo_coordinador;
