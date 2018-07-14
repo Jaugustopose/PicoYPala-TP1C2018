@@ -199,3 +199,17 @@ void* serializar(header_t header, void* payload) {
 
 	return buffer;
 }
+
+char* recibirNombreESI(int socket) {
+	header_t header;
+	char* nombre;
+	int resultado = recibir_mensaje(socket, &header, sizeof(header_t)); //Ahora recibo el nombre de la instancia
+	if ((resultado == ERROR_RECV) || !(header.comando == msj_nombre_esi)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
+		printf("Error al intentar recibir nombre del ESI\n");
+	} else {
+		nombre = malloc(header.tamanio);
+		recibir_mensaje(socket, nombre, header.tamanio);
+	}
+	return nombre;
+}
+

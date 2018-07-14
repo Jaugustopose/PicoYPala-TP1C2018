@@ -184,9 +184,7 @@ int procesoEjecutar(proceso_t* proceso) {
 	if (esHRRN()) {
 		incrementarRafagasEsperando();
 	}
-	//log_trace(logPlanificador, "Por tomar semaforo de planificacion_habilitada");
 	sem_wait(&planificacion_habilitada);
-	//log_trace(logPlanificador, "Se manda a ejecutar ESI %d", proceso->idProceso);
 	int resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
 	sem_post(&planificacion_habilitada);
 	return resultado;
@@ -522,7 +520,13 @@ void analizarDeadlocks() {
 
 	void _listarProcesosDeadlock(struct Nodo* n) {
 		string_append(&stringLog, n->nombreESI);
+		string_append(&stringLog, "(");
+		char* idString = string_new();
+		sprintf(idString, "%d", n->pid);
+		string_append(&stringLog, idString);
+		string_append(&stringLog, ")");
 		string_append(&stringLog, "-");
+		free(idString);
 	}
 
 	list_iterate(listaDeadlock, (void*)_listarProcesosDeadlock);

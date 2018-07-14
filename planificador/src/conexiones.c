@@ -31,19 +31,6 @@ void procesar_handshake(int socketCliente) {
 	}
 }
 
-char* recibirNombreESI(int socket){
-	header_t header;
-	char* nombre;
-	int resultado = recibir_mensaje(socket, &header, sizeof(header_t)); //Ahora recibo el nombre de la instancia
-	if ((resultado == ERROR_RECV) || !(header.comando == msj_nombre_esi)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
-		printf("Error al intentar recibir nombre del ESI\n");
-	} else {
-		nombre = malloc(header.tamanio);
-		recibir_mensaje(socket, nombre, header.tamanio);
-	}
-	return nombre;
-}
-
 void* iniciarEscucha(void* sockets) {
 	sockets_escucha_t sockets_predefinidos = *(sockets_escucha_t*) sockets;
 
@@ -73,10 +60,9 @@ void* iniciarEscucha(void* sockets) {
 				if (fdCliente == sockets_predefinidos.socket_escucha_esis) {
 					socketCliente = aceptar_conexion(sockets_predefinidos.socket_escucha_esis);
 					if (socketCliente == ERROR_ACCEPT) {
-						log_error(logPlanificador, "Error en el accept");//TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
+						log_error(logPlanificador, "Error en el accept");
 						exit(ERROR_ACCEPT);
 					} else {
-						//sem_wait(&planificacion_habilitada);
 						// Procesamos el handshake e ingresamos el nuevo ESI en el sistema. Siempre será un ESI, el handshake con coordinador se
 						// hace al revés: Planificador se conectará a Coordinador previamente.
 						procesar_handshake(socketCliente);
@@ -96,13 +82,11 @@ void* iniciarEscucha(void* sockets) {
 						if (retorno < 0) {
 							//TODO: Revisar manejo de error. Sacar de los SET y listo.
 						}
-						//sem_post(&planificacion_habilitada);
 					}
 
 				} else if (fdCliente == sockets_predefinidos.socket_coordinador) {
 					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
-					//sem_wait(&planificacion_habilitada);
 					log_debug(logPlanificador, "Notificacion recibida del coordinador");
 					paquete_t* paquete = recibirPaquete(fdCliente);
 					if(paquete->header.comando < 0){
@@ -146,9 +130,7 @@ void* iniciarEscucha(void* sockets) {
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
 					}
-					//sem_post(&planificacion_habilitada);
 				} else {
-					//sem_wait(&planificacion_habilitada);
 					int respuesta;
 					header_t header;
 					bytesRecibidos = recibir_mensaje(fdCliente, &header, sizeof(header_t));
@@ -189,7 +171,6 @@ void* iniciarEscucha(void* sockets) {
 							log_debug(logPlanificador, "MSJ ESI - No reconocido!: %d", header.comando);
 						}
 					}
-					//sem_post(&planificacion_habilitada);
 				}
 			}
 		}
