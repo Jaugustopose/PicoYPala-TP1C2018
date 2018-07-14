@@ -88,7 +88,7 @@ void* iniciarEscucha(void* sockets) {
 						//     de consola podría llamar a este método procesoNuevo.
 //						pthread_mutex_lock(&mutex_cola_listos);
 //						pthread_mutex_lock(&mutex_proceso_ejecucion);
-						int retorno = procesoNuevo(socketCliente);
+						int retorno = procesoNuevo(socketCliente, nombre);
 //						pthread_mutex_unlock(&mutex_proceso_ejecucion);
 //						pthread_mutex_unlock(&mutex_cola_listos);
 
