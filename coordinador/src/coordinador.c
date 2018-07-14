@@ -1150,11 +1150,13 @@ void atender_mensaje_planificador(){
 				statusNombreInstanciaConClave = "";
 				int tamanioNombreInstanciaConClave = sizeof(char);
 
+				int tamanioClave = strlen(statusClave) + 1;
+
 				candidata = simular_eleccion_instancia_por_algoritmo(config.ALGORITMO_DISTRIBUCION);
 
 				statusNombreInstanciaCandidata = candidata->nombre;
 				int tamanioNombreInstanciaCandidata = strlen(statusNombreInstanciaCandidata) + 1;
-				int tamanioTotalParaBuffer = sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int) + tamanioNombreInstanciaCandidata;
+				int tamanioTotalParaBuffer = sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int) + tamanioNombreInstanciaCandidata + sizeof(int) + tamanioClave;
 				//El malloc es: tamanioValor + sizeof(char) para guardar \0 por valor vacio + tamanioNombreInstanciaConClave + sizeof(char) para guardar \0 por instancia vacia + tamanioNombreCandidata + longitudNombreCandidata
 
 				void* buffer = malloc(tamanioTotalParaBuffer);
@@ -1165,6 +1167,9 @@ void atender_mensaje_planificador(){
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+				memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata,&tamanioClave,sizeof(int));
+				memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata + sizeof(int),statusClave, tamanioClave);
+
 
 				header.comando = msj_status_clave;
 				header.tamanio = tamanioTotalParaBuffer;
