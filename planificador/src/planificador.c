@@ -156,6 +156,7 @@ void procesar_continuar_planificacion(char** subBufferSplitted) {
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Continuar Planificación!");
 		sem_post(&planificacion_habilitada);
+		continuarPlanificacion();
 	} else {
 		log_info(logPlanificador, "Comando 'continuar' no requiere parámetros!");
 	}
@@ -177,7 +178,7 @@ void procesar_bloqueo_esi(char** subBufferSplitted) {
 }
 
 void procesar_desbloqueo_esi(char** subBufferSplitted) {
-	sem_wait(&planificacion_habilitada);
+	//sem_wait(&planificacion_habilitada);
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
@@ -186,7 +187,7 @@ void procesar_desbloqueo_esi(char** subBufferSplitted) {
 	} else {
 		log_info(logPlanificador, "Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'");
 	}
-	sem_post(&planificacion_habilitada);
+	//sem_post(&planificacion_habilitada);
 }
 
 void procesar_listar_recurso(char** subBufferSplitted) {

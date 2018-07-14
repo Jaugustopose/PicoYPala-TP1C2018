@@ -18,6 +18,7 @@ void analizarDeadlocks();
 int fdProcesoEnEjecucion();
 void bloquearClave(char* clave);
 void procesoDesbloquear(char* clave);
+void continuarPlanificacion();
 
 sem_t planificacion_habilitada;
 pthread_mutex_t mutex_cola_listos;
