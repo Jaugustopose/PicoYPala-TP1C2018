@@ -67,6 +67,7 @@ void* iniciarEscucha(void* sockets) {
 						// hace al revés: Planificador se conectará a Coordinador previamente.
 						procesar_handshake(socketCliente);
 						nombre = recibirNombreESI(socketCliente);
+						log_debug(logPlanificador, "%s conectado en socket %d",nombre,socketCliente);
 						FD_SET(socketCliente, &master);
 						if(socketCliente>maxFd){
 							maxFd = socketCliente;

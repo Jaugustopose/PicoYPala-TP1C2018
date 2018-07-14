@@ -83,7 +83,7 @@ void continuarPlanificacion(){
 }
 
 bool planificadorConDesalojo(){
-	return esSJFCD() || esHRRN();
+	return esSJFCD();
 }
 
 bool comparadorSJF(void* arg1, void* arg2){
@@ -95,7 +95,13 @@ bool comparadorSJF(void* arg1, void* arg2){
 bool comparadorHRRN(void* arg1, void* arg2){
 	proceso_t* proceso1 = (proceso_t*)arg1;
 	proceso_t* proceso2 = (proceso_t*)arg2;
-	return (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) >= (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+	double rrProceso1 = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada);
+	double rrProceso2 = (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
+	log_warning(logPlanificador, "Proceso %s, SS=%fl, W=%fl, RR=%fl", proceso2->nombreESI, proceso2->rafagaEstimada,
+			proceso2->rafagasEsperando, rrProceso2);
+	log_warning(logPlanificador, "Proceso %s, SS=%fl, W=%fl, RR=%fl", proceso1->nombreESI, proceso1->rafagaEstimada,
+						proceso1->rafagasEsperando, rrProceso1);
+	return rrProceso1 >= rrProceso2;
 }
 
 void ordenarColaListos(){
@@ -112,21 +118,13 @@ void ordenarColaListos(){
 void planificarConDesalojo(){
 	if(list_size(colaListos)){
 		bool cambiarProceso;
-		if(esHRRN()){
-			proceso_t* proceso1 = colaListosPeek();
-			proceso_t* proceso2 = procesoEjecucion;
-			cambiarProceso = (1 + proceso1->rafagasEsperando/proceso1->rafagaEstimada) > (1 + proceso2->rafagasEsperando/proceso2->rafagaEstimada);
-		}else{
-			proceso_t* proceso1 = colaListosPeek();
-			proceso_t* proceso2 = procesoEjecucion;
-			cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
-		}
+		proceso_t* proceso1 = colaListosPeek();
+		proceso_t* proceso2 = procesoEjecucion;
+		cambiarProceso = proceso1->rafagaEstimada < proceso2->rafagaEstimada;
 		if(cambiarProceso){
-			proceso_t* procesoNuevo = colaListosPop();
-			log_warning(logPlanificador, "Se desaloja proceso %s(%d) por %s(%d)",
-					procesoEjecucion->nombreESI, procesoEjecucion->idProceso, procesoNuevo->nombreESI, procesoNuevo->idProceso);
+			log_warning(logPlanificador, "Se desaloja proceso %s(%d)", procesoEjecucion->nombreESI, procesoEjecucion->idProceso);
 			colaListosPush(procesoEjecucion);
-			procesoEjecutar(procesoNuevo);
+			procesoEjecutar(colaListosPop());
 		}else{
 			procesoEjecutar(procesoEjecucion);
 		}
@@ -136,11 +134,17 @@ void planificarConDesalojo(){
 }
 
 void colaListosPush(proceso_t* proceso){
+	proceso->rafagasEsperando = 0;
 	list_add(colaListos, (void*)proceso);
-	ordenarColaListos();
+	if(esSJFCD() || esSJFSD()){
+		ordenarColaListos();
+	}
 }
 
 proceso_t* colaListosPop(){
+	if(esHRRN()){
+		ordenarColaListos();
+	}
 	return list_remove(colaListos, 0);
 }
 
@@ -168,9 +172,11 @@ int procesoNuevo(int socketESI, char* nombre) {
 		}
 	} else {
 		colaListosPush(proceso);
+		/*
 		if (planificadorConDesalojo()) {
 			planificarConDesalojo();
 		}
+		*/
 	}
 
 	return EXIT_SUCCESS; //TODO: Revisar si habría que hacer algún return antes en los IF
@@ -178,15 +184,21 @@ int procesoNuevo(int socketESI, char* nombre) {
 }
 
 int procesoEjecutar(proceso_t* proceso) {
-	log_debug(logPlanificador, "Se ejecuta proceso %s(%d)", proceso->nombreESI, proceso->idProceso);
-	procesoEjecucion = proceso;
-	procesoEjecucion->rafagaActual++;
-	if (esHRRN()) {
-		incrementarRafagasEsperando();
+	int semValue;
+	sem_getvalue(&planificacion_habilitada, &semValue);
+	int resultado;
+	if(semValue){
+		log_debug(logPlanificador, "Se ejecuta proceso %s(%d)", proceso->nombreESI, proceso->idProceso);
+		procesoEjecucion = proceso;
+		procesoEjecucion->rafagaActual++;
+		if (esHRRN()) {
+			incrementarRafagasEsperando();
+		}
+		resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
+	}else{
+		colaListosPush(proceso);
+		resultado =1;
 	}
-	sem_wait(&planificacion_habilitada);
-	int resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
-	sem_post(&planificacion_habilitada);
 	return resultado;
 }
 
@@ -234,9 +246,6 @@ void procesoDesbloquear(char* clave) {
 
 		estimarRafaga(proceso);
 		log_debug(logPlanificador, "Se desbloquea %s con una estimación de próxima rafaga de %lf", proceso->nombreESI, proceso->rafagaEstimada);
-		int semValue;
-		sem_getvalue(&planificacion_habilitada, &semValue);
-		log_warning(logPlanificador, "Valor semaforo planificacion habilitada %d", semValue);
 		colaListosPush(proceso); //LC solo se mueve a la cola de listos, la planificacion se hace despues de sentencia finalizada
 		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
 			desbloquearClave(clave);
@@ -271,9 +280,6 @@ void procesoDesbloquearPorConsola(char* clave) {
 			} else {
 				log_trace(logPlanificador, "Hay proceso en ejecución y es el %d. Mandamos el ESI %d a cola de listos", procesoEjecucion->idProceso, proceso->idProceso);
 				colaListosPush(proceso);
-				if (planificadorConDesalojo()) {
-					planificarConDesalojo();
-				}
 			}
 		} else {
 			colaListosPush(proceso); //LC solo se mueve a la cola de listos, la planificacion se hace despues de sentencia finalizada
@@ -291,8 +297,8 @@ void procesoDesbloquearPorConsola(char* clave) {
 
 void incrementarRafagasEsperando() {
 	int i;
+	proceso_t* proceso;
 	for (i=0;i<list_size(colaListos);i++) {
-		proceso_t* proceso;
 		proceso = (proceso_t*)list_get(colaListos, i);
 		proceso->rafagasEsperando++;
 	}
