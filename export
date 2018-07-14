@@ -1,1 +1,1 @@
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/workspace/tp-2018-1c-Pico-y-Pala/commons/Debug:~/workspace/tp-2018-1c-Pico-y-Pala/comunicacion/Debug
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/workspace/tp-2018-1c-Pico-y-Pala/comunicacion/Debug
