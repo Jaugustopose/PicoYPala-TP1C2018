@@ -220,7 +220,7 @@ void msgEjecucion(t_esi_operacion operacion) {
 	free(buffer);
 	if (retorno < 0) {
 		log_error(logESI,
-				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
+				"Problema con el ESI en el socket %d. Se cierra conexión con él.",
 				socket_coordinador);
 		exitFailure();
 	}
@@ -232,12 +232,12 @@ void msgFinProceso(int unSocket) {
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(unSocket, &header, sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", unSocket);
+		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.", unSocket);
 		exitFailure();
 	}
 	int respuestaFinalizacion;
 	recibir_mensaje(unSocket, &respuestaFinalizacion, sizeof(respuestaFinalizacion));
-	printf("Aviso de FIN SCRIPT enviado correctamente\n");
+	log_info(logESI, "Aviso de FIN SCRIPT enviado correctamente");
 
 }
 
@@ -247,10 +247,10 @@ void msgSentenciaFinalizada() {
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_planificador);
+		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él", socket_planificador);
 		exitFailure();
 	}
-	printf("MSJ Sentencia finalizada enviada al plani\n");
+	log_info(logESI, "MSJ Sentencia finalizada enviada al plani");
 }
 
 void sig_handler(int signo) {

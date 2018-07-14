@@ -15,3 +15,14 @@
 [INFO] 20:27:53:717 ESI/(19816:19816): Msg requerimiento de ejecución recibido del Planificador
 [INFO] 20:27:53:717 ESI/(19816:19816): Parseando linea: SET futbol:messi TraemeLaCopa
 
+[DEBUG] 18:08:17:630 ESI/(5531:5531): Ruta Script: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/ESI_1
+[DEBUG] 18:08:17:647 ESI/(5531:5531): Path archivo configuración: /home/utnso/workspace/tp-2018-1c-Pico-y-Pala/esi/Debug/esi.cfg
+[DEBUG] 18:08:17:647 ESI/(5531:5531): PUERTO_PLANIFICADOR: 8020
+
+[DEBUG] 18:08:17:647 ESI/(5531:5531): IP_PLANIFICADOR: 127.0.0.1
+
+[DEBUG] 18:08:17:647 ESI/(5531:5531): PUERTO_COORDINADOR: 8030
+
+[DEBUG] 18:08:17:647 ESI/(5531:5531): IP_COORDINADOR: 127.0.0.1
+
+[ERROR] 18:08:17:648 ESI/(5531:5531): Error en select

@@ -260,325 +260,950 @@
 [DEBUG] 21:54:21:435 Planificador/(13351:13359): Notificacion Coordinador - Solicitud de GET clave recibida
 [DEBUG] 21:54:21:435 Planificador/(13351:13359): Pudo solicitar clave? => 0
 [INFO] 21:54:30:266 Planificador/(13351:13351): Desbloqueo Esi por clave postre:ingrediente1!
-[DEBUG] 16:51:03:5 Planificador/(5743:5743): PUERTO: 8020
-[DEBUG] 16:51:03:12 Planificador/(5743:5743): ESTIMACION_INICIAL: 3
-[DEBUG] 16:51:03:12 Planificador/(5743:5743): ALGORITMO_PLANIFICACION: SJF-SD
-[DEBUG] 16:51:03:12 Planificador/(5743:5743): ALFA_PLANIFICACION: 50
-[DEBUG] 16:51:03:12 Planificador/(5743:5743): IP_COORDINADOR: 127.0.0.1
-[DEBUG] 16:51:03:12 Planificador/(5743:5743): PUERTO_COORDINADOR: 8030
-[DEBUG] 16:51:03:12 Planificador/(5743:5743): CLAVES_BLOQUEADAS: [postre:ingrediente1]
-[INFO] 16:51:11:171 Planificador/(5743:5743): Pausar Planificación!
-[INFO] 16:51:23:379 Planificador/(5743:5743): Continuar Planificación!
-[DEBUG] 16:51:23:380 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:380 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:380 Planificador/(5743:5752): Notificacion Coordinador - Solicitud de GET clave recibida: e3:sony:juegos
-[DEBUG] 16:51:23:380 Planificador/(5743:5752): Pudo solicitar clave? => 1
-[DEBUG] 16:51:23:381 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:385 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:385 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:385 Planificador/(5743:5752): Notificacion Coordinador - Solicitud de GET clave recibida: e3:microsoft:juegos
-[DEBUG] 16:51:23:385 Planificador/(5743:5752): Pudo solicitar clave? => 1
-[DEBUG] 16:51:23:386 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:396 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:396 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:396 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:396 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 16:51:23:396 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:398 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:398 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:398 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:398 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 16:51:23:398 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:399 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:400 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:400 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:400 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 16:51:23:400 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:402 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:402 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:402 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:402 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 16:51:23:402 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:405 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:405 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:405 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:405 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 16:51:23:407 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:411 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:411 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:411 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:411 Planificador/(5743:5752): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 16:51:23:411 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:412 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:412 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:413 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:413 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:413 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:414 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:414 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:414 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:414 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:414 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:415 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:415 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:415 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:415 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:416 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:416 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:416 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:416 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:416 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:417 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:418 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:418 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:418 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:418 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:419 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:420 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:420 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:420 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:420 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:421 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:421 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:421 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:421 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:421 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:422 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:422 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:422 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:422 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:422 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:423 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:424 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:424 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:424 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:424 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:425 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:426 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:426 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:426 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:426 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:427 Planificador/(5743:5752): MSJ Sentencia finalizada recibido
-[DEBUG] 16:51:23:428 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:428 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:23:428 Planificador/(5743:5752): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 16:51:23:428 Planificador/(5743:5752): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 16:51:23:429 Planificador/(5743:5752): Notificacion recibida del coordinador
-[DEBUG] 16:51:23:429 Planificador/(5743:5752): Paquete recibido del coordinador
-[DEBUG] 16:51:44:694 Planificador/(5743:5752): Notificacion Coordinador - Solicitud de STORE clave recibida
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): PUERTO: 8020
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): ESTIMACION_INICIAL: 3
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): ALGORITMO_PLANIFICACION: SJF-SD
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): ALFA_PLANIFICACION: 50
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): IP_COORDINADOR: 127.0.0.1
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): PUERTO_COORDINADOR: 8030
-[DEBUG] 16:59:26:683 Planificador/(6017:6017): CLAVES_BLOQUEADAS: [postre:ingrediente1]
-[INFO] 16:59:48:591 Planificador/(6017:6017): Pausar Planificación!
-[INFO] 17:00:02:712 Planificador/(6017:6017): Continuar Planificación!
-[DEBUG] 17:00:02:867 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:867 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:867 Planificador/(6017:6026): Notificacion Coordinador - Solicitud de GET clave recibida: e3:sony:juegos
-[DEBUG] 17:00:02:867 Planificador/(6017:6026): Pudo solicitar clave? => 1
-[DEBUG] 17:00:02:868 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:869 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:869 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:869 Planificador/(6017:6026): Notificacion Coordinador - Solicitud de GET clave recibida: e3:microsoft:juegos
-[DEBUG] 17:00:02:869 Planificador/(6017:6026): Pudo solicitar clave? => 1
-[DEBUG] 17:00:02:869 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:870 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:870 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:870 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:870 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:00:02:876 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:877 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:877 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:877 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:877 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:00:02:880 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:881 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:881 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:881 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:881 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:00:02:882 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:883 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:884 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:884 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:884 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:00:02:885 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:887 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:887 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:887 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:887 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:00:02:888 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:889 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:889 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:889 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:889 Planificador/(6017:6026): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:00:02:890 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:891 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:891 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:891 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:891 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:892 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:893 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:893 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:893 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:893 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:896 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:898 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:898 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:898 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:898 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:898 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:899 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:899 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:899 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:899 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:900 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:901 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:901 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:901 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:901 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:901 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:903 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:903 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:903 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:903 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:903 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:905 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:905 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:905 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:905 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:905 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:906 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:906 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:906 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:906 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:907 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:907 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:908 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:908 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:908 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:908 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:02:909 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:02:909 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:02:910 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:02:910 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:02:910 Planificador/(6017:6026): MSJ Sentencia finalizada recibido
-[DEBUG] 17:00:08:985 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:08:985 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:08:985 Planificador/(6017:6026): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:00:08:985 Planificador/(6017:6026): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:00:26:425 Planificador/(6017:6026): Notificacion recibida del coordinador
-[DEBUG] 17:00:26:426 Planificador/(6017:6026): Paquete recibido del coordinador
-[DEBUG] 17:00:59:67 Planificador/(6017:6026): Notificacion Coordinador - Solicitud de STORE clave recibida
-[DEBUG] 17:05:43:871 Planificador/(6259:6259): PUERTO: 8020
-[DEBUG] 17:05:43:872 Planificador/(6259:6259): ESTIMACION_INICIAL: 3
-[DEBUG] 17:05:43:872 Planificador/(6259:6259): ALGORITMO_PLANIFICACION: SJF-SD
-[DEBUG] 17:05:43:872 Planificador/(6259:6259): ALFA_PLANIFICACION: 50
-[DEBUG] 17:05:43:872 Planificador/(6259:6259): IP_COORDINADOR: 127.0.0.1
-[DEBUG] 17:05:43:872 Planificador/(6259:6259): PUERTO_COORDINADOR: 8030
-[DEBUG] 17:05:43:872 Planificador/(6259:6259): CLAVES_BLOQUEADAS: [postre:ingrediente1]
-[INFO] 17:05:51:821 Planificador/(6259:6259): Pausar Planificación!
-[INFO] 17:06:13:485 Planificador/(6259:6259): Continuar Planificación!
-[DEBUG] 17:06:13:486 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:486 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:486 Planificador/(6259:6271): Notificacion Coordinador - Solicitud de GET clave recibida: e3:sony:juegos
-[DEBUG] 17:06:13:486 Planificador/(6259:6271): Pudo solicitar clave? => 1
-[DEBUG] 17:06:13:486 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:488 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:488 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:488 Planificador/(6259:6271): Notificacion Coordinador - Solicitud de GET clave recibida: e3:microsoft:juegos
-[DEBUG] 17:06:13:488 Planificador/(6259:6271): Pudo solicitar clave? => 1
-[DEBUG] 17:06:13:489 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:490 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:490 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:490 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:490 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:06:13:490 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:492 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:492 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:492 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:492 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:06:13:493 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:494 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:494 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:494 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:494 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:06:13:494 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:495 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:495 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:495 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:495 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:06:13:499 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:500 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:500 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:500 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:500 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:06:13:501 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:501 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:502 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:502 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:502 Planificador/(6259:6271): Esi tiene tomada clave e3:sony:juegos? => 1
-[DEBUG] 17:06:13:502 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:503 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:503 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:503 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:503 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:504 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:504 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:504 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:504 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:505 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:505 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:506 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:506 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:506 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:506 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:507 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:508 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:508 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:508 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:508 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:514 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:515 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:516 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:516 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:516 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:516 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:517 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:517 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:517 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:517 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:518 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:519 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:519 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:519 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:519 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:519 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:522 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:522 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:522 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:522 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:522 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:523 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:523 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:523 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:523 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:524 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:13:525 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:13:525 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:13:525 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:13:525 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:13:525 Planificador/(6259:6271): MSJ Sentencia finalizada recibido
-[DEBUG] 17:06:25:465 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:25:466 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:25:466 Planificador/(6259:6271): Notificacion Coordinador - Consulta ESI por clave tomada recibida
-[DEBUG] 17:06:25:466 Planificador/(6259:6271): Esi tiene tomada clave e3:microsoft:juegos? => 1
-[DEBUG] 17:06:39:764 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:06:39:764 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:06:51:459 Planificador/(6259:6271): Notificacion Coordinador - Solicitud de STORE clave recibida
-[DEBUG] 17:07:31:535 Planificador/(6259:6271): Notificacion recibida del coordinador
-[DEBUG] 17:07:31:542 Planificador/(6259:6271): Paquete recibido del coordinador
-[DEBUG] 17:07:31:542 Planificador/(6259:6271): Notificacion Coordinador - Llegó un mensaje desconocido: -12
-[ERROR] 17:07:31:542 Planificador/(6259:6271): Error en select
+[DEBUG] 00:33:35:96 Planificador/(6434:6434): PUERTO: 8020
+[DEBUG] 00:33:35:97 Planificador/(6434:6434): ESTIMACION_INICIAL: 3
+[DEBUG] 00:33:35:97 Planificador/(6434:6434): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 00:33:35:97 Planificador/(6434:6434): ALFA_PLANIFICACION: 50
+[DEBUG] 00:33:35:97 Planificador/(6434:6434): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 00:33:35:97 Planificador/(6434:6434): PUERTO_COORDINADOR: 8030
+[DEBUG] 00:33:35:97 Planificador/(6434:6434): CLAVES_BLOQUEADAS: [bebida13,segundoplato:ingrediente3]
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): PUERTO: 8020
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): ESTIMACION_INICIAL: 3
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): ALFA_PLANIFICACION: 50
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): PUERTO_COORDINADOR: 8030
+[DEBUG] 17:57:32:511 Planificador/(5244:5244): CLAVES_BLOQUEADAS: [bebida13,segundoplato:ingrediente3]
+[DEBUG] 17:58:29:681 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:29:681 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:29:681 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:29:681 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:29:682 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:29:933 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:29:933 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:29:933 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:29:933 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:29:935 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:30:185 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:30:185 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:30:185 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:30:185 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:30:187 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:30:438 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:30:438 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:30:438 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:30:438 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:30:439 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:30:690 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:30:690 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:30:690 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:30:690 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:30:692 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:30:943 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:30:943 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:30:943 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:30:943 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:30:944 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:31:195 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:31:195 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:31:195 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:31:195 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:31:196 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:31:447 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:31:447 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:31:447 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:31:447 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:31:447 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:31:698 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:31:698 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:31:698 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:31:698 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:31:699 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:31:950 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:31:950 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:31:950 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:31:950 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:31:950 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:32:202 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:32:202 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:32:202 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:32:202 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:32:203 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:32:454 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:32:454 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:32:454 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:32:454 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:32:455 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:32:707 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:32:707 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:32:707 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:32:707 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:32:708 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:32:959 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:32:959 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:32:960 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:32:960 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:32:961 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:33:212 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:33:212 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:33:212 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:33:212 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 17:58:33:214 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:33:465 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:33:465 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:33:465 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:33:465 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 17:58:33:466 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:33:717 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:33:717 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:33:717 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:33:717 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 17:58:33:718 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:33:969 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:33:969 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:33:969 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:33:969 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 17:58:33:971 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:34:222 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:34:222 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:34:222 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:34:222 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 17:58:34:224 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:34:475 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:34:475 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:34:475 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:34:475 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 17:58:34:476 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:34:727 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:34:728 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:34:728 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:34:728 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 17:58:34:729 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:34:980 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:34:980 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:34:980 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:34:980 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 17:58:34:982 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:35:233 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:35:233 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:35:233 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:35:233 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 17:58:35:234 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:35:485 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:35:485 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:35:485 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:35:485 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 17:58:35:486 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:35:738 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:35:738 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:35:738 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:35:738 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 17:58:35:739 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:35:990 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:35:990 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:35:990 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:35:990 Planificador/(5244:5250): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 17:58:35:992 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:36:243 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:36:243 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:36:243 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:36:243 Planificador/(5244:5250): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 17:58:36:245 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:36:496 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:36:496 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:36:496 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:36:496 Planificador/(5244:5250): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 17:58:36:497 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:36:498 Planificador/(5244:5250): MSJ ESI finalizado recibido
+[DEBUG] 17:58:36:498 Planificador/(5244:5250): Liberando claves tomadas por proceso 1...
+[DEBUG] 17:58:36:498 Planificador/(5244:5250): Se liberaron las claves tomadas por el proceso 1
+[DEBUG] 17:58:36:498 Planificador/(5244:5250): Se envio respuesta de ok solicitud finalizacion a ESI
+[DEBUG] 17:58:36:749 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:36:749 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:36:749 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:36:749 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:36:750 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:36:0 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:36:1 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:36:1 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:36:1 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:36:1 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:37:252 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:37:252 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:37:252 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:37:252 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:37:253 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:37:504 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:37:504 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:37:504 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:37:504 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:37:505 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:37:755 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:37:755 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:37:756 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:37:756 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:37:756 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:38:7 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:38:7 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:38:7 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:38:7 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:38:7 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:38:258 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:38:258 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:38:258 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:38:258 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:38:258 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:38:510 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:38:510 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:38:510 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:38:510 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:38:511 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:38:763 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:38:763 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:38:763 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:38:763 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:38:763 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:39:14 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:39:15 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:39:15 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:39:15 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:39:15 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:39:266 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:39:266 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:39:266 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:39:266 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:39:267 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:39:518 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:39:518 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:39:518 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:39:518 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:39:518 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:39:769 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:39:769 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:39:769 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:39:769 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:39:770 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:40:20 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:40:21 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:40:21 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:40:21 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:40:21 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:40:272 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:40:272 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:40:272 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:40:272 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 17:58:40:274 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:40:524 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:40:524 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:40:524 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:40:524 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 17:58:40:526 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:40:776 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:40:776 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:40:777 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:40:777 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 17:58:40:778 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:41:28 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:41:28 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:41:28 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:41:28 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 17:58:41:29 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:41:280 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:41:280 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:41:280 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:41:280 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 17:58:41:282 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:41:532 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:41:532 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:41:532 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:41:532 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 17:58:41:534 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:41:785 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:41:785 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:41:785 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:41:785 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 17:58:41:787 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:42:37 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:42:37 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:42:37 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:42:37 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 17:58:42:39 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:42:289 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:42:289 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:42:289 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:42:289 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 17:58:42:291 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:42:541 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:42:541 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:42:542 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:42:542 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 17:58:42:543 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:42:794 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:42:795 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:42:795 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:42:795 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 17:58:42:795 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:43:46 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:43:46 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:43:47 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:43:47 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 17:58:43:837 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:44:88 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:44:88 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:44:88 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:44:88 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 17:58:44:90 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:44:341 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:44:341 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:44:341 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:44:341 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 17:58:44:342 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:44:594 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:44:594 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:44:594 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:44:594 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 17:58:44:595 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:44:846 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:44:846 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:44:846 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:44:846 Planificador/(5244:5250): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 17:58:44:847 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:45:98 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:45:98 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:45:98 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:45:98 Planificador/(5244:5250): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 17:58:45:98 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:45:349 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:45:349 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:45:349 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:45:349 Planificador/(5244:5250): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 17:58:45:349 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:45:600 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:45:600 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:45:600 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:45:601 Planificador/(5244:5250): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 17:58:45:602 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:45:853 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:45:853 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:45:854 Planificador/(5244:5250): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 17:58:45:854 Planificador/(5244:5250): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 17:58:45:855 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:45:855 Planificador/(5244:5250): MSJ ESI finalizado recibido
+[DEBUG] 17:58:45:855 Planificador/(5244:5250): Liberando claves tomadas por proceso 2...
+[DEBUG] 17:58:45:855 Planificador/(5244:5250): Se liberaron las claves tomadas por el proceso 2
+[DEBUG] 17:58:45:855 Planificador/(5244:5250): Se envio respuesta de ok solicitud finalizacion a ESI
+[DEBUG] 17:58:46:106 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:46:106 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:46:106 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:46:106 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:46:108 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:46:359 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:46:359 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:46:359 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:46:359 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:46:360 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:46:612 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:46:612 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:46:612 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:46:612 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:46:613 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:46:864 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:46:864 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:46:864 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:46:864 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:46:866 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:47:117 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:47:117 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:47:117 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:47:117 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:47:118 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:47:369 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:47:369 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:47:369 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:47:369 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:47:370 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:47:621 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:47:621 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:47:621 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:47:621 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:47:623 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:47:874 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:47:874 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:47:874 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:47:874 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:47:876 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:48:127 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:48:127 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:48:127 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:48:127 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:48:129 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:48:380 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:48:380 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:48:380 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:48:380 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:48:382 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:48:633 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:48:633 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:48:633 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:48:634 Planificador/(5244:5250): Pudo solicitar clave? => 0
+[DEBUG] 17:58:48:885 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:48:886 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:48:886 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:48:886 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:48:889 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:49:140 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:49:140 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:49:140 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:49:140 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:49:142 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:49:393 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:49:393 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:49:393 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:49:393 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:49:396 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:49:646 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:49:647 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:49:647 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:49:647 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 17:58:49:648 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 17:58:49:899 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 17:58:49:899 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 17:58:49:899 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 17:58:49:899 Planificador/(5244:5250): Pudo solicitar clave? => 0
+[DEBUG] 18:00:41:943 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:41:943 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:41:943 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:41:943 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:41:945 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:42:196 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:42:196 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:42:196 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:42:196 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:42:197 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:42:448 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:42:448 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:42:448 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:42:448 Planificador/(5244:5250): Pudo solicitar clave? => 0
+[DEBUG] 18:00:43:229 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:43:229 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:43:229 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:43:229 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:43:231 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:43:482 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:43:482 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:43:482 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:43:482 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:43:484 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:43:734 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:43:734 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:43:734 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:43:735 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:43:736 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:43:987 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:43:987 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:43:987 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:43:987 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:43:989 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:44:240 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:44:240 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:44:240 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:44:240 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:44:241 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:44:492 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:44:493 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:44:493 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:44:493 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:44:494 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:44:745 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:44:745 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:44:745 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:44:745 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:44:747 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:44:998 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:44:998 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:44:998 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:44:998 Planificador/(5244:5250): Pudo solicitar clave? => 1
+[DEBUG] 18:00:44:0 Planificador/(5244:5250): MSJ Sentencia finalizada recibido
+[DEBUG] 18:00:45:251 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:00:45:251 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:00:45:251 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:00:45:251 Planificador/(5244:5250): Pudo solicitar clave? => 0
+[INFO] 18:01:03:873 Planificador/(5244:5244): Desbloqueo Esi por clave bebida13!
+[DEBUG] 18:03:43:375 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:03:43:375 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:03:43:375 Planificador/(5244:5250): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:03:43:375 Planificador/(5244:5250): Pudo solicitar clave? => 0
+[INFO] 18:05:51:423 Planificador/(5244:5244): Listar procesos en cola de espera para recurso bebida13!
+[INFO] 18:05:51:423 Planificador/(5244:5244): Procesos bloqueados por clave bebida13: 4
+[INFO] 18:05:51:423 Planificador/(5244:5244): Procesos bloqueados completo: 3-5-6-4
+[DEBUG] 18:06:00:456 Planificador/(5244:5250): Notificacion recibida del coordinador
+[DEBUG] 18:06:00:457 Planificador/(5244:5250): Paquete recibido del coordinador
+[DEBUG] 18:06:00:457 Planificador/(5244:5250): Notificacion Coordinador - Llegó un mensaje desconocido: -13
+[ERROR] 18:06:00:457 Planificador/(5244:5250): Error en select
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): PUERTO: 8020
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): ESTIMACION_INICIAL: 3
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): ALFA_PLANIFICACION: 50
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): PUERTO_COORDINADOR: 8030
+[DEBUG] 18:09:27:767 Planificador/(5579:5579): CLAVES_BLOQUEADAS: [bebida13,segundoplato:ingrediente3]
+[DEBUG] 18:09:48:173 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:48:173 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:48:173 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:48:173 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:48:174 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:48:425 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:48:425 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:48:425 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:48:425 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:48:426 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:48:677 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:48:677 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:48:677 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:48:677 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:48:679 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:48:930 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:48:930 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:48:930 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:48:930 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:48:932 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:49:183 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:49:183 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:49:183 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:49:183 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:49:183 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:49:433 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:49:434 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:49:434 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:49:434 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:49:435 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:49:686 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:49:686 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:49:686 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:49:686 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:49:687 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:49:938 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:49:939 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:49:939 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:49:939 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:49:940 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:50:191 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:50:191 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:50:191 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:50:191 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:50:192 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:50:443 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:50:443 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:50:443 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:50:443 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:50:444 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:50:695 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:50:695 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:50:695 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:50:695 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:50:696 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:50:947 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:50:947 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:50:947 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:50:947 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:50:949 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:51:200 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:51:200 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:51:200 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:51:200 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:51:201 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:51:453 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:51:453 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:51:453 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:51:453 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:51:454 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:51:705 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:51:705 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:51:705 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:51:705 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 18:09:51:706 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:51:958 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:51:958 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:51:958 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:51:958 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 18:09:51:959 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:52:210 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:52:210 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:52:210 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:52:210 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 18:09:52:212 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:52:462 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:52:463 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:52:463 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:52:463 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 18:09:52:464 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:52:715 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:52:715 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:52:715 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:52:715 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 18:09:52:716 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:52:968 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:52:968 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:52:968 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:52:968 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 18:09:52:970 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:53:221 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:53:221 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:53:221 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:53:221 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 18:09:53:222 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:53:473 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:53:473 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:53:474 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:53:474 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 18:09:53:475 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:53:726 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:53:726 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:53:726 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:53:726 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 18:09:53:727 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:53:978 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:53:978 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:53:978 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:53:978 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 18:09:53:979 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:54:230 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:54:230 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:54:230 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:54:230 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 18:09:54:232 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:54:483 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:54:483 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:54:483 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:54:483 Planificador/(5579:5585): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 18:09:54:486 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:54:737 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:54:737 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:54:737 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:54:737 Planificador/(5579:5585): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 18:09:54:739 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:54:990 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:54:990 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:54:990 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:54:990 Planificador/(5579:5585): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 18:09:54:991 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:54:991 Planificador/(5579:5585): MSJ ESI finalizado recibido
+[DEBUG] 18:09:54:991 Planificador/(5579:5585): Liberando claves tomadas por proceso 1...
+[DEBUG] 18:09:54:991 Planificador/(5579:5585): Se liberaron las claves tomadas por el proceso 1
+[DEBUG] 18:09:54:992 Planificador/(5579:5585): Se envio respuesta de ok solicitud finalizacion a ESI
+[DEBUG] 18:09:55:243 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:55:243 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:55:243 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:55:243 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:55:243 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:55:494 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:55:494 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:55:494 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:55:494 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:55:495 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:55:746 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:55:746 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:55:746 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:55:746 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:55:746 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:55:997 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:55:997 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:55:997 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:55:998 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:55:998 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:56:249 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:56:249 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:56:249 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:56:249 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:56:250 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:56:501 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:56:501 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:56:501 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:56:501 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:56:501 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:56:752 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:56:752 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:56:752 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:56:752 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:56:753 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:57:4 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:57:4 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:57:4 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:57:4 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:57:4 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:57:256 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:57:256 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:57:256 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:57:256 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:57:257 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:57:508 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:57:508 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:57:508 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:57:508 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:57:509 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:57:760 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:57:760 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:57:760 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:57:760 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:57:761 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:58:12 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:58:13 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:58:13 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:58:13 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:58:14 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:58:265 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:58:265 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:58:265 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:58:266 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:58:266 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:58:517 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:58:517 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:58:517 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:09:58:517 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:09:58:518 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:58:769 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:58:769 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:58:769 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:58:769 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:nes? => 1
+[DEBUG] 18:09:58:770 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:59:21 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:59:21 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:59:21 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:59:21 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:snes? => 1
+[DEBUG] 18:09:59:23 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:59:273 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:59:273 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:59:273 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:59:274 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 18:09:59:275 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:59:526 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:59:526 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:59:526 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:59:526 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:gamecube? => 1
+[DEBUG] 18:09:59:527 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:09:59:778 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:09:59:778 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:09:59:778 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:09:59:778 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 18:09:59:779 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:00:30 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:00:30 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:00:30 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:00:30 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:wii? => 1
+[DEBUG] 18:10:00:32 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:00:283 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:00:283 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:00:283 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:00:283 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:wiiu? => 1
+[DEBUG] 18:10:00:284 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:00:535 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:00:535 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:00:535 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:00:535 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 18:10:00:536 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:00:787 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:00:787 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:00:787 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:00:788 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 18:10:00:789 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:01:40 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:01:40 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:01:40 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:01:40 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:nintendo64? => 1
+[DEBUG] 18:10:01:41 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:01:292 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:01:292 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:01:292 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:01:292 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 18:10:01:294 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:01:544 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:01:544 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:01:545 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:01:545 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps1? => 1
+[DEBUG] 18:10:01:546 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:01:797 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:01:797 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:01:797 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:01:797 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 18:10:01:799 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:02:49 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:02:49 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:02:49 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:02:49 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps2? => 1
+[DEBUG] 18:10:02:51 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:02:301 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:02:301 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:02:301 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:02:301 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps4? => 1
+[DEBUG] 18:10:02:303 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:02:554 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:02:554 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:02:554 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:02:554 Planificador/(5579:5585): Esi tiene tomada clave sony:consola:ps3? => 1
+[DEBUG] 18:10:02:555 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:02:806 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:02:806 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:02:806 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:02:806 Planificador/(5579:5585): Esi tiene tomada clave microsoft:consola:xbox? => 1
+[DEBUG] 18:10:02:807 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:03:58 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:03:59 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:03:59 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:03:59 Planificador/(5579:5585): Esi tiene tomada clave microsoft:consola:xbox360? => 1
+[DEBUG] 18:10:03:62 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:03:313 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:03:313 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:03:313 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:03:313 Planificador/(5579:5585): Esi tiene tomada clave microsoft:consola:xboxone? => 1
+[DEBUG] 18:10:03:314 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:03:565 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:03:565 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:03:565 Planificador/(5579:5585): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 18:10:03:565 Planificador/(5579:5585): Esi tiene tomada clave nintendo:consola:switch? => 1
+[DEBUG] 18:10:03:566 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:03:567 Planificador/(5579:5585): MSJ ESI finalizado recibido
+[DEBUG] 18:10:03:567 Planificador/(5579:5585): Liberando claves tomadas por proceso 2...
+[DEBUG] 18:10:03:567 Planificador/(5579:5585): Se liberaron las claves tomadas por el proceso 2
+[DEBUG] 18:10:03:567 Planificador/(5579:5585): Se envio respuesta de ok solicitud finalizacion a ESI
+[DEBUG] 18:10:03:819 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:03:819 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:03:819 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:03:819 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:03:820 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:04:71 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:04:71 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:04:71 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:04:71 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:04:73 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:04:323 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:04:323 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:04:323 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:04:324 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:04:325 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:04:576 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:04:576 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:04:576 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:04:576 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:04:577 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:04:828 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:04:828 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:04:829 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:04:829 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:04:830 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:05:81 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:05:81 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:05:81 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:05:81 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:05:83 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:05:333 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:05:333 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:05:334 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:05:334 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:05:335 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:05:586 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:05:586 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:05:586 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:05:586 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:05:588 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:05:839 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:05:839 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:05:839 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:05:839 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:05:840 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:06:92 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:06:92 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:06:92 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:06:92 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:06:93 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:06:344 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:06:344 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:06:344 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:06:344 Planificador/(5579:5585): Pudo solicitar clave? => 0
+[DEBUG] 18:10:06:595 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:06:595 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:06:595 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:06:596 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:06:597 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:06:849 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:06:849 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:06:849 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:06:849 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:06:850 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:07:102 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:07:102 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:07:102 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:07:102 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:07:105 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:07:356 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:07:356 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:07:356 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:07:356 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:07:358 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:07:609 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:07:609 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:07:609 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:07:609 Planificador/(5579:5585): Pudo solicitar clave? => 0
+[DEBUG] 18:10:19:493 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:19:493 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:19:493 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:19:493 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:19:495 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:19:746 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:19:746 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:19:746 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:19:746 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:19:748 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:19:999 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:19:999 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:19:999 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:19:999 Planificador/(5579:5585): Pudo solicitar clave? => 0
+[DEBUG] 18:10:20:707 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:20:707 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:20:707 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:20:707 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:20:709 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:20:961 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:20:961 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:20:961 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:20:961 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:20:963 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:21:214 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:21:214 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:21:214 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:21:214 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:21:216 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:21:467 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:21:467 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:21:467 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:21:467 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:21:469 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:21:720 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:21:720 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:21:720 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:21:720 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:21:721 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:21:972 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:21:972 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:21:973 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:21:973 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:21:974 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:22:225 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:22:225 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:22:225 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:22:225 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:22:227 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:22:478 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:22:478 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:22:478 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:22:479 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[DEBUG] 18:10:22:480 Planificador/(5579:5585): MSJ Sentencia finalizada recibido
+[DEBUG] 18:10:22:731 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:22:731 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:22:731 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:22:731 Planificador/(5579:5585): Pudo solicitar clave? => 0
+[INFO] 18:10:41:197 Planificador/(5579:5579): Desbloqueo Esi por clave bebida13!
+[DEBUG] 18:10:47:144 Planificador/(5579:5585): Notificacion recibida del coordinador
+[DEBUG] 18:10:47:144 Planificador/(5579:5585): Paquete recibido del coordinador
+[DEBUG] 18:10:47:144 Planificador/(5579:5585): Notificacion Coordinador - Solicitud de GET clave recibida
+[DEBUG] 18:10:47:144 Planificador/(5579:5585): Pudo solicitar clave? => 1
+[INFO] 18:11:14:427 Planificador/(5579:5579): Desbloqueo Esi por clave segundoplato:ingrediente3!

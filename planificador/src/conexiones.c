@@ -64,6 +64,7 @@ void* iniciarEscucha(void* sockets) {
 	//Bucle principal
 	for (;;) {
 		read_fds = master;
+		log_trace(logPlanificador, "Vuelvo a bloquear en select...");
 		if (select(maxFd + 1, &read_fds, NULL, NULL, NULL) == -1) { //Compruebo si algun cliente quiere interactuar.
 			log_error(logPlanificador, "Error en select");
 			exit(1);
@@ -76,6 +77,7 @@ void* iniciarEscucha(void* sockets) {
 						log_error(logPlanificador, "Error en el accept");//TODO Deberiamos tomar el error y armar un exit_gracefully como en el tp0.
 						exit(ERROR_ACCEPT);
 					} else {
+						sem_wait(&planificacion_habilitada);
 						// Procesamos el handshake e ingresamos el nuevo ESI en el sistema. Siempre será un ESI, el handshake con coordinador se
 						// hace al revés: Planificador se conectará a Coordinador previamente.
 						procesar_handshake(socketCliente);
@@ -84,30 +86,33 @@ void* iniciarEscucha(void* sockets) {
 						maxFd = socketCliente;
 						//TODO Analizar si es necesario sincronizar. En principio el select es secuencial así que no. Pero ver si algún comando
 						//     de consola podría llamar a este método procesoNuevo.
-						pthread_mutex_lock(&mutex_cola_listos);
-						pthread_mutex_lock(&mutex_proceso_ejecucion);
-						int retorno = procesoNuevo(socketCliente, nombre);
-						pthread_mutex_unlock(&mutex_proceso_ejecucion);
-						pthread_mutex_unlock(&mutex_cola_listos);
+//						pthread_mutex_lock(&mutex_cola_listos);
+//						pthread_mutex_lock(&mutex_proceso_ejecucion);
+						int retorno = procesoNuevo(socketCliente);
+//						pthread_mutex_unlock(&mutex_proceso_ejecucion);
+//						pthread_mutex_unlock(&mutex_cola_listos);
+
 						if (retorno < 0) {
 							//TODO: Revisar manejo de error. Sacar de los SET y listo.
 						}
+						sem_post(&planificacion_habilitada);
 					}
 
 				} else if (fdCliente == sockets_predefinidos.socket_coordinador) {
 					// El coordinador está solicitando get de clave, store de clave, o si tiene bloqueada la clave que quiere setear, o clave inexistente
 					// Handshake hecho previo a ingresar al Select.
+					sem_wait(&planificacion_habilitada);
 					log_debug(logPlanificador, "Notificacion recibida del coordinador");
 					paquete_t* paquete = recibirPaquete(fdCliente);
 					if(paquete->header.comando < 0){
 						//TODO: Manejar desconexion
 					}
 					log_debug(logPlanificador, "Paquete recibido del coordinador");
-					pthread_mutex_lock(&mutex_cola_listos);
-					pthread_mutex_lock(&mutex_proceso_ejecucion);
+//					pthread_mutex_lock(&mutex_cola_listos);
+//					pthread_mutex_lock(&mutex_proceso_ejecucion);
 					retorno = procesar_notificacion_coordinador(paquete->header.comando, paquete->header.tamanio, paquete->cuerpo);
-					pthread_mutex_unlock(&mutex_proceso_ejecucion);
-					pthread_mutex_unlock(&mutex_cola_listos);
+//					pthread_mutex_unlock(&mutex_proceso_ejecucion);
+//					pthread_mutex_unlock(&mutex_cola_listos);
 					int respuesta;
 					header_t headerParaCoordinador;
 					if(paquete->header.comando == msj_store_clave){
@@ -140,10 +145,14 @@ void* iniciarEscucha(void* sockets) {
 							enviar_mensaje(retorno.fdESIAAbortar, &respuesta, sizeof(respuesta));
 						}
 					}
+					sem_post(&planificacion_habilitada);
 				} else {
+					sem_wait(&planificacion_habilitada);
 					int respuesta;
 					header_t header;
+					log_trace(logPlanificador, "Por recibir mensaje de ESI...");
 					bytesRecibidos = recibir_mensaje(fdCliente, &header, sizeof(header_t));
+					log_trace(logPlanificador, "Se recibió mensaje de ESI en socket %d", fdCliente);
 					if (bytesRecibidos == ERROR_RECV_DISCONNECTED || bytesRecibidos == ERROR_RECV_DISCONNECTED) {
 						//TODO: ESI se desconectó. Sacar de los FD, el close del socket ya lo hizo el recibir_mensaje.
 						FD_CLR(fdCliente, &master);
@@ -153,11 +162,11 @@ void* iniciarEscucha(void* sockets) {
 						case msj_sentencia_finalizada:
 
 							log_debug(logPlanificador, "MSJ Sentencia finalizada recibido");
-							pthread_mutex_lock(&mutex_cola_listos);
-							pthread_mutex_lock(&mutex_proceso_ejecucion);
+//							pthread_mutex_lock(&mutex_cola_listos);
+//							pthread_mutex_lock(&mutex_proceso_ejecucion);
 							sentenciaFinalizada(fdCliente);
-							pthread_mutex_unlock(&mutex_proceso_ejecucion);
-							pthread_mutex_unlock(&mutex_cola_listos);
+//							pthread_mutex_unlock(&mutex_proceso_ejecucion);
+//							pthread_mutex_unlock(&mutex_cola_listos);
 							break;
 
 						case msj_esi_finalizado:
@@ -177,8 +186,11 @@ void* iniciarEscucha(void* sockets) {
 //							respuesta = msj_ok_solicitud_operacion;
 //							enviar_mensaje(fdCliente, &respuesta, sizeof(respuesta));
 							break;
+						default:
+							log_debug(logPlanificador, "MSJ ESI - No reconocido!: %d", header.comando);
 						}
 					}
+					sem_post(&planificacion_habilitada);
 				}
 			}
 		}
