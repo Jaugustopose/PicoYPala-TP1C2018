@@ -715,14 +715,17 @@ void* atender_accion_instancia(void* info) { // Puesto void* para evitar casteo 
 				case STATUS:
 					operacion->keyword = ultimaOperacion;
 
+//					log_trace(log_coordinador,"Dentro de hilo atender instancia, statusClave = %s",statusClave);
 					header->comando = msj_status_clave;
 					header->tamanio = strlen(statusClave) + 1;
 
 					buffer = malloc(header->tamanio);
+					memcpy(buffer,statusClave,header->tamanio);
 
 					bufferAEnviar = serializar(*header,buffer);
 					enviar_mensaje(informacionQueSeComparte->fd,bufferAEnviar,sizeof(header_t) + header->tamanio);
 					log_debug(log_coordinador, "Se envio mensaje de STATUS a INSTANCIA");
+//					printf("header.tamanio = %d     header.comando = %d \n",header->tamanio,header->comando);
 				break;
 
 				default:
@@ -1041,31 +1044,39 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 			//La data del valor de la clave
 			recibir_mensaje(unFileDescriptor,statusValorClave,header.tamanio);
 			tamanioValorClave = header.tamanio;
+//			log_trace(log_coordinador,"El valor de la clave enviado por instancia es: %s con tamanio %d",statusValorClave, tamanioValorClave);
 
 			//La data del nombre de la instancia
-			instanciaConClave = encontrar_instancia_por_clave(statusValorClave);
-			statusNombreInstanciaConClave = instanciaConClave->nombre;
+			instanciaConClave = encontrar_instancia_por_clave(statusClave);
+			statusNombreInstanciaConClave = instanciaConClave->nombre ;
 			tamanioNombreInstanciaConClave = strlen(statusNombreInstanciaConClave) + 1;
+//			log_trace(log_coordinador,"El nombre de la instancia con la clave es: %s con tamanio %d",statusNombreInstanciaConClave, tamanioNombreInstanciaConClave);
 
 			//La data de la clave candidata que se llena con vacio
 			statusNombreInstanciaCandidata = "";
 			tamanioNombreInstanciaCandidata = sizeof(char);
 
-			//Armado de buffer para enviar a Planificador
-			tamanioParaBufferStatus = sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata;
+			//La data de la clave que solicito status porque el planificador tiene alzeimer.
+			int tamanioClave = strlen(statusClave) + 1;
+
+			//Armado de buffer para enviar a Planificador. El ultimo int y strlen(statusClave) son para mandarle la clave al plani de vuelta.
+			tamanioParaBufferStatus = sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata + sizeof(int) + strlen(statusClave) +1;
 
 			void* buffer = malloc(tamanioParaBufferStatus);
 
 			memcpy(buffer, &tamanioValorClave, sizeof(int));
-			memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
-			memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
-			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
-			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
-			memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+			memcpy(buffer + sizeof(int), statusValorClave, tamanioValorClave);
+			memcpy(buffer + sizeof(int) + tamanioValorClave, &tamanioNombreInstanciaConClave, sizeof(int));
+			memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int),statusNombreInstanciaConClave, tamanioNombreInstanciaConClave);
+			memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave,&tamanioNombreInstanciaCandidata, sizeof(int));
+			memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
+			memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata,&tamanioClave,sizeof(int));
+			memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata + sizeof(int),statusClave, tamanioClave);
 
 			header.comando = msj_status_clave;
 			header.tamanio = tamanioParaBufferStatus;
 			enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
+
 		break;
 
 		case msj_instancia_entradas_libres:
@@ -1117,6 +1128,8 @@ void atender_mensaje_planificador(){
 
 			recibir_mensaje(socket_planificador,statusClave,header.tamanio);
 
+//			log_trace(log_coordinador,"Recepcion de status clave: %s",statusClave);
+
 			instanciaConClave = encontrar_instancia_por_clave(statusClave);
 
 			if(instanciaConClave != 0){ //Si hay una instancia que tenga la clave, levanto el semaforo de su hilo para que envie el respectivo mensaje a la instancia.
@@ -1148,6 +1161,7 @@ void atender_mensaje_planificador(){
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char) + sizeof(int), statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
 
+				header.comando = msj_status_clave;
 				header.tamanio = tamanioTotalParaBuffer;
 				enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
 			}

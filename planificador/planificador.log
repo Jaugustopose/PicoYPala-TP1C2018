@@ -582,3 +582,77 @@
 [DEBUG] 17:07:31:542 Planificador/(6259:6271): Paquete recibido del coordinador
 [DEBUG] 17:07:31:542 Planificador/(6259:6271): Notificacion Coordinador - Llegó un mensaje desconocido: -12
 [ERROR] 17:07:31:542 Planificador/(6259:6271): Error en select
+[DEBUG] 00:26:54:598 Planificador/(9975:9975): PUERTO: 8020
+[DEBUG] 00:26:54:600 Planificador/(9975:9975): ESTIMACION_INICIAL: 3
+[DEBUG] 00:26:54:601 Planificador/(9975:9975): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 00:26:54:601 Planificador/(9975:9975): ALFA_PLANIFICACION: 50
+[DEBUG] 00:26:54:601 Planificador/(9975:9975): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 00:26:54:601 Planificador/(9975:9975): PUERTO_COORDINADOR: 8030
+[DEBUG] 00:26:54:601 Planificador/(9975:9975): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 00:27:06:180 Planificador/(9975:9994): Notificacion recibida del coordinador
+[DEBUG] 00:27:06:180 Planificador/(9975:9994): Paquete recibido del coordinador
+[DEBUG] 00:27:06:180 Planificador/(9975:9994): Notificacion Coordinador - Solicitud de GET clave recibida: status
+[DEBUG] 00:27:06:180 Planificador/(9975:9994): Pudo solicitar clave? => 1
+[DEBUG] 00:27:06:180 Planificador/(9975:9994): Se envio respuesta OK al coordinador
+[DEBUG] 00:27:06:212 Planificador/(9975:9994): MSJ Sentencia finalizada recibido
+[DEBUG] 00:27:06:214 Planificador/(9975:9994): Notificacion recibida del coordinador
+[DEBUG] 00:27:06:214 Planificador/(9975:9994): Paquete recibido del coordinador
+[DEBUG] 00:27:06:214 Planificador/(9975:9994): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 00:27:06:214 Planificador/(9975:9994): Esi tiene tomada clave status? => 1
+[DEBUG] 00:27:06:214 Planificador/(9975:9994): Se envio respuesta OK al coordinador
+[DEBUG] 00:27:06:345 Planificador/(9975:9994): MSJ Sentencia finalizada recibido
+[DEBUG] 00:27:06:347 Planificador/(9975:9994): Notificacion recibida del coordinador
+[DEBUG] 00:27:06:356 Planificador/(9975:9994): Paquete recibido del coordinador
+[DEBUG] 00:27:06:356 Planificador/(9975:9994): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 00:27:06:356 Planificador/(9975:9994): Esi tiene tomada clave status? => 1
+[DEBUG] 00:27:06:357 Planificador/(9975:9994): Se envio respuesta OK al coordinador
+[DEBUG] 00:27:06:415 Planificador/(9975:9994): Notificacion recibida del coordinador
+[DEBUG] 00:27:06:416 Planificador/(9975:9994): Paquete recibido del coordinador
+[DEBUG] 00:27:06:416 Planificador/(9975:9994): Notificacion Coordinador - Solicitud de STORE clave recibida
+[DEBUG] 00:27:06:421 Planificador/(9975:9994): MSJ Sentencia finalizada recibido
+[DEBUG] 00:27:06:422 Planificador/(9975:9994): MSJ ESI finalizado recibido
+[DEBUG] 00:27:06:423 Planificador/(9975:9994): Liberando claves tomadas por proceso 1...
+[DEBUG] 00:27:06:423 Planificador/(9975:9994): Se liberaron las claves tomadas por el proceso 1
+[DEBUG] 00:27:06:423 Planificador/(9975:9994): Se envio respuesta de ok solicitud finalizacion a ESI
+[INFO] 00:27:19:854 Planificador/(9975:9975): Status instancias para clave status!
+[TRACE] 00:27:19:865 Planificador/(9975:9975): Recibi respuesta STATUS del COORDINADOR
+[DEBUG] 00:27:19:865 Planificador/(9975:9994): Notificacion recibida del coordinador
+[DEBUG] 00:28:08:469 Planificador/(9975:9994): Paquete recibido del coordinador
+[DEBUG] 00:28:08:469 Planificador/(9975:9994): Notificacion Coordinador - Llegó un mensaje desconocido: 14
+[DEBUG] 00:28:08:469 Planificador/(9975:9994): Se envio respuesta OK al coordinador
+[DEBUG] 01:23:50:158 Planificador/(12813:12813): PUERTO: 8020
+[DEBUG] 01:23:50:159 Planificador/(12813:12813): ESTIMACION_INICIAL: 3
+[DEBUG] 01:23:50:159 Planificador/(12813:12813): ALGORITMO_PLANIFICACION: SJF-SD
+[DEBUG] 01:23:50:159 Planificador/(12813:12813): ALFA_PLANIFICACION: 50
+[DEBUG] 01:23:50:159 Planificador/(12813:12813): IP_COORDINADOR: 127.0.0.1
+[DEBUG] 01:23:50:159 Planificador/(12813:12813): PUERTO_COORDINADOR: 8030
+[DEBUG] 01:23:50:159 Planificador/(12813:12813): CLAVES_BLOQUEADAS: [postre:ingrediente1]
+[DEBUG] 01:24:16:292 Planificador/(12813:12823): Notificacion recibida del coordinador
+[DEBUG] 01:24:16:292 Planificador/(12813:12823): Paquete recibido del coordinador
+[DEBUG] 01:24:16:292 Planificador/(12813:12823): Notificacion Coordinador - Solicitud de GET clave recibida: status
+[DEBUG] 01:24:16:292 Planificador/(12813:12823): Pudo solicitar clave? => 1
+[DEBUG] 01:24:16:292 Planificador/(12813:12823): Se envio respuesta OK al coordinador
+[DEBUG] 01:24:16:326 Planificador/(12813:12823): MSJ Sentencia finalizada recibido
+[DEBUG] 01:24:16:329 Planificador/(12813:12823): Notificacion recibida del coordinador
+[DEBUG] 01:24:16:329 Planificador/(12813:12823): Paquete recibido del coordinador
+[DEBUG] 01:24:16:329 Planificador/(12813:12823): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 01:24:16:330 Planificador/(12813:12823): Esi tiene tomada clave status? => 1
+[DEBUG] 01:24:16:331 Planificador/(12813:12823): Se envio respuesta OK al coordinador
+[DEBUG] 01:24:16:449 Planificador/(12813:12823): MSJ Sentencia finalizada recibido
+[DEBUG] 01:24:16:459 Planificador/(12813:12823): Notificacion recibida del coordinador
+[DEBUG] 01:24:16:459 Planificador/(12813:12823): Paquete recibido del coordinador
+[DEBUG] 01:24:16:459 Planificador/(12813:12823): Notificacion Coordinador - Consulta ESI por clave tomada recibida
+[DEBUG] 01:24:16:459 Planificador/(12813:12823): Esi tiene tomada clave status? => 1
+[DEBUG] 01:24:16:459 Planificador/(12813:12823): Se envio respuesta OK al coordinador
+[DEBUG] 01:24:16:520 Planificador/(12813:12823): Notificacion recibida del coordinador
+[DEBUG] 01:24:16:520 Planificador/(12813:12823): Paquete recibido del coordinador
+[DEBUG] 01:24:16:521 Planificador/(12813:12823): Notificacion Coordinador - Solicitud de STORE clave recibida
+[DEBUG] 01:24:16:523 Planificador/(12813:12823): MSJ Sentencia finalizada recibido
+[DEBUG] 01:24:16:525 Planificador/(12813:12823): MSJ ESI finalizado recibido
+[DEBUG] 01:24:16:526 Planificador/(12813:12823): Liberando claves tomadas por proceso 1...
+[DEBUG] 01:24:16:526 Planificador/(12813:12823): Se liberaron las claves tomadas por el proceso 1
+[DEBUG] 01:24:16:526 Planificador/(12813:12823): Se envio respuesta de ok solicitud finalizacion a ESI
+[INFO] 01:24:40:607 Planificador/(12813:12813): Status instancias para clave status!
+[DEBUG] 01:25:04:428 Planificador/(12813:12823): Notificacion recibida del coordinador
+[DEBUG] 01:25:04:428 Planificador/(12813:12823): Paquete recibido del coordinador
+[DEBUG] 01:25:04:428 Planificador/(12813:12823): Notificacion Coordinador - Aviso Coordinador status clave

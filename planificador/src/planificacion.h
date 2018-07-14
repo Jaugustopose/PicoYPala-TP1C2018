@@ -10,7 +10,7 @@ void inicializarPlanificacion();
 int procesoNuevo(int socketESI);
 void procesoTerminado(int exitStatus);
 void sentenciaFinalizada();
-respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo);
+respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio, void* cuerpo, int socketCoordinador);
 void bloquearEsiPorConsola(int idEsi, char* clave);
 void listarRecursosBloqueadosPorClave(char* clave);
 t_list* killProcesoPorID(int idProceso);
@@ -20,6 +20,7 @@ void bloquearClave(char* clave);
 void procesoDesbloquear(char* clave);
 
 sem_t planificacion_habilitada;
+sem_t semaforo_coordinador;
 pthread_mutex_t mutex_cola_listos;
 pthread_mutex_t mutex_proceso_ejecucion;
 

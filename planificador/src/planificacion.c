@@ -73,6 +73,7 @@ void inicializarPlanificacion(){
 		p++;
 	}
 	sem_init(&planificacion_habilitada, 1, 1);
+	sem_init(&semaforo_coordinador, 1, 1);
 }
 
 bool planificadorConDesalojo(){
@@ -496,6 +497,99 @@ void analizarDeadlocks() {
 
 }
 
+void statusClave(void* unBuffer) {
+
+		int offset = 0;
+		log_trace(logPlanificador, "Recibi respuesta STATUS del COORDINADOR");
+
+		status_clave_t* status = malloc(sizeof(status_clave_t));
+
+		memcpy(&status->tamanioValor,unBuffer,sizeof(int));
+//		log_trace(logPlanificador, "tamanio valor recibido de: %d", status->tamanioValor);
+		offset += sizeof(int);
+
+		status->valor = malloc(status->tamanioValor);
+		memcpy(status->valor,unBuffer + offset, status->tamanioValor);
+//		log_trace(logPlanificador, "valor recibido de: %s", status->valor);
+		offset += status->tamanioValor;
+
+		memcpy(&status->tamanioNombreInstanciaClave,unBuffer + offset, sizeof(int));
+//		log_trace(logPlanificador, "tamanio Nombre de instancia recibido de: %d", status->tamanioNombreInstanciaClave);
+		offset += sizeof(int);
+
+		status->nombreInstanciaClave = malloc(status->tamanioNombreInstanciaClave);
+		memcpy(status->nombreInstanciaClave,unBuffer + offset,status->tamanioNombreInstanciaClave);
+//		log_trace(logPlanificador, "Nombre de instancia recibido de: %s", status->nombreInstanciaClave);
+		offset += status->tamanioNombreInstanciaClave;
+
+		memcpy(&status->tamanioNombreInstanciaCandidata, unBuffer + offset, sizeof(int));
+//		log_trace(logPlanificador, "tamanio de Nombre de instancia Candidata recibido de: %d", status->tamanioNombreInstanciaCandidata);
+		offset += sizeof(int);
+
+		status->nombreInstanciaCandidata = malloc(status->tamanioNombreInstanciaCandidata);
+		memcpy(status->nombreInstanciaCandidata,unBuffer + offset, status->tamanioNombreInstanciaCandidata);
+		offset += status->tamanioNombreInstanciaCandidata;
+//		log_trace(logPlanificador, "tamanio de Nombre de instancia Candidata recibido de: %d", status->tamanioNombreInstanciaCandidata);
+
+		memcpy(&status->tamanioClave,unBuffer + offset, sizeof(int));
+//		log_trace(logPlanificador, "tamanio de clave: %d", status->tamanioClave);
+		offset += sizeof(int);
+
+		status->clave = malloc(status->tamanioClave);
+		memcpy(status->clave, unBuffer + offset, status->tamanioClave);
+//		log_trace(logPlanificador, "la clave es de: %s", status->clave);
+
+		//Se procede a mostrar toda la informacion correspondiente al status de la clave
+
+		log_trace(logPlanificador, "Recibi respuesta STATUS del COORDINADOR");
+
+		log_info(logPlanificador, "\nSe informa status de clave: %s\nValor Clave: %s\nNombre Instancia con Clave: %s\nNombre Instancia Candidata para Clave: %s\n"
+								,status->clave, status->valor, status->nombreInstanciaClave, status->nombreInstanciaCandidata);
+
+		listarRecursosBloqueadosPorClave(status->clave);
+
+
+
+//
+//		log_trace(logPlanificador, "Recibi respuesta STATUS del COORDINADOR");
+//
+//		int resultado=recibir_mensaje(socketCoordinador,&status->tamanioValor,sizeof(int));
+//		int offset = 0;
+//		memcpy(&status->tamanioValor, paquete->cuerpo, sizeof(int));
+//		status->valor = malloc(status->tamanioValor);
+//		offset = offset + sizeof(int);
+//
+//		resultado= recibir_mensaje(socketCoordinador,&status->valor,status->tamanioValor);
+//		memcpy(status->valor, paquete->cuerpo + offset, status->tamanioValor);
+//		offset = offset + status->tamanioValor;
+//
+//		resultado= recibir_mensaje(socketCoordinador,&status->tamanioNombreInstanciaClave,sizeof(int));
+//		memcpy(&status->tamanioNombreInstanciaClave, paquete->cuerpo + offset, sizeof(int));
+//		status->nombreInstanciaClave = malloc(status->tamanioNombreInstanciaClave);
+//		offset = offset + sizeof(int);
+//
+//		resultado= recibir_mensaje(socketCoordinador,status->nombreInstanciaClave,status->tamanioNombreInstanciaClave);
+//		memcpy(status->nombreInstanciaClave, paquete->cuerpo + offset, status->tamanioNombreInstanciaClave);
+//		offset = offset + status->tamanioNombreInstanciaClave;
+//
+//		resultado= recibir_mensaje(socketCoordinador,&status->tamanioNombreInstanciaCandidata,sizeof(int));
+//		memcpy(&status->tamanioNombreInstanciaCandidata, paquete->cuerpo + offset, sizeof(int));
+//		status->nombreInstanciaCandidata = malloc(status->tamanioNombreInstanciaCandidata);
+//		offset = offset + sizeof(int);
+//
+//		resultado= recibir_mensaje(socketCoordinador,status->nombreInstanciaCandidata,status->tamanioNombreInstanciaCandidata);
+//		memcpy(status->nombreInstanciaCandidata, paquete->cuerpo + offset, status->tamanioNombreInstanciaCandidata);
+//
+//		log_info(logPlanificador, "Valor Clave: %s\nNombre Instancia con Clave: %s\nNombre Instancia Candidata para Clave: %s\n"
+//										, status->valor, status->nombreInstanciaClave, status->nombreInstanciaCandidata);
+//
+//		free(status->nombreInstanciaCandidata);
+//		free(status->nombreInstanciaClave);
+//		free(status);
+//		listarRecursosBloqueadosPorClave(status);
+
+}
+
 int fdProcesoEnEjecucion() {
 	return procesoEjecucion->socketESI;
 }
@@ -535,6 +629,11 @@ respuesta_operacion_t procesar_notificacion_coordinador(int comando, int tamanio
 		retorno.respuestaACoordinador = list_any_satisfy(procesoEjecucion->clavesBloqueadas, (void*)_soy_clave_buscada);
 		log_debug(logPlanificador, "Esi tiene tomada clave %s? => %d", (char*)cuerpo, retorno.respuestaACoordinador);
 		retorno.fdESIAAbortar = (retorno.respuestaACoordinador == 1) ? -1 : procesoEjecucion->socketESI;
+		break;
+	case msj_status_clave:
+		log_debug(logPlanificador, "Notificacion Coordinador - Aviso Coordinador status clave");
+		statusClave(cuerpo);
+		log_debug(logPlanificador, "Notificacion Coordinador - Finalizado análisis status clave");
 		break;
 	default:
 		log_debug(logPlanificador, "Notificacion Coordinador - Llegó un mensaje desconocido: %d", comando);

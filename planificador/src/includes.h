@@ -54,6 +54,8 @@ typedef struct {
 	char* nombreInstanciaClave;
 	int tamanioNombreInstanciaCandidata;
 	char* nombreInstanciaCandidata;
+	int tamanioClave;
+	char* clave;
 } status_clave_t;
 
 #endif /* SRC_INCLUDES_H_ */
