@@ -319,7 +319,7 @@ void atenderMsgCoordinador() {
 	}
 }
 
-void enviarNombreESI(char *path){
+void enviarNombreESI(char *path, int unSocket){
 	char** pathArray = string_split(path, "/");
 	int contador=0;
 	while(pathArray[contador]){
@@ -331,7 +331,7 @@ void enviarNombreESI(char *path){
 	header.comando = msj_nombre_esi;
 	header.tamanio = strlen(nombre) + 1;
 	void* buffer = serializar(header, nombre);
-	int retorno = enviar_mensaje(socket_planificador, buffer, sizeof(header_t) + header.tamanio);
+	int retorno = enviar_mensaje(unSocket, buffer, sizeof(header_t) + header.tamanio);
 	free(buffer);
 }
 
@@ -351,11 +351,19 @@ int main(int argc, char **argv) {
 	configuracion_t config = cargarConfiguracion();
 	socket_coordinador = conectarConProceso(config.IP_COORDINADOR,
 			config.PUERTO_COORDINADOR, ESI);
+
+	//Envio nombre ESI a coordinador
+		enviarNombreESI(argv[1],socket_coordinador);
+
 	socket_planificador = conectarConProceso(config.IP_PLANIFICADOR,
 			config.PUERTO_PLANIFICADOR, ESI);
 
 	//Envio nombre ESI a planificador
-	enviarNombreESI(argv[1]);
+	enviarNombreESI(argv[1],socket_planificador);
+
+
+
+
 
 	fd_set master;
 	fd_set readfs;

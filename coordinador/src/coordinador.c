@@ -42,6 +42,11 @@ typedef struct infoInstancia_t{
 	sem_t semaforo;
 }infoInstancia_t;
 
+typedef struct infoEsi_t{
+	char* nombre;
+	int fileDescriptor;
+}infoEsi_t;
+
 typedef struct {
 		enum {
 			GET,
@@ -84,7 +89,7 @@ int puntero_algoritmo_equitative = 0;
 int contadorDeInstancias = 0;
 int okPlanificador = 0;
 t_list* lista_instancias_claves;
-t_list* lista_esis_permisos_setear;
+t_list* lista_esis;
 operacion_compartida_t* operacion; //Estructura que se compartira con todas las instancias. Se sincroniza para su ejecucion particular en una instancia.
 int compactaciones = 0;
 bool compactacionFinalizada = false;
@@ -92,6 +97,7 @@ int ultimaOperacion = 0;
 int fdQuePidioCompactacion;
 infoInstancia_t* instanciaQuePidioCompactacion;
 t_log* log_coordinador;
+t_log* log_operaciones_esi;
 int esiActual = 0;
 //sem_t atenderEsi;
 //sem_t atenderInstancia;
@@ -297,6 +303,20 @@ void* encontrar_instancia_por_fd (int unFd){
 	return instanciaConFd;
 }
 
+void* encontrar_esi_por_fd (int unFd){
+
+	//Funcion de ayuda solo dentro de este scope
+	int mismo_fd (infoEsi_t* p){
+		return (p->fileDescriptor == unFd);
+	}
+
+	void* esiConFd;
+
+	esiConFd = list_find(lista_esis,(void*) mismo_fd);
+
+	return esiConFd;
+}
+
 void* filtrar_instancias_conectadas(){
 
 	//Funcion solo dentro de este scope
@@ -453,8 +473,11 @@ void enviar_ok_sentencia_a_ESI(){
 void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en creacion del hilo.
 
 	int fdEsi = (int) fd;
+	infoEsi_t* elEsi = malloc(sizeof(infoEsi_t));
 	header_t header;
 	int resultado;
+
+	elEsi = encontrar_esi_por_fd(fdEsi);
 
 	while(1){ //Comienzo a atender el esi en el hilo hasta que el header sea msj_esi_finalizado
 
@@ -473,7 +496,8 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 		if(header.comando == msj_esi_finalizado){ //Si el ESI me indica que termino, cierro el hilo
 			conexion_de_cliente_finalizada(fdEsi);
-			printf("ESI ha finalizado, se interrumpe la conexion en fd %d\n", fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+			log_trace(log_operaciones_esi,"%s ha finalizado, se interrumpe la conexion en fd %d\n",elEsi->nombre, fdEsi); //TODO: Probablemente haya que hacer algo mas, hay que ver el enunciado.
+
 			int ret = EXIT_FAILURE;
 			pthread_exit(&ret);
 
@@ -502,7 +526,8 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 			case msj_sentencia_get:
 
-				log_trace(log_coordinador, "ESI %d realizo un GET clave %s",fdEsi,(char*) buffer);
+				log_trace(log_operaciones_esi, "%s realizo un GET clave %s",elEsi->nombre,(char*) buffer);
+
 
 				/* 1) Le pregunto al planificador si puede hacer el get de la clave indicada
 				 *		1.1) Si puede, el PLANIFICADOR le avisa al ESI que ejecute la siguiente instruccion.
@@ -548,7 +573,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 			case msj_sentencia_set:
 
-				log_trace(log_coordinador, "ESI %d realizo un SET clave %s",fdEsi,(char*) buffer);
+				log_trace(log_operaciones_esi, "%s realizo un SET clave %s",elEsi->nombre,(char*) buffer);
 				clave = (char*)buffer; //Anda de una porque como separamos con /0
 				printf("clave = %s\n", clave);
 				int fin = 0;
@@ -601,7 +626,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 
 			case msj_sentencia_store:
 
-				log_trace(log_coordinador, "ESI %d realizo un STORE clave %s",fdEsi,(char*) buffer);
+				log_trace(log_operaciones_esi, "%s realizo un STORE clave %s",elEsi->nombre,(char*) buffer);
 				clave = (char*)buffer;
 
 				instanciaConClave = encontrar_instancia_por_clave(clave);
@@ -814,14 +839,25 @@ int posicion_de_clave_en_lista(t_list* unaListaDeClaves, char* claveBuscada){
 	return -1; //Retorna -1 en caso que la clave no este en la lista
 }
 
+void* crear_nuevo_esi(int socket_cliente, char* nombre_esi) {
+
+	infoEsi_t* nuevo_esi = (infoEsi_t*)malloc(sizeof(infoEsi_t));
+	nuevo_esi->nombre = nombre_esi;
+	nuevo_esi->fileDescriptor = socket_cliente;
+
+	return nuevo_esi;
+}
+
 void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 
 	//Recibo identidad y coloco en la bolsa correspondiente.
 	header_t cabecera;
 	int identificacion;
 	infoInstancia_t* nueva_instancia;
+	infoEsi_t* nuevo_esi = malloc(sizeof(infoEsi_t));
 	infoInstancia_t* instancia_existente;
 	char* nombre_instancia = string_new();
+	char* nombre_esi = string_new();
 	int resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t));
 	if(resultado == ERROR_RECV){
 		printf("Error en el recv para socket %d!!!\n", socket_cliente);
@@ -836,7 +872,20 @@ void identificar_proceso_y_crear_su_hilo(int socket_cliente) {
 			switch (identificacion){
 			case ESI:
 				responder_ok_handshake(ESI, socket_cliente);
-				printf("Se ha conectado un nuevo ESI al sistema en fd %d\n", socket_cliente);
+
+				resultado = recibir_mensaje(socket_cliente, &cabecera, sizeof(header_t)); //Ahora recibo el nombre de la instancia
+				if ((resultado == ERROR_RECV) || !(cabecera.comando == msj_nombre_esi)) { //Si hay error en recv o cabecera no dice msj_nombre_instancia
+					printf("Error al intentar recibir nombre del ESI\n");
+				} else {
+					recibir_mensaje(socket_cliente, nombre_esi, cabecera.tamanio);
+				}
+				printf("Se ha conectado un nuevo ESI al sistema en fd %d y de nombre: %s\n", socket_cliente,nombre_esi);
+
+//				nuevo_esi = crear_nuevo_esi(socket_cliente, nombre_esi);
+				nuevo_esi->fileDescriptor = socket_cliente;
+				nuevo_esi->nombre = nombre_esi;
+
+				list_add(lista_esis, nuevo_esi);
 
 				//Creo el hilo para su ejecucion
 				pthread_t hiloESI;
@@ -1048,7 +1097,7 @@ void escuchar_mensaje_de_instancia(int unFileDescriptor){
 
 			//La data del valor de la clave
 			recibir_mensaje(unFileDescriptor,statusValorClave,header.tamanio);
-			tamanioValorClave = header.tamanio;
+			tamanioValorClave = strlen(statusValorClave) + 1;
 //			log_trace(log_coordinador,"El valor de la clave enviado por instancia es: %s con tamanio %d",statusValorClave, tamanioValorClave);
 
 			//La data del nombre de la instancia
@@ -1121,6 +1170,10 @@ void atender_mensaje_planificador(){
 	header_t header;
 	infoInstancia_t* instanciaConClave = malloc(sizeof(infoInstancia_t));
 	infoInstancia_t* candidata = malloc(sizeof(infoInstancia_t));
+//	statusClave = "";
+//	statusValorClave = "";
+//	statusNombreInstanciaCandidata = "";
+//	statusNombreInstanciaConClave = "";
 
 	recibir_mensaje(socket_planificador,&header,sizeof(header_t));
 
@@ -1145,7 +1198,7 @@ void atender_mensaje_planificador(){
 				sem_post(&instanciaConClave->semaforo);
 
 			}else{ //Ninguna instancia tiene esta clave. Ver instancia candidata y devolverle informacion al planificador.
-				statusValorClave = "";
+//				statusValorClave = "";
 				int tamanioValorClave = sizeof(char);
 				statusNombreInstanciaConClave = "";
 				int tamanioNombreInstanciaConClave = sizeof(char);
@@ -1162,7 +1215,7 @@ void atender_mensaje_planificador(){
 				void* buffer = malloc(tamanioTotalParaBuffer);
 
 				memcpy(buffer, &tamanioValorClave, sizeof(int));
-				memcpy(buffer + sizeof(int), statusValorClave, sizeof(char));
+				memcpy(buffer + sizeof(int), "\0", sizeof(char));
 				memcpy(buffer + sizeof(int) + sizeof(char), &tamanioNombreInstanciaConClave, sizeof(int));
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int),statusNombreInstanciaConClave, sizeof(char));
 				memcpy(buffer + sizeof(int) + sizeof(char) + sizeof(int) + sizeof(char),&tamanioNombreInstanciaCandidata, sizeof(int));
@@ -1170,10 +1223,14 @@ void atender_mensaje_planificador(){
 				memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata,&tamanioClave,sizeof(int));
 				memcpy(buffer + sizeof(int) + tamanioValorClave + sizeof(int) + tamanioNombreInstanciaConClave + sizeof(int) + tamanioNombreInstanciaCandidata + sizeof(int),statusClave, tamanioClave);
 
+				log_trace(log_coordinador,"El valor de la clave es: %s con tamanio %d",statusValorClave, tamanioValorClave);
+				log_trace(log_coordinador,"Nombre instancia con clave es: %s con tamanio %d",statusNombreInstanciaConClave, tamanioNombreInstanciaConClave);
+				log_trace(log_coordinador,"Nombre instancia candidata es: %s con tamanio %d",statusNombreInstanciaCandidata, tamanioNombreInstanciaCandidata);
 
 				header.comando = msj_status_clave;
 				header.tamanio = tamanioTotalParaBuffer;
 				enviar_mensaje_planificador(socket_planificador,&header,buffer,msj_status_clave);
+				free(buffer);
 			}
 		break;
 
@@ -1221,9 +1278,11 @@ int main(void) {
 	//sem_init(&escucharInstancia,0,0);
 
 	//Creo log de operaciones de los ESI
-	log_coordinador = log_create("coordinador.log", "Coordinador", true, LOG_LEVEL_TRACE);
+	log_coordinador = log_create("coordinador_all.log", "Coordinador", true, LOG_LEVEL_TRACE);
+	log_operaciones_esi = log_create("coordinador_operaciones_esi.log", "Coordinador", true, LOG_LEVEL_TRACE);
 
 	lista_instancias_claves = list_create();
+	lista_esis = list_create();
 
 	inicializar_status();
 

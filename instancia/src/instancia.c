@@ -1017,6 +1017,8 @@ void ejecutarStatus(void* unBuffer) {
 	memcpy(bufferEnviar, &header, sizeof(header_t));
 	memcpy(bufferEnviar + sizeof(header_t), valor, header.tamanio);
 
+	log_info(logInstancia, "Se envia valor de status Clave con Valor: %s",valor);
+
 	enviar_mensaje(socketCoordinador, bufferEnviar, sizeof(header_t)+header.tamanio);
 	free(bufferEnviar);
 }
