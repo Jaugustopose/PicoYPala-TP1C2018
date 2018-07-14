@@ -52,8 +52,8 @@ typedef enum id_mensaje { // A medida que se creen mensajes, aca ponemos el ID
 	msj_compactacion_finalizada_continuar_planificacion = 28,
 	msj_cantidad_entradas = 29,
 	msj_tamanio_entradas = 30,
-	msj_instancia_entradas_libres = 31
-
+	msj_instancia_entradas_libres = 31,
+	msj_nombre_esi = 32
 
 }id_mensaje;
 

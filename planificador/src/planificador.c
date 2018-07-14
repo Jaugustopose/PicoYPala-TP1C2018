@@ -166,17 +166,18 @@ void procesar_bloqueo_esi(char** subBufferSplitted) {
 		log_info(logPlanificador, "Comando 'bloquear' incompleto! Se requiere formato 'bloquear <clave> <ID>'");
 	} else if (subBufferSplitted[3] == NULL) {
 		log_info(logPlanificador, "Bloqueo Esi %s de la cola del recurso %s!", subBufferSplitted[2], subBufferSplitted[1]);
-		pthread_mutex_lock(&mutex_cola_listos);
-		pthread_mutex_lock(&mutex_proceso_ejecucion);
+//		pthread_mutex_lock(&mutex_cola_listos);
+//		pthread_mutex_lock(&mutex_proceso_ejecucion);
 		bloquearEsiPorConsola(strtol(subBufferSplitted[2], NULL, 10) , subBufferSplitted[1]);
-		pthread_mutex_unlock(&mutex_proceso_ejecucion);
-		pthread_mutex_unlock(&mutex_cola_listos);
+//		pthread_mutex_unlock(&mutex_proceso_ejecucion);
+//		pthread_mutex_unlock(&mutex_cola_listos);
 	} else {
 		log_info(logPlanificador, "Comando 'bloquear' con demasiados parámetros! Se requiere formato 'bloquear <clave> <ID>'");
 	}
 }
 
 void procesar_desbloqueo_esi(char** subBufferSplitted) {
+	sem_wait(&planificacion_habilitada);
 	if (subBufferSplitted[1] == NULL) {
 		log_info(logPlanificador, "Comando 'desbloquear' incompleto! Se requiere formato 'desbloquear <ID>'");
 	} else if (subBufferSplitted[2] == NULL) {
@@ -185,6 +186,7 @@ void procesar_desbloqueo_esi(char** subBufferSplitted) {
 	} else {
 		log_info(logPlanificador, "Comando 'desbloquear' con demasiados parámetros! Se requiere formato 'desbloquear <ID>'");
 	}
+	sem_post(&planificacion_habilitada);
 }
 
 void procesar_listar_recurso(char** subBufferSplitted) {

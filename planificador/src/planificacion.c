@@ -139,7 +139,7 @@ proceso_t* colaListosPeek(){
 	return list_get(colaListos, 0);
 }
 
-int procesoNuevo(int socketESI) {
+int procesoNuevo(int socketESI, char* nombre) {
 	proceso_t* proceso = malloc(sizeof(proceso_t));
 	proceso->idProceso = contadorProcesos;
 	contadorProcesos++;
@@ -149,6 +149,7 @@ int procesoNuevo(int socketESI) {
 	proceso->rafagaEstimada = config.ESTIMACION_INICIAL;
 	proceso->rafagasEsperando = 0;
 	proceso->socketESI = socketESI;
+	proceso->nombreESI = nombre;
 	int retorno;
 
 	if(procesoEjecucion == 0){
@@ -169,10 +170,11 @@ int procesoNuevo(int socketESI) {
 
 int procesoEjecutar(proceso_t* proceso) {
 	procesoEjecucion = proceso;
-	sem_wait(&planificacion_habilitada);
-
+	log_trace(logPlanificador, "Por tomar semaforo de planificacion_habilitada");
+//	sem_wait(&planificacion_habilitada);
+	log_trace(logPlanificador, "Se manda a ejecutar ESI %d", proceso->idProceso);
 	int resultado =  mandar_a_ejecutar_esi(proceso->socketESI);
-	sem_post(&planificacion_habilitada);
+//	sem_post(&planificacion_habilitada);
 	return resultado;
 }
 
@@ -180,11 +182,11 @@ void procesoTerminado(int exitStatus) {
 	procesoEjecucion->exitStatus = exitStatus;
 	queue_push(colaTerminados, (void*)procesoEjecucion);
 
-	pthread_mutex_lock(&mutex_cola_listos); //PROBLEMA MUTEX.
-	pthread_mutex_lock(&mutex_lista_bloqueados);
+//	pthread_mutex_lock(&mutex_cola_listos); //PROBLEMA MUTEX.
+//	pthread_mutex_lock(&mutex_lista_bloqueados);
 	liberarRecursos(procesoEjecucion);
-	pthread_mutex_unlock(&mutex_lista_bloqueados);
-	pthread_mutex_unlock(&mutex_cola_listos);
+//	pthread_mutex_unlock(&mutex_lista_bloqueados);
+//	pthread_mutex_unlock(&mutex_cola_listos);
 
 
 	proceso_t* procesoListo = colaListosPop();
@@ -196,11 +198,15 @@ void procesoTerminado(int exitStatus) {
 }
 
 void procesoBloquear(char* clave){
+	log_trace(logPlanificador, "Se bloquea proceso %d", procesoEjecucion->idProceso);
 	procesoEjecucion->claveBloqueo=clave;
 	list_add(listaBloqueados, (void*)procesoEjecucion);
+
 	if(colaListosPeek()){
+		log_trace(logPlanificador, "Se toma de la cola de listos para ejecutar");
 		procesoEjecutar(colaListosPop());
 	}else{
+		log_trace(logPlanificador, "No había procesos en la cola de listos. Se setea procesoEjecucion = 0");
 		procesoEjecucion = 0;
 	}
 }
@@ -215,19 +221,25 @@ void procesoDesbloquear(char* clave) {
 	proceso_t* proceso = (proceso_t*)list_remove_by_condition(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada);
 
 	if (proceso != NULL) { //Desbloqueo el proceso para esa clave
+		log_trace(logPlanificador, "Se detectó proceso ESI %d que estaba bloqueado por clave %s", proceso->idProceso, clave);
+
 		estimarRafaga(proceso);
 		if (procesoEjecucion == 0) {
+			log_trace(logPlanificador, "No había procesos en ejecución. Se envía a ejecutar el ESI %d", proceso->idProceso);
 			procesoEjecutar(proceso);
 		} else {
+			log_trace(logPlanificador, "Hay proceso en ejecución y es el %d. Mandamos el ESI %d a cola de listos", procesoEjecucion->idProceso, proceso->idProceso);
 			colaListosPush(proceso);
 			if (planificadorConDesalojo()) {
 				planificarConDesalojo();
 			}
 		}
 		if (!list_any_satisfy(listaBloqueados, (void*)_soy_esi_bloqueado_por_clave_buscada)) { //Si no quedaron bloqueados liberamos la clave
+			log_trace(logPlanificador, "Ya no habia otros procesos bloqueados por esa clave. Se desbloquea %s", clave);
 			desbloquearClave(clave);
 		}
 	} else { //Si no había proceso para esa clave nos aseguramos de que no quede en el diccionario de bloqueadas
+		log_trace(logPlanificador, "No se encontró procesos bloqueados por la clave %s", clave);
 		desbloquearClave(clave);
 	}
 
@@ -336,6 +348,7 @@ void bloquearEsiPorConsola(int idEsi, char* clave) {
 void listarRecursosBloqueadosPorClave(char* clave) {
 	//Closure para recorrer la lista de proceso bloqueados por la clave y guardar el string a imprimir
 	char* stringLog = string_new();
+	char* stringLog2 = string_new();
 
 	void _listarProceso(proceso_t* p) {
 		if (strcmp(p->claveBloqueo, clave) == 0) {
@@ -345,10 +358,18 @@ void listarRecursosBloqueadosPorClave(char* clave) {
 			string_append(&stringLog, "-");
 			free(idString);
 		}
+		char* idString2 = string_new();
+		sprintf(idString2, "%d", p->idProceso);
+		string_append(&stringLog2, idString2);
+		string_append(&stringLog2, "-");
+		free(idString2);
 	}
+
 	list_iterate(listaBloqueados, (void*)_listarProceso);
 	char* stringLogFinal = (!string_is_empty(stringLog)) ? string_substring_until(stringLog, string_length(stringLog) - 1) : "";
-	log_info(logPlanificador, "Procesos bloqueados: %s", stringLogFinal);
+	char* stringLogFinal2 = (!string_is_empty(stringLog2)) ? string_substring_until(stringLog2, string_length(stringLog2) - 1) : "";
+	log_info(logPlanificador, "Procesos bloqueados por clave %s: %s", clave, stringLogFinal);
+	log_info(logPlanificador, "Procesos bloqueados completo: %s", stringLogFinal2);
 
 	free(stringLog);
 }
@@ -404,6 +425,7 @@ void analizarDeadlocks() {
 
 	struct Nodo {
 		int pid;
+		char* nombreESI;
 		struct Nodo* bloqueador;
 	};
 
@@ -416,6 +438,7 @@ void analizarDeadlocks() {
 		proceso_t* proceso = list_get(listaTemporal, i);
 		nodos[i] = nodo;
 		nodo->pid = proceso->idProceso;
+		nodo->nombreESI = proceso->nombreESI;
 		nodo->bloqueador = NULL;
 	}
 
@@ -483,11 +506,8 @@ void analizarDeadlocks() {
 	char* stringLog = string_new();
 
 	void _listarProcesosDeadlock(struct Nodo* n) {
-		char* idString = string_new();
-		sprintf(idString, "%d", n->pid);
-		string_append(&stringLog, idString);
+		string_append(&stringLog, n->nombreESI);
 		string_append(&stringLog, "-");
-		free(idString);
 	}
 
 	list_iterate(listaDeadlock, (void*)_listarProcesosDeadlock);

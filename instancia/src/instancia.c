@@ -589,10 +589,13 @@ void sustituirMatrizEntradas(t_entrada* entrada, char* valor, int tamanio, int e
 
 		log_debug(logInstancia, "Sustituye por algoritmo %s",algoritmo);
 		if(string_equals_ignore_case(algoritmo,"CIRC")){
+			log_debug(logInstancia,"Sustituyo por algoritmo ciclico");
 			sustituirCiclico(entrada, valor, tamanio, entradasASustituir);
 		} else if (string_equals_ignore_case(algoritmo,"LRU")){
+			log_debug(logInstancia,"Sustituyo por algoritmo LRU");
 			sustituirLRU(entrada, valor, tamanio, entradasASustituir);
 		} else if (string_equals_ignore_case(algoritmo, "BSU")){
+			log_debug(logInstancia,"Sustituyo por algoritmo BSU");
 			sustituirBSU(entrada, valor, tamanio, entradasASustituir);
 		}
 	}
@@ -741,9 +744,11 @@ void sustitucionEntrada(t_entrada* entrada, char* valor, int tamanio, int entrad
 	int entradasLibres = cantEntradasLibres();
 	if(entradasLibres >= entradasNecesarias){
 		//Se avisa a coordinador de que se necesita compactar
+		log_debug(logInstancia,"El valor entra compactando sin sustituir nada");
 		enviar_msj_instancia_compactar();
 	}else{
 		int entradasASustituir = entradasNecesarias - entradasLibres;
+		log_debug(logInstancia,"No entra valor, se debe sustituir %d entradas", entradasASustituir);
 		sustituirMatrizEntradas(entrada, valor, tamanio, entradasASustituir);
 	}
 	//TODO: Se avisa al coordinador
@@ -789,6 +794,8 @@ void setConValorPrevio(t_entrada* entrada, char* valor, int tamanio) {
 		if (indiceEntrada < 0) {
 			//No hay lugar, se liberan las entradas usadas y se inicia algoritmo de sustitución
 			liberarEntrada(entrada->numeroEntrada, entradasAsignadas);
+			entrada->tamanioValor=0; //TODO: Revisar si no hace falta ponerlo en otro lugar
+
 			sustitucionEntrada(entrada, valor, tamanio , entradasNecesarias);
 		} else {
 			//Habia entradas libres,se inserta valor y se marca en el bitmap las entradas usadas y las entradas liberadas

@@ -28,6 +28,7 @@ typedef struct{
 	int rafagaActual;
 	int rafagasEsperando;
 	int exitStatus;
+	char* nombreESI;
 }proceso_t;
 
 typedef struct {

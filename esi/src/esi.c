@@ -220,7 +220,7 @@ void msgEjecucion(t_esi_operacion operacion) {
 	free(buffer);
 	if (retorno < 0) {
 		log_error(logESI,
-				"Problema con el ESI en el socket %d. Se cierra conexión con él.\n",
+				"Problema con el ESI en el socket %d. Se cierra conexión con él.",
 				socket_coordinador);
 		exitFailure();
 	}
@@ -232,12 +232,12 @@ void msgFinProceso(int unSocket) {
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(unSocket, &header, sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", unSocket);
+		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.", unSocket);
 		exitFailure();
 	}
 	int respuestaFinalizacion;
 	recibir_mensaje(unSocket, &respuestaFinalizacion, sizeof(respuestaFinalizacion));
-	printf("Aviso de FIN SCRIPT enviado correctamente\n");
+	log_info(logESI, "Aviso de FIN SCRIPT enviado correctamente");
 
 }
 
@@ -247,10 +247,10 @@ void msgSentenciaFinalizada() {
 	header.tamanio = 0;
 	int retorno = enviar_mensaje(socket_planificador, &header, sizeof(header_t));
 	if (retorno < 0) {
-		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él.\n", socket_planificador);
+		log_error(logESI, "Problema con el ESI en el socket %d. Se cierra conexión con él", socket_planificador);
 		exitFailure();
 	}
-	printf("MSJ Sentencia finalizada enviada al plani\n");
+	log_info(logESI, "MSJ Sentencia finalizada enviada al plani");
 }
 
 void sig_handler(int signo) {
@@ -313,12 +313,26 @@ void atenderMsgCoordinador() {
 			msgSentenciaFinalizada();
 			break;
 		default:
-			log_error(logESI,
-					"Se recibió comando desconocido (Coordinador): %d",
-					header.comando);
+			log_error(logESI, "Se recibió comando desconocido (Coordinador): %d", header.comando);
 			break;
 		}
 	}
+}
+
+void enviarNombreESI(char *path){
+	char** pathArray = string_split(path, "/");
+	int contador=0;
+	while(pathArray[contador]){
+		contador++;
+	}
+	char* nombre = pathArray[contador-1];
+
+	header_t header;
+	header.comando = msj_nombre_esi;
+	header.tamanio = strlen(nombre) + 1;
+	void* buffer = serializar(header, nombre);
+	int retorno = enviar_mensaje(socket_planificador, buffer, sizeof(header_t) + header.tamanio);
+	free(buffer);
 }
 
 int main(int argc, char **argv) {
@@ -339,6 +353,9 @@ int main(int argc, char **argv) {
 			config.PUERTO_COORDINADOR, ESI);
 	socket_planificador = conectarConProceso(config.IP_PLANIFICADOR,
 			config.PUERTO_PLANIFICADOR, ESI);
+
+	//Envio nombre ESI a planificador
+	enviarNombreESI(argv[1]);
 
 	fd_set master;
 	fd_set readfs;

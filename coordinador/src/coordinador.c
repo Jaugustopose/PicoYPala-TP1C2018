@@ -463,6 +463,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 		printf("Atendiendo acción esi en socket %d!!!\n", fdEsi);
 
 		resultado = recibir_mensaje(fdEsi,&header,sizeof(header_t));
+
 		if ((resultado == ERROR_RECV) || (resultado == ERROR_RECV_DISCONNECTED)){
 			printf("Error al recibir header del ESI \n");
 			conexion_de_cliente_finalizada(fdEsi);
@@ -479,6 +480,10 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 		}
 		esiActual = fdEsi;
 
+		esiActual = fdEsi;
+
+		esiActual = fdEsi;
+
 		void* buffer = malloc(header.tamanio);
 		resultado = recibir_mensaje(fdEsi,buffer,header.tamanio);
 
@@ -489,7 +494,7 @@ void* atender_accion_esi(void* fd) { //Hecho con void* para evitar casteo en cre
 			pthread_exit(&ret);
 		}
 
-		usleep(config.RETARDO); //Para retardo ficticio. OJO que va a los pedos pero esta bien
+		usleep(config.RETARDO * 1000); //Para retardo ficticio. OJO que va a los pedos pero esta bien
 
 		switch (header.comando) {
 			infoInstancia_t* instanciaConClave;
