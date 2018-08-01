@@ -1,4 +1,4 @@
-# tp-2018-1c-Pico-y-Pala
+# TRABAJO PRÁCTICO DE SISTEMAS OPERATIVOS UTN FACULTAD REGIONAL BUENOS AIRES AÑO 2018
 
 # Mensajes dentro del sistema:
 
